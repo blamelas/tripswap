@@ -3,6 +3,13 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [Unreleased]
+
+### Adicionado
+
+- Dois testes de integridade das imagens locais (ficheiro presente, tamanho mínimo,
+  sem dependência de domínios externos).
+
 ## [1.0.2] — 2026-11-13
 
 ### Adicionado
