@@ -3,12 +3,20 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.0.6] — 2026-11-13
+
+### Removido
+
+- Deploy no GitHub Pages e respetivo workflow. O único alvo é a Vercel.
+- Suporte de subpath (`VITE_BASE`, `basename`, `withBase`). O build assume o domínio raiz.
+- Badge e referências ao Pages no README, guia de publicação e Q&A.
+
 ## [1.0.5] — 2026-11-13
 
 ### Alterado
 
 - URL público passa a ser o deploy de produção na Vercel:
-  <https://tripswap-kappa.vercel.app/>. O GitHub Pages mantém-se como fallback.
+  <https://tripswap-kappa.vercel.app/>. (O GitHub Pages foi removido na 1.0.6.)
 - README e guião de defesa alinhados com o URL final.
 
 ## [1.0.4] — 2026-11-13
