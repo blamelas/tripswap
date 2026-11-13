@@ -54,6 +54,7 @@ commit. Os tempos são reais e incluem revisão manual.
 | 47 | 13 Nov 09:55 | Release | Testes, docs, screenshots e deploy | `v1.5.0` | `chore(release): v1.5.0` | 20 min |
 | 48 | 13 Nov 10:05 | Refinamento | Ícones por atividade, jogos de azar, exemplo conservador e premissas ocultas | `v1.5.1` | `feat(swaps): refine activity cards and games copy` | 25 min |
 | 49 | 13 Nov 11:05 | Simplificação | Jogos com estimativa fixa; inputs removidos; sorriso ao selecionar | `v1.5.2` | `feat(swaps): simplify games estimate and add selection feedback` | 25 min |
+| 50 | 13 Nov 11:30 | Refinamento | Jogos a 20 €/mês; faixa Wikimedia mascarada; check monocromático; categorias em acordeão | `v1.5.3` | `feat(swaps): raise games estimate and add masked image edge` | 30 min |
 
 ## O que aprendi
 

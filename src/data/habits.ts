@@ -366,12 +366,12 @@ export const HABITS: Habit[] = [
       'Raspadinhas, apostas online e idas ao casino somam-se sem se notar. Troca parte desse gasto por jogos de tabuleiro ou planos gratuitos e reserva algum desse orçamento para uma nova experiência.',
     category: 'games',
     kind: 'recurring',
-    originalCost: 20,
-    alternativeCost: 15,
+    originalCost: 40,
+    alternativeCost: 20,
     monthlyFrequency: 1,
-    saving: 5,
+    saving: 20,
     assumptions:
-      'Estimativa conservadora: 20 €/mês em raspadinhas, apostas ou casino; mantém 15 €. Poupança = 20 € − 15 € = 5 €/mês.',
+      'Estimativa ilustrativa: 40 €/mês em raspadinhas, apostas ou casino; mantém 20 €. Poupança = 40 € − 20 € = 20 €/mês.',
     benefits: ['Consumo consciente'],
   },
   {

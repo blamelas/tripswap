@@ -3,6 +3,20 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.5.3] — 2026-11-13
+
+### Alterado
+
+- **Jogos de azar e apostas**: estimativa ilustrativa de **40 € → 20 € = 20 €/mês**
+  (antes 5 €/mês), sem inputs.
+- Cada cartão de troca recebe uma **faixa fotográfica estreita e mascarada** na edge
+  esquerda, a partir do Wikimedia Commons. A faixa é textura; a fotografia grande
+  continua reservada aos destinos. Créditos em `docs/IMAGE-CREDITS.md`.
+- O feedback de seleção passa a ser um **check monocromático** no canto; o sorriso
+  animado do v1.5.2 foi removido.
+- As categorias do catálogo começam **fechadas**; abrir uma fecha as restantes.
+- 42 testes.
+
 ## [1.5.2] — 2026-11-13
 
 ### Alterado

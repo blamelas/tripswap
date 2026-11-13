@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, MapPin, PenLine } from 'lucide-react'
-import type { Habit } from '../types'
+import type { Habit, HabitCategory } from '../types'
 import { DESTINATIONS } from '../data/destinations'
 import { HABITS, HABIT_CATEGORY_ORDER, getHabit } from '../data/habits'
 import { useI18n } from '../i18n/context'
@@ -18,6 +18,7 @@ import { SwapCard } from '../components/SwapCard'
 export function Swaps() {
   const { copy, fmt, destinationText } = useI18n()
   const [selected, setSelected] = useState<string[]>(() => readSwapSelection())
+  const [openCategory, setOpenCategory] = useState<HabitCategory | null>(null)
 
   function handleToggle(habit: Habit) {
     const next = toggleHabit(selected, habit, HABITS)
@@ -96,6 +97,8 @@ export function Swaps() {
               available={habits.length}
               selected={selectedCount}
               className={index === 0 ? '' : 'mt-10'}
+              open={openCategory === category}
+              onOpenChange={(next) => setOpenCategory(next ? category : null)}
             >
               <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {habits.map((habit) => (

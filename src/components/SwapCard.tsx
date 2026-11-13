@@ -1,4 +1,4 @@
-import { createElement, useEffect, useRef, useState } from 'react'
+import { createElement } from 'react'
 import { Check, Plus } from 'lucide-react'
 import type { Habit } from '../types'
 import { DESTINATIONS } from '../data/destinations'
@@ -6,6 +6,7 @@ import { useI18n } from '../i18n/context'
 import { monthsToTarget } from '../lib/calc'
 import { HABIT_CATEGORY_META } from '../lib/habitCategories'
 import { habitIcon } from '../lib/habitIcons'
+import { habitImage } from '../lib/habitImages'
 import { cn } from '../lib/cn'
 
 const cheapest = DESTINATIONS.reduce((first, next) =>
@@ -22,18 +23,6 @@ export function SwapCard({ habit, selected, onToggle }: SwapCardProps) {
   const { copy, habitText, fmt } = useI18n()
   const text = habitText(habit)
   const meta = HABIT_CATEGORY_META[habit.category]
-  const [celebrate, setCelebrate] = useState(false)
-  const wasSelected = useRef(selected)
-
-  useEffect(() => {
-    if (selected && !wasSelected.current) {
-      setCelebrate(true)
-      const timer = window.setTimeout(() => setCelebrate(false), 900)
-      wasSelected.current = selected
-      return () => window.clearTimeout(timer)
-    }
-    wasSelected.current = selected
-  }, [selected])
 
   const monthly = habit.kind === 'recurring' ? habit.saving : 0
   const oneTime = habit.kind === 'one-time' ? habit.saving : 0
@@ -56,25 +45,18 @@ export function SwapCard({ habit, selected, onToggle }: SwapCardProps) {
         selected ? 'border-ink bg-sky/35' : 'bg-white/25',
       )}
     >
-      {celebrate && (
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-1/2 z-10 flex justify-center"
-        >
-          <svg
-            className="swap-smile h-7 w-12 text-accent-dark"
-            viewBox="0 0 48 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.6"
-            strokeLinecap="round"
-          >
-            <path d="M5 4c3.5 11 34.5 11 38 0" />
-            <circle cx="15" cy="3" r="1.4" fill="currentColor" stroke="none" />
-            <circle cx="33" cy="3" r="1.4" fill="currentColor" stroke="none" />
-          </svg>
-        </span>
-      )}
+      <span
+        aria-hidden="true"
+        className="swap-edge pointer-events-none absolute inset-y-0 left-0 z-10 w-[12px] overflow-hidden"
+      >
+        <img
+          src={habitImage(habit.id)}
+          alt=""
+          className="h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+      </span>
       <div className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 items-start gap-3">
           <span
@@ -94,8 +76,8 @@ export function SwapCard({ habit, selected, onToggle }: SwapCardProps) {
           <h3 className="text-[20px] leading-[0.98] text-ink">{text.title}</h3>
         </div>
         {selected && (
-          <span className="flex h-5 w-5 shrink-0 items-center justify-center bg-accent text-ink">
-            <Check className="h-3 w-3" strokeWidth={3} aria-hidden="true" />
+          <span className="flex h-5 w-5 shrink-0 items-center justify-center text-ink">
+            <Check className="h-4 w-4" strokeWidth={2.4} aria-hidden="true" />
           </span>
         )}
       </div>

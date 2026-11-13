@@ -37,8 +37,8 @@ Short answers, to rehearse out loud. Each row names the artefact that proves it.
 | 22 | Can I collapse them? | Yes, from the header; selections and counts remain. | `HabitSelector` |
 | 23 | How do I create a reminder? | In a saved plan, “Add reminder”, choose daily/monthly, time and day; download the `.ics`. | `ReminderForm`, `lib/reminders` |
 | 24 | Does the event enter my calendar? | The `.ics` creates an event + alarm in the user’s calendar; no push notifications. | `buildReminderIcs` |
-| 25 | Where is the swaps catalogue? | At `/swaps`, with 25 swaps, 6 categories and a selection that carries into a destination. | `Swaps.tsx` |
-| 26 | How do games of chance work? | A fixed conservative estimate: €20 current, €15 reduced, €5/month. No inputs, no invented average. | `data/habits.ts`, `SwapCard` |
+| 25 | Where is the swaps catalogue? | At `/swaps`, with 25 swaps, 6 categories and a selection that carries into a destination. Categories start collapsed; opening one closes the others. | `Swaps.tsx` |
+| 26 | How do games of chance work? | A fixed conservative estimate: €40 current, €20 reduced, €20/month. No inputs, no invented average. | `data/habits.ts`, `SwapCard` |
 
 ## Phrases to avoid
 

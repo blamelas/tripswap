@@ -11,6 +11,8 @@ interface HabitCategorySectionProps {
   selected: number
   children: ReactNode
   className?: string
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
 }
 
 export function HabitCategorySection({
@@ -19,21 +21,30 @@ export function HabitCategorySection({
   selected,
   children,
   className,
+  open,
+  onOpenChange,
 }: HabitCategorySectionProps) {
   const { copy } = useI18n()
-  const [open, setOpen] = useState(true)
+  const [localOpen, setLocalOpen] = useState(true)
+  const expanded = open ?? localOpen
   const meta = HABIT_CATEGORY_META[category]
   const Icon = meta.icon
   const panelId = `cat-${category}-panel`
+
+  function handleToggle() {
+    const next = !expanded
+    if (onOpenChange) onOpenChange(next)
+    else setLocalOpen(next)
+  }
 
   return (
     <section className={className}>
       <h3>
         <button
           type="button"
-          aria-expanded={open}
+          aria-expanded={expanded}
           aria-controls={panelId}
-          onClick={() => setOpen((value) => !value)}
+          onClick={handleToggle}
           className={cn(
             'flex w-full items-center gap-3 border-b-2 pb-3 text-left transition-colors',
             meta.border,
@@ -62,14 +73,14 @@ export function HabitCategorySection({
           <ChevronDown
             className={cn(
               'h-4 w-4 shrink-0 text-muted transition-transform duration-200',
-              open && 'rotate-180',
+              expanded && 'rotate-180',
             )}
             aria-hidden="true"
           />
         </button>
       </h3>
 
-      <div id={panelId} hidden={!open}>
+      <div id={panelId} hidden={!expanded}>
         {children}
       </div>
     </section>

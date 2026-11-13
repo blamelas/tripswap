@@ -60,14 +60,14 @@ horizon buttons update. Visual: the real screen, not a mockup.
 - One-time: difference, once.
 - Horizon: first whole month at the target.
 - Overlaps: exclusive groups, never summed.
-- Games of chance: current − reduced, entered by the user; no invented average.
+- Games of chance: a fixed €40 → €20 = €20/month estimate; no inputs, no invented average.
 - Visual: a real receipt with one line and the formula; examples for Paris, Douro, Iceland.
 
 ### 8. The swaps catalogue — 5:40
 - 25 changes, 6 categories, independent of any destination.
 - Select swaps, see monthly and one-time savings separately, carry them into any plan.
 - The selection travels through deep links and the global store.
-- Games of chance: fixed conservative estimate (€20 → €15 = €5/month); no inputs.
+- Games of chance: fixed conservative estimate (€40 → €20 = €20/month); no inputs.
 - Roadmap cards (“Create my own swap”, “Add my dream trip”) are deliberately non-interactive.
 - Visual: the swaps page and the games card.
 
@@ -102,7 +102,7 @@ Preparation: clean window, zoom 110%, `/unlocks` empty, `/` open.
 | 1:25 | Back to **Balanced**, horizon **3m** | “With three months, it is not unlocked. The product does not lie.” |
 | 1:40 | Horizon **12m**, **Save this plan** | “Saved on this device. No account, no server.” |
 | 1:55 | Open **The swaps** | “Twenty-five changes in six categories, independent of any destination. Select them and carry them into a plan.” |
-| 2:10 | Games card | “A fixed conservative estimate: €20 current, €15 reduced, €5 a month. No inputs, no invented average.” |
+| 2:10 | Open **The swaps**, then **Games of chance & betting** | “Categories start collapsed. I open games: a fixed estimate of €40 current, €20 reduced, €20 a month. No inputs, no invented average.” |
 | 2:20 | **My unlocks** | “The plan is here, with the horizon and progress recalculated.” |
 | 2:30 | **Open plan** | “The deep link returns exactly the same swaps — the number is reproducible.” |
 | 2:38 | **Add to calendar** | “Daily at 08:30, an `.ics` with a 15-minute event and an alarm. No account, no server.” |

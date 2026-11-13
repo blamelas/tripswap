@@ -4,7 +4,7 @@
 **Student:** Bruno Lamelas · **Project:** TripSwap
 **One-liner:** small changes, bigger journeys — a travel plan funded by everyday swaps.
 **URL:** https://tripswap-home.vercel.app · **Repo:** https://github.com/blamelas/tripswap
-**Tag:** `v1.5.2` · **Deck:** [`TripSwap-Defense.pptx`](TripSwap-Defense.pptx) · **PDF:** [`TripSwap-Defense.pdf`](TripSwap-Defense.pdf)
+**Tag:** `v1.5.3` · **Deck:** [`TripSwap-Defense.pptx`](TripSwap-Defense.pptx) · **PDF:** [`TripSwap-Defense.pdf`](TripSwap-Defense.pdf)
 
 > All presentation materials are in English: the PPTX, the PDF, the 10-minute script
 > (`DECK-SCRIPT.md`), the demo script (`DEFENSE.md`), the Q&A (`QA.md`) and the backup
@@ -23,7 +23,7 @@
 | CI on every PR | ✅ `lint → typecheck → test → build` |
 | 3+ branches | ✅ 29 remote branches |
 | 15+ conventional commits | ✅ 114+ |
-| Tag `v1.0.0` | ✅ and tags up to `v1.5.2` |
+| Tag `v1.0.0` | ✅ and tags up to `v1.5.3` |
 | 3+ unit tests | ✅ 42 |
 | Deck, 8–10 slides | ✅ 10, English |
 | Demo script | ✅ `docs/DECK-SCRIPT.md` (English) |
@@ -71,7 +71,7 @@
 | Zero secrets in history | see §6 | ✅ |
 | 15+ conventional commits | 114+ | ✅ |
 | 3+ branches and 3+ merged PRs | 29 branches, 21+ PRs | ✅ |
-| Tag `v1.0.0` | tags up to `v1.5.2` | ✅ |
+| Tag `v1.0.0` | tags up to `v1.5.3` | ✅ |
 | `.devcontainer/devcontainer.json` | `.devcontainer/` | ✅ |
 | `Dockerfile` + `docker-compose.yml` | root | ✅ |
 | `docker compose up` from a clean clone | documented and used | ✅ |
@@ -121,7 +121,7 @@ Preparation: clean window, zoom 110%, `/unlocks` empty, `/` open.
 | 1:25 | Back to **Balanced**, horizon **3m** | “With three months, it is not unlocked. The product does not lie.” |
 | 1:40 | Horizon **12m**, **Save this plan** | “Saved on this device. No account, no server.” |
 | 1:55 | Open **The swaps** | “Twenty-five changes in six categories, independent of any destination. Select them and carry them into a plan.” |
-| 2:10 | Games card | “A fixed conservative estimate: €20 current, €15 reduced, €5 a month. No inputs, no invented average.” |
+| 2:10 | Open **The swaps**, then **Games of chance & betting** | “Categories start collapsed. I open games: a fixed estimate of €40 current, €20 reduced, €20 a month. No inputs, no invented average.” |
 | 2:20 | **My unlocks** | “The plan is here, with the horizon and progress recalculated.” |
 | 2:30 | **Open plan** | “The deep link returns exactly the same swaps — the number is reproducible.” |
 | 2:38 | **Add to calendar** | “Daily at 08:30, an `.ics` with a 15-minute event and an alarm. No account, no server.” |

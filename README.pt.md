@@ -171,14 +171,16 @@ elimina sobreposições de forma defensiva, mesmo que receba uma lista não sani
 
 A página `/swaps` apresenta as 25 mudanças em seis categorias, independentemente de
 qualquer destino. Usa os mesmos dados, motor e regras de sobreposição do fluxo de
-destino. **Jogos de azar e apostas** usa uma estimativa fixa e conservadora — 20 € atuais,
-15 € reduzidos, 5 €/mês — sem inputs e sem médias inventadas. As trocas escolhidas ficam guardadas localmente
+destino. **Jogos de azar e apostas** usa uma estimativa fixa e conservadora — 40 € atuais,
+20 € reduzidos, 20 €/mês — sem inputs e sem médias inventadas. As trocas escolhidas ficam guardadas localmente
 e seguem para qualquer plano através dos links de destino e da seleção global.
 
-Cada atividade tem um ícone próprio na cor da categoria; a fotografia continua
-reservada aos destinos, para que os cartões não se tornem tiles repetidos de stock.
-Dois cartões tracejados mostram o roadmap de “Criar a minha troca” e “Adicionar a minha
-viagem de sonho”. Ao selecionar uma troca, um pequeno sorriso sobe dentro do cartão e desaparece.
+Cada atividade tem um ícone próprio e uma faixa fotográfica estreita e mascarada do
+Wikimedia Commons na edge do cartão. A faixa é textura, não um tile de stock; a
+fotografia completa continua reservada aos destinos. Créditos:
+[`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md). Ao selecionar uma troca, aparece um
+check monocromático no cartão. As categorias começam fechadas; abrir uma fecha as
+outras, mantendo o catálogo curto.
 
 ![O catálogo de trocas](docs/assets/swaps.jpg)
 
@@ -215,11 +217,13 @@ docs/        MVP, pressupostos, decisões, iterações, testes, defesa
 - Persistência apenas no navegador; limpar os dados do site remove os planos.
 - O prazo é uma projeção aritmética, não uma garantia de poupança.
 - Fotografias locais com licenças indicadas em [`docs/CREDITS.md`](docs/CREDITS.md).
+- Faixas dos cartões de troca do Wikimedia Commons, em [`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md).
 
 ## Documentação
 
 - [`docs/MVP.md`](docs/MVP.md) — scope, user stories e critérios de aceitação
 - [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) — todas as premissas, geradas do código
+- [`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md) — créditos das faixas Wikimedia
 - [`docs/DECISIONS.md`](docs/DECISIONS.md) — decisões e trade-offs
 - [`docs/ITERATIONS.md`](docs/ITERATIONS.md) — ciclos de construção
 - [`docs/TESTING.md`](docs/TESTING.md) — testes automáticos e checklist manual

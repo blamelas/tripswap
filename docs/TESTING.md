@@ -92,7 +92,7 @@ Executar em http://localhost:5173 e repetir no URL público.
 | 23 | Lembrete | Plano guardado → Add reminder → diário/mensal, hora, dia → download `.ics`; resumo visível |
 | 24 | Lembrete persiste | Reload mantém o resumo; editar atualiza; remover limpa; remover o plano limpa o lembrete |
 | 25 | Swaps | `/swaps` mostra 6 categorias e 25 cartões; categorias colapsam |
-| 26 | Jogos de azar | Estimativa fixa 20/15 → €5/mês; sem inputs; adicionar atualiza o resumo |
+| 26 | Jogos de azar | Estimativa fixa 40/20 → €20/mês; sem inputs; adicionar atualiza o resumo |
 | 27 | Transporte | 2 trocas em `/swaps` → Douro com seleção pré-preenchida; guardar e ver o plano |
 
 Casos adicionais: `/destination/nao-existe` (404), `/unlocks` sem planos (empty state),

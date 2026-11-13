@@ -169,14 +169,15 @@ link or edited `localStorage`).
 
 A dedicated `/swaps` page presents all 25 changes across six categories, independent of
 any destination. It uses the same habit data, calculator and overlap rules as the
-destination flow. **Games of chance & betting** uses a fixed, conservative estimate — €20 current,
-€15 reduced, €5/month — with no user inputs and no invented average. Selected swaps are stored locally and carried into any destination
+destination flow. **Games of chance & betting** uses a fixed, conservative estimate — €40 current,
+€20 reduced, €20/month — with no user inputs and no invented average. Selected swaps are stored locally and carried into any destination
 plan through the destination links and the global selection.
 
-Each activity has a distinct icon in its category colour; photography stays
-destination-led, so the cards do not become repeated stock-photo tiles. Two dashed
-roadmap cards preview the future “Create my own swap” and “Add my dream trip” tools.
-Selecting a swap adds a small smile arc that rises inside the card and fades.
+Each activity has a distinct icon and a narrow, masked photographic strip from Wikimedia
+Commons on the card edge. The strip is a texture, not a full stock-photo tile; full
+photography remains destination-led. Credits: [`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md).
+Selecting a swap shows a standard monochrome check in the card. Categories start
+collapsed; opening one closes the others, keeping the catalogue short.
 
 ![The swaps catalogue](docs/assets/swaps.jpg)
 
@@ -213,11 +214,13 @@ docs/        MVP, assumptions, decisions, iterations, testing, defense
 - Browser-only persistence; clearing site data removes saved plans.
 - The horizon is an arithmetic projection, not a savings guarantee.
 - Local photography with licences listed in [`docs/CREDITS.md`](docs/CREDITS.md).
+- Swap-card strips from Wikimedia Commons, listed in [`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md).
 
 ## Documentation
 
 - [`docs/MVP.md`](docs/MVP.md) — scope, user stories, acceptance criteria
 - [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) — every assumption, generated from code
+- [`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md) — Wikimedia swap-strip credits
 - [`docs/DECISIONS.md`](docs/DECISIONS.md) — decisions and trade-offs
 - [`docs/ITERATIONS.md`](docs/ITERATIONS.md) — build cycles
 - [`docs/TESTING.md`](docs/TESTING.md) — automated tests and manual checklist

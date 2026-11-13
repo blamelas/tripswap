@@ -315,7 +315,7 @@ slides.append(slide(f'''
       <div class="checklist" style="margin-top:12px;">
         <div><b>Overlaps:</b> meals, snacks, nights, subscriptions, repairs, trips. One per group.</div>
         <div><b>One-time:</b> counted once, never as monthly income.</div>
-        <div><b>Games of chance:</b> a fixed conservative estimate: €20 → €15 = €5/month. No inputs, no invented average.</div>
+        <div><b>Games of chance:</b> a fixed conservative estimate: €40 → €20 = €20/month. No inputs, no invented average.</div>
         <div><b>€0*:</b> a metaphor for a cost covered by swaps. Not a discount, not a free trip.</div>
         <div><b>No claims:</b> no medical promises, weight loss or avoided emissions.</div>
       </div>
@@ -341,7 +341,7 @@ slides.append(slide(f'''
     <div><div class="step-num">01</div><div class="tiny" style="margin-top:4px;">An independent catalogue, not a destination dashboard.</div></div>
     <div><div class="step-num">02</div><div class="tiny" style="margin-top:4px;">Select swaps, see monthly and one-time savings separately.</div></div>
     <div><div class="step-num">03</div><div class="tiny" style="margin-top:4px;">Carry the selection into any destination plan.</div></div>
-    <div><div class="step-num">04</div><div class="tiny" style="margin-top:4px;">Games of chance with a fixed €5/month estimate; roadmap cards are not interactive.</div></div>
+    <div><div class="step-num">04</div><div class="tiny" style="margin-top:4px;">Games of chance with a fixed €20/month estimate; roadmap cards are not interactive.</div></div>
   </div>
   <div style="position:absolute;left:72px;right:72px;bottom:74px;border-top:2px solid #F04A28;padding-top:14px;font-family:'Barlow';font-size:30px;font-weight:600;text-transform:uppercase;">The swaps are the actions. The destination is the reward.</div>
 ''', 8))
@@ -441,7 +441,7 @@ notes = [
     'The flow: discover, swap, unlock. Example: Paris, Balanced, 3 swaps, €122/month, 6 months.',
     'Scope: a four-story MVP with a sharp boundary. No backend, booking or live prices.',
     'Architecture: static React/TypeScript app, deterministic engine, localStorage, Vercel. Design is photography-led.',
-    'Calculation and guardrails: recurring and one-time savings, overlap groups, a fixed games estimate, honest €0*.',
+    'Calculation and guardrails: recurring and one-time savings, overlap groups, a fixed €20/month games estimate, honest €0*.',
     'The swaps catalogue: 25 changes, 6 categories, carry-over into plans, fixed games estimate, roadmap cards.',
     'Process: CLAUDE.md, agents, skills, iterations, 42 tests and two real AI failures caught by checks.',
     'Limits and next steps. Thank you.',

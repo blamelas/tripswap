@@ -69,7 +69,7 @@ describe('documented savings assumptions', () => {
       'repair-shoes': 65,
       'repair-equipment': 120,
       'exercise-at-home': 30,
-      'games-betting': 5,
+      'games-betting': 20,
     }
 
     for (const [id, value] of Object.entries(expected)) {

@@ -75,7 +75,7 @@ for (const habit of HABITS) {
 
 lines.push('')
 lines.push('> **Jogos de azar e apostas:** `games-betting` usa uma estimativa fixa e conservadora:')
-lines.push('> 20 €/mês atuais, 15 €/mês reduzidos, 5 €/mês de poupança. Não há inputs do')
+lines.push('> 40 €/mês atuais, 20 €/mês reduzidos, 20 €/mês de poupança. Não há inputs do')
 lines.push('> utilizador nem médias universais.')
 lines.push('')
 lines.push('## Destinos')

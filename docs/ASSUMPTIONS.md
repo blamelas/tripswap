@@ -39,11 +39,11 @@ Todos os valores são **ilustrativos e fictícios**, definidos para este projeto
 | `second-hand-instead-of-new` | Compras e reparações | mensal | 30 € | 10 € | 1/mês | 20 € | — |
 | `sell-unused-items` | Compras e reparações | pontual | 80 € | 0 € | — | 80 € | — |
 | `stop-tobacco` | Bem-estar | mensal | 6 € | 0 € | 20/mês | 120 € | — |
-| `games-betting` | Jogos de azar e apostas | mensal | 20 € | 15 € | 1/mês | 5 € | — |
+| `games-betting` | Jogos de azar e apostas | mensal | 40 € | 20 € | 1/mês | 20 € | — |
 | `exercise-at-home` | Bem-estar | mensal | 30 € | 0 € | 1/mês | 30 € | — |
 
 > **Jogos de azar e apostas:** `games-betting` usa uma estimativa fixa e conservadora:
-> 20 €/mês atuais, 15 €/mês reduzidos, 5 €/mês de poupança. Não há inputs do
+> 40 €/mês atuais, 20 €/mês reduzidos, 20 €/mês de poupança. Não há inputs do
 > utilizador nem médias universais.
 
 ## Destinos
