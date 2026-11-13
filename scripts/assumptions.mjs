@@ -73,6 +73,10 @@ for (const habit of HABITS) {
 }
 
 lines.push('')
+lines.push('> **Jogos e apostas:** `games-betting` não tem valor fixo. A poupança é')
+lines.push('> `gasto mensal atual − gasto mensal reduzido`, introduzida pelo utilizador; sem')
+lines.push('> valores não existe poupança numérica. Não é usada qualquer média universal.')
+lines.push('')
 lines.push('## Destinos')
 lines.push('')
 lines.push('| ID | Destino | Partida | Viajantes | Noites | Objetivo | Inclui |')

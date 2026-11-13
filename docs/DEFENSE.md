@@ -1,6 +1,7 @@
 # Defesa — guião completo
 
 **Produto:** TripSwap · **URL pública:** https://tripswap-home.vercel.app/ · **Repo:** https://github.com/blamelas/tripswap
+**Deck:** [`TripSwap-Defense.pptx`](TripSwap-Defense.pptx) · **Submissão:** [`SUBMISSION.md`](SUBMISSION.md)
 **Duração:** 10 min de apresentação + Q&A · **Ensaios:** 2 cronometrados
 
 ---
@@ -16,7 +17,7 @@
 
 ### 1. Título — 0:00
 **TripSwap — Small changes. Bigger journeys.**
-Nome, URL, repo. Visual: captura da homepage.
+Nome, URL, repo. Visual: captura da homepage no deck.
 
 ### 2. Problema e utilizador — 0:40
 - Utilizador: viajante em Lisboa, 25–40, com um destino em mente.
@@ -37,7 +38,7 @@ Visual: ecrã real, não mockup.
 ### 5. Scope — 5:00
 | Dentro | Fora |
 |---|---|
-| 8 destinos, 24 trocas, motor, unlocks, about | auth, booking, preços live, backend, mapas |
+| 8 destinos, 25 trocas, motor, swaps, unlocks, about | auth, booking, preços live, backend, mapas |
 - Critério: “sem isto, o utilizador obtém o valor central?”
 - Visual: tabela in/out de `docs/MVP.md`.
 
@@ -45,6 +46,7 @@ Visual: ecrã real, não mockup.
 - Direção “The world is the reward”: Barlow Condensed, IBM Plex, ink/canvas/signal; fotografia como interface.
 - SPA estática: React 19 + TS + Vite + Tailwind.
 - Dados tipados → motor puro → UI. Sem servidor.
+- `/swaps`: catálogo independente, 25 trocas, 6 categorias, jogos com valores do utilizador e roadmap não interativo.
 - i18n local: dicionários PT/EN tipados, paridade testada, motor independente do idioma.
 - `localStorage` atrás de uma camada de serviço.
 - Visual: diagrama de 3 caixas.
@@ -57,8 +59,8 @@ Visual: ecrã real, não mockup.
 - Visual: recibo real com uma linha e a fórmula.
 
 ### 8. Processo com AI — 7:45
-- `CLAUDE.md`, 3 agentes, 3 skills, 26 ciclos em `ITERATIONS.md`.
-- 42 testes; dois deles apanharam erros reais do agente.
+- `CLAUDE.md`, 3 agentes, 3 skills, 44 ciclos em `ITERATIONS.md`.
+- 45 testes; dois deles apanharam erros reais do agente. 109 commits, 20 PRs merged, CI em cada PR.
 - Visual: `git log --oneline`, ficheiros de agentes, teste a falhar.
 
 ### 9. Qualidade e deploy — 8:45
@@ -90,9 +92,10 @@ Preparação: janela limpa, zoom 110%, `/unlocks` vazio, `/` aberto.
 | 1:40 | Horizonte **12m**, **Save this plan** | “Guardado neste dispositivo. Sem conta, sem servidor.” |
 | 1:55 | Abrir **My unlocks** | “O plano está aqui, com o prazo e o progresso recalculados.” |
 | 2:10 | Clicar **Open plan** | “O deep link devolve exatamente as mesmas trocas — o número é reproduzível.” |
-| 2:20 | Toggle **PT** | “A mesma conta, em português: 122 € / 6 meses. Os números não mudam.” |
-| 2:30 | Abrir **Sobre** | “Método, limites e créditos. O €0* explicado outra vez.” |
-| 2:45 | Fecho | “Não é uma app de finanças. É uma forma de ver o que as pequenas decisões pagam.” |
+| 2:20 | Em **My unlocks**, clicar **Add to calendar** | “Escolho diário às 08:30 e descarrego o `.ics`: evento de 15 minutos com alarme. Sem conta, sem servidor.” |
+| 2:30 | Toggle **PT** | “A mesma conta, em português: 122 € / 6 meses. Os números não mudam.” |
+| 2:38 | Abrir **Sobre** | “Método, limites e créditos. O €0* explicado outra vez.” |
+| 2:50 | Fecho | “Não é uma app de finanças. É uma forma de ver o que as pequenas decisões pagam.” |
 
 **Se algo falhar:** “Isto é o produto real; tenho o vídeo de backup” e continua. Não
 pedir desculpa mais de uma vez.
@@ -112,12 +115,13 @@ pedir desculpa mais de uma vez.
 | “Duas falhas reais corrigidas” | `docs/PROMPTS.md` + commits `fix(calc)` e `fix(i18n)` |
 | “Reproduzível numa máquina limpa” | `Dockerfile`, `docker-compose.yml`, README |
 | “Deploy automático” | Vercel + `main` |
+| “Lembretes sem servidor” | `src/lib/reminders.ts`, `tests/reminders.test.ts`, `.ics` com `VALARM` |
 | “Mobile funciona” | checklist caso 10, captura em `docs/assets/mobile.jpg` |
 | “É bilingue” | `src/i18n/`, `tests/i18n.test.ts`, toggle no header |
 
 ---
 
-## Q&A (14 perguntas)
+## Q&A (16 perguntas)
 
 **1. Isto não é só um CRUD?**
 > “O CRUD é o meio. O produto é o número: um motor que transforma escolhas em prazo,
@@ -172,8 +176,16 @@ pedir desculpa mais de uma vez.
 > toggle, os dados estão traduzidos e um teste garante paridade. Os números não mudam
 > com o idioma.”
 
-**14. Porque mudaste o visual?**
+**14. Porque `.ics` e não notificações?**
+> “Um `.ics` funciona em qualquer calendário, sem conta, permissão de push ou backend.
+> O custo é ser local e manual; para o MVP, é a solução com menos fricção e menos
+> superfície de falha.”
+
+**15. Porque mudaste o visual?**
 > “A primeira versão era competente mas previsível. O produto é sobre desejo; a fotografia tinha de ser o interface e o mecanismo financeiro a consequência. A reward window liga as trocas à imagem.”
+
+**16. O que é a página The swaps?**
+> “Um catálogo independente das 25 trocas, com seis categorias. Jogos e apostas usa valores introduzidos pelo utilizador, sem médias inventadas. A seleção segue para qualquer destino e há dois cartões de roadmap claramente não interativos.”
 
 **Se não souberes:** “Não validei isso. A minha hipótese é X; o próximo teste seria Y.”
 

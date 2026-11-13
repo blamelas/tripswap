@@ -36,7 +36,7 @@ transparentes.
 Como visitante, quero selecionar mudanças realistas sem introduzir informação
 financeira pessoal.
 
-- [ ] Existem 24 trocas em 5 categorias.
+- [ ] Existem 25 trocas em 6 categorias.
 - [ ] É possível selecionar e remover trocas com um clique.
 - [ ] Não existe nenhum campo para salário, rendimento, despesas ou dados bancários.
 - [ ] Duas trocas do mesmo grupo de sobreposição nunca ficam ativas ao mesmo tempo;
@@ -59,7 +59,7 @@ quanto tempo podem levar a financiar a viagem.
 Como visitante, quero ler a experiência no meu idioma.
 
 - [ ] O inglês é o idioma por omissão; o português está a um clique.
-- [ ] Um toggle PT/EN no cabeçalho muda toda a interface, incluindo as 24 trocas e os
+- [ ] Um toggle PT/EN no cabeçalho muda toda a interface, incluindo as 25 trocas e os
       8 destinos.
 - [ ] Os números, prazos e fórmulas mantêm-se idênticos nos dois idiomas.
 - [ ] A escolha persiste após refresh e atualiza `<html lang>` e o título do documento.
@@ -79,7 +79,8 @@ Como visitante, quero guardar objetivos e planos para voltar mais tarde.
 ## Dentro do MVP
 
 - Catálogo de 8 destinos com dados tipados.
-- Detalhe com presets, 24 trocas, painel de financiamento e recibo.
+- Detalhe com presets, 25 trocas, painel de financiamento e recibo.
+- Página `/swaps` com catálogo independente, jogos com valores do utilizador e roadmap.
 - Motor determinístico com grupos de sobreposição.
 - Gráfico de projeção em SVG.
 - `/unlocks` com persistência local.
@@ -94,11 +95,11 @@ Como visitante, quero guardar objetivos e planos para voltar mais tarde.
 
 - Autenticação, multiusuário, sincronização.
 - Reservas, pagamentos, preços em tempo real, integrações de companhias.
-- Mapas, clima, uploads, notificações, email.
+- Mapas, clima, uploads, push notifications, email.
 - Chatbot ou geração de texto em runtime.
-- Push notifications, email ou sincronização de calendário via API.
+- Criar trocas pessoais ou viagens de sonho (apenas roadmap nesta fase).
 - Gamificação com pontos, moedas ou recompensas.
-- Filtros, pesquisa, favoritos sociais, i18n, dark mode.
+- Filtros, pesquisa, favoritos sociais, dark mode.
 
 ## Modelo de dados
 
@@ -131,7 +132,7 @@ SavedPlan {
 ## Definição de pronto
 
 - As 4 user stories funcionam de ponta a ponta, sem tocar no código.
-- Os 26 testes passam; lint, typecheck e build verdes.
+- Os 45 testes passam; lint, typecheck e build verdes.
 - O URL público abre em incógnito e no telemóvel.
 - O toggle PT/EN funciona e persiste.
 - Zero erros na consola.

@@ -49,6 +49,9 @@ commit. Os tempos são reais e incluem revisão manual.
 | 42 | 13 Nov 08:50 | Lembretes | Form diário/mensal, hora, dia, `.ics` e storage | Evento + alarme | `feat(plans): add calendar reminders` | 45 min |
 | 43 | 13 Nov 09:00 | QA | Testes de ICS, fluxo de edição/remoção e docs | 42/42 verdes | `test(reminders): cover ics generation` | 20 min |
 | 44 | 13 Nov 09:05 | Release | Changelog, versão e deploy | `v1.4.0` | `chore(release): v1.4.0` | 10 min |
+| 45 | 13 Nov 09:30 | Catálogo | Página `/swaps`, cartões editoriais, resumo e seleção | 25/6 | `feat(swaps): add the swaps catalogue` | 60 min |
+| 46 | 13 Nov 09:45 | Jogos | Valores atuais/reduzidos, cálculo efetivo e transporte para o plano | Sem média inventada | `feat(games): user-defined games estimate` | 40 min |
+| 47 | 13 Nov 09:55 | Release | Testes, docs, screenshots e deploy | `v1.5.0` | `chore(release): v1.5.0` | 20 min |
 
 ## O que aprendi
 
