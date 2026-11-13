@@ -53,7 +53,7 @@ componentes: o risco do produto está na aritmética e nas sobreposições.
 - Singular/plural de meses.
 - Percentagens.
 
-## Checklist manual (20 casos)
+## Checklist manual (22 casos)
 
 Executar em http://localhost:5173 e repetir no URL público.
 
@@ -79,6 +79,8 @@ Executar em http://localhost:5173 e repetir no URL público.
 | 18 | Sucesso | Balanced em Paris transforma o cartão em signal: check, “This is now possible.”, 6 meses, 3 trocas, €650; barra mobile signal |
 | 19 | Altura estável | Medir o reward card com 0, 3 e 4 trocas: mesma altura; sem secção extra |
 | 20 | Detalhes | Chevron abre descrição, premissa e benefícios sem alterar a seleção |
+| 21 | Categorias | Título 21px, ícone 44px, resumo “N disponíveis · N selecionadas”, regra na cor |
+| 22 | Colapsar | Cabeçalho colapsa/expande com `aria-expanded`; seleções e contagem mantêm-se |
 
 Casos adicionais: `/destination/nao-existe` (404), `/unlocks` sem planos (empty state),
 imagem inexistente (fallback), `prefers-reduced-motion` (sem animações).

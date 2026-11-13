@@ -96,11 +96,12 @@ altura, um check e **“Isto agora é possível.”** substituem o bloco neutro.
 acrescentado abaixo; só o cartão se transforma. No telemóvel, a barra de funding fica
 signal.
 
-As linhas de hábitos mostram apenas o nome, a poupança e o estado selecionado. As
-categorias são etiquetas discretas, não títulos, com um ícone pequeno; descrições,
-premissas e benefícios ficam atrás de um chevron. Os dados da viagem têm ícones, e os
-planos sugeridos vivem numa faixa azul-pálida no início do passo de troca, claramente
-separados dos dados da viagem.
+As linhas de hábitos mostram apenas o nome, a poupança e o estado selecionado;
+descrições, premissas e benefícios ficam atrás de um chevron. As categorias são
+marcadores de capítulo: ícone de 44px em fundo tingido, título de 21px, resumo ao vivo
+“N trocas disponíveis · N selecionadas” e uma regra de 2px na cor da categoria. Podem
+colapsar a partir do cabeçalho e mantêm as seleções. Os dados da viagem têm ícones, e
+os planos sugeridos vivem numa faixa azul-pálida no início do passo de troca.
 
 ![O estado de sucesso](docs/assets/success.jpg)
 

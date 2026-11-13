@@ -122,7 +122,9 @@ docker compose up       # same dev server in a container
 - Success is explicit but layout-stable: the reward card turns signal with a check and
   “This is now possible.”; it never adds sections or changes height. The mobile funding
   bar turns signal. Saving always uses a bookmark icon.
-- Habit categories are quiet labels, not headings. Activity rows show name, saving and
+- Habit categories are editorial chapter markers: 21px title, 44px tinted icon, one of
+  five category colours, a 2px rule and a live “N available · N selected” summary. They
+  collapse from the header and preserve selections. Activity rows keep name, saving and
   selected state; descriptions, assumptions and benefits live behind a chevron.
 - The €0* is the card CTA: struck planning target above, large €0*, “Unlock this
   experience” underneath.
