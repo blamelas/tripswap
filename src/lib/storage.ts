@@ -1,6 +1,8 @@
+import { DEFAULT_LOCALE, isLocale, type Locale } from '../i18n/types'
 import type { SavedPlan } from '../types'
 
 const KEY = 'tripswap:unlocks:v1'
+const LOCALE_KEY = 'tripswap:locale:v2'
 
 function isSavedPlan(value: unknown): value is SavedPlan {
   if (!value || typeof value !== 'object') return false
@@ -60,4 +62,22 @@ export function clearPlans(): void {
 
 export function getPlan(destinationId: string): SavedPlan | undefined {
   return readPlans().find((plan) => plan.destinationId === destinationId)
+}
+
+export function readLocale(): Locale {
+  if (typeof window === 'undefined') return DEFAULT_LOCALE
+  try {
+    const raw = window.localStorage.getItem(LOCALE_KEY)
+    return isLocale(raw) ? raw : DEFAULT_LOCALE
+  } catch {
+    return DEFAULT_LOCALE
+  }
+}
+
+export function writeLocale(locale: Locale): void {
+  try {
+    window.localStorage.setItem(LOCALE_KEY, locale)
+  } catch {
+    // Storage can be unavailable; the toggle still works in memory.
+  }
 }
