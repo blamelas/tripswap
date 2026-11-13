@@ -1,214 +1,160 @@
-# Defesa — guião completo
+# Defence — full script (English)
 
-**Produto:** TripSwap · **URL pública:** https://tripswap-home.vercel.app/ · **Repo:** https://github.com/blamelas/tripswap
-**Deck:** [`TripSwap-Defense.pptx`](TripSwap-Defense.pptx) · **Submissão:** [`SUBMISSION.md`](SUBMISSION.md)
-**Duração:** 10 min de apresentação + Q&A · **Ensaios:** 2 cronometrados
+**Product:** TripSwap · **Public URL:** https://tripswap-home.vercel.app/
+**Repo:** https://github.com/blamelas/tripswap
+**Deck:** [`TripSwap-Defense.pptx`](TripSwap-Defense.pptx) · **PDF:** [`TripSwap-Defense.pdf`](TripSwap-Defense.pdf)
+**10-minute script:** [`DECK-SCRIPT.md`](DECK-SCRIPT.md) · **Submission:** [`SUBMISSION.md`](SUBMISSION.md)
+**Duration:** 10 min presentation + Q&A · **Rehearsals:** 2 timed runs
 
 ---
 
-## Abertura (30 s, decorar)
+## Opening (30 s, memorise)
 
-> “O problema que escolhi é simples: quem quer viajar já sabe para onde quer ir, mas
-> não sabe se o consegue pagar. As apps de finanças começam em orçamentos e perdem a
-> pessoa no primeiro ecrã. O TripSwap começa no desejo e responde a uma pergunta: em
-> quanto tempo isto fica ao meu alcance? Vou mostrar o momento em que isso acontece.”
+> “The problem I chose is simple: people who want to travel already know where they want
+> to go, but they do not know whether they can afford it. Finance apps start with budgets
+> and lose the person on the first screen. TripSwap starts with desire and answers one
+> question: how soon does this become reachable? I’ll show you the moment that happens.”
 
 ## Slides (10)
 
-### 1. Título — 0:00
+### 1. Title — 0:00
 **TripSwap — Small changes. Bigger journeys.**
-Nome, URL, repo. Visual: captura da homepage no deck.
+Name, URL, repo. Visual: the hero photograph, the 8 destinations / 25 swaps / 6 categories / 45 tests strip.
+One line: “A travel discovery product that turns everyday swaps into future experiences.”
 
-### 2. Problema e utilizador — 0:40
-- Utilizador: viajante em Lisboa, 25–40, com um destino em mente.
-- Hoje: ou não planeia, ou abre uma folha de cálculo e desiste.
-- Custo: a viagem fica no “um dia”.
-- Visual: comparação “folha de cálculo vs. desejo”.
+### 2. Problem and user — 0:40
+- User: a traveller in Lisbon, 25–40, with a destination in mind.
+- Today: they either do not plan, or open a spreadsheet and give up.
+- Cost: the trip stays in “one day”.
+- Visual: bank / spreadsheet / inspiration; the missing bridge is a plan with a timeline.
 
-### 3. A ideia — 1:20
-- O catálogo é a porta. O cálculo é o produto.
-- €0\* = custo coberto por poupança; nunca um preço.
-- Três pilares escondidos: gastar melhor, viver melhor, consumir melhor.
-- Visual: um cartão com €0\* e o orçamento real.
+### 3. The idea — 1:20
+- The catalogue is the door. The calculation is the product.
+- €0\* = a cost covered by savings; never a price.
+- Three hidden pillars: spend smarter, live healthier, consume consciously.
+- Visual: €0\*, the €650 planning target crossed out, and the three destinations strip.
 
-### 4. Demo — 2:00 (ver guião abaixo)
-**O momento de valor:** 3 trocas → 6 meses, com a maré a subir na fotografia e a linha coral a acompanhar.
-Visual: ecrã real, não mockup.
+### 4. Demo — 2:00 (see the demo script below)
+**Value moment:** 3 swaps → 6 months, the coral state moves across the photograph and the
+horizon buttons update. Visual: the real screen, not a mockup.
 
-### 5. Scope — 5:00
-| Dentro | Fora |
+### 5. Scope — 3:00
+| In | Out |
 |---|---|
-| 8 destinos, 25 trocas, motor, swaps, unlocks, about | auth, booking, preços live, backend, mapas |
-- Critério: “sem isto, o utilizador obtém o valor central?”
-- Visual: tabela in/out de `docs/MVP.md`.
+| 8 destinations, 25 swaps, 6 categories, engine, swaps, unlocks, about | auth, booking, live prices, backend, maps |
+- Criterion: “without this, does the user get the core value?”
+- Visual: the in/out table from `docs/MVP.md`.
+- Four stories: discover, select, understand, save.
 
-### 6. Arquitetura e design — 6:00
-- Direção “The world is the reward”: Barlow Condensed, IBM Plex, ink/canvas/signal; fotografia como interface.
-- SPA estática: React 19 + TS + Vite + Tailwind.
-- Dados tipados → motor puro → UI. Sem servidor.
-- `/swaps`: catálogo independente, 25 trocas, 6 categorias, jogos com valores do utilizador e roadmap não interativo.
-- i18n local: dicionários PT/EN tipados, paridade testada, motor independente do idioma.
-- `localStorage` atrás de uma camada de serviço.
-- Visual: diagrama de 3 caixas.
+### 6. Architecture and design — 3:50
+- Direction “The world is the reward”: Barlow Condensed, IBM Plex, ink/canvas/signal; photography as interface.
+- Static SPA: React 19 + TS + Vite + Tailwind.
+- Typed data → pure engine → UI. No server.
+- `/swaps`: independent catalogue, 25 swaps, 6 categories, games with user values, non-interactive roadmap.
+- Local i18n: typed PT/EN dictionaries, parity tested, engine language-agnostic.
+- `localStorage` behind a service layer.
+- Visual: the three-box diagram and the token strip.
 
-### 7. O cálculo — 6:45
-- Recorrente: `(original − alternativa) × frequência`.
-- Pontual: diferença, uma vez.
-- Prazo: primeiro mês inteiro.
-- Sobreposições: grupos exclusivos, nunca soma.
-- Visual: recibo real com uma linha e a fórmula.
+### 7. The calculation — 4:40
+- Recurring: `(original − alternative) × frequency`.
+- One-time: difference, once.
+- Horizon: first whole month at the target.
+- Overlaps: exclusive groups, never summed.
+- Games of chance: current − reduced, entered by the user; no invented average.
+- Visual: a real receipt with one line and the formula; examples for Paris, Douro, Iceland.
 
-### 8. Processo com AI — 7:45
-- `CLAUDE.md`, 3 agentes, 3 skills, 44 ciclos em `ITERATIONS.md`.
-- 45 testes; dois deles apanharam erros reais do agente. 109 commits, 20 PRs merged, CI em cada PR.
-- Visual: `git log --oneline`, ficheiros de agentes, teste a falhar.
+### 8. The swaps catalogue — 5:40
+- 25 changes, 6 categories, independent of any destination.
+- Select swaps, see monthly and one-time savings separately, carry them into any plan.
+- The selection travels through deep links and the global store.
+- Games of chance: conservative example (€20 → €15 = €5/month); no number until both values exist.
+- Roadmap cards (“Create my own swap”, “Add my dream trip”) are deliberately non-interactive.
+- Visual: the swaps page and the games card.
 
-### 9. Qualidade e deploy — 8:45
-- lint + typecheck + test + build verdes; CI em cada PR.
-- Deploy automático de `main`; rollback por redeploy anterior.
-- Visual: badge/CI e dashboard.
+### 9. Process with AI — 6:40
+- `CLAUDE.md`, 3 agents, 3 skills, 48 cycles in `ITERATIONS.md`.
+- 45 tests; two of them caught real AI errors. 110+ commits, 20+ merged PRs, CI on every PR.
+- Failure 1: the engine summed overlapping swaps. A test failed with 2 lines instead of 1. I fixed the engine, not the test.
+- Failure 2: a literal i18n return type broke the English dictionary. `tsc` caught it; I widened the type and added a parity test.
+- Visual: `git log --oneline`, agent files, a failing test.
 
-### 10. Limitações e próximo passo — 9:30
-- Orçamentos ilustrativos, sem preços reais.
-- Sem contas nem sincronização.
-- Próximo: pré-renderização + recomendação calculada + teste e2e.
-- Fecho (15 s): “O produto está em [URL]. O código está em [repo]. O que ficou de fora
-  está no slide 5, e porquê. A próxima coisa que eu faria era testes end-to-end.”
+### 10. Quality, limits and next — 7:40
+- lint + typecheck + test + build green; CI on every PR.
+- Automatic deploy from `main`; rollback by redeploying the previous build.
+- Limits: illustrative budgets, no real prices; no accounts or sync; no push; reminders are `.ics` files.
+- Next: savings tracking, custom swaps/dream trip, accounts/sync, end-to-end tests.
+- Close (15 s): “The product is at [URL]. The code is at [repo]. What I left out is on
+  slide 5, and why. The next thing I would build is end-to-end tests.”
 
 ---
 
-## Guião de demo (3 min, cliques exatos)
+## Demo script (3 min, exact clicks)
 
-Preparação: janela limpa, zoom 110%, `/unlocks` vazio, `/` aberto.
+Preparation: clean window, zoom 110%, `/unlocks` empty, `/` open.
 
-| Tempo | Ação | O que dizer |
+| Time | Action | Say |
 |---|---|---|
-| 0:00 | `/` | “Oito destinos. Cada um com um objetivo real de planeamento — e um €0* que é uma metáfora, não um preço.” |
-| 0:20 | Abrir **Paris City Break** | “650 € para planear. Dois viajantes, três noites, partida de Lisboa.” |
-| 0:35 | Clicar **Balanced** | “Três trocas comuns: café em casa, almoço de casa, metade dos Uber. **€122 por mês. Seis meses.** O próprio cartão fica laranja: *this is now possible*, sem mudar de altura.” |
-| 0:55 | Abrir **How we calculated** | “A conta está aqui: (€2.00 − €0.40) × 20. Nada disto é gerado por IA.” |
-| 1:10 | Clicar **Walk** | “Substitui o Uber — as duas assumem as mesmas viagens. O produto recusa somar.” |
-| 1:25 | Voltar a **Balanced**, mudar horizonte para **3m** | “Com três meses, ainda não está desbloqueado. O produto não mente.” |
-| 1:40 | Horizonte **12m**, **Save this plan** | “Guardado neste dispositivo. Sem conta, sem servidor.” |
-| 1:55 | Abrir **My unlocks** | “O plano está aqui, com o prazo e o progresso recalculados.” |
-| 2:10 | Clicar **Open plan** | “O deep link devolve exatamente as mesmas trocas — o número é reproduzível.” |
-| 2:20 | Em **My unlocks**, clicar **Add to calendar** | “Escolho diário às 08:30 e descarrego o `.ics`: evento de 15 minutos com alarme. Sem conta, sem servidor.” |
-| 2:30 | Toggle **PT** | “A mesma conta, em português: 122 € / 6 meses. Os números não mudam.” |
-| 2:38 | Abrir **Sobre** | “Método, limites e créditos. O €0* explicado outra vez.” |
-| 2:50 | Fecho | “Não é uma app de finanças. É uma forma de ver o que as pequenas decisões pagam.” |
+| 0:00 | `/` | “Eight destinations. Each with a real planning target — and a €0* that is a metaphor, not a price.” |
+| 0:20 | Open **Paris City Break** | “€650 to plan. Two travellers, three nights, from Lisbon.” |
+| 0:35 | Click **Balanced** | “Coffee at home, lunch at home, half the Ubers. **€122 a month. Six months.** The card turns coral: *this is now possible*.” |
+| 0:55 | Open **How we calculated** | “The maths is here: (10 − 2.50) × 4, (9 − 4) × 12, (2 − 0.40) × 20. None of this is generated by AI.” |
+| 1:10 | Click **Walk** | “Replace the Uber — both assume the same trips. The product refuses to sum them.” |
+| 1:25 | Back to **Balanced**, horizon **3m** | “With three months, it is not unlocked. The product does not lie.” |
+| 1:40 | Horizon **12m**, **Save this plan** | “Saved on this device. No account, no server.” |
+| 1:55 | Open **The swaps** | “Twenty-five changes in six categories, independent of any destination. Select them and carry them into a plan.” |
+| 2:10 | Games card, **Use a conservative example** | “€20 current, €15 reduced: €5 a month. The user’s values, not an invented average.” |
+| 2:20 | **My unlocks** | “The plan is here, with the horizon and progress recalculated.” |
+| 2:30 | **Open plan** | “The deep link returns exactly the same swaps — the number is reproducible.” |
+| 2:38 | **Add to calendar** | “Daily at 08:30, an `.ics` with a 15-minute event and an alarm. No account, no server.” |
+| 2:45 | Toggle **PT** | “The same maths in Portuguese: €122 / 6 months. The numbers do not change.” |
+| 2:50 | Close | “Not a finance app. A way to see what small decisions pay for.” |
 
-**Se algo falhar:** “Isto é o produto real; tenho o vídeo de backup” e continua. Não
-pedir desculpa mais de uma vez.
+**If something fails:** “This is the real product; I have a backup video.” Continue.
 
 ---
 
-## Mapa afirmação → artefacto
+## Q&A
 
-| Afirmação | Onde provar |
+Use [`QA.md`](QA.md) (26 questions). If you do not know:
+
+> “I have not validated that. My hypothesis is X. The next test would be Y.”
+
+### Traps to avoid
+- Do not call €0\* a discount, a price or a free trip.
+- Do not claim real prices, real savings or a medical benefit.
+- Do not say the AI calculated the result.
+- Do not hide the limitations; slide 10 is part of the argument.
+
+### Numbers to know
+- 8 destinations · 25 swaps · 6 categories.
+- Paris, Balanced: €122/month · €650 target · 6 months.
+- Paris, Essential: €90/month · 8 months.
+- Paris, Conscious: €146/month + €65 one-time · 5 months.
+- 45 tests · 27 manual cases · 26 Q&A · 48 iterations.
+- 110+ commits · 20+ merged PRs · 21 merged at the time of writing.
+
+---
+
+## Runbook (last 30 minutes)
+
+- [ ] URL open in incognito and on the phone.
+- [ ] `/unlocks` empty for the demo.
+- [ ] Paris deep link tested.
+- [ ] Deck open in presentation mode (English).
+- [ ] PDF open as fallback (English).
+- [ ] Backup video open offline.
+- [ ] `docs/DECK-SCRIPT.md` and `docs/QA.md` in another tab.
+- [ ] `git log --oneline` and the PRs open.
+- [ ] Zoom 110%, notifications off.
+- [ ] Water.
+
+## If something breaks
+
+| Situation | What to do |
 |---|---|
-| “Os números são determinísticos” | `src/lib/calc.ts`, `tests/calc.test.ts` |
-| “Nunca soma trocas sobrepostas” | `src/lib/conflicts.ts`, teste “replaces a habit…” |
-| “Poupanças pontuais não são mensais” | teste “never mixes a one-time saving…” |
-| “O €0* é explicado” | `Discover`, detalhe, rodapé, `About` |
-| “Sem dados financeiros pessoais” | nenhum formulário; `types.ts` |
-| “Trabalho com AI é auditável” | `CLAUDE.md`, `.claude/`, `docs/PROMPTS.md` |
-| “Duas falhas reais corrigidas” | `docs/PROMPTS.md` + commits `fix(calc)` e `fix(i18n)` |
-| “Reproduzível numa máquina limpa” | `Dockerfile`, `docker-compose.yml`, README |
-| “Deploy automático” | Vercel + `main` |
-| “Lembretes sem servidor” | `src/lib/reminders.ts`, `tests/reminders.test.ts`, `.ics` com `VALARM` |
-| “Mobile funciona” | checklist caso 10, captura em `docs/assets/mobile.jpg` |
-| “É bilingue” | `src/i18n/`, `tests/i18n.test.ts`, toggle no header |
-
----
-
-## Q&A (16 perguntas)
-
-**1. Isto não é só um CRUD?**
-> “O CRUD é o meio. O produto é o número: um motor que transforma escolhas em prazo,
-> com sobreposições resolvidas e premissas visíveis. O ecrã de detalhe é a prova.”
-
-**2. O que a AI fez mal?**
-> “Somou duas trocas do mesmo grupo no motor, apesar de a UI as substituir. O teste
-> falhou com duas linhas onde esperava uma. Corrigi o motor, não o teste.”
-
-**3. Como sabes que o utilizador quer isto?**
-> “É uma hipótese, não um estudo. A lógica: o destino é o motivo, o plano é a
-> objeção. O próximo teste seria cinco entrevistas com pessoas que já viajaram nos
-> últimos 12 meses.”
-
-**4. O que ficou de fora e porquê?**
-> “Auth, booking, preços reais, backend e mapas. Sem qualquer um deles o utilizador
-> ainda obtém o valor central: perceber o custo e o prazo.”
-
-**5. Como reproduzo isto numa máquina limpa?**
-> “`docker compose up`. Ou `npm ci && npm run dev`. Está no README, secção Run.”
-
-**6. E se a AI apagar tudo?**
-> “Trabalhei em branches, com commits pequenos e PRs. `git checkout` resolve. Nunca
-> trabalhei diretamente em `main`.”
-
-**7. Os orçamentos são reais?**
-> “Não. São objetivos ilustrativos, com cidade de partida, viajantes, noites e âmbito
-> declarados. A UI chama-lhes isso em todos os ecrãs. Não há tarifas.”
-
-**8. Porque não usaste uma API de voos?**
-> “Três razões: custo, instabilidade na demo e a distinção entre preço verificado e
-> objetivo de planeamento. O produto não precisa de tarifas para provar o conceito.”
-
-**9. Como garantes que não há dupla contagem?**
-> “Seis grupos exclusivos. Escolher uma troca remove a anterior e a UI explica. O
-> motor também deduplica, para deep links e dados antigos.”
-
-**10. Porque localStorage e não uma base de dados?**
-> “Zero fricção e zero dados pessoais. O custo é não sincronizar. Para o MVP, o
-> benefício supera. A camada `storage.ts` permite trocar por API sem tocar nas vistas.”
-
-**11. Como escalarias?**
-> “Primeiro pré-renderização para partilha; depois contas e sincronização; depois
-> recomendação calculada por perfil; por fim testes end-to-end e observabilidade.”
-
-**12. Que decisão foi mais difícil?**
-> “Excluir trocas sobrepostas em vez de aplicar uma penalização. Perdi combinações,
-> ganhei um número que consigo defender linha a linha.”
-
-**13. Porque PT e EN?**
-> “O produto é para Lisboa, mas o júri e o repo são internacionais. A interface tem
-> toggle, os dados estão traduzidos e um teste garante paridade. Os números não mudam
-> com o idioma.”
-
-**14. Porque `.ics` e não notificações?**
-> “Um `.ics` funciona em qualquer calendário, sem conta, permissão de push ou backend.
-> O custo é ser local e manual; para o MVP, é a solução com menos fricção e menos
-> superfície de falha.”
-
-**15. Porque mudaste o visual?**
-> “A primeira versão era competente mas previsível. O produto é sobre desejo; a fotografia tinha de ser o interface e o mecanismo financeiro a consequência. A reward window liga as trocas à imagem.”
-
-**16. O que é a página The swaps?**
-> “Um catálogo independente das 25 trocas, com seis categorias. Jogos de azar e apostas usa valores introduzidos pelo utilizador, sem médias inventadas. A seleção segue para qualquer destino e há dois cartões de roadmap claramente não interativos.”
-
-**Se não souberes:** “Não validei isso. A minha hipótese é X; o próximo teste seria Y.”
-
----
-
-## Cronometragem
-
-| Bloco | Alvo | Máximo |
-|---|---|---|
-| Abertura | 0:30 | 0:40 |
-| Slides 2–3 | 0:45 | 1:00 |
-| Demo | 2:30 | 3:00 |
-| Slides 5–8 | 2:30 | 2:45 |
-| Slides 9–10 | 1:15 | 1:30 |
-| **Total** | **9:00** | **10:00** |
-
-## Antes de entrar
-
-- [ ] URL aberto em incógnito e no telemóvel
-- [ ] `/unlocks` limpo para a demo
-- [ ] Deep link de Paris testado
-- [ ] Vídeo de backup abre offline
-- [ ] `git log --oneline` e PRs abertos noutro separador
-- [ ] `CLAUDE.md` e `docs/ITERATIONS.md` abertos
-- [ ] Zoom 110%, notificações desligadas
-- [ ] Água
+| URL does not open | `npm run build && npm run preview` locally; otherwise the video |
+| Vercel is down | Show the local build; the deploy is automatic from `main` |
+| Deep link fails | Open `/unlocks`; explain that the selection is sanitised in the engine |
+| Save demo fails | Show an existing saved plan; the calculation is already visible |
+| No internet | Video + slides + local Docker |
+| Question without an answer | “I have not validated it; my hypothesis is X; the next test is Y.” |

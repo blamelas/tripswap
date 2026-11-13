@@ -19,8 +19,9 @@ and funding horizon update instantly.
 | **Local demo** | `npm run dev` → http://localhost:5173 |
 | **Live demo** | https://tripswap-home.vercel.app/ |
 | **Repository** | https://github.com/blamelas/tripswap |
-| **Defense script** | [`docs/DEFENSE.md`](docs/DEFENSE.md) (pt-PT) |
-| **Slides** | [`docs/TripSwap-Defense.pptx`](docs/TripSwap-Defense.pptx) |
+| **Defense script** | [`docs/DEFENSE.md`](docs/DEFENSE.md) (English) |
+| **10-minute deck script** | [`docs/DECK-SCRIPT.md`](docs/DECK-SCRIPT.md) (English) |
+| **Slides** | [`docs/TripSwap-Defense.pptx`](docs/TripSwap-Defense.pptx) · [PDF](docs/TripSwap-Defense.pdf) |
 | **Submission pack** | [`docs/SUBMISSION.md`](docs/SUBMISSION.md) |
 | **Assumptions** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) (pt-PT) |
 | **Status** | working MVP, 4 user stories, PT/EN toggle, fictional data, local persistence |
@@ -221,11 +222,12 @@ docs/        MVP, assumptions, decisions, iterations, testing, defense
 - [`docs/ITERATIONS.md`](docs/ITERATIONS.md) — build cycles
 - [`docs/TESTING.md`](docs/TESTING.md) — automated tests and manual checklist
 - [`docs/PROMPTS.md`](docs/PROMPTS.md) — real prompts and one real AI failure
-- [`docs/DEFENSE.md`](docs/DEFENSE.md) — slides, demo script and Q&A
-- [`docs/QA.md`](docs/QA.md) — rehearsal flashcards
-- [`docs/VIDEO.md`](docs/VIDEO.md) — 3-minute backup video script
-- [`docs/SUBMISSION.md`](docs/SUBMISSION.md) — course requirement → evidence map
-- [`docs/TripSwap-Defense.pptx`](docs/TripSwap-Defense.pptx) — 10-slide defense deck
+- [`docs/DEFENSE.md`](docs/DEFENSE.md) — English demo runbook and full defence script
+- [`docs/DECK-SCRIPT.md`](docs/DECK-SCRIPT.md) — English 10-minute slide script
+- [`docs/QA.md`](docs/QA.md) — English rehearsal flashcards (26 questions)
+- [`docs/VIDEO.md`](docs/VIDEO.md) — English 3-minute backup video script
+- [`docs/SUBMISSION.md`](docs/SUBMISSION.md) — English course requirement → evidence map
+- [`docs/TripSwap-Defense.pptx`](docs/TripSwap-Defense.pptx) — 10-slide English deck · [`PDF`](docs/TripSwap-Defense.pdf)
 - [`CLAUDE.md`](CLAUDE.md) — agent context and rules
 
 The interface is fully bilingual (PT-PT / EN) with a persistent toggle. Documentation

@@ -20,8 +20,9 @@ projetada e o prazo de financiamento a atualizar-se de imediato.
 | **Demo local** | `npm run dev` → http://localhost:5173 |
 | **Demo pública (Vercel)** | https://tripswap-home.vercel.app/ |
 | **Repositório** | https://github.com/blamelas/tripswap |
-| **Guião de defesa** | [`docs/DEFENSE.md`](docs/DEFENSE.md) |
-| **Slides** | [`docs/TripSwap-Defense.pptx`](docs/TripSwap-Defense.pptx) |
+| **Guião de defesa** | [`docs/DEFENSE.md`](docs/DEFENSE.md) (inglês) |
+| **Guião do deck (10 min)** | [`docs/DECK-SCRIPT.md`](docs/DECK-SCRIPT.md) (inglês) |
+| **Slides** | [`docs/TripSwap-Defense.pptx`](docs/TripSwap-Defense.pptx) · [PDF](docs/TripSwap-Defense.pdf) |
 | **Pacote de submissão** | [`docs/SUBMISSION.md`](docs/SUBMISSION.md) |
 | **Pressupostos** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) |
 | **Estado** | MVP funcional, 4 user stories, toggle PT/EN, dados fictícios, persistência local |
@@ -224,11 +225,12 @@ docs/        MVP, pressupostos, decisões, iterações, testes, defesa
 - [`docs/ITERATIONS.md`](docs/ITERATIONS.md) — ciclos de construção
 - [`docs/TESTING.md`](docs/TESTING.md) — testes automáticos e checklist manual
 - [`docs/PROMPTS.md`](docs/PROMPTS.md) — prompts reais e uma falha do AI
-- [`docs/DEFENSE.md`](docs/DEFENSE.md) — slides, demo e Q&A
-- [`docs/QA.md`](docs/QA.md) — cartões de treino
-- [`docs/VIDEO.md`](docs/VIDEO.md) — guião do vídeo de backup
-- [`docs/SUBMISSION.md`](docs/SUBMISSION.md) — requisito do curso → evidência
-- [`docs/TripSwap-Defense.pptx`](docs/TripSwap-Defense.pptx) — deck de 10 slides
+- [`docs/DEFENSE.md`](docs/DEFENSE.md) — runbook de demo e guião completo, em inglês
+- [`docs/DECK-SCRIPT.md`](docs/DECK-SCRIPT.md) — guião do deck de 10 minutos, em inglês
+- [`docs/QA.md`](docs/QA.md) — cartões de treino, em inglês (26 perguntas)
+- [`docs/VIDEO.md`](docs/VIDEO.md) — guião do vídeo de backup, em inglês
+- [`docs/SUBMISSION.md`](docs/SUBMISSION.md) — requisito do curso → evidência, em inglês
+- [`docs/TripSwap-Defense.pptx`](docs/TripSwap-Defense.pptx) — deck de 10 slides em inglês · [`PDF`](docs/TripSwap-Defense.pdf)
 - [`CLAUDE.md`](CLAUDE.md) — contexto e regras para o agente
 
 ## Como a IA ajudou
