@@ -1,7 +1,27 @@
 import { DEFAULT_LOCALE, isLocale, type Locale } from '../i18n/types'
-import type { GamesEstimate, SavedPlan } from '../types'
+import type {
+  Allocation,
+  AllocationPeriod,
+  GamesEstimate,
+  Habit,
+  LifecycleStatus,
+  OneTimeCredit,
+  PlanLifecycle,
+  SavedPlan,
+} from '../types'
+import type { ReservedAllocation } from './allocations'
+import {
+  achieve,
+  activate,
+  addConfirmed,
+  allocate,
+  pause,
+  releaseAllocation,
+  resume,
+} from './lifecycle'
 
-const KEY = 'tripswap:unlocks:v1'
+const V1_KEY = 'tripswap:unlocks:v1'
+const V2_KEY = 'tripswap:plans:v2'
 const LOCALE_KEY = 'tripswap:locale:v2'
 const GAMES_KEY = 'tripswap:games:v1'
 const SWAPS_KEY = 'tripswap:swaps:v1'
@@ -19,27 +39,132 @@ function isGamesEstimate(value: unknown): value is GamesEstimate {
   )
 }
 
-function isSavedPlan(value: unknown): value is SavedPlan {
+function isLifecycleStatus(value: unknown): value is LifecycleStatus {
+  return value === 'saved' || value === 'active' || value === 'paused' || value === 'achieved'
+}
+
+function isAllocation(value: unknown): value is Allocation {
   if (!value || typeof value !== 'object') return false
-  const plan = value as Partial<SavedPlan>
+  const allocation = value as Partial<Allocation>
   return (
-    typeof plan.destinationId === 'string' &&
-    Array.isArray(plan.habitIds) &&
-    plan.habitIds.every((id) => typeof id === 'string') &&
-    typeof plan.horizonMonths === 'number' &&
-    typeof plan.savedAt === 'string' &&
-    (plan.gamesEstimate === undefined || isGamesEstimate(plan.gamesEstimate))
+    typeof allocation.habitId === 'string' &&
+    typeof allocation.monthly === 'number' &&
+    Number.isFinite(allocation.monthly) &&
+    typeof allocation.allocatedAt === 'string'
   )
+}
+
+function isAllocationPeriod(value: unknown): value is AllocationPeriod {
+  if (!value || typeof value !== 'object') return false
+  const period = value as Partial<AllocationPeriod>
+  return (
+    typeof period.habitId === 'string' &&
+    typeof period.monthly === 'number' &&
+    Number.isFinite(period.monthly) &&
+    typeof period.start === 'string' &&
+    (period.end === null || typeof period.end === 'string')
+  )
+}
+
+function isOneTimeCredit(value: unknown): value is OneTimeCredit {
+  if (!value || typeof value !== 'object') return false
+  const credit = value as Partial<OneTimeCredit>
+  return (
+    typeof credit.habitId === 'string' &&
+    typeof credit.amount === 'number' &&
+    Number.isFinite(credit.amount) &&
+    typeof credit.creditedAt === 'string' &&
+    typeof credit.destinationId === 'string'
+  )
+}
+
+function isPlanLifecycle(value: unknown): value is PlanLifecycle {
+  if (!value || typeof value !== 'object') return false
+  const lifecycle = value as Partial<PlanLifecycle>
+  return (
+    isLifecycleStatus(lifecycle.status) &&
+    (lifecycle.activatedAt === null || typeof lifecycle.activatedAt === 'string') &&
+    (lifecycle.achievedAt === null || typeof lifecycle.achievedAt === 'string') &&
+    Array.isArray(lifecycle.allocations) &&
+    lifecycle.allocations.every(isAllocation) &&
+    Array.isArray(lifecycle.periods) &&
+    lifecycle.periods.every(isAllocationPeriod) &&
+    Array.isArray(lifecycle.oneTimeCredits) &&
+    lifecycle.oneTimeCredits.every(isOneTimeCredit) &&
+    typeof lifecycle.confirmed === 'number' &&
+    Number.isFinite(lifecycle.confirmed)
+  )
+}
+
+/**
+ * Validates a stored plan's base shape. A malformed lifecycle is coerced to
+ * undefined (the plan becomes "saved") rather than dropping the plan.
+ */
+function normalizePlan(value: unknown): SavedPlan | null {
+  if (!value || typeof value !== 'object') return null
+  const plan = value as Partial<SavedPlan>
+  if (
+    typeof plan.destinationId !== 'string' ||
+    !Array.isArray(plan.habitIds) ||
+    !plan.habitIds.every((id) => typeof id === 'string') ||
+    typeof plan.horizonMonths !== 'number' ||
+    typeof plan.savedAt !== 'string' ||
+    (plan.gamesEstimate !== undefined && !isGamesEstimate(plan.gamesEstimate))
+  ) {
+    return null
+  }
+
+  const normalized: SavedPlan = {
+    destinationId: plan.destinationId,
+    habitIds: plan.habitIds,
+    horizonMonths: plan.horizonMonths,
+    savedAt: plan.savedAt,
+  }
+  if (plan.gamesEstimate !== undefined) normalized.gamesEstimate = plan.gamesEstimate
+  if (plan.lifecycle !== undefined && isPlanLifecycle(plan.lifecycle)) {
+    normalized.lifecycle = plan.lifecycle
+  }
+  return normalized
+}
+
+function isPlanEnvelope(value: unknown): value is { version: 2; plans: unknown[] } {
+  if (!value || typeof value !== 'object') return false
+  const envelope = value as { version?: unknown; plans?: unknown }
+  return envelope.version === 2 && Array.isArray(envelope.plans)
+}
+
+function dedupeByDestination(plans: SavedPlan[]): SavedPlan[] {
+  const byDestination = new Map<string, SavedPlan>()
+  for (const plan of plans) byDestination.set(plan.destinationId, plan)
+  return [...byDestination.values()]
 }
 
 export function readPlans(): SavedPlan[] {
   if (typeof window === 'undefined') return []
   try {
-    const raw = window.localStorage.getItem(KEY)
-    if (!raw) return []
-    const parsed: unknown = JSON.parse(raw)
-    if (!Array.isArray(parsed)) return []
-    return parsed.filter(isSavedPlan)
+    const raw = window.localStorage.getItem(V2_KEY)
+    if (raw) {
+      const parsed: unknown = JSON.parse(raw)
+      if (isPlanEnvelope(parsed)) {
+        return parsed.plans
+          .map(normalizePlan)
+          .filter((plan): plan is SavedPlan => plan !== null)
+      }
+      // Malformed v2 falls back to the legacy key below.
+    }
+
+    const legacy = window.localStorage.getItem(V1_KEY)
+    if (legacy) {
+      const parsed: unknown = JSON.parse(legacy)
+      if (!Array.isArray(parsed)) return []
+      const plans = dedupeByDestination(
+        parsed.map(normalizePlan).filter((plan): plan is SavedPlan => plan !== null),
+      )
+      writePlans(plans)
+      return plans
+    }
+
+    return []
   } catch {
     return []
   }
@@ -47,17 +172,24 @@ export function readPlans(): SavedPlan[] {
 
 function writePlans(plans: SavedPlan[]): void {
   try {
-    window.localStorage.setItem(KEY, JSON.stringify(plans))
+    window.localStorage.setItem(V2_KEY, JSON.stringify({ version: 2, plans }))
   } catch {
     // Storage can be unavailable (private mode, quota). The UI keeps working.
   }
 }
 
 export function savePlan(plan: SavedPlan): SavedPlan[] {
-  const plans = readPlans().filter(
-    (existing) => existing.destinationId !== plan.destinationId,
-  )
-  const next = [plan, ...plans]
+  const plans = readPlans()
+  const existing = plans.find((p) => p.destinationId === plan.destinationId)
+  const merged: SavedPlan = {
+    destinationId: plan.destinationId,
+    habitIds: plan.habitIds,
+    horizonMonths: plan.horizonMonths,
+    savedAt: plan.savedAt,
+    ...(plan.gamesEstimate !== undefined ? { gamesEstimate: plan.gamesEstimate } : {}),
+    ...(existing?.lifecycle !== undefined ? { lifecycle: existing.lifecycle } : {}),
+  }
+  const next = [merged, ...plans.filter((p) => p.destinationId !== plan.destinationId)]
   writePlans(next)
   return next
 }
@@ -70,7 +202,9 @@ export function removePlan(destinationId: string): SavedPlan[] {
 
 export function clearPlans(): void {
   try {
-    window.localStorage.removeItem(KEY)
+    window.localStorage.removeItem(V2_KEY)
+    // Also drop the legacy key so a stale v1 record cannot re-migrate after a wipe.
+    window.localStorage.removeItem(V1_KEY)
   } catch {
     // Ignore.
   }
@@ -78,6 +212,100 @@ export function clearPlans(): void {
 
 export function getPlan(destinationId: string): SavedPlan | undefined {
   return readPlans().find((plan) => plan.destinationId === destinationId)
+}
+
+function mutatePlan(
+  destinationId: string,
+  mutate: (plan: SavedPlan) => SavedPlan,
+): SavedPlan[] {
+  const next = readPlans().map((plan) =>
+    plan.destinationId === destinationId ? mutate(plan) : plan,
+  )
+  writePlans(next)
+  return next
+}
+
+/** saved -> active. Reserves the selected habits (no-op if already activated). */
+export function startPlan(
+  destinationId: string,
+  selectedHabits: Habit[],
+  nowIso: string,
+): SavedPlan[] {
+  return mutatePlan(destinationId, (plan) => {
+    if (plan.lifecycle && plan.lifecycle.status !== 'saved') return plan
+    return { ...plan, lifecycle: activate(plan, selectedHabits, nowIso) }
+  })
+}
+
+export function pausePlan(destinationId: string, nowIso: string): SavedPlan[] {
+  return mutatePlan(destinationId, (plan) =>
+    plan.lifecycle ? { ...plan, lifecycle: pause(plan.lifecycle, nowIso) } : plan,
+  )
+}
+
+export function resumePlan(destinationId: string, nowIso: string): SavedPlan[] {
+  return mutatePlan(destinationId, (plan) =>
+    plan.lifecycle ? { ...plan, lifecycle: resume(plan.lifecycle, nowIso) } : plan,
+  )
+}
+
+export function achievePlan(destinationId: string, nowIso: string): SavedPlan[] {
+  return mutatePlan(destinationId, (plan) =>
+    plan.lifecycle ? { ...plan, lifecycle: achieve(plan.lifecycle, nowIso) } : plan,
+  )
+}
+
+export function addAllocation(
+  destinationId: string,
+  habit: Habit,
+  nowIso: string,
+): SavedPlan[] {
+  return mutatePlan(destinationId, (plan) =>
+    plan.lifecycle
+      ? { ...plan, lifecycle: allocate(plan.lifecycle, habit, destinationId, nowIso) }
+      : plan,
+  )
+}
+
+export function removeAllocation(
+  destinationId: string,
+  habitId: string,
+  nowIso: string,
+): SavedPlan[] {
+  return mutatePlan(destinationId, (plan) =>
+    plan.lifecycle
+      ? { ...plan, lifecycle: releaseAllocation(plan.lifecycle, habitId, nowIso) }
+      : plan,
+  )
+}
+
+export function confirmAmount(destinationId: string, amount: number): SavedPlan[] {
+  return mutatePlan(destinationId, (plan) =>
+    plan.lifecycle ? { ...plan, lifecycle: addConfirmed(plan.lifecycle, amount) } : plan,
+  )
+}
+
+export function getReservedAllocations(): ReservedAllocation[] {
+  const reserved: ReservedAllocation[] = []
+  for (const plan of readPlans()) {
+    const allocations = plan.lifecycle?.allocations
+    if (!allocations || allocations.length === 0) continue
+    reserved.push({
+      destinationId: plan.destinationId,
+      allocatedHabitIds: allocations.map((allocation) => allocation.habitId),
+    })
+  }
+  return reserved
+}
+
+export function getCreditedHabitIds(): string[] {
+  const credited = new Set<string>()
+  for (const plan of readPlans()) {
+    for (const credit of plan.lifecycle?.oneTimeCredits ?? []) {
+      credited.add(credit.habitId)
+    }
+  }
+  return [...credited]
 }
 
 export function readLocale(): Locale {
