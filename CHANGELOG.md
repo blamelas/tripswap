@@ -3,6 +3,19 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.3.1] — 2026-11-13
+
+### Corrigido
+
+- O cartão de recompensa mantém a mesma altura em todos os estados. O sucesso é uma
+  transformação do próprio cartão (signal, check, tipografia) e não uma secção extra.
+  Medido: 753 px no desktop e 462 px no mobile, de 0 a 4 trocas.
+- Categorias de hábitos reduzidas a etiquetas discretas; removidos ícones, numeração e
+  separadores pesados.
+- Atividades com hierarquia nome → poupança → seleção. Descrições, premissas e
+  benefícios passam para divulgação progressiva (chevron).
+- Nota de sobreposição reduzida a “mesmas despesas · escolhe uma”.
+
 ## [1.3.0] — 2026-11-13
 
 ### Adicionado

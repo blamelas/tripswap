@@ -18,10 +18,11 @@ function RewardWindow({ destination, plan }: RewardWindowProps) {
   const state = planState(plan)
   const progress = Math.max(0, Math.min(1, plan.progress))
   const months = plan.monthsToTarget
+  const reached = plan.unlocked && months !== null
 
   return (
     <div className="border border-line">
-      <div className="relative aspect-[4/3] overflow-hidden bg-ink">
+      <div className={cn('relative aspect-[4/3] overflow-hidden bg-ink transition-shadow duration-500', reached && 'ring-2 ring-inset ring-accent')}>
         <div
           className="absolute inset-0 transition-transform duration-700 ease-out"
           style={{ transform: `scale(${1 + progress * 0.05})` }}
@@ -61,13 +62,29 @@ function RewardWindow({ destination, plan }: RewardWindowProps) {
         )}
       </div>
 
-      <div className="bg-ink p-4 text-canvas">
+      <div
+        className={cn(
+          'p-4 transition-colors duration-500',
+          reached ? 'bg-accent text-ink' : 'bg-ink text-canvas',
+        )}
+      >
         <div className="flex items-center justify-between gap-3">
-          <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/65">
-            {copy.reward.timeToReach}
+          <span
+            className={cn(
+              'flex items-center gap-1.5 text-[9px] font-semibold uppercase tracking-[0.16em]',
+              reached ? 'text-ink/70' : 'text-canvas/65',
+            )}
+          >
+            {reached && <Check className="h-3 w-3" strokeWidth={3} aria-hidden="true" />}
+            {reached ? copy.reward.reachedTitle : copy.reward.timeToReach}
           </span>
-          <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/65">
-            {copy.panel.states[state].label}
+          <span
+            className={cn(
+              'text-[9px] font-semibold uppercase tracking-[0.16em]',
+              reached ? 'text-ink/70' : 'text-canvas/65',
+            )}
+          >
+            {reached ? copy.reward.unlockedShort : copy.panel.states[state].label}
           </span>
         </div>
 
@@ -75,34 +92,71 @@ function RewardWindow({ destination, plan }: RewardWindowProps) {
           {months !== null ? (
             <NumberTicker
               value={months}
-              className="text-[4.4rem] leading-[0.8] text-canvas"
+              className={cn(
+                'text-[4.4rem] leading-[0.8]',
+                reached ? 'text-ink' : 'text-canvas',
+              )}
             />
           ) : (
-            <span className="text-[4.4rem] leading-[0.8] text-canvas">—</span>
+            <span
+              className={cn(
+                'text-[4.4rem] leading-[0.8]',
+                reached ? 'text-ink' : 'text-canvas',
+              )}
+            >
+              —
+            </span>
           )}
-          <span className="pb-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-canvas/60">
+          <span
+            className={cn(
+              'pb-1 text-[10px] font-semibold uppercase tracking-[0.14em]',
+              reached ? 'text-ink/70' : 'text-canvas/60',
+            )}
+          >
             {months === 1 ? copy.reward.month : copy.reward.months}
           </span>
         </div>
 
-        {months === null && (
-          <p className="mt-2 text-[11px] leading-relaxed text-canvas/70">
-            {copy.panel.states[state].hint}
-          </p>
-        )}
+        <p
+          className={cn(
+            'mt-2 min-h-[16px] text-[10px] leading-relaxed',
+            reached ? 'text-ink/70' : 'text-canvas/70',
+          )}
+        >
+          {reached ? copy.reward.simulation : copy.panel.saveNote}
+        </p>
 
-        <div className="mt-3 grid grid-cols-2 gap-3 border-t border-canvas/15 pt-3">
+        <div
+          className={cn(
+            'mt-3 grid grid-cols-2 gap-3 border-t pt-3',
+            reached ? 'border-ink/20' : 'border-canvas/15',
+          )}
+        >
           <div>
-            <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/60">
+            <p
+              className={cn(
+                'text-[9px] font-semibold uppercase tracking-[0.16em]',
+                reached ? 'text-ink/60' : 'text-canvas/60',
+              )}
+            >
               {copy.panel.perMonth}
             </p>
-            <p className="nums mt-0.5 text-[15px] text-canvas">{fmt.eur(plan.monthly)}</p>
+            <p className={cn('nums mt-0.5 text-[15px]', reached ? 'text-ink' : 'text-canvas')}>
+              {fmt.eur(plan.monthly)}
+            </p>
           </div>
           <div>
-            <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/60">
+            <p
+              className={cn(
+                'text-[9px] font-semibold uppercase tracking-[0.16em]',
+                reached ? 'text-ink/60' : 'text-canvas/60',
+              )}
+            >
               {copy.price.planningTarget}
             </p>
-            <p className="nums mt-0.5 text-[15px] text-canvas">{fmt.eur(plan.target)}</p>
+            <p className={cn('nums mt-0.5 text-[15px]', reached ? 'text-ink' : 'text-canvas')}>
+              {fmt.eur(plan.target)}
+            </p>
           </div>
         </div>
       </div>
@@ -129,39 +183,10 @@ export function RewardPanel({
   onSave,
   className,
 }: RewardPanelProps) {
-  const { copy, fmt } = useI18n()
-
-  const reached = plan.unlocked && plan.monthsToTarget !== null
+  const { copy } = useI18n()
 
   return (
     <div className={cn(className)}>
-      {reached && (
-        <div
-          role="status"
-          aria-live="polite"
-          className="animate-rise bg-accent p-4 text-ink"
-        >
-          <div className="flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-ink">
-              <Check className="h-3.5 w-3.5" strokeWidth={3} aria-hidden="true" />
-            </span>
-            <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-ink/70">
-              {copy.reward.reachedEyebrow}
-            </span>
-          </div>
-          <p className="mt-2 font-display text-[2.05rem] leading-[0.84]">
-            {copy.reward.reachedTitle}
-          </p>
-          <p className="mt-1 text-[11px] font-medium">
-            {fmt.months(plan.monthsToTarget)} · {plan.habits.length}{' '}
-            {copy.reward.selected}
-          </p>
-          <p className="mt-1 text-[10px] leading-relaxed text-ink/70">
-            {copy.reward.covered}
-          </p>
-        </div>
-      )}
-
       <RewardWindow destination={destination} plan={plan} />
 
       <div className="border-x border-b border-line p-4">

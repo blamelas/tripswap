@@ -37,6 +37,7 @@ export const en: Copy = {
     reachedTitle: 'This is now possible.',
     covered: 'Your selected swaps cover the planning target.',
     simulation: 'Simulation, not a booking.',
+    unlockedShort: 'Unlocked',
   },
   common: {
     perMonth: '/mo',
@@ -171,6 +172,9 @@ export const en: Copy = {
   habitCard: {
     replacement: (title: string) =>
       `Replaces “${title}” · same spending.`,
+    overlap: 'Same spending · choose one',
+    details: 'Details',
+    assumptionLabel: 'Assumption',
   },
   panel: {
     states: {

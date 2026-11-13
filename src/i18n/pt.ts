@@ -35,6 +35,7 @@ export const pt = {
     reachedTitle: 'Isto agora é possível.',
     covered: 'As trocas escolhidas cobrem o objetivo de planeamento.',
     simulation: 'Simulação, não uma reserva.',
+    unlockedShort: 'Alcançado',
   },
   common: {
     perMonth: '/mês',
@@ -169,6 +170,9 @@ export const pt = {
   habitCard: {
     replacement: (title: string) =>
       `Substitui “${title}” · mesmas despesas.`,
+    overlap: 'Mesmas despesas · escolhe uma',
+    details: 'Detalhes',
+    assumptionLabel: 'Premissa',
   },
   panel: {
     states: {
