@@ -1,6 +1,12 @@
-import type { Habit } from '../types'
+import type { Allocation, AllocationPeriod, Habit, OneTimeCredit } from '../types'
 
 export const MAX_MONTHS = 240
+
+/**
+ * Proration constant used to turn a calendar span into months of accrual.
+ * A year is treated as 365.25 days so a "month" is 30.4375 days.
+ */
+export const DAYS_PER_MONTH = 365.25 / 12
 
 export function round2(value: number): number {
   return Math.round((value + Number.EPSILON) * 100) / 100
@@ -96,6 +102,93 @@ export function summarizeSavings(habits: Habit[]): SavingsSummary {
   const oneTime = round2(lines.reduce((total, line) => total + line.oneTime, 0))
 
   return { habits: selected, lines, monthly, oneTime }
+}
+
+/** Whole days elapsed between two ISO timestamps, clamped to >= 0. */
+export function elapsedDays(fromIso: string, toIso: string): number {
+  const start = Date.parse(fromIso)
+  const end = Date.parse(toIso)
+  if (Number.isNaN(start) || Number.isNaN(end)) return 0
+  return Math.max(0, (end - start) / 86_400_000)
+}
+
+/**
+ * Estimated recurring accumulation across allocation periods, prorated by day.
+ * Closed periods stop accruing at their end; open periods accrue to `nowIso`.
+ */
+export function accumulatedRecurring(periods: AllocationPeriod[], nowIso: string): number {
+  const nowMs = Date.parse(nowIso)
+  const total = periods.reduce((sum, period) => {
+    const startMs = Date.parse(period.start)
+    if (Number.isNaN(startMs) || Number.isNaN(nowMs)) return sum
+    const endMs = period.end ? Date.parse(period.end) : nowMs
+    const clampedEnd = Number.isNaN(endMs) ? nowMs : Math.min(endMs, nowMs)
+    const spanDays = Math.max(0, (clampedEnd - startMs) / 86_400_000)
+    return sum + (period.monthly * spanDays) / DAYS_PER_MONTH
+  }, 0)
+  return round2(total)
+}
+
+/** Total one-time savings credited so far (counted once each). */
+export function accumulatedOneTime(credits: OneTimeCredit[]): number {
+  return round2(credits.reduce((sum, credit) => sum + credit.amount, 0))
+}
+
+export interface LifecycleProgress {
+  /** Estimated accumulated savings (recurring + one-time). Confirmed excluded. */
+  accumulated: number
+  confirmed: number
+  remaining: number
+  /** Accumulated / target, clamped to 0..1. */
+  progress: number
+  monthly: number
+  monthsRemaining: number | null
+}
+
+export function planProgress(
+  target: number,
+  allocations: Allocation[],
+  periods: AllocationPeriod[],
+  credits: OneTimeCredit[],
+  confirmed: number,
+  nowIso: string,
+): LifecycleProgress {
+  const recurring = accumulatedRecurring(periods, nowIso)
+  const oneTime = accumulatedOneTime(credits)
+  const accumulated = round2(recurring + oneTime)
+  const remaining = Math.max(0, round2(target - accumulated))
+  const monthly = round2(allocations.reduce((sum, allocation) => sum + allocation.monthly, 0))
+  const safeTarget = target > 0 ? target : 1
+  const progress = Math.min(1, Math.max(0, accumulated / safeTarget))
+  const monthsRemaining = remaining <= 0 ? 0 : monthsToTarget(remaining, monthly, 0)
+
+  return {
+    accumulated,
+    confirmed: round2(confirmed),
+    remaining,
+    progress,
+    monthly,
+    monthsRemaining,
+  }
+}
+
+export interface CombinedTotals {
+  activeCount: number
+  accumulated: number
+  target: number
+  progress: number
+}
+
+/** Aggregates estimated progress across plans; progress never sums percentages. */
+export function combinedTotals(
+  items: Array<{ target: number; accumulated: number }>,
+): CombinedTotals {
+  const activeCount = items.length
+  const accumulated = round2(items.reduce((sum, item) => sum + item.accumulated, 0))
+  const target = round2(items.reduce((sum, item) => sum + item.target, 0))
+  const safeTarget = target > 0 ? target : 1
+  const progress = Math.min(1, Math.max(0, accumulated / safeTarget))
+  return { activeCount, accumulated, target, progress }
 }
 
 export function calculatePlan(
