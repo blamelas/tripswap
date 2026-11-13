@@ -3,6 +3,22 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.1.0] — 2026-11-13
+
+### Adicionado
+
+- Toggle **PT/EN** no cabeçalho, persistente em `localStorage`, com `<html lang>`,
+  título e meta description atualizados. **Inglês por omissão**; português a um clique.
+- Dicionários tipados em `src/i18n` (PT e EN) e conteúdo traduzido para as 24 trocas,
+  os 8 destinos, as categorias, os benefícios e todas as vistas.
+- Formatação por locale: EUR (`650 €` / `€650`) e meses (`6 meses` / `6 months`).
+- `tests/i18n.test.ts` com paridade de chaves, conteúdo completo e formatação.
+
+### Alterado
+
+- `formatEUR`, `formatMonths` e `formatDate` aceitam `locale`.
+- README e documentação atualizados para 35 testes e interface bilingue.
+
 ## [1.0.7] — 2026-11-13
 
 ### Alterado

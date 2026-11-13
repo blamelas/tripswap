@@ -44,6 +44,7 @@ Visual: ecrã real, não mockup.
 ### 6. Arquitetura — 6:00
 - SPA estática: React 19 + TS + Vite + Tailwind.
 - Dados tipados → motor puro → UI. Sem servidor.
+- i18n local: dicionários PT/EN tipados, paridade testada, motor independente do idioma.
 - `localStorage` atrás de uma camada de serviço.
 - Visual: diagrama de 3 caixas.
 
@@ -55,8 +56,8 @@ Visual: ecrã real, não mockup.
 - Visual: recibo real com uma linha e a fórmula.
 
 ### 8. Processo com AI — 7:45
-- `CLAUDE.md`, 3 agentes, 3 skills, 14 ciclos em `ITERATIONS.md`.
-- 29 testes; um deles apanhou um erro real do agente.
+- `CLAUDE.md`, 3 agentes, 3 skills, 26 ciclos em `ITERATIONS.md`.
+- 35 testes; dois deles apanharam erros reais do agente.
 - Visual: `git log --oneline`, ficheiros de agentes, teste a falhar.
 
 ### 9. Qualidade e deploy — 8:45
@@ -81,15 +82,16 @@ Preparação: janela limpa, zoom 110%, `/unlocks` vazio, `/` aberto.
 |---|---|---|
 | 0:00 | `/` | “Oito destinos. Cada um com um objetivo real de planeamento — e um €0* que é uma metáfora, não um preço.” |
 | 0:20 | Abrir **Paris City Break** | “650 € para planear. Dois viajantes, três noites, partida de Lisboa.” |
-| 0:35 | Clicar **Equilibrado** | “Três trocas comuns: café em casa, almoço de casa, metade dos Uber. **122 € por mês. Seis meses.**” |
-| 0:55 | Abrir **“Como calculámos”** | “A conta está aqui: (2 € − 0,40 €) × 20. Nada disto é gerado por IA.” |
-| 1:10 | Clicar **Caminhar** | “Substitui o Uber — as duas assumem as mesmas viagens. O produto recusa somar.” |
-| 1:25 | Voltar a **Equilibrado**, mudar horizonte para **3m** | “Com três meses, ainda não está desbloqueado. O produto não mente.” |
-| 1:40 | Horizonte **12m**, **Guardar este plano** | “Guardado neste dispositivo. Sem conta, sem servidor.” |
-| 1:55 | Abrir **Os meus unlocks** | “O plano está aqui, com o prazo e o progresso recalculados.” |
-| 2:10 | Clicar **Abrir plano** | “O deep link devolve exatamente as mesmas trocas — o número é reproduzível.” |
-| 2:25 | Abrir **Sobre** | “Método, limites e créditos. O €0* explicado outra vez.” |
-| 2:40 | Fecho | “Não é uma app de finanças. É uma forma de ver o que as pequenas decisões pagam.” |
+| 0:35 | Clicar **Balanced** | “Três trocas comuns: café em casa, almoço de casa, metade dos Uber. **€122 por mês. Seis meses.**” |
+| 0:55 | Abrir **How we calculated** | “A conta está aqui: (€2.00 − €0.40) × 20. Nada disto é gerado por IA.” |
+| 1:10 | Clicar **Walk** | “Substitui o Uber — as duas assumem as mesmas viagens. O produto recusa somar.” |
+| 1:25 | Voltar a **Balanced**, mudar horizonte para **3m** | “Com três meses, ainda não está desbloqueado. O produto não mente.” |
+| 1:40 | Horizonte **12m**, **Save this plan** | “Guardado neste dispositivo. Sem conta, sem servidor.” |
+| 1:55 | Abrir **My unlocks** | “O plano está aqui, com o prazo e o progresso recalculados.” |
+| 2:10 | Clicar **Open plan** | “O deep link devolve exatamente as mesmas trocas — o número é reproduzível.” |
+| 2:20 | Toggle **PT** | “A mesma conta, em português: 122 € / 6 meses. Os números não mudam.” |
+| 2:30 | Abrir **Sobre** | “Método, limites e créditos. O €0* explicado outra vez.” |
+| 2:45 | Fecho | “Não é uma app de finanças. É uma forma de ver o que as pequenas decisões pagam.” |
 
 **Se algo falhar:** “Isto é o produto real; tenho o vídeo de backup” e continua. Não
 pedir desculpa mais de uma vez.
@@ -106,14 +108,15 @@ pedir desculpa mais de uma vez.
 | “O €0* é explicado” | `Discover`, detalhe, rodapé, `About` |
 | “Sem dados financeiros pessoais” | nenhum formulário; `types.ts` |
 | “Trabalho com AI é auditável” | `CLAUDE.md`, `.claude/`, `docs/PROMPTS.md` |
-| “Uma falha real foi corrigida” | `docs/PROMPTS.md` + commit `fix(calc)` |
+| “Duas falhas reais corrigidas” | `docs/PROMPTS.md` + commits `fix(calc)` e `fix(i18n)` |
 | “Reproduzível numa máquina limpa” | `Dockerfile`, `docker-compose.yml`, README |
 | “Deploy automático” | Vercel + `main` |
 | “Mobile funciona” | checklist caso 10, captura em `docs/assets/mobile.jpg` |
+| “É bilingue” | `src/i18n/`, `tests/i18n.test.ts`, toggle no header |
 
 ---
 
-## Q&A (12 perguntas)
+## Q&A (13 perguntas)
 
 **1. Isto não é só um CRUD?**
 > “O CRUD é o meio. O produto é o número: um motor que transforma escolhas em prazo,
@@ -162,6 +165,11 @@ pedir desculpa mais de uma vez.
 **12. Que decisão foi mais difícil?**
 > “Excluir trocas sobrepostas em vez de aplicar uma penalização. Perdi combinações,
 > ganhei um número que consigo defender linha a linha.”
+
+**13. Porque PT e EN?**
+> “O produto é para Lisboa, mas o júri e o repo são internacionais. A interface tem
+> toggle, os dados estão traduzidos e um teste garante paridade. Os números não mudam
+> com o idioma.”
 
 **Se não souberes:** “Não validei isso. A minha hipótese é X; o próximo teste seria Y.”
 

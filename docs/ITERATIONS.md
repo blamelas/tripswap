@@ -27,6 +27,10 @@ commit. Os tempos são reais e incluem revisão manual.
 | 20 | 13 Nov 03:42 | Evidência | QA flashcards + PR template + release | `v1.0.3` | `chore(release): v1.0.3` | 15 min |
 | 21 | 13 Nov 04:35 | Deploy | Remover GitHub Pages; Vercel como único alvo | `v1.0.6` | `chore(deploy): remove github pages` | 15 min |
 | 22 | 13 Nov 04:50 | Domínio | `tripswap-home.vercel.app` como URL público | `v1.0.7` | `chore(deploy): set public domain` | 10 min |
+| 23 | 13 Nov 04:10 | i18n base | Dicionários PT/EN tipados, contexto, formatação por locale | `useI18n` funcional | `feat(i18n): add typed dictionaries and locale provider` | 30 min |
+| 24 | 13 Nov 04:18 | i18n conteúdo | 24 trocas, 8 destinos, benefícios e todas as vistas traduzidas | Toggle completo | `feat(i18n): translate catalogue and calculation flow` | 40 min |
+| 25 | 13 Nov 04:22 | i18n testes | Paridade de chaves, conteúdo EN, formatação localizada | 35/35 verdes | `test(i18n): cover parity and localised formatting` | 15 min |
+| 26 | 13 Nov 04:25 | Release | Changelog, versão e deploy | `v1.1.0` | `chore(release): v1.1.0` | 10 min |
 
 ## O que aprendi
 

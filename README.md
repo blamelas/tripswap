@@ -21,9 +21,9 @@ and funding horizon update instantly.
 | **Repository** | https://github.com/blamelas/tripswap |
 | **Defense script** | [`docs/DEFENSE.md`](docs/DEFENSE.md) (pt-PT) |
 | **Assumptions** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) (pt-PT) |
-| **Status** | working MVP, 4 user stories, fictional data, local persistence |
+| **Status** | working MVP, 4 user stories, PT/EN toggle, fictional data, local persistence |
 
-![TripSwap catalogue](docs/assets/home.jpg)
+![TripSwap catalogue](docs/assets/home-en.jpg)
 
 ---
 
@@ -59,9 +59,12 @@ one primary screen.
   once.
 - **Full transparency.** Every result screen includes the calculation receipt and the
   €0\* note.
+- **Bilingual by design.** English is the default and Portuguese is one click away.
+  The toggle changes every string — including the 24 swaps and 8 destinations — while
+  the numbers stay identical.
 - **No health promises.** Benefits are qualitative tags.
 
-![Destination detail with a plan applied](docs/assets/detail.jpg)
+![Destination detail with a plan applied](docs/assets/detail-en.jpg)
 
 ---
 
@@ -76,7 +79,7 @@ one primary screen.
 | Icons | Lucide |
 | Chart | Hand-rolled SVG, no chart library |
 | Persistence | `localStorage` (`tripswap:unlocks:v1`) |
-| Tests | Vitest — 29 tests |
+| Tests | Vitest — 35 tests |
 | Environment | Multi-stage Docker + DevContainer |
 | Deploy | Vercel (production, auto-deploy from `main`) |
 | AI in development | DeepSeek (`deepseek-flash`) as the coding agent |
@@ -104,7 +107,7 @@ Open http://localhost:5173. Changes reload automatically.
 ```bash
 npm run lint        # oxlint
 npm run typecheck   # tsc
-npm test            # 29 tests (engine, data, assets, formatting)
+npm test            # 35 tests (engine, data, assets, formatting, i18n)
 npm run build       # production build
 node scripts/assumptions.mjs > docs/ASSUMPTIONS.md   # regenerate assumptions
 ```
@@ -127,6 +130,7 @@ link or edited `localStorage`).
 src/
   data/      destinations, swaps, assumptions
   lib/       engine, conflicts, formatting, presets, storage
+  i18n/      typed PT/EN dictionaries, content and locale context
   components/
   views/     Discover, Destination detail, Unlocks, About
 tests/       engine, data, assets, formatting
@@ -155,8 +159,8 @@ docs/        MVP, assumptions, decisions, iterations, testing, defense
 - [`docs/QA.md`](docs/QA.md) — rehearsal flashcards
 - [`CLAUDE.md`](CLAUDE.md) — agent context and rules
 
-The documentation and UI copy are written in Portuguese (pt-PT); this README is the
-English counterpart.
+The interface is fully bilingual (PT-PT / EN) with a persistent toggle. Documentation
+is available in Portuguese ([README.pt.md](README.pt.md)) and English (this file).
 
 ## How AI helped
 

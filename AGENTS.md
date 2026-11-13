@@ -26,3 +26,5 @@ conventions, architecture and rules live in [CLAUDE.md](CLAUDE.md); read it firs
 3. No one-time saving counted as recurring.
 4. No verified-price language for planning targets.
 5. No health, weight-loss or emissions claims.
+6. No user-facing copy outside `src/i18n`; PT and EN must stay in parity.
+7. Never change a number when changing a language.
