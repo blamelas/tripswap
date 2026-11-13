@@ -1,5 +1,5 @@
-import { BookmarkCheck, BookmarkPlus, Check } from 'lucide-react'
-import type { Destination } from '../types'
+import { ArrowUpRight, BookmarkCheck, BookmarkPlus, Check, Play } from 'lucide-react'
+import type { Destination, LifecycleStatus } from '../types'
 import type { PlanResult } from '../lib/calc'
 import { HORIZONS, planState } from '../lib/planState'
 import { useI18n } from '../i18n/context'
@@ -168,13 +168,18 @@ function RewardWindow({ destination, plan }: RewardWindowProps) {
   )
 }
 
+export type PlanStatus = 'none' | LifecycleStatus
+
 interface RewardPanelProps {
   destination: Destination
   plan: PlanResult
   horizon: number
   onHorizon: (value: number) => void
-  saved: boolean
+  planStatus: PlanStatus
+  canStart: boolean
   onSave: () => void
+  onStart: () => void
+  onViewProgress: () => void
   className?: string
 }
 
@@ -183,11 +188,15 @@ export function RewardPanel({
   plan,
   horizon,
   onHorizon,
-  saved,
+  planStatus,
+  canStart,
   onSave,
+  onStart,
+  onViewProgress,
   className,
 }: RewardPanelProps) {
   const { copy } = useI18n()
+  const isSaved = planStatus === 'saved'
 
   return (
     <div className={cn(className)}>
@@ -197,7 +206,7 @@ export function RewardPanel({
         <div className="flex items-center justify-between gap-3">
           <span className="label">{copy.panel.horizon}</span>
           <span className="label text-ink">
-            {plan.habits.length} {copy.reward.selected}
+            {copy.reward.selectedCount(plan.habits.length)}
           </span>
         </div>
 
@@ -220,14 +229,46 @@ export function RewardPanel({
           ))}
         </div>
 
-        <button type="button" onClick={onSave} className="btn-accent mt-4 w-full">
-          {saved ? (
-            <BookmarkCheck className="h-4 w-4" aria-hidden="true" />
-          ) : (
+        {/* Exactly one primary CTA, chosen by plan status. */}
+        {planStatus === 'none' ? (
+          <button type="button" onClick={onSave} className="btn-accent mt-4 w-full">
             <BookmarkPlus className="h-4 w-4" aria-hidden="true" />
-          )}
-          {saved ? copy.panel.saved : copy.panel.save}
-        </button>
+            {copy.panel.save}
+          </button>
+        ) : isSaved ? (
+          <button
+            type="button"
+            onClick={onStart}
+            disabled={!canStart}
+            className="btn-accent mt-4 w-full"
+          >
+            <Play className="h-4 w-4" aria-hidden="true" />
+            {copy.plan.startNow}
+          </button>
+        ) : (
+          <button type="button" onClick={onViewProgress} className="btn-accent mt-4 w-full">
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            {copy.plan.viewProgress}
+          </button>
+        )}
+
+        {/* Secondary save for saved and live plans. */}
+        {planStatus !== 'none' && (
+          <button
+            type="button"
+            onClick={onSave}
+            className="mt-2 w-full text-[9px] font-semibold uppercase tracking-[0.14em] text-muted transition-colors hover:text-ink"
+          >
+            <BookmarkCheck className="mr-1 inline h-3 w-3 align-[-1px]" aria-hidden="true" />
+            {copy.common.save}
+          </button>
+        )}
+
+        {isSaved && !canStart && (
+          <p className="mt-2 text-[10px] leading-relaxed text-muted">
+            {copy.plan.startDisabledHint}
+          </p>
+        )}
 
         <p className="mt-3 text-[10px] leading-relaxed text-muted">
           {copy.panel.disclaimer}
@@ -239,16 +280,28 @@ export function RewardPanel({
 
 interface MobileFundingBarProps {
   plan: PlanResult
-  saved: boolean
+  planStatus: PlanStatus
+  canStart: boolean
   onSave: () => void
+  onStart: () => void
+  onViewProgress: () => void
 }
 
-export function MobileFundingBar({ plan, saved, onSave }: MobileFundingBarProps) {
+export function MobileFundingBar({
+  plan,
+  planStatus,
+  canStart,
+  onSave,
+  onStart,
+  onViewProgress,
+}: MobileFundingBarProps) {
   const { copy, fmt } = useI18n()
   const state = planState(plan)
   const months = plan.monthsToTarget
 
   const reached = plan.unlocked && months !== null
+  const live =
+    planStatus === 'active' || planStatus === 'paused' || planStatus === 'achieved'
 
   return (
     <div
@@ -294,21 +347,61 @@ export function MobileFundingBar({ plan, saved, onSave }: MobileFundingBarProps)
             </span>
           </p>
         </div>
-        <button
-          type="button"
-          onClick={onSave}
-          className={cn(
-            'flex shrink-0 items-center gap-1.5 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.12em]',
-            reached ? 'bg-ink text-canvas' : 'bg-accent text-ink',
-          )}
-        >
-          {saved ? (
-            <BookmarkCheck className="h-3.5 w-3.5" aria-hidden="true" />
+        <div className="flex shrink-0 items-center gap-2">
+          {live ? (
+            <button
+              type="button"
+              onClick={onViewProgress}
+              className={cn(
+                'flex items-center gap-1.5 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.12em]',
+                reached ? 'bg-ink text-canvas' : 'bg-accent text-ink',
+              )}
+            >
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+              {copy.plan.viewProgress}
+            </button>
+          ) : planStatus === 'saved' ? (
+            <button
+              type="button"
+              onClick={onStart}
+              disabled={!canStart}
+              className={cn(
+                'flex items-center gap-1.5 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.12em]',
+                reached ? 'bg-ink text-canvas' : 'bg-accent text-ink',
+                !canStart && 'cursor-not-allowed opacity-40',
+              )}
+            >
+              <Play className="h-3.5 w-3.5" aria-hidden="true" />
+              {copy.plan.startNow}
+            </button>
           ) : (
-            <BookmarkPlus className="h-3.5 w-3.5" aria-hidden="true" />
+            <button
+              type="button"
+              onClick={onSave}
+              className={cn(
+                'flex items-center gap-1.5 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.12em]',
+                reached ? 'bg-ink text-canvas' : 'bg-accent text-ink',
+              )}
+            >
+              <BookmarkPlus className="h-3.5 w-3.5" aria-hidden="true" />
+              {copy.common.save}
+            </button>
           )}
-          {saved ? copy.common.saved : copy.common.save}
-        </button>
+
+          {(live || planStatus === 'saved') && (
+            <button
+              type="button"
+              onClick={onSave}
+              aria-label={copy.common.save}
+              className={cn(
+                'p-2 transition-opacity hover:opacity-70',
+                reached ? 'text-ink' : 'text-canvas',
+              )}
+            >
+              <BookmarkCheck className="h-4 w-4" aria-hidden="true" />
+            </button>
+          )}
+        </div>
       </div>
     </div>
   )
