@@ -240,7 +240,20 @@ export function startPlan(
 ): SavedPlan[] {
   return mutatePlan(destinationId, (plan) => {
     if (plan.lifecycle && plan.lifecycle.status !== 'saved') return plan
-    return { ...plan, lifecycle: activate(plan, selectedHabits, nowIso) }
+    const lifecycle = activate(plan, selectedHabits, nowIso)
+    const funded = new Set([
+      ...lifecycle.allocations.map((allocation) => allocation.habitId),
+      ...lifecycle.oneTimeCredits.map((credit) => credit.habitId),
+    ])
+    return {
+      ...plan,
+      // The saved selection mirrors what the plan actually funds, so a
+      // "keep with the other plan" decision cannot leave phantom swaps behind.
+      habitIds: selectedHabits
+        .map((habit) => habit.id)
+        .filter((id) => funded.has(id)),
+      lifecycle,
+    }
   })
 }
 
@@ -294,6 +307,9 @@ export function addAllocation(
 
     return {
       ...plan,
+      habitIds: plan.habitIds.includes(habit.id)
+        ? plan.habitIds
+        : [...plan.habitIds, habit.id],
       lifecycle: allocate(plan.lifecycle, habit, destinationId, nowIso),
     }
   })

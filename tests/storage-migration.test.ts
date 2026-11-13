@@ -190,6 +190,17 @@ describe('startPlan', () => {
     expect(getCreditedHabitIds()).toEqual(['repair-shoes'])
   })
 
+  it('stores only the funded habits as the plan selection', () => {
+    savePlan({
+      destinationId: 'paris',
+      habitIds: ['coffee-at-home', 'lunch-from-home'],
+      horizonMonths: 12,
+      savedAt: NOW,
+    })
+    startPlan('paris', [getHabit('coffee-at-home')!], NOW)
+    expect(getPlan('paris')!.habitIds).toEqual(['coffee-at-home'])
+  })
+
   it('does not double-allocate when started twice', () => {
     savePlan({
       destinationId: 'paris',
@@ -222,6 +233,15 @@ describe('allocations are exclusive to live plans', () => {
     achievePlan('paris', '2026-02-01T00:00:00.000Z')
 
     expect(getReservedAllocations()).toEqual([])
+  })
+
+  it('adds a funded swap to the saved selection', () => {
+    savePlan({ destinationId: 'barcelona', habitIds: [], horizonMonths: 12, savedAt: NOW })
+    startPlan('barcelona', [], NOW)
+    addAllocation('barcelona', getHabit('coffee-at-home')!, NOW)
+
+    expect(getPlan('barcelona')!.habitIds).toEqual(['coffee-at-home'])
+    expect(getPlan('barcelona')!.lifecycle!.allocations).toHaveLength(1)
   })
 
   it('refuses to add a swap already funded by another active plan', () => {
