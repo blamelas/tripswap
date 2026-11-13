@@ -23,7 +23,7 @@ Short answers, to rehearse out loud. Each row names the artefact that proves it.
 | 8 | Why not ask for salary? | The value does not depend on personal data. It reduces friction, risk and privacy surface. | `types.ts` |
 | 9 | What did the AI get wrong? | The engine summed overlapping swaps. A test failed with 2 lines where 1 was expected. I fixed the engine. | `docs/PROMPTS.md` |
 | 10 | How do I reproduce it? | `docker compose up` or `npm ci && npm run dev`. Node 20. | `README.md` |
-| 11 | How do you know it works? | 45 tests on the logic, a 27-case manual checklist, CI on every PR. | `docs/TESTING.md` |
+| 11 | How do you know it works? | 42 tests on the logic, a 27-case manual checklist, CI on every PR. | `docs/TESTING.md` |
 | 12 | Where is it deployed? | Vercel, automatic deploy on every push to `main`. | `vercel.json`, `docs/PUBLISH.md` |
 | 13 | How would you scale it? | Pre-rendering, accounts and sync, calculated recommendations, end-to-end tests. | `docs/DECISIONS.md` |
 | 14 | What was the hardest decision? | Excluding overlapping swaps instead of penalising them. I lost combinations, gained a defensible number. | `docs/DECISIONS.md` |
@@ -38,7 +38,7 @@ Short answers, to rehearse out loud. Each row names the artefact that proves it.
 | 23 | How do I create a reminder? | In a saved plan, “Add reminder”, choose daily/monthly, time and day; download the `.ics`. | `ReminderForm`, `lib/reminders` |
 | 24 | Does the event enter my calendar? | The `.ics` creates an event + alarm in the user’s calendar; no push notifications. | `buildReminderIcs` |
 | 25 | Where is the swaps catalogue? | At `/swaps`, with 25 swaps, 6 categories and a selection that carries into a destination. | `Swaps.tsx` |
-| 26 | How do games of chance work? | The user enters current and reduced spend; the saving is the difference. The conservative example 20/15 gives €5/month. | `GamesFields`, `habitValues` |
+| 26 | How do games of chance work? | A fixed conservative estimate: €20 current, €15 reduced, €5/month. No inputs, no invented average. | `data/habits.ts`, `SwapCard` |
 
 ## Phrases to avoid
 

@@ -1,23 +1,15 @@
-import type { GamesEstimate, Habit } from '../types'
+import type { Habit } from '../types'
 import { HABITS, HABIT_CATEGORY_ORDER } from '../data/habits'
 import { conflictWith } from '../lib/conflicts'
-import { applyGamesEstimate } from '../lib/habitValues'
 import { HabitCard } from './HabitCard'
 import { HabitCategorySection } from './HabitCategorySection'
 
 interface HabitSelectorProps {
   selectedIds: string[]
   onToggle: (habit: Habit) => void
-  gamesEstimate: GamesEstimate | null
-  onGamesEstimateChange: (estimate: GamesEstimate) => void
 }
 
-export function HabitSelector({
-  selectedIds,
-  onToggle,
-  gamesEstimate,
-  onGamesEstimateChange,
-}: HabitSelectorProps) {
+export function HabitSelector({ selectedIds, onToggle }: HabitSelectorProps) {
   return (
     <div>
       {HABIT_CATEGORY_ORDER.map((category, index) => {
@@ -37,12 +29,10 @@ export function HabitSelector({
             {habits.map((habit) => (
               <HabitCard
                 key={habit.id}
-                habit={applyGamesEstimate(habit, gamesEstimate)}
+                habit={habit}
                 selected={selectedIds.includes(habit.id)}
                 replacedHabit={conflictWith(selectedIds, habit, HABITS)}
                 onToggle={onToggle}
-                gamesEstimate={gamesEstimate}
-                onGamesEstimateChange={onGamesEstimateChange}
               />
             ))}
           </HabitCategorySection>

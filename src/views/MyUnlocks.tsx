@@ -8,11 +8,9 @@ import { useI18n } from '../i18n/context'
 import { calculatePlan, type PlanResult } from '../lib/calc'
 import {
   clearPlans,
-  readGamesEstimate,
   readPlans,
   removePlan,
 } from '../lib/storage'
-import { applyGamesEstimate } from '../lib/habitValues'
 import {
   buildReminderIcs,
   clearReminders,
@@ -33,16 +31,12 @@ interface PlanView {
 }
 
 function buildViews(plans: SavedPlan[]): PlanView[] {
-  const globalGamesEstimate = readGamesEstimate()
-
   return plans.flatMap((saved) => {
     const destination = getDestination(saved.destinationId)
     if (!destination) return []
-    const gamesEstimate = saved.gamesEstimate ?? globalGamesEstimate
     const habits = saved.habitIds
       .map((id) => getHabit(id))
       .filter((habit) => habit !== undefined)
-      .map((habit) => applyGamesEstimate(habit, gamesEstimate))
     return [
       {
         saved,

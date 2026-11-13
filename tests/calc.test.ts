@@ -6,12 +6,10 @@ import {
   oneTimeSaving,
   projectedSavings,
   round2,
-  summarizeSavings,
 } from '../src/lib/calc'
 import { HABITS, getHabit } from '../src/data/habits'
 import { DESTINATIONS } from '../src/data/destinations'
 import { sanitizeSelection, toggleHabit } from '../src/lib/conflicts'
-import { applyGamesEstimate, hasGamesSaving } from '../src/lib/habitValues'
 
 function habits(ids: string[]) {
   return ids.map((id) => {
@@ -32,7 +30,7 @@ describe('habit catalogue', () => {
       const derived =
         habit.kind === 'recurring' ? monthlySaving(habit) : oneTimeSaving(habit)
       expect(derived, habit.id).toBe(habit.saving)
-      if (!habit.customExpense) expect(habit.saving).toBeGreaterThan(0)
+      expect(habit.saving).toBeGreaterThan(0)
     }
   })
 
@@ -54,35 +52,6 @@ describe('habit catalogue', () => {
   })
 })
 
-describe('custom games estimate', () => {
-  it('derives the saving from the user amounts', () => {
-    const games = getHabit('games-betting')!
-    const effective = applyGamesEstimate(games, { current: 120, reduced: 70 })
-    expect(effective.saving).toBe(50)
-    expect(effective.originalCost).toBe(120)
-    expect(effective.alternativeCost).toBe(70)
-    expect(hasGamesSaving({ current: 120, reduced: 70 })).toBe(true)
-    expect(hasGamesSaving({ current: 70, reduced: 70 })).toBe(false)
-  })
-
-  it('does not add a games saving until amounts exist', () => {
-    const games = getHabit('games-betting')!
-    const plan = calculatePlan(650, [games], 12)
-    expect(plan.monthly).toBe(0)
-    expect(plan.oneTime).toBe(0)
-  })
-
-  it('feeds the custom saving into the summary and plan', () => {
-    const games = getHabit('games-betting')!
-    const effective = applyGamesEstimate(games, { current: 120, reduced: 70 })
-    const summary = summarizeSavings([effective])
-    expect(summary.monthly).toBe(50)
-    const plan = calculatePlan(650, [effective], 12)
-    expect(plan.monthly).toBe(50)
-    expect(plan.monthsToTarget).toBe(13)
-  })
-})
-
 describe('documented savings assumptions', () => {
   it('matches the published values', () => {
     const expected: Record<string, number> = {
@@ -100,6 +69,7 @@ describe('documented savings assumptions', () => {
       'repair-shoes': 65,
       'repair-equipment': 120,
       'exercise-at-home': 30,
+      'games-betting': 5,
     }
 
     for (const [id, value] of Object.entries(expected)) {

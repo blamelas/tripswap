@@ -366,14 +366,13 @@ export const HABITS: Habit[] = [
       'Raspadinhas, apostas online e idas ao casino somam-se sem se notar. Troca parte desse gasto por jogos de tabuleiro ou planos gratuitos e reserva algum desse orçamento para uma nova experiência.',
     category: 'games',
     kind: 'recurring',
-    originalCost: 0,
-    alternativeCost: 0,
+    originalCost: 20,
+    alternativeCost: 15,
     monthlyFrequency: 1,
-    saving: 0,
+    saving: 5,
     assumptions:
-      'Indica o teu gasto mensal atual em raspadinhas, apostas ou casino e o valor que preferes manter. Poupança = atual − reduzido.',
+      'Estimativa conservadora: 20 €/mês em raspadinhas, apostas ou casino; mantém 15 €. Poupança = 20 € − 15 € = 5 €/mês.',
     benefits: ['Consumo consciente'],
-    customExpense: true,
   },
   {
     id: 'exercise-at-home',

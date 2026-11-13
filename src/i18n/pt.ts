@@ -357,17 +357,6 @@ export const pt = {
     body: 'O endereço pode estar incompleto. O catálogo continua à espera.',
     cta: 'Voltar ao catálogo',
   },
-  games: {
-    current: 'Gasto mensal atual',
-    reduced: 'Gasto mensal que queres manter',
-    save: 'Guardar valores',
-    estimated: 'Poupança mensal estimada',
-    hint: 'Indica os dois valores para ver a poupança.',
-    invalid: 'O valor reduzido deve ser inferior ao atual.',
-    setFirst: 'Define os teus valores mensais',
-    example: 'Usar um exemplo conservador',
-    exampleNote: 'Exemplo ilustrativo: 20 € atuais, 15 € reduzidos. Ajusta ao teu gasto.',
-  },
   reminder: {
     add: 'Adicionar lembrete',
     edit: 'Editar lembrete',

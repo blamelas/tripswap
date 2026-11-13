@@ -1,23 +1,9 @@
 import { DEFAULT_LOCALE, isLocale, type Locale } from '../i18n/types'
-import type { GamesEstimate, SavedPlan } from '../types'
+import type { SavedPlan } from '../types'
 
 const KEY = 'tripswap:unlocks:v1'
 const LOCALE_KEY = 'tripswap:locale:v2'
-const GAMES_KEY = 'tripswap:games:v1'
 const SWAPS_KEY = 'tripswap:swaps:v1'
-
-function isGamesEstimate(value: unknown): value is GamesEstimate {
-  if (!value || typeof value !== 'object') return false
-  const estimate = value as Partial<GamesEstimate>
-  return (
-    typeof estimate.current === 'number' &&
-    Number.isFinite(estimate.current) &&
-    estimate.current >= 0 &&
-    typeof estimate.reduced === 'number' &&
-    Number.isFinite(estimate.reduced) &&
-    estimate.reduced >= 0
-  )
-}
 
 function isSavedPlan(value: unknown): value is SavedPlan {
   if (!value || typeof value !== 'object') return false
@@ -27,8 +13,7 @@ function isSavedPlan(value: unknown): value is SavedPlan {
     Array.isArray(plan.habitIds) &&
     plan.habitIds.every((id) => typeof id === 'string') &&
     typeof plan.horizonMonths === 'number' &&
-    typeof plan.savedAt === 'string' &&
-    (plan.gamesEstimate === undefined || isGamesEstimate(plan.gamesEstimate))
+    typeof plan.savedAt === 'string'
   )
 }
 
@@ -95,26 +80,6 @@ export function writeLocale(locale: Locale): void {
     window.localStorage.setItem(LOCALE_KEY, locale)
   } catch {
     // Storage can be unavailable; the toggle still works in memory.
-  }
-}
-
-export function readGamesEstimate(): GamesEstimate | null {
-  if (typeof window === 'undefined') return null
-  try {
-    const raw = window.localStorage.getItem(GAMES_KEY)
-    if (!raw) return null
-    const parsed: unknown = JSON.parse(raw)
-    return isGamesEstimate(parsed) ? parsed : null
-  } catch {
-    return null
-  }
-}
-
-export function writeGamesEstimate(estimate: GamesEstimate): void {
-  try {
-    window.localStorage.setItem(GAMES_KEY, JSON.stringify(estimate))
-  } catch {
-    // Ignore.
   }
 }
 

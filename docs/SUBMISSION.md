@@ -4,7 +4,7 @@
 **Student:** Bruno Lamelas · **Project:** TripSwap
 **One-liner:** small changes, bigger journeys — a travel plan funded by everyday swaps.
 **URL:** https://tripswap-home.vercel.app · **Repo:** https://github.com/blamelas/tripswap
-**Tag:** `v1.5.1` · **Deck:** [`TripSwap-Defense.pptx`](TripSwap-Defense.pptx) · **PDF:** [`TripSwap-Defense.pdf`](TripSwap-Defense.pdf)
+**Tag:** `v1.5.2` · **Deck:** [`TripSwap-Defense.pptx`](TripSwap-Defense.pptx) · **PDF:** [`TripSwap-Defense.pdf`](TripSwap-Defense.pdf)
 
 > All presentation materials are in English: the PPTX, the PDF, the 10-minute script
 > (`DECK-SCRIPT.md`), the demo script (`DEFENSE.md`), the Q&A (`QA.md`) and the backup
@@ -23,8 +23,8 @@
 | CI on every PR | ✅ `lint → typecheck → test → build` |
 | 3+ branches | ✅ 29 remote branches |
 | 15+ conventional commits | ✅ 114+ |
-| Tag `v1.0.0` | ✅ and tags up to `v1.5.1` |
-| 3+ unit tests | ✅ 45 |
+| Tag `v1.0.0` | ✅ and tags up to `v1.5.2` |
+| 3+ unit tests | ✅ 42 |
 | Deck, 8–10 slides | ✅ 10, English |
 | Demo script | ✅ `docs/DECK-SCRIPT.md` (English) |
 | Q&A | ✅ `docs/QA.md` (26, English) |
@@ -44,7 +44,7 @@
 | Stack | React 19 · TypeScript · Vite 8 · Tailwind 3.4 · Vitest |
 | Run locally | `npm ci && npm run dev` → http://localhost:5173 |
 | Docker | `docker compose up` |
-| Tests | 45 in 5 files |
+| Tests | 42 in 5 files |
 | Deck | `docs/TripSwap-Defense.pptx` (English) |
 | PDF | `docs/TripSwap-Defense.pdf` (English) |
 | 10-minute script | `docs/DECK-SCRIPT.md` |
@@ -65,19 +65,19 @@
 | README with one-liner, URL, stack, 1 command | `README.md` / `README.pt.md` | ✅ |
 | `CLAUDE.md` with stack, conventions, rules | `CLAUDE.md` | ✅ |
 | `docs/MVP.md` with in/out and criteria | `docs/MVP.md` | ✅ |
-| `docs/ITERATIONS.md` with 4+ cycles | `docs/ITERATIONS.md` | ✅ 48 |
+| `docs/ITERATIONS.md` with 4+ cycles | `docs/ITERATIONS.md` | ✅ 49 |
 | `.gitignore` from the start | `.gitignore` | ✅ |
 | Versioned `.env.example` | `.env.example` | ✅ |
 | Zero secrets in history | see §6 | ✅ |
 | 15+ conventional commits | 114+ | ✅ |
 | 3+ branches and 3+ merged PRs | 29 branches, 21+ PRs | ✅ |
-| Tag `v1.0.0` | tags up to `v1.5.1` | ✅ |
+| Tag `v1.0.0` | tags up to `v1.5.2` | ✅ |
 | `.devcontainer/devcontainer.json` | `.devcontainer/` | ✅ |
 | `Dockerfile` + `docker-compose.yml` | root | ✅ |
 | `docker compose up` from a clean clone | documented and used | ✅ |
 | Node pinned | `.nvmrc`, `engines` | ✅ |
 | Lockfile committed | `package-lock.json` | ✅ |
-| 3+ unit tests | 45 | ✅ |
+| 3+ unit tests | 42 | ✅ |
 | lint / test / build green | CI + local log | ✅ |
 | Manual checklist, 8–10 cases | `docs/TESTING.md` | ✅ 27 |
 | Zero console errors | manual | ⚠️ confirm |
@@ -104,7 +104,7 @@
 | 5:40 | The calculation | Formula, overlaps, one-time savings, games |
 | 6:30 | The swaps catalogue | 25/6, carry-over, games, roadmap |
 | 7:20 | Process with AI | 114+ commits, 21+ PRs, 3 agents, the engine failure |
-| 8:20 | Quality and deploy | CI, 45 tests, Vercel, rollback |
+| 8:20 | Quality and deploy | CI, 42 tests, Vercel, rollback |
 | 9:20 | Limits and close | Illustrative budgets; next step |
 
 ## 5. Demo (3 min, exact clicks)
@@ -121,7 +121,7 @@ Preparation: clean window, zoom 110%, `/unlocks` empty, `/` open.
 | 1:25 | Back to **Balanced**, horizon **3m** | “With three months, it is not unlocked. The product does not lie.” |
 | 1:40 | Horizon **12m**, **Save this plan** | “Saved on this device. No account, no server.” |
 | 1:55 | Open **The swaps** | “Twenty-five changes in six categories, independent of any destination. Select them and carry them into a plan.” |
-| 2:10 | Games card, **Use a conservative example** | “€20 current, €15 reduced: €5 a month. The user’s values, not an invented average.” |
+| 2:10 | Games card | “A fixed conservative estimate: €20 current, €15 reduced, €5 a month. No inputs, no invented average.” |
 | 2:20 | **My unlocks** | “The plan is here, with the horizon and progress recalculated.” |
 | 2:30 | **Open plan** | “The deep link returns exactly the same swaps — the number is reproducible.” |
 | 2:38 | **Add to calendar** | “Daily at 08:30, an `.ics` with a 15-minute event and an alarm. No account, no server.” |
@@ -147,7 +147,7 @@ git log -p | grep -iE "api[_-]?key|secret|password|token" | head
 npm ci
 npm run lint
 npm run typecheck
-npm test          # 45 tests
+npm test          # 42 tests
 npm run build
 npm run preview   # http://localhost:4173
 docker compose up
@@ -157,7 +157,7 @@ Recorded result:
 
 ```text
 Test Files  5 passed (5)
-Tests       45 passed (45)
+Tests       42 passed (42)
 ```
 
 ## 8. Room plan B

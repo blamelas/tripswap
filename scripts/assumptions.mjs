@@ -14,6 +14,7 @@ const labels = {
   entertainment: 'Lazer e subscrições',
   shopping: 'Compras e reparações',
   wellbeing: 'Bem-estar',
+  games: 'Jogos de azar e apostas',
 }
 
 const eur = new Intl.NumberFormat('pt-PT', {
@@ -73,9 +74,9 @@ for (const habit of HABITS) {
 }
 
 lines.push('')
-lines.push('> **Jogos de azar e apostas:** `games-betting` não tem valor fixo. A poupança é')
-lines.push('> `gasto mensal atual − gasto mensal reduzido`, introduzida pelo utilizador; sem')
-lines.push('> valores não existe poupança numérica. Não é usada qualquer média universal.')
+lines.push('> **Jogos de azar e apostas:** `games-betting` usa uma estimativa fixa e conservadora:')
+lines.push('> 20 €/mês atuais, 15 €/mês reduzidos, 5 €/mês de poupança. Não há inputs do')
+lines.push('> utilizador nem médias universais.')
 lines.push('')
 lines.push('## Destinos')
 lines.push('')

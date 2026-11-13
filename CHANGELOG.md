@@ -3,6 +3,22 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.5.2] — 2026-11-13
+
+### Alterado
+
+- **Jogos de azar e apostas** passa a usar uma estimativa fixa e conservadora: 20 €
+  atuais, 15 € reduzidos, **5 €/mês**. O cartão deixa de pedir valores ao utilizador.
+- Ao adicionar uma troca ao plano, um sorriso sobe dentro do cartão e desaparece; a
+  animação respeita `prefers-reduced-motion`.
+- 42 testes: removidos os três casos do cálculo personalizado de jogos.
+
+### Removido
+
+- `GamesFields`, o estado `tripswap:games:v1`, `customExpense`, `GamesEstimate` e o
+  snapshot de jogos nos planos guardados. Planos antigos continuam válidos; o campo
+  extra é simplesmente ignorado.
+
 ## [1.5.1] — 2026-11-13
 
 ### Alterado

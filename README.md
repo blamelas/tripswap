@@ -120,7 +120,7 @@ step, clearly separate from the trip data.
 | Icons | Lucide |
 | Chart | Hand-rolled SVG, no chart library |
 | Persistence | `localStorage` (`tripswap:unlocks:v1`) |
-| Tests | Vitest — 45 tests |
+| Tests | Vitest — 42 tests |
 | Environment | Multi-stage Docker + DevContainer |
 | Deploy | Vercel (production, auto-deploy from `main`) |
 | AI in development | DeepSeek (`deepseek-flash`) as the coding agent |
@@ -148,7 +148,7 @@ Open http://localhost:5173. Changes reload automatically.
 ```bash
 npm run lint        # oxlint
 npm run typecheck   # tsc
-npm test            # 45 tests (engine, data, assets, formatting, i18n, reminders)
+npm test            # 42 tests (engine, data, assets, formatting, i18n, reminders)
 npm run build       # production build
 node scripts/assumptions.mjs > docs/ASSUMPTIONS.md   # regenerate assumptions
 ```
@@ -169,14 +169,14 @@ link or edited `localStorage`).
 
 A dedicated `/swaps` page presents all 25 changes across six categories, independent of
 any destination. It uses the same habit data, calculator and overlap rules as the
-destination flow. **Games of chance & betting** uses user-entered current and reduced
-monthly spend — there is no invented average — and shows no numerical saving until
-both values exist. Selected swaps are stored locally and carried into any destination
+destination flow. **Games of chance & betting** uses a fixed, conservative estimate — €20 current,
+€15 reduced, €5/month — with no user inputs and no invented average. Selected swaps are stored locally and carried into any destination
 plan through the destination links and the global selection.
 
 Each activity has a distinct icon in its category colour; photography stays
 destination-led, so the cards do not become repeated stock-photo tiles. Two dashed
 roadmap cards preview the future “Create my own swap” and “Add my dream trip” tools.
+Selecting a swap adds a small smile arc that rises inside the card and fades.
 
 ![The swaps catalogue](docs/assets/swaps.jpg)
 

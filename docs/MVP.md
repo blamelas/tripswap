@@ -80,7 +80,7 @@ Como visitante, quero guardar objetivos e planos para voltar mais tarde.
 
 - Catálogo de 8 destinos com dados tipados.
 - Detalhe com presets, 25 trocas, painel de financiamento e recibo.
-- Página `/swaps` com catálogo independente, jogos com valores do utilizador e roadmap.
+- Página `/swaps` com catálogo independente, jogos com estimativa fixa e roadmap.
 - Motor determinístico com grupos de sobreposição.
 - Gráfico de projeção em SVG.
 - `/unlocks` com persistência local.
@@ -132,7 +132,7 @@ SavedPlan {
 ## Definição de pronto
 
 - As 4 user stories funcionam de ponta a ponta, sem tocar no código.
-- Os 45 testes passam; lint, typecheck e build verdes.
+- Os 42 testes passam; lint, typecheck e build verdes.
 - O URL público abre em incógnito e no telemóvel.
 - O toggle PT/EN funciona e persiste.
 - Zero erros na consola.

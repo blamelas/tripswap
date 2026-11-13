@@ -1,17 +1,14 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, MapPin, PenLine } from 'lucide-react'
-import type { GamesEstimate, Habit } from '../types'
+import type { Habit } from '../types'
 import { DESTINATIONS } from '../data/destinations'
 import { HABITS, HABIT_CATEGORY_ORDER, getHabit } from '../data/habits'
 import { useI18n } from '../i18n/context'
 import { summarizeSavings } from '../lib/calc'
 import { toggleHabit } from '../lib/conflicts'
-import { applyGamesEstimate, hasGamesSaving } from '../lib/habitValues'
 import {
-  readGamesEstimate,
   readSwapSelection,
-  writeGamesEstimate,
   writeSwapSelection,
 } from '../lib/storage'
 import { DestinationImage } from '../components/DestinationImage'
@@ -21,27 +18,17 @@ import { SwapCard } from '../components/SwapCard'
 export function Swaps() {
   const { copy, fmt, destinationText } = useI18n()
   const [selected, setSelected] = useState<string[]>(() => readSwapSelection())
-  const [gamesEstimate, setGamesEstimate] = useState<GamesEstimate | null>(() =>
-    readGamesEstimate(),
-  )
 
   function handleToggle(habit: Habit) {
-    if (habit.customExpense && !hasGamesSaving(gamesEstimate)) return
     const next = toggleHabit(selected, habit, HABITS)
     setSelected(next)
     writeSwapSelection(next)
   }
 
-  function handleGamesEstimate(estimate: GamesEstimate) {
-    setGamesEstimate(estimate)
-    writeGamesEstimate(estimate)
-  }
-
-  const effectiveSelection = selected
+  const selectedHabits = selected
     .map((id) => getHabit(id))
     .filter((habit): habit is Habit => habit !== undefined)
-    .map((habit) => applyGamesEstimate(habit, gamesEstimate))
-  const summary = summarizeSavings(effectiveSelection)
+  const summary = summarizeSavings(selectedHabits)
   const query = selected.length ? `?h=${selected.join(',')}` : ''
 
   return (
@@ -117,8 +104,6 @@ export function Swaps() {
                     habit={habit}
                     selected={selected.includes(habit.id)}
                     onToggle={handleToggle}
-                    gamesEstimate={gamesEstimate}
-                    onGamesEstimateChange={handleGamesEstimate}
                   />
                 ))}
               </div>

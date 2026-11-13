@@ -153,7 +153,7 @@ export const habitEn: Record<string, HabitText> = {
     description:
       'Scratch cards, online betting and casino visits add up quietly. Swap part of that spend for board games or free plans, and put some of the budget toward a new experience.',
     assumptions:
-      'Enter your current monthly spend on scratch cards, betting or casino, and the amount you would rather keep. Saving = current − reduced.',
+      'Conservative estimate: €20/month on scratch cards, betting or casino; keep €15. Saving = €20 − €15 = €5/month.',
   },
   'exercise-at-home': {
     title: 'Train at home instead of paying for a gym',

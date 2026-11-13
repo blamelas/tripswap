@@ -121,7 +121,7 @@ os planos sugeridos vivem numa faixa azul-pálida no início do passo de troca.
 | Ícones | Lucide |
 | Gráfico | SVG próprio, sem biblioteca de charts |
 | Persistência | `localStorage` (`tripswap:unlocks:v1`) |
-| Testes | Vitest — 45 testes |
+| Testes | Vitest — 42 testes |
 | Ambiente | Docker multi-stage + DevContainer |
 | Deploy | Vercel (estático) |
 | AI no desenvolvimento | DeepSeek (`deepseek-flash`) como agente de código |
@@ -150,7 +150,7 @@ Abre http://localhost:5173. As alterações recarregam automaticamente.
 ```bash
 npm run lint        # oxlint
 npm run typecheck   # tsc
-npm test            # 45 testes (motor, dados, assets, formatação, i18n, lembretes)
+npm test            # 42 testes (motor, dados, assets, formatação, i18n, lembretes)
 npm run build       # build de produção
 node scripts/assumptions.mjs > docs/ASSUMPTIONS.md   # regenera os pressupostos
 ```
@@ -171,15 +171,14 @@ elimina sobreposições de forma defensiva, mesmo que receba uma lista não sani
 
 A página `/swaps` apresenta as 25 mudanças em seis categorias, independentemente de
 qualquer destino. Usa os mesmos dados, motor e regras de sobreposição do fluxo de
-destino. **Jogos de azar e apostas** usa o gasto mensal atual e o valor reduzido
-introduzidos pelo utilizador — sem médias inventadas — e não mostra poupança numérica
-enquanto os dois valores não existirem. As trocas escolhidas ficam guardadas localmente
+destino. **Jogos de azar e apostas** usa uma estimativa fixa e conservadora — 20 € atuais,
+15 € reduzidos, 5 €/mês — sem inputs e sem médias inventadas. As trocas escolhidas ficam guardadas localmente
 e seguem para qualquer plano através dos links de destino e da seleção global.
 
 Cada atividade tem um ícone próprio na cor da categoria; a fotografia continua
 reservada aos destinos, para que os cartões não se tornem tiles repetidos de stock.
 Dois cartões tracejados mostram o roadmap de “Criar a minha troca” e “Adicionar a minha
-viagem de sonho”.
+viagem de sonho”. Ao selecionar uma troca, um pequeno sorriso sobe dentro do cartão e desaparece.
 
 ![O catálogo de trocas](docs/assets/swaps.jpg)
 

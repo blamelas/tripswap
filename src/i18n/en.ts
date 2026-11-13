@@ -360,17 +360,6 @@ export const en: Copy = {
     body: 'The address may be incomplete. The catalogue is still here.',
     cta: 'Back to the catalogue',
   },
-  games: {
-    current: 'Current monthly spend',
-    reduced: 'Reduced monthly spend',
-    save: 'Save amounts',
-    estimated: 'Estimated monthly saving',
-    hint: 'Enter both amounts to see your saving.',
-    invalid: 'The reduced amount should be lower than the current amount.',
-    setFirst: 'Set your monthly amounts',
-    example: 'Use a conservative example',
-    exampleNote: 'Illustrative: €20 current, €15 reduced. Adjust to your spending.',
-  },
   reminder: {
     add: 'Add reminder',
     edit: 'Edit reminder',

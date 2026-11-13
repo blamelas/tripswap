@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { ArrowLeft, ListChecks, Moon, PlaneTakeoff, Users } from 'lucide-react'
-import type { Destination, GamesEstimate, Habit } from '../types'
+import type { Destination, Habit } from '../types'
 import { HABITS, getHabit } from '../data/habits'
 import { getDestination } from '../data/destinations'
 import { useI18n } from '../i18n/context'
@@ -10,12 +10,9 @@ import { sanitizeSelection, toggleHabit } from '../lib/conflicts'
 import { getPresets } from '../lib/presets'
 import {
   getPlan,
-  readGamesEstimate,
   readSwapSelection,
   savePlan,
-  writeGamesEstimate,
 } from '../lib/storage'
-import { applyGamesEstimate } from '../lib/habitValues'
 import { HabitSelector } from '../components/HabitSelector'
 import { MobileFundingBar, RewardPanel } from '../components/RewardPanel'
 import { PresetButtons, type PresetView } from '../components/PresetButtons'
@@ -39,9 +36,6 @@ function DetailView({ destination }: { destination: Destination }) {
   }, [])
 
   const [selected, setSelected] = useState<string[]>(initialIds)
-  const [gamesEstimate, setGamesEstimate] = useState<GamesEstimate | null>(() =>
-    readGamesEstimate(),
-  )
   const [horizon, setHorizon] = useState(12)
   const [saved, setSaved] = useState(() => Boolean(getPlan(destination.id)))
 
@@ -59,9 +53,8 @@ function DetailView({ destination }: { destination: Destination }) {
     () =>
       selected
         .map((id) => getHabit(id))
-        .filter((habit): habit is Habit => habit !== undefined)
-        .map((habit) => applyGamesEstimate(habit, gamesEstimate)),
-    [selected, gamesEstimate],
+        .filter((habit): habit is Habit => habit !== undefined),
+    [selected],
   )
 
   const plan = useMemo(
@@ -88,18 +81,12 @@ function DetailView({ destination }: { destination: Destination }) {
     setSelected((previous) => toggleHabit(previous, habit, HABITS))
   }
 
-  function handleGamesEstimate(estimate: GamesEstimate) {
-    setGamesEstimate(estimate)
-    writeGamesEstimate(estimate)
-  }
-
   function handleSave() {
     savePlan({
       destinationId: destination.id,
       habitIds: selected,
       horizonMonths: horizon,
       savedAt: new Date().toISOString(),
-      gamesEstimate: gamesEstimate ?? undefined,
     })
     setSaved(true)
   }
@@ -211,8 +198,6 @@ function DetailView({ destination }: { destination: Destination }) {
               <HabitSelector
                 selectedIds={selected}
                 onToggle={handleToggle}
-                gamesEstimate={gamesEstimate}
-                onGamesEstimateChange={handleGamesEstimate}
               />
             </div>
           </div>

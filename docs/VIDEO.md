@@ -25,7 +25,7 @@ Record in 1080p, with the Mac microphone, in a clean window. **Narration: Englis
 | 1:35 | 3m | “With three months, it is not unlocked. The product does not lie.” |
 | 1:45 | 12m + save | “I save the plan on this device. No account, no server.” |
 | 2:00 | The swaps | “Twenty-five changes in six categories, independent of any destination. Select them and carry them into a plan.” |
-| 2:15 | Games | “Games of chance use the values you enter. No invented average; no number until both values exist.” |
+| 2:15 | Games | “Games of chance use a fixed conservative estimate: €5 a month. No inputs, no invented average.” |
 | 2:30 | Unlocks | “The plan is here, with the horizon and progress recalculated.” |
 | 2:40 | PT | “The same maths in Portuguese: €122 / 6 months. The numbers do not change.” |
 | 2:50 | About + close | “Method, limits and credits. The product is at tripswap-home.vercel.app.” |

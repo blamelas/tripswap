@@ -19,7 +19,7 @@
 
 ### 1. Title — 0:00
 **TripSwap — Small changes. Bigger journeys.**
-Name, URL, repo. Visual: the hero photograph, the 8 destinations / 25 swaps / 6 categories / 45 tests strip.
+Name, URL, repo. Visual: the hero photograph, the 8 destinations / 25 swaps / 6 categories / 42 tests strip.
 One line: “A travel discovery product that turns everyday swaps into future experiences.”
 
 ### 2. Problem and user — 0:40
@@ -50,7 +50,7 @@ horizon buttons update. Visual: the real screen, not a mockup.
 - Direction “The world is the reward”: Barlow Condensed, IBM Plex, ink/canvas/signal; photography as interface.
 - Static SPA: React 19 + TS + Vite + Tailwind.
 - Typed data → pure engine → UI. No server.
-- `/swaps`: independent catalogue, 25 swaps, 6 categories, games with user values, non-interactive roadmap.
+- `/swaps`: independent catalogue, 25 swaps, 6 categories, games with a fixed conservative estimate, non-interactive roadmap.
 - Local i18n: typed PT/EN dictionaries, parity tested, engine language-agnostic.
 - `localStorage` behind a service layer.
 - Visual: the three-box diagram and the token strip.
@@ -67,13 +67,13 @@ horizon buttons update. Visual: the real screen, not a mockup.
 - 25 changes, 6 categories, independent of any destination.
 - Select swaps, see monthly and one-time savings separately, carry them into any plan.
 - The selection travels through deep links and the global store.
-- Games of chance: conservative example (€20 → €15 = €5/month); no number until both values exist.
+- Games of chance: fixed conservative estimate (€20 → €15 = €5/month); no inputs.
 - Roadmap cards (“Create my own swap”, “Add my dream trip”) are deliberately non-interactive.
 - Visual: the swaps page and the games card.
 
 ### 9. Process with AI — 6:40
-- `CLAUDE.md`, 3 agents, 3 skills, 48 cycles in `ITERATIONS.md`.
-- 45 tests; two of them caught real AI errors. 110+ commits, 20+ merged PRs, CI on every PR.
+- `CLAUDE.md`, 3 agents, 3 skills, 49 cycles in `ITERATIONS.md`.
+- 42 tests; two of them caught real AI errors. 110+ commits, 20+ merged PRs, CI on every PR.
 - Failure 1: the engine summed overlapping swaps. A test failed with 2 lines instead of 1. I fixed the engine, not the test.
 - Failure 2: a literal i18n return type broke the English dictionary. `tsc` caught it; I widened the type and added a parity test.
 - Visual: `git log --oneline`, agent files, a failing test.
@@ -102,7 +102,7 @@ Preparation: clean window, zoom 110%, `/unlocks` empty, `/` open.
 | 1:25 | Back to **Balanced**, horizon **3m** | “With three months, it is not unlocked. The product does not lie.” |
 | 1:40 | Horizon **12m**, **Save this plan** | “Saved on this device. No account, no server.” |
 | 1:55 | Open **The swaps** | “Twenty-five changes in six categories, independent of any destination. Select them and carry them into a plan.” |
-| 2:10 | Games card, **Use a conservative example** | “€20 current, €15 reduced: €5 a month. The user’s values, not an invented average.” |
+| 2:10 | Games card | “A fixed conservative estimate: €20 current, €15 reduced, €5 a month. No inputs, no invented average.” |
 | 2:20 | **My unlocks** | “The plan is here, with the horizon and progress recalculated.” |
 | 2:30 | **Open plan** | “The deep link returns exactly the same swaps — the number is reproducible.” |
 | 2:38 | **Add to calendar** | “Daily at 08:30, an `.ics` with a 15-minute event and an alarm. No account, no server.” |
@@ -130,7 +130,7 @@ Use [`QA.md`](QA.md) (26 questions). If you do not know:
 - Paris, Balanced: €122/month · €650 target · 6 months.
 - Paris, Essential: €90/month · 8 months.
 - Paris, Conscious: €146/month + €65 one-time · 5 months.
-- 45 tests · 27 manual cases · 26 Q&A · 48 iterations.
+- 42 tests · 27 manual cases · 26 Q&A · 49 iterations.
 - 110+ commits · 20+ merged PRs · 21 merged at the time of writing.
 
 ---

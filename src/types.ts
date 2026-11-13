@@ -29,8 +29,6 @@ export interface Habit {
   assumptions: string
   exclusiveGroup?: string
   benefits: string[]
-  /** Saving depends on user-entered current/reduced monthly spend. */
-  customExpense?: boolean
 }
 
 export interface Destination {
@@ -52,17 +50,12 @@ export interface Destination {
   recommendedHabitIds: string[]
 }
 
-export interface GamesEstimate {
-  current: number
-  reduced: number
-}
 
 export interface SavedPlan {
   destinationId: string
   habitIds: string[]
   horizonMonths: number
   savedAt: string
-  gamesEstimate?: GamesEstimate
 }
 
 export type ReminderFrequency = 'daily' | 'monthly'
