@@ -97,8 +97,10 @@ acrescentado abaixo; só o cartão se transforma. No telemóvel, a barra de fund
 signal.
 
 As linhas de hábitos mostram apenas o nome, a poupança e o estado selecionado. As
-categorias são etiquetas discretas, não títulos; descrições, premissas e benefícios
-ficam atrás de um chevron.
+categorias são etiquetas discretas, não títulos, com um ícone pequeno; descrições,
+premissas e benefícios ficam atrás de um chevron. Os dados da viagem têm ícones, e os
+planos sugeridos vivem numa faixa azul-pálida no início do passo de troca, claramente
+separados dos dados da viagem.
 
 ![O estado de sucesso](docs/assets/success.jpg)
 

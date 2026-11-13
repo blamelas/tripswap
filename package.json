@@ -1,7 +1,7 @@
 {
   "name": "tripswap",
   "private": true,
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "TripSwap — small changes, bigger journeys. A travel discovery experience funded by everyday swaps.",
   "type": "module",
   "engines": {
