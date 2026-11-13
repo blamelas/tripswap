@@ -1,6 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { getHabit } from '../src/data/habits'
 import {
+  achievePlan,
+  addAllocation,
   clearPlans,
   confirmAmount,
   getCreditedHabitIds,
@@ -117,6 +119,21 @@ describe('malformed lifecycle', () => {
   })
 })
 
+describe('corrupt storage', () => {
+  it('falls back to v1 when the v2 payload is not valid JSON', () => {
+    storage.setItem(V2_KEY, '{not json')
+    storage.setItem(
+      V1_KEY,
+      JSON.stringify([
+        { destinationId: 'paris', habitIds: ['coffee-at-home'], horizonMonths: 12, savedAt: NOW },
+      ]),
+    )
+
+    expect(readPlans()).toHaveLength(1)
+    expect(readPlans()[0].destinationId).toBe('paris')
+  })
+})
+
 describe('savePlan', () => {
   it('merges base fields and preserves an existing lifecycle', () => {
     savePlan({
@@ -195,6 +212,27 @@ describe('one-time credited once', () => {
     startPlan('tokyo', [getHabit('repair-shoes')!], NOW)
 
     expect(getCreditedHabitIds()).toEqual(['repair-shoes'])
+  })
+})
+
+describe('allocations are exclusive to live plans', () => {
+  it('releases recurring reservations when a plan is achieved', () => {
+    savePlan({ destinationId: 'paris', habitIds: ['coffee-at-home'], horizonMonths: 12, savedAt: NOW })
+    startPlan('paris', [getHabit('coffee-at-home')!], NOW)
+    achievePlan('paris', '2026-02-01T00:00:00.000Z')
+
+    expect(getReservedAllocations()).toEqual([])
+  })
+
+  it('refuses to add a swap already funded by another active plan', () => {
+    savePlan({ destinationId: 'paris', habitIds: ['coffee-at-home'], horizonMonths: 12, savedAt: NOW })
+    startPlan('paris', [getHabit('coffee-at-home')!], NOW)
+
+    savePlan({ destinationId: 'barcelona', habitIds: [], horizonMonths: 12, savedAt: NOW })
+    startPlan('barcelona', [], NOW)
+
+    addAllocation('barcelona', getHabit('coffee-at-home')!, '2026-02-01T00:00:00.000Z')
+    expect(getPlan('barcelona')!.lifecycle!.allocations).toEqual([])
   })
 })
 

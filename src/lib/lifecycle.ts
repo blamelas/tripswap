@@ -19,16 +19,26 @@ export function activate(
   const allocations: PlanLifecycle['allocations'] = []
   const periods: PlanLifecycle['periods'] = []
   const oneTimeCredits: PlanLifecycle['oneTimeCredits'] = []
+  const seenGroups = new Set<string>()
 
   for (const habit of selectedHabits) {
     if (habit.kind === 'recurring') {
       const monthly = monthlySaving(habit)
       if (monthly <= 0) continue
+      // Defensive: one allocation per overlap group, even for unsanitised input.
+      if (habit.exclusiveGroup) {
+        if (seenGroups.has(habit.exclusiveGroup)) continue
+        seenGroups.add(habit.exclusiveGroup)
+      }
       allocations.push({ habitId: habit.id, monthly, allocatedAt: nowIso })
       periods.push({ habitId: habit.id, monthly, start: nowIso, end: null })
     } else {
       const amount = oneTimeSaving(habit)
       if (amount <= 0) continue
+      if (habit.exclusiveGroup) {
+        if (seenGroups.has(habit.exclusiveGroup)) continue
+        seenGroups.add(habit.exclusiveGroup)
+      }
       oneTimeCredits.push({
         habitId: habit.id,
         amount,

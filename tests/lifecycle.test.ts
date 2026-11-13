@@ -63,6 +63,20 @@ describe('activate', () => {
   })
 })
 
+describe('activate overlap groups', () => {
+  it('allocates only the first positive habit in an overlap group', () => {
+    const started = activate(
+      plan(['reduce-takeaway', 'cook-instead-of-ready-meals']),
+      [getHabit('reduce-takeaway')!, getHabit('cook-instead-of-ready-meals')!],
+      NOW,
+    )
+    expect(started.allocations.map((allocation) => allocation.habitId)).toEqual([
+      'reduce-takeaway',
+    ])
+    expect(started.periods).toHaveLength(1)
+  })
+})
+
 describe('pause and resume', () => {
   it('closes open periods on pause', () => {
     const lifecycle = pause(activate(plan(['coffee-at-home']), [getHabit('coffee-at-home')!], NOW), T1)

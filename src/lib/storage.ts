@@ -10,7 +10,8 @@ import type {
   SavedPlan,
 } from '../types'
 import type { ReservedAllocation } from './allocations'
-import { getHabit } from '../data/habits'
+import { HABITS, getHabit } from '../data/habits'
+import { findActivationConflicts } from './allocations'
 import {
   achieve,
   activate,
@@ -142,30 +143,35 @@ function dedupeByDestination(plans: SavedPlan[]): SavedPlan[] {
 
 export function readPlans(): SavedPlan[] {
   if (typeof window === 'undefined') return []
+
   try {
     const raw = window.localStorage.getItem(V2_KEY)
     if (raw) {
-      const parsed: unknown = JSON.parse(raw)
-      if (isPlanEnvelope(parsed)) {
-        return parsed.plans
-          .map(normalizePlan)
-          .filter((plan): plan is SavedPlan => plan !== null)
+      try {
+        const parsed: unknown = JSON.parse(raw)
+        if (isPlanEnvelope(parsed)) {
+          return parsed.plans
+            .map(normalizePlan)
+            .filter((plan): plan is SavedPlan => plan !== null)
+        }
+      } catch {
+        // Corrupt v2 is not fatal: fall through to the legacy key.
       }
-      // Malformed v2 falls back to the legacy key below.
     }
-
-    const legacy = window.localStorage.getItem(V1_KEY)
-    if (legacy) {
-      const parsed: unknown = JSON.parse(legacy)
-      if (!Array.isArray(parsed)) return []
-      const plans = dedupeByDestination(
-        parsed.map(normalizePlan).filter((plan): plan is SavedPlan => plan !== null),
-      )
-      writePlans(plans)
-      return plans
-    }
-
+  } catch {
     return []
+  }
+
+  try {
+    const legacy = window.localStorage.getItem(V1_KEY)
+    if (!legacy) return []
+    const parsed: unknown = JSON.parse(legacy)
+    if (!Array.isArray(parsed)) return []
+    const plans = dedupeByDestination(
+      parsed.map(normalizePlan).filter((plan): plan is SavedPlan => plan !== null),
+    )
+    writePlans(plans)
+    return plans
   } catch {
     return []
   }
@@ -276,6 +282,16 @@ export function addAllocation(
       )
     if (alreadyAllocated || clashesGroup) return plan
 
+    // Defensive: never reserve a swap that another active plan already funds.
+    const conflicts = findActivationConflicts(
+      [habit.id],
+      destinationId,
+      getReservedAllocations(),
+      getCreditedHabitIds(),
+      HABITS,
+    )
+    if (conflicts.length > 0) return plan
+
     return {
       ...plan,
       lifecycle: allocate(plan.lifecycle, habit, destinationId, nowIso),
@@ -290,7 +306,13 @@ export function removeAllocation(
 ): SavedPlan[] {
   return mutatePlan(destinationId, (plan) =>
     plan.lifecycle
-      ? { ...plan, lifecycle: releaseAllocation(plan.lifecycle, habitId, nowIso) }
+      ? {
+          ...plan,
+          // The selection follows the allocation so the saved plan and the
+          // deep link never advertise a swap this plan is not funding.
+          habitIds: plan.habitIds.filter((id) => id !== habitId),
+          lifecycle: releaseAllocation(plan.lifecycle, habitId, nowIso),
+        }
       : plan,
   )
 }
@@ -304,6 +326,9 @@ export function confirmAmount(destinationId: string, amount: number): SavedPlan[
 export function getReservedAllocations(): ReservedAllocation[] {
   const reserved: ReservedAllocation[] = []
   for (const plan of readPlans()) {
+    const status = plan.lifecycle?.status
+    // Achieved plans are closed: their recurring swaps may fund a new plan.
+    if (status !== 'active' && status !== 'paused') continue
     const allocations = plan.lifecycle?.allocations
     if (!allocations || allocations.length === 0) continue
     reserved.push({
