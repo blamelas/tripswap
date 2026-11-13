@@ -8,7 +8,7 @@ Respostas curtas, para ensaiar em voz alta. Cada linha tem o artefacto que a pro
 > o dinheiro. O TripSwap mostra o custo real de planeamento, propõe trocas pequenas e
 > calcula em quanto tempo a viagem fica ao alcance. Começa no desejo, não no orçamento.
 
-## 17 perguntas
+## 18 perguntas
 
 | # | Pergunta | Resposta curta | Artefacto |
 |---|---|---|---|
@@ -29,6 +29,7 @@ Respostas curtas, para ensaiar em voz alta. Cada linha tem o artefacto que a pro
 | 15 | O que ficou de fora? | Auth, booking, preços live, backend, mapas. Sem isso o valor central mantém-se. | `docs/MVP.md` |
 | 16 | A app é bilingue? | Sim: inglês por omissão, português a um clique. Números iguais; copy e dados traduzidos. | `src/i18n`, `tests/i18n.test.ts` |
 | 17 | Qual é a ideia visual? | “The world is the reward”: fotografia full-bleed, Barlow Condensed, ink/canvas/signal. A foto é a superfície de progresso. | `README.md`, `src/index.css`, `RewardPanel` |
+| 18 | Como sei que alcancei o objetivo? | Bloco signal “This is now possible.”, check, meses/trocas/objetivo; no mobile a barra fica signal. | `RewardPanel`, `UnlockMoment` |
 
 ## Frases a evitar
 

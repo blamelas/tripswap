@@ -31,6 +31,10 @@ export const pt = {
     unlocked: 'Desbloqueado na simulação',
     noPlan: 'Escolhe uma troca para começar.',
     destination: 'Destino',
+    reachedEyebrow: 'Objetivo alcançado',
+    reachedTitle: 'Isto agora é possível.',
+    covered: 'As trocas escolhidas cobrem o objetivo de planeamento.',
+    simulation: 'Simulação, não uma reserva.',
   },
   common: {
     perMonth: '/mês',

@@ -53,7 +53,7 @@ componentes: o risco do produto está na aritmética e nas sobreposições.
 - Singular/plural de meses.
 - Percentagens.
 
-## Checklist manual (17 casos)
+## Checklist manual (18 casos)
 
 Executar em http://localhost:5173 e repetir no URL público.
 
@@ -76,6 +76,7 @@ Executar em http://localhost:5173 e repetir no URL público.
 | 15 | 360 px | Header cabe; sem scroll horizontal; reward window legível |
 | 16 | Reduced motion | Sem animações de maré, contador ou hover |
 | 17 | €0* | Orçamento riscado + €0* + “financiado por trocas”; nunca “grátis” |
+| 18 | Sucesso | Balanced em Paris mostra “This is now possible.”, check, 6 meses, 3 trocas, €650; barra mobile signal; desaparece com horizonte 3m |
 
 Casos adicionais: `/destination/nao-existe` (404), `/unlocks` sem planos (empty state),
 imagem inexistente (fallback), `prefers-reduced-motion` (sem animações).

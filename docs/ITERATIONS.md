@@ -36,6 +36,9 @@ commit. Os tempos são reais e incluem revisão manual.
 | 29 | 13 Nov 04:44 | Detalhe | Reward window com maré/rail, price block, hábitos em linhas | Nova interação | `feat(detail): add the reward window interaction` | 45 min |
 | 30 | 13 Nov 04:50 | QA | Imagens novas, contraste, mobile, screenshots e docs | 35/35 verdes | `docs: update art direction evidence` | 30 min |
 | 31 | 13 Nov 04:55 | Release | Changelog, versão e deploy | `v1.2.0` | `chore(release): v1.2.0` | 10 min |
+| 32 | 13 Nov 05:00 | Feedback | Estado de sucesso, ícones, favicon, €0* CTA nos cartões | Interação clara | `feat(ui): make the reward and the €0* explicit` | 40 min |
+| 33 | 13 Nov 05:05 | QA | Contraste, mobile, screenshots, docs | 35/35 verdes | `docs: update success state evidence` | 20 min |
+| 34 | 13 Nov 05:10 | Release | Changelog, versão e deploy | `v1.3.0` | `chore(release): v1.3.0` | 10 min |
 
 ## O que aprendi
 

@@ -33,6 +33,10 @@ export const en: Copy = {
     unlocked: 'Unlocked in simulation',
     noPlan: 'Choose a swap to start.',
     destination: 'Destination',
+    reachedEyebrow: 'Goal reached',
+    reachedTitle: 'This is now possible.',
+    covered: 'Your selected swaps cover the planning target.',
+    simulation: 'Simulation, not a booking.',
   },
   common: {
     perMonth: '/mo',

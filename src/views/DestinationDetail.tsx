@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
-import { ArrowLeft, ArrowRight, Check } from 'lucide-react'
+import { ArrowLeft, BookmarkCheck, BookmarkPlus, Check } from 'lucide-react'
 import type { Destination, Habit } from '../types'
 import { HABITS, getHabit } from '../data/habits'
 import { getDestination } from '../data/destinations'
@@ -21,27 +21,55 @@ import { NotFound } from './NotFound'
 function UnlockMoment({
   destination,
   months,
+  swaps,
   saved,
   onSave,
 }: {
   destination: Destination
   months: number
+  swaps: number
   saved: boolean
   onSave: () => void
 }) {
   const { copy, fmt } = useI18n()
 
   return (
-    <section className="mt-8 bg-sky p-6 lg:p-8">
-      <p className="label-accent">{copy.detail.unlockEyebrow}</p>
-      <p className="mt-3 max-w-xl font-display text-[clamp(1.8rem,3.2vw,2.6rem)] normal-case leading-[1.02] text-ink">
-        {copy.detail.unlockSentence(destination.name, fmt.months(months))}
+    <section className="mt-8 bg-accent p-6 text-ink lg:p-8">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-ink/70">
+            {copy.reward.reachedEyebrow}
+          </p>
+          <p className="mt-2 max-w-lg font-display text-[clamp(2.4rem,5vw,4rem)] leading-[0.8]">
+            {copy.reward.reachedTitle}
+          </p>
+        </div>
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-ink">
+          <Check className="h-5 w-5" strokeWidth={3} aria-hidden="true" />
+        </span>
+      </div>
+
+      <div className="mt-4 flex flex-wrap items-baseline gap-x-5 gap-y-1 border-t border-ink/20 pt-4">
+        <span className="nums text-[2rem] leading-none">{months}</span>
+        <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/70">
+          {months === 1 ? copy.reward.month : copy.reward.months}
+        </span>
+        <span className="text-[11px] font-medium">
+          {swaps} {copy.reward.selected} · {fmt.eur(destination.budget)}
+        </span>
+      </div>
+
+      <p className="mt-2 max-w-xl text-[10px] leading-relaxed text-ink/70">
+        {copy.reward.covered}
       </p>
-      <p className="mt-3 max-w-xl text-[12px] leading-relaxed text-ink/65">
-        {copy.detail.unlockBody}
-      </p>
+      <p className="mt-1 text-[10px] text-ink/60">{copy.reward.simulation}</p>
+
       <button type="button" onClick={onSave} className="btn-primary mt-5">
-        {saved ? <Check className="h-3.5 w-3.5" /> : <ArrowRight className="h-3.5 w-3.5" />}
+        {saved ? (
+          <BookmarkCheck className="h-4 w-4" aria-hidden="true" />
+        ) : (
+          <BookmarkPlus className="h-4 w-4" aria-hidden="true" />
+        )}
         {saved ? copy.detail.unlockSaved : copy.detail.unlockSave}
       </button>
     </section>
@@ -250,6 +278,7 @@ function DetailView({ destination }: { destination: Destination }) {
             <UnlockMoment
               destination={destination}
               months={plan.monthsToTarget}
+              swaps={plan.habits.length}
               saved={saved}
               onSave={handleSave}
             />

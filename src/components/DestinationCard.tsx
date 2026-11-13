@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { ArrowUpRight } from 'lucide-react'
 import type { Destination } from '../types'
 import { useI18n } from '../i18n/context'
 import { cn } from '../lib/cn'
@@ -64,12 +65,17 @@ export function DestinationCard({
                 {text.quote}
               </p>
             </div>
-            <PriceBlock
-              budget={destination.budget}
-              size="sm"
-              tone="dark"
-              className="shrink-0"
-            />
+            <div className="shrink-0">
+              <PriceBlock
+                budget={destination.budget}
+                size="md"
+                tone="dark"
+              />
+              <p className="mt-2 inline-flex items-center gap-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-canvas/70 transition-colors group-hover:text-accent">
+                {copy.card.cta}
+                <ArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </p>
+            </div>
           </div>
         </div>
       </Link>
@@ -107,11 +113,15 @@ export function DestinationCard({
           </p>
         </div>
         <div className="shrink-0 text-right">
-          <p className="nums text-[11px] text-muted line-through decoration-1">
+          <p className="nums text-[12px] text-muted line-through decoration-1">
             {budget}
           </p>
-          <p className="font-display text-[2.1rem] font-semibold leading-none text-accent">
+          <p className="font-display text-[clamp(2.9rem,3.6vw,3.5rem)] font-semibold leading-[0.78] text-accent">
             €0*
+          </p>
+          <p className="mt-1.5 inline-flex items-center gap-1 text-[8.5px] font-semibold uppercase tracking-[0.12em] text-ink transition-colors group-hover:text-accent">
+            {copy.card.cta}
+            <ArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </p>
         </div>
       </div>
