@@ -79,7 +79,8 @@ produto: fotografia full-bleed, tipografia condensada e uma única cor-sinal.
 |---|---|
 | Canvas | `#F7F6F2` |
 | Ink | `#151A19` |
-| Signal | `#FF5936` |
+| Signal | `#F04A28` |
+| Signal deep (small text) | `#B83417` |
 | Azul pálido | `#D8E8EE` |
 | Display | Barlow Condensed |
 | Interface | IBM Plex Sans |

@@ -3,6 +3,15 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.2.1] — 2026-11-13
+
+### Corrigido
+
+- Signal afinado para `#F04A28` (texto grande) e `accent-dark` `#B83417` para labels
+  pequenos, garantindo contraste AA em canvas e sky.
+- Opacidades de texto secundário sobre ink e sky reforçadas.
+- Tab do destino no hero passou a fundo canvas para ser legível sobre a fotografia.
+
 ## [1.2.0] — 2026-11-13
 
 ### Alterado

@@ -96,7 +96,7 @@ export function About() {
             {copy.about.overlapBody2}
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-x-3 gap-y-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-ink/45">
+          <div className="mt-6 flex flex-wrap gap-x-3 gap-y-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-ink/65">
             {copy.about.groups.map((group, index) => (
               <span key={group}>
                 {index > 0 && <span aria-hidden="true">· </span>}
@@ -105,7 +105,7 @@ export function About() {
             ))}
           </div>
 
-          <p className="mt-6 border-t border-ink/15 pt-4 text-[10px] text-ink/50">
+          <p className="mt-6 border-t border-ink/15 pt-4 text-[10px] text-ink/65">
             {copy.about.stats(
               HABITS.length,
               DESTINATIONS.length,
@@ -122,7 +122,7 @@ export function About() {
             €0<span className="align-top text-[0.2em]">*</span>
           </p>
           <div>
-            <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/45">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/60">
               {copy.about.zeroEyebrow}
             </p>
             <h2 className="mt-2 text-[clamp(2rem,4vw,3.4rem)] leading-[0.88] text-canvas">

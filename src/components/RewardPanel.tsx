@@ -61,10 +61,10 @@ function RewardWindow({ destination, plan }: RewardWindowProps) {
 
       <div className="bg-ink p-4 text-canvas">
         <div className="flex items-center justify-between gap-3">
-          <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/50">
+          <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/65">
             {copy.reward.timeToReach}
           </span>
-          <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/50">
+          <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/65">
             {copy.panel.states[state].label}
           </span>
         </div>
@@ -84,20 +84,20 @@ function RewardWindow({ destination, plan }: RewardWindowProps) {
         </div>
 
         {months === null && (
-          <p className="mt-2 text-[11px] leading-relaxed text-canvas/55">
+          <p className="mt-2 text-[11px] leading-relaxed text-canvas/70">
             {copy.panel.states[state].hint}
           </p>
         )}
 
         <div className="mt-3 grid grid-cols-2 gap-3 border-t border-canvas/15 pt-3">
           <div>
-            <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/45">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/60">
               {copy.panel.perMonth}
             </p>
             <p className="nums mt-0.5 text-[15px] text-canvas">{fmt.eur(plan.monthly)}</p>
           </div>
           <div>
-            <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/45">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/60">
               {copy.price.planningTarget}
             </p>
             <p className="nums mt-0.5 text-[15px] text-canvas">{fmt.eur(plan.target)}</p>
@@ -193,17 +193,17 @@ export function MobileFundingBar({ plan, saved, onSave }: MobileFundingBarProps)
       </div>
       <div className="flex items-center justify-between gap-4">
         <div className="min-w-0">
-          <p className="text-[8px] font-semibold uppercase tracking-[0.16em] text-canvas/45">
+          <p className="text-[8px] font-semibold uppercase tracking-[0.16em] text-canvas/60">
             {copy.panel.states[state].label}
           </p>
           <p className="mt-0.5 flex items-baseline gap-1.5">
             <span className="nums text-lg text-canvas">
               {months !== null ? `${months}` : '—'}
             </span>
-            <span className="text-[10px] uppercase tracking-[0.12em] text-canvas/55">
+            <span className="text-[10px] uppercase tracking-[0.12em] text-canvas/70">
               {months === 1 ? copy.reward.month : copy.reward.months}
             </span>
-            <span className="nums text-[10px] text-canvas/55">
+            <span className="nums text-[10px] text-canvas/70">
               · {fmt.eur(plan.monthly)}
             </span>
           </p>
