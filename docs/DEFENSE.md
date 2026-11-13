@@ -1,6 +1,6 @@
 # Defesa — guião completo
 
-**Produto:** TripSwap · **URL:** https://blamelas.github.io/tripswap/ · **Repo:** https://github.com/blamelas/tripswap
+**Produto:** TripSwap · **URL pública:** https://blamelas.github.io/tripswap/ · **Vercel:** https://tripswap-filipes-projects-ba4328b8.vercel.app/ (auto-deploy; proteção SSO a desativar) · **Repo:** https://github.com/blamelas/tripswap
 **Duração:** 10 min de apresentação + Q&A · **Ensaios:** 2 cronometrados
 
 ---
