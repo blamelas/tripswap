@@ -6,7 +6,7 @@
 npm test
 ```
 
-27 testes em Vitest, todos sobre a lógica central e os dados. Não há snapshots de
+29 testes em Vitest, todos sobre a lógica central e os dados. Não há snapshots de
 componentes: o risco do produto está na aritmética e nas sobreposições.
 
 ### `tests/calc.test.ts` (21)
@@ -31,7 +31,12 @@ componentes: o risco do produto está na aritmética e nas sobreposições.
 - Recomendações de todos os destinos são livres de conflito.
 - 8 destinos com orçamento, viajantes, noites e âmbito válidos.
 
-### `tests/format.test.ts` (5)
+### `tests/assets.test.ts` (2)
+
+- Cada destino tem uma imagem local em `public/images/` com mais de 20 kB.
+- Nenhum destino aponta para um domínio externo de imagens.
+
+### `tests/format.test.ts` (6)
 
 - EUR sem decimais quando o valor é inteiro.
 - Cêntimos preservados quando existem.

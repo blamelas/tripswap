@@ -3,6 +3,15 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.0.3] — 2026-11-13
+
+### Adicionado
+
+- Dois testes de integridade das imagens locais (ficheiro presente, tamanho mínimo,
+  sem dependência de domínios externos). Total: 29 testes.
+- `docs/QA.md` com pitch, 15 perguntas, frases a evitar e números de referência.
+- Template de pull request com as regras de cálculo, honestidade do €0* e claims.
+
 ## [1.0.2] — 2026-11-13
 
 ### Adicionado

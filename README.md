@@ -2,6 +2,9 @@
 
 **Small changes. Bigger journeys.**
 
+[![CI](https://github.com/blamelas/tripswap/actions/workflows/ci.yml/badge.svg)](https://github.com/blamelas/tripswap/actions/workflows/ci.yml)
+[![Deploy](https://github.com/blamelas/tripswap/actions/workflows/pages.yml/badge.svg)](https://github.com/blamelas/tripswap/actions/workflows/pages.yml)
+
 TripSwap is a premium travel discovery experience that shows how small, realistic
 changes in everyday habits could finance a meaningful trip. Users browse a curated
 catalogue, choose swaps they would genuinely consider, and watch the projected savings
@@ -71,7 +74,7 @@ fluxo, um ecrã principal.
 | Ícones | Lucide |
 | Gráfico | SVG próprio, sem biblioteca de charts |
 | Persistência | `localStorage` (`tripswap:unlocks:v1`) |
-| Testes | Vitest — 27 testes |
+| Testes | Vitest — 29 testes |
 | Ambiente | Docker multi-stage + DevContainer |
 | Deploy | Vercel (estático) |
 | AI no desenvolvimento | DeepSeek (`deepseek-flash`) como agente de código |
@@ -100,7 +103,7 @@ Abre http://localhost:5173. As alterações recarregam automaticamente.
 ```bash
 npm run lint        # oxlint
 npm run typecheck   # tsc
-npm test            # 27 testes (motor, dados, formatação)
+npm test            # 29 testes (motor, dados, formatação)
 npm run build       # build de produção
 node scripts/assumptions.mjs > docs/ASSUMPTIONS.md   # regenera os pressupostos
 ```
