@@ -13,8 +13,8 @@ and funding horizon update instantly.
 | | |
 |---|---|
 | **Demo local** | `npm run dev` → http://localhost:5173 |
-| **Demo pública** | a publicar na Vercel — ver [`docs/PUBLISH.md`](docs/PUBLISH.md) |
-| **Repositório** | a publicar — ver [`docs/PUBLISH.md`](docs/PUBLISH.md) |
+| **Demo pública** | https://blamelas.github.io/tripswap/ |
+| **Repositório** | https://github.com/blamelas/tripswap |
 | **Guião de defesa** | [`docs/DEFENSE.md`](docs/DEFENSE.md) |
 | **Pressupostos** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) |
 | **Estado** | MVP funcional, 4 user stories, dados fictícios, persistência local |

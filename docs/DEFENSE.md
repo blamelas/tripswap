@@ -1,6 +1,6 @@
 # Defesa — guião completo
 
-**Produto:** TripSwap · **URL:** a preencher após deploy · **Repo:** a preencher
+**Produto:** TripSwap · **URL:** https://blamelas.github.io/tripswap/ · **Repo:** https://github.com/blamelas/tripswap
 **Duração:** 10 min de apresentação + Q&A · **Ensaios:** 2 cronometrados
 
 ---
