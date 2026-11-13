@@ -6,11 +6,9 @@ import { MyUnlocks } from './views/MyUnlocks'
 import { About } from './views/About'
 import { NotFound } from './views/NotFound'
 
-const base = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
-
 export default function App() {
   return (
-    <BrowserRouter basename={base}>
+    <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Discover />} />

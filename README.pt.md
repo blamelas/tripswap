@@ -5,7 +5,6 @@
 **Small changes. Bigger journeys.**
 
 [![CI](https://github.com/blamelas/tripswap/actions/workflows/ci.yml/badge.svg)](https://github.com/blamelas/tripswap/actions/workflows/ci.yml)
-[![Deploy](https://github.com/blamelas/tripswap/actions/workflows/pages.yml/badge.svg)](https://github.com/blamelas/tripswap/actions/workflows/pages.yml)
 
 O TripSwap é uma experiência de descoberta de viagens que mostra como pequenas
 mudanças realistas nos hábitos do dia a dia podem financiar uma viagem com significado.
@@ -20,7 +19,6 @@ projetada e o prazo de financiamento a atualizar-se de imediato.
 |---|---|
 | **Demo local** | `npm run dev` → http://localhost:5173 |
 | **Demo pública (Vercel)** | https://tripswap-kappa.vercel.app/ |
-| **Fallback (GitHub Pages)** | https://blamelas.github.io/tripswap/ |
 | **Repositório** | https://github.com/blamelas/tripswap |
 | **Guião de defesa** | [`docs/DEFENSE.md`](docs/DEFENSE.md) |
 | **Pressupostos** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) |
@@ -145,7 +143,6 @@ docs/        MVP, pressupostos, decisões, iterações, testes, defesa
 - Persistência apenas no navegador; limpar os dados do site remove os planos.
 - O prazo é uma projeção aritmética, não uma garantia de poupança.
 - Fotografias locais com licenças indicadas em [`docs/CREDITS.md`](docs/CREDITS.md).
-- O GitHub Pages fica como fallback estático; o deploy principal é na Vercel.
 
 ## Documentação
 

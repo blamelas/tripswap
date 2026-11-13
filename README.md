@@ -5,7 +5,6 @@
 **Small changes. Bigger journeys.**
 
 [![CI](https://github.com/blamelas/tripswap/actions/workflows/ci.yml/badge.svg)](https://github.com/blamelas/tripswap/actions/workflows/ci.yml)
-[![Deploy](https://github.com/blamelas/tripswap/actions/workflows/pages.yml/badge.svg)](https://github.com/blamelas/tripswap/actions/workflows/pages.yml)
 
 TripSwap is a premium travel discovery experience that shows how small, realistic
 changes in everyday habits could finance a meaningful trip. Users browse a curated
@@ -19,7 +18,6 @@ and funding horizon update instantly.
 |---|---|
 | **Local demo** | `npm run dev` → http://localhost:5173 |
 | **Live demo** | https://tripswap-kappa.vercel.app/ |
-| **Fallback demo (GitHub Pages)** | https://blamelas.github.io/tripswap/ |
 | **Repository** | https://github.com/blamelas/tripswap |
 | **Defense script** | [`docs/DEFENSE.md`](docs/DEFENSE.md) (pt-PT) |
 | **Assumptions** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) (pt-PT) |
@@ -80,7 +78,7 @@ one primary screen.
 | Persistence | `localStorage` (`tripswap:unlocks:v1`) |
 | Tests | Vitest — 29 tests |
 | Environment | Multi-stage Docker + DevContainer |
-| Deploy | Vercel (production) · GitHub Pages (fallback) |
+| Deploy | Vercel (production, auto-deploy from `main`) |
 | AI in development | DeepSeek (`deepseek-flash`) as the coding agent |
 
 ## Run it
@@ -144,7 +142,6 @@ docs/        MVP, assumptions, decisions, iterations, testing, defense
 - Browser-only persistence; clearing site data removes saved plans.
 - The horizon is an arithmetic projection, not a savings guarantee.
 - Local photography with licences listed in [`docs/CREDITS.md`](docs/CREDITS.md).
-- GitHub Pages is kept as a static fallback; the primary deployment is Vercel.
 
 ## Documentation
 

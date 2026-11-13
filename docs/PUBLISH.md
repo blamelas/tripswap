@@ -4,7 +4,7 @@ A app é estática: não há segredos, base de dados nem variáveis obrigatória
 
 ## Vercel
 
-Destino principal do projeto. O [`vercel.json`](../vercel.json) já define framework
+O [`vercel.json`](../vercel.json) define framework
 Vite, build `npm run build`, output `dist` e o rewrite de SPA (deep links com 200).
 
 **Estado:** já ligado ao repositório `blamelas/tripswap` (team
@@ -14,7 +14,7 @@ A build de produção está verde.
 **URL público:** <https://tripswap-kappa.vercel.app/>
 
 > Deployment Protection desativada. O URL responde 200 em `/`, `/destination/...`,
-> `/unlocks` e `/about`; o GitHub Pages mantém-se como fallback estático.
+> `/unlocks` e `/about`.
 
 ### 1. Login (alternativa por CLI)
 
@@ -49,7 +49,6 @@ npx vercel ls tripswap
 
 1. <https://vercel.com/new> → importar `blamelas/tripswap`.
 2. Framework **Vite** (detetado). Build `npm run build`. Output `dist`.
-3. **Não** definir `VITE_BASE` (o domínio raiz usa `/`).
 4. Deploy. Cada push para `main` publica; cada PR gera um preview.
 
 Opcional: `gh repo edit blamelas/tripswap --homepage <url-vercel>` e atualizar o README
@@ -73,25 +72,6 @@ curl -I https://<projeto>.vercel.app/unlocks                          # 200
 Vercel → Deployments → versão anterior → **Promote to Production**. Sem base de dados,
 o rollback é imediato.
 
-## GitHub Pages (fallback)
-
-- **URL:** <https://blamelas.github.io/tripswap/>
-- **Workflow:** [`.github/workflows/pages.yml`](../.github/workflows/pages.yml) — corre
-  em cada push para `main`: instala, lint, testa, constrói com `VITE_BASE=/tripswap/`,
-  copia `index.html` para `404.html` e publica.
-- **Subpath:** `src/lib/base.ts` prefixa imagens e o `basename` do router trata das
-  rotas.
-- **Deep links:** o Pages serve `404.html` (a mesma app), por isso
-  `/destination/paris-city-break` abre corretamente. O estado HTTP é 404; na Vercel é
-  200.
-
-Para reativar num repositório novo:
-
-```bash
-gh api -X POST repos/<owner>/<repo>/pages -f build_type=workflow
-gh workflow run pages.yml --ref main
-```
-
 ## GitHub: repositório e metadados
 
 ```bash
@@ -106,5 +86,5 @@ No “About” do repositório: descrição, homepage e tópicos
 ## Se o deploy falhar
 
 - Confirmar `npm run build` local com Node 20.
-- Confirmar `base` correto: `/` na Vercel, `/tripswap/` no Pages.
-- Deep links a 404 num host sem SPA fallback: verificar `404.html` ou o rewrite.
+- Confirmar que o rewrite de SPA está ativo (`vercel.json`); os deep links devem dar 200.
+- Confirmar o framework Vite e o output `dist` no dashboard.

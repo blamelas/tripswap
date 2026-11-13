@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { withBase } from '../lib/base'
 import { cn } from '../lib/cn'
 
 interface DestinationImageProps {
@@ -39,7 +38,7 @@ export function DestinationImage({
 
   return (
     <img
-      src={withBase(src)}
+      src={src}
       alt={alt}
       width={1600}
       height={1067}

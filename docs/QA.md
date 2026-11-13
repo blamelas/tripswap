@@ -23,7 +23,7 @@ Respostas curtas, para ensaiar em voz alta. Cada linha tem o artefacto que a pro
 | 9 | O que a AI fez mal? | O motor somava trocas sobrepostas. Um teste falhou com 2 linhas onde esperava 1. Corrigi o motor. | `docs/PROMPTS.md` |
 | 10 | Como reproduzo? | `docker compose up` ou `npm ci && npm run dev`. Node 20. | `README.md` |
 | 11 | Como sabes que funciona? | 29 testes na lógica, checklist manual de 10 casos, CI em cada PR. | `docs/TESTING.md` |
-| 12 | Onde está deployed? | GitHub Pages, workflow automático de `main`, subpath `/tripswap/`. | `.github/workflows/pages.yml` |
+| 12 | Onde está deployed? | Vercel, deploy automático a cada push para `main`. | `vercel.json`, `docs/PUBLISH.md` |
 | 13 | Como escalarias? | Pré-renderização, contas e sync, recomendação calculada, testes e2e. | `docs/DECISIONS.md` |
 | 14 | Qual foi a decisão mais difícil? | Excluir trocas sobrepostas em vez de penalizar. Perdi combinações, ganhei um número defensável. | `docs/DECISIONS.md` |
 | 15 | O que ficou de fora? | Auth, booking, preços live, backend, mapas. Sem isso o valor central mantém-se. | `docs/MVP.md` |
