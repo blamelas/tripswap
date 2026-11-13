@@ -41,7 +41,6 @@ interface ActivePlanCardProps {
   onRemove: () => void
   onAddActivity: (habitId: string) => void
   onRemoveAllocation: (habitId: string) => void
-  onRecordSavings: (amount: number) => void
 }
 
 export function ActivePlanCard({
@@ -58,24 +57,15 @@ export function ActivePlanCard({
   onRemove,
   onAddActivity,
   onRemoveAllocation,
-  onRecordSavings,
 }: ActivePlanCardProps) {
   const { copy, fmt, destinationText } = useI18n()
   const text = destinationText(destination)
   const [managing, setManaging] = useState(false)
-  const [savingsInput, setSavingsInput] = useState('')
   const status = plan.lifecycle?.status === 'paused' ? 'paused' : 'active'
   const href = `/destination/${destination.id}${
     plan.habitIds.length ? `?h=${plan.habitIds.join(',')}` : ''
   }`
   const a11yLabel = copy.a11y.progressPlan(destination.name)
-
-  function submitSavings() {
-    const amount = Number.parseFloat(savingsInput.replace(',', '.'))
-    if (!Number.isFinite(amount) || amount <= 0) return
-    onRecordSavings(amount)
-    setSavingsInput('')
-  }
 
   return (
     <article className="grid gap-6 border-b border-line py-8 lg:grid-cols-12 lg:gap-10">
@@ -143,7 +133,7 @@ export function ActivePlanCard({
           </div>
         </dl>
 
-        <dl className="mt-4 grid grid-cols-3 gap-4">
+        <dl className="mt-4 grid grid-cols-2 gap-4">
           <div>
             <dt className="label">{copy.plan.monthly}</dt>
             <dd className="nums mt-1 text-[13px] text-ink">
@@ -154,12 +144,6 @@ export function ActivePlanCard({
             <dt className="label">{copy.plan.timeRemaining}</dt>
             <dd className="nums mt-1 text-[13px] text-ink">
               {fmt.months(progress.monthsRemaining)}
-            </dd>
-          </div>
-          <div>
-            <dt className="label">{copy.plan.confirmed}</dt>
-            <dd className="nums mt-1 text-[13px] text-moss">
-              {fmt.eur(progress.confirmed)}
             </dd>
           </div>
         </dl>
@@ -295,43 +279,6 @@ export function ActivePlanCard({
           </button>
         </div>
 
-        <div className="mt-4 border-t border-line pt-3">
-          <label
-            htmlFor={`record-${destination.id}`}
-            className="label"
-          >
-            {copy.plan.recordSavings}
-          </label>
-          <p className="mt-1 text-[10px] leading-relaxed text-muted">
-            {copy.plan.recordHelper}
-          </p>
-          <div className="mt-2 flex flex-wrap items-center gap-2">
-            <input
-              id={`record-${destination.id}`}
-              type="number"
-              inputMode="decimal"
-              min="0"
-              step="0.01"
-              value={savingsInput}
-              onChange={(event) => setSavingsInput(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  event.preventDefault()
-                  submitSavings()
-                }
-              }}
-              placeholder="0,00"
-              className="w-28 border border-line bg-canvas px-2 py-1.5 text-[12px] text-ink"
-            />
-            <button
-              type="button"
-              onClick={submitSavings}
-              className="btn-ghost px-3 py-1.5 text-[10px]"
-            >
-              {copy.plan.addAmount}
-            </button>
-          </div>
-        </div>
       </div>
     </article>
   )

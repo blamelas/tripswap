@@ -24,7 +24,6 @@ import {
   achievePlan,
   addAllocation,
   clearPlans,
-  confirmAmount,
   getCreditedHabitIds,
   getReservedAllocations,
   pausePlan,
@@ -535,9 +534,6 @@ export function MyUnlocks() {
                             new Date().toISOString(),
                           ),
                         )
-                      }
-                      onRecordSavings={(amount) =>
-                        setPlans(confirmAmount(view.saved.destinationId, amount))
                       }
                     />
                     {renderReminder(view)}

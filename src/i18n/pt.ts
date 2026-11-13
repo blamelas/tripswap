@@ -332,10 +332,6 @@ export const pt = {
     addActivityHint:
       'Trocas que ainda não estás a usar, verificadas contra os teus outros planos.',
     removeAllocation: 'Remover',
-    recordSavings: 'Registar poupança',
-    recordHelper: 'Dinheiro que realmente puseste de lado, separado da estimativa.',
-    addAmount: 'Adicionar valor',
-    confirmed: 'Confirmado',
     estimated: 'Estimado',
     accumulated: 'Poupança acumulada estimada',
     remaining: 'Falta',
