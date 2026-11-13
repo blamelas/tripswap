@@ -2,44 +2,86 @@
 
 A app é estática: não há segredos, base de dados nem variáveis obrigatórias.
 
-## Deploy atual: GitHub Pages
+## Vercel
+
+Destino principal do projeto. O [`vercel.json`](../vercel.json) já define framework
+Vite, build `npm run build`, output `dist` e o rewrite de SPA (deep links com 200).
+
+### 1. Login (uma vez)
+
+O CLI não tem sessão iniciada nesta máquina.
+
+```bash
+npx vercel login
+```
+
+Escolhe GitHub, email ou SSO. O browser abre para confirmar. Verifica com:
+
+```bash
+npx vercel whoami
+```
+
+### 2. Primeiro deploy de produção
+
+```bash
+cd tripswap
+npx vercel link --yes --project tripswap
+npx vercel --prod --yes
+```
+
+No fim, o CLI imprime o URL de produção (algo como
+`https://tripswap-<hash>.vercel.app`). Confirma com:
+
+```bash
+npx vercel ls tripswap
+```
+
+### 3. Deploys automáticos a partir do GitHub
+
+1. <https://vercel.com/new> → importar `blamelas/tripswap`.
+2. Framework **Vite** (detetado). Build `npm run build`. Output `dist`.
+3. **Não** definir `VITE_BASE` (o domínio raiz usa `/`).
+4. Deploy. Cada push para `main` publica; cada PR gera um preview.
+
+Opcional: `gh repo edit blamelas/tripswap --homepage <url-vercel>` e atualizar o README
+e o `docs/DEFENSE.md` com o URL final.
+
+### 4. Verificação
+
+```bash
+curl -I https://<projeto>.vercel.app
+curl -I https://<projeto>.vercel.app/destination/paris-city-break   # 200
+curl -I https://<projeto>.vercel.app/unlocks                          # 200
+```
+
+- Abrir em incógnito e no telemóvel.
+- `…/destination/paris-city-break?h=coffee-at-home,lunch-from-home` → **92 €/mês · 8 meses**.
+- `…?h=coffee-at-home,lunch-from-home,uber-public-transport` → **122 €/mês · 6 meses**.
+- Zero erros na consola; imagens carregadas.
+
+### 5. Rollback
+
+Vercel → Deployments → versão anterior → **Promote to Production**. Sem base de dados,
+o rollback é imediato.
+
+## GitHub Pages (fallback atual, já no ar)
 
 - **URL:** <https://blamelas.github.io/tripswap/>
 - **Workflow:** [`.github/workflows/pages.yml`](../.github/workflows/pages.yml) — corre
   em cada push para `main`: instala, lint, testa, constrói com `VITE_BASE=/tripswap/`,
-  copia `index.html` para `404.html` e publica o artefacto.
+  copia `index.html` para `404.html` e publica.
 - **Subpath:** `src/lib/base.ts` prefixa imagens e o `basename` do router trata das
   rotas.
-- **Deep links:** o GitHub Pages serve `404.html` (a mesma app), por isso
-  `/destination/paris-city-break` abre corretamente. O estado HTTP é 404; num host com
-  rewrites (Vercel) seria 200.
+- **Deep links:** o Pages serve `404.html` (a mesma app), por isso
+  `/destination/paris-city-break` abre corretamente. O estado HTTP é 404; na Vercel é
+  200.
 
-Para ativar num repositório novo:
+Para reativar num repositório novo:
 
 ```bash
 gh api -X POST repos/<owner>/<repo>/pages -f build_type=workflow
 gh workflow run pages.yml --ref main
 ```
-
-### Atualizar o deploy
-
-```bash
-git checkout main
-git merge --no-ff develop
-git push origin main
-```
-
-O workflow publica sozinho. Acompanhar com `gh run watch` ou na aba **Actions**.
-
-## Alternativa: Vercel
-
-1. Importa o repositório em <https://vercel.com/new>.
-2. Framework: **Vite**. Build: `npm run build`. Output: `dist`.
-   O [`vercel.json`](../vercel.json) já define isto e o rewrite de SPA.
-3. Variáveis: nenhuma. Se quiseres, `VITE_APP_NAME=TripSwap`.
-4. Deploy. O URL de produção passa a ser o do README.
-
-Neste caso o build corre com `VITE_BASE=/` (omitir a variável).
 
 ## GitHub: repositório e metadados
 
@@ -49,40 +91,11 @@ git push origin --all
 git push origin --tags
 ```
 
-Ou, no browser, cria o repositório vazio e:
-
-```bash
-git remote add origin https://github.com/<owner>/tripswap.git
-git push -u origin main
-git push origin --all --tags
-```
-
 No “About” do repositório: descrição, homepage e tópicos
 `react`, `typescript`, `vite`, `tailwindcss`, `travel`, `local-first`.
-
-## Verificação pós-deploy
-
-```bash
-curl -I https://<host>/
-curl -s https://<host>/destination/paris-city-break | grep -c 'id="root"'
-```
-
-- Abrir em incógnito e no telemóvel.
-- Testar `…/destination/paris-city-break?h=coffee-at-home,lunch-from-home`.
-  Esperado: **92 €/mês** e **8 meses**.
-- Testar `…?h=coffee-at-home,lunch-from-home,uber-public-transport`.
-  Esperado: **122 €/mês** e **6 meses**.
-- Confirmar zero erros na consola e imagens carregadas.
-
-## Rollback
-
-- **Pages:** Actions → escolher o run anterior do workflow → **Re-run all jobs**.
-  Ou reverter o merge em `main` e fazer push.
-- **Vercel:** Deployments → versão anterior → **Promote to Production**.
-  Sem base de dados, o rollback é imediato.
 
 ## Se o deploy falhar
 
 - Confirmar `npm run build` local com Node 20.
-- Confirmar `base` correto: `/` para domínio raiz, `/tripswap/` para Pages.
+- Confirmar `base` correto: `/` na Vercel, `/tripswap/` no Pages.
 - Deep links a 404 num host sem SPA fallback: verificar `404.html` ou o rewrite.
