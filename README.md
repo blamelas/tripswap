@@ -96,8 +96,9 @@ height, a check and **“This is now possible.”** replace the neutral info blo
 is added below; only the card transforms. On mobile the funding bar turns signal.
 
 Habit rows keep only the activity name, the saving and the selected state. Category
-labels are quiet, not headings; descriptions, assumptions and benefits sit behind a
-chevron.
+labels are quiet, not headings, with a small icon; descriptions, assumptions and
+benefits sit behind a chevron. Trip facts are icon-led, and suggested plans live in a
+pale-blue band at the start of the swap step, clearly separate from the trip data.
 
 ![The success state](docs/assets/success.jpg)
 

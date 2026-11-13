@@ -19,14 +19,9 @@ export function PresetButtons({ presets, activeIds, onApply }: PresetButtonsProp
 
   return (
     <div>
-      <div className="flex items-end justify-between gap-4 border-b border-line pb-2">
-        <p className="label-accent">{copy.detail.presetsEyebrow}</p>
-        <p className="text-[9px] uppercase tracking-[0.14em] text-muted">
-          {copy.detail.presetsHint}
-        </p>
-      </div>
+      <p className="label-accent">{copy.detail.presetsEyebrow}</p>
 
-      <div className="grid border-b border-line sm:grid-cols-3">
+      <div className="mt-2 grid border-t border-b border-line sm:grid-cols-3">
         {presets.map((preset, index) => {
           const isActive = [...preset.habitIds].sort().join('|') === activeKey
           const presetCopy = copy.presets[preset.id]

@@ -145,7 +145,7 @@ export const en: Copy = {
     },
     illustrative:
       'Illustrative planning target. Not a verified price, a current fare or a travel offer. TripSwap does not book trips.',
-    presetsEyebrow: 'Start with a plan',
+    presetsEyebrow: 'Suggested plans',
     presetsHint: 'You can adjust everything afterwards',
     step2Eyebrow: '02 — Swap',
     step2Title: 'What would you change?',

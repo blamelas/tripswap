@@ -3,6 +3,17 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.3.3] — 2026-11-13
+
+### Alterado
+
+- Zona de planos sugeridos separada dos dados da viagem: passa para o início do passo
+  “What would you change?”, com fundo sky e a etiqueta “Suggested plans”.
+- Removido “You can adjust everything afterwards”.
+- Removido o parágrafo “Illustrative planning target…” do detalhe.
+- Ícones pequenos nos dados da viagem (partida, viajantes, noites, inclui) e nas
+  categorias de hábitos.
+
 ## [1.3.2] — 2026-11-13
 
 ### Corrigido
