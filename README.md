@@ -91,8 +91,13 @@ the "funded by everyday swaps" line. Every destination card turns the €0* into
 call to action, with "Unlock this experience" directly underneath. In the detail page,
 the destination photograph is the progress surface: a rising tide and a coral edge rail
 connect selected swaps, the monthly saving and the time to the target. When the plan
-reaches the target, a signal block states **“This is now possible.”** with the months
-and selected swaps; on mobile the funding bar turns signal.
+reaches the target, the reward card itself turns signal: the same photo, the same
+height, a check and **“This is now possible.”** replace the neutral info block. Nothing
+is added below; only the card transforms. On mobile the funding bar turns signal.
+
+Habit rows keep only the activity name, the saving and the selected state. Category
+labels are quiet, not headings; descriptions, assumptions and benefits sit behind a
+chevron.
 
 ![The success state](docs/assets/success.jpg)
 
