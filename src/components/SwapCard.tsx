@@ -40,14 +40,10 @@ export function SwapCard({ habit, selected, onToggle }: SwapCardProps) {
   return (
     <article
       className={cn(
-        'relative flex h-full flex-col overflow-hidden border border-line p-4 transition-colors',
-        selected ? 'border-ink bg-sky/35' : 'bg-white/25',
+        'relative flex h-full flex-col overflow-hidden border p-4 transition-colors',
+        selected ? 'border-ink bg-sky/35' : cn('border-line', meta.wash),
       )}
     >
-      <div
-        aria-hidden="true"
-        className={cn('-mx-4 -mt-4 mb-3 h-5', meta.bar)}
-      />
       <div className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 items-start gap-3">
           <span

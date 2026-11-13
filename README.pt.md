@@ -175,9 +175,9 @@ destino. **Jogos de azar e apostas** usa uma estimativa fixa e conservadora — 
 20 € reduzidos, 20 €/mês — sem inputs e sem médias inventadas. As trocas escolhidas ficam guardadas localmente
 e seguem para qualquer plano através dos links de destino e da seleção global.
 
-Cada atividade tem um ícone próprio e uma **barra sólida com a cor da categoria** no
-topo do cartão. A fotografia continua reservada aos destinos; a barra é a única textura
-dos cartões. Ao selecionar uma troca, aparece um
+Cada atividade tem um ícone próprio e um **fundo suave com a cor da categoria**.
+A fotografia continua reservada aos destinos; o tint faz a grelha sobressair sem faixas
+fotográficas. Ao selecionar uma troca, aparece um
 check monocromático no cartão. As categorias começam fechadas; abrir uma fecha as
 outras, mantendo o catálogo curto.
 

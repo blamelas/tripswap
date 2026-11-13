@@ -3,6 +3,15 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.5.7] — 2026-11-13
+
+### Alterado
+
+- Removi a barra sólida. Cada cartão usa agora um **tint suave da cor da categoria** no
+  fundo; a grelha ganha contraste sem faixas nem imagens.
+- O cartão selecionado mantém o fundo sky e o bordo ink, para o estado continuar óbvio.
+- 42 testes.
+
 ## [1.5.6] — 2026-11-13
 
 ### Alterado

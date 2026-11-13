@@ -4,7 +4,7 @@
 **Student:** Bruno Lamelas · **Project:** TripSwap
 **One-liner:** small changes, bigger journeys — a travel plan funded by everyday swaps.
 **URL:** https://tripswap-home.vercel.app · **Repo:** https://github.com/blamelas/tripswap
-**Tag:** `v1.5.6` · **Deck:** [`TripSwap-Defense.pptx`](TripSwap-Defense.pptx) · **PDF:** [`TripSwap-Defense.pdf`](TripSwap-Defense.pdf)
+**Tag:** `v1.5.7` · **Deck:** [`TripSwap-Defense.pptx`](TripSwap-Defense.pptx) · **PDF:** [`TripSwap-Defense.pdf`](TripSwap-Defense.pdf)
 
 > All presentation materials are in English: the PPTX, the PDF, the 10-minute script
 > (`DECK-SCRIPT.md`), the demo script (`DEFENSE.md`), the Q&A (`QA.md`) and the backup
@@ -23,7 +23,7 @@
 | CI on every PR | ✅ `lint → typecheck → test → build` |
 | 3+ branches | ✅ 29 remote branches |
 | 15+ conventional commits | ✅ 114+ |
-| Tag `v1.0.0` | ✅ and tags up to `v1.5.6` |
+| Tag `v1.0.0` | ✅ and tags up to `v1.5.7` |
 | 3+ unit tests | ✅ 42 |
 | Deck, 8–10 slides | ✅ 10, English |
 | Demo script | ✅ `docs/DECK-SCRIPT.md` (English) |
@@ -71,7 +71,7 @@
 | Zero secrets in history | see §6 | ✅ |
 | 15+ conventional commits | 114+ | ✅ |
 | 3+ branches and 3+ merged PRs | 29 branches, 21+ PRs | ✅ |
-| Tag `v1.0.0` | tags up to `v1.5.6` | ✅ |
+| Tag `v1.0.0` | tags up to `v1.5.7` | ✅ |
 | `.devcontainer/devcontainer.json` | `.devcontainer/` | ✅ |
 | `Dockerfile` + `docker-compose.yml` | root | ✅ |
 | `docker compose up` from a clean clone | documented and used | ✅ |

@@ -14,7 +14,7 @@ export interface HabitCategoryMeta {
   color: string
   soft: string
   border: string
-  bar: string
+  wash: string
 }
 
 export const HABIT_CATEGORY_META: Record<HabitCategory, HabitCategoryMeta> = {
@@ -23,41 +23,41 @@ export const HABIT_CATEGORY_META: Record<HabitCategory, HabitCategoryMeta> = {
     color: 'text-cat-mobility',
     soft: 'bg-cat-mobility-soft',
     border: 'border-cat-mobility',
-    bar: 'bg-cat-mobility',
+    wash: 'bg-cat-mobility-soft/60',
   },
   food: {
     icon: Utensils,
     color: 'text-cat-food',
     soft: 'bg-cat-food-soft',
     border: 'border-cat-food',
-    bar: 'bg-cat-food',
+    wash: 'bg-cat-food-soft/60',
   },
   entertainment: {
     icon: Ticket,
     color: 'text-cat-entertainment',
     soft: 'bg-cat-entertainment-soft',
     border: 'border-cat-entertainment',
-    bar: 'bg-cat-entertainment',
+    wash: 'bg-cat-entertainment-soft/60',
   },
   shopping: {
     icon: Wrench,
     color: 'text-cat-shopping',
     soft: 'bg-cat-shopping-soft',
     border: 'border-cat-shopping',
-    bar: 'bg-cat-shopping',
+    wash: 'bg-cat-shopping-soft/60',
   },
   wellbeing: {
     icon: HeartPulse,
     color: 'text-cat-wellbeing',
     soft: 'bg-cat-wellbeing-soft',
     border: 'border-cat-wellbeing',
-    bar: 'bg-cat-wellbeing',
+    wash: 'bg-cat-wellbeing-soft/60',
   },
   games: {
     icon: Dices,
     color: 'text-cat-games',
     soft: 'bg-cat-games-soft',
     border: 'border-cat-games',
-    bar: 'bg-cat-games',
+    wash: 'bg-cat-games-soft/60',
   },
 }

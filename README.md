@@ -173,8 +173,8 @@ destination flow. **Games of chance & betting** uses a fixed, conservative estim
 €20 reduced, €20/month — with no user inputs and no invented average. Selected swaps are stored locally and carried into any destination
 plan through the destination links and the global selection.
 
-Each activity has a distinct icon and a full-width **category-colour bar** across the top
-of the card. Photography remains destination-led; the bar is the only card texture.
+Each activity has a distinct icon and a **soft category-colour tint** behind the card.
+Photography remains destination-led; the tint makes the grid pop without photo strips.
 Selecting a swap shows a standard monochrome check in the card. Categories start
 collapsed; opening one closes the others, keeping the catalogue short.
 
