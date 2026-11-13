@@ -8,7 +8,7 @@ import { calculatePlan } from '../lib/calc'
 import { sanitizeSelection, toggleHabit } from '../lib/conflicts'
 import { getPresets } from '../lib/presets'
 import { formatEUR, formatMonths } from '../lib/format'
-import { withBase } from '../lib/base'
+import { DestinationImage } from '../components/DestinationImage'
 import { getPlan, savePlan } from '../lib/storage'
 import { HabitSelector } from '../components/HabitSelector'
 import { FundingPanel, MobileFundingBar } from '../components/FundingPanel'
@@ -125,12 +125,10 @@ function DetailView({ destination }: { destination: Destination }) {
   return (
     <article className="pb-28 lg:pb-16">
       <div className="relative h-[52vh] min-h-[340px] max-h-[580px] w-full overflow-hidden bg-ink">
-        <img
-          src={withBase(destination.image)}
+        <DestinationImage
+          src={destination.image}
           alt={destination.imageAlt}
-          width={1600}
-          height={1067}
-          className="h-full w-full object-cover"
+          priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-ink/20" />
 

@@ -3,6 +3,14 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.0.4] — 2026-11-13
+
+### Corrigido
+
+- Se uma fotografia falhar, o cartão mantém a forma e mostra a legenda em vez de um
+  ícone de imagem quebrada. O fundo neutro do contentor serve de placeholder de
+  carregamento.
+
 ## [1.0.3] — 2026-11-13
 
 ### Adicionado
