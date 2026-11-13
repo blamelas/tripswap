@@ -1,7 +1,7 @@
 {
   "name": "tripswap",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "TripSwap — small changes, bigger journeys. A travel discovery experience funded by everyday swaps.",
   "type": "module",
   "engines": {
@@ -18,9 +18,9 @@
     "assumptions": "node scripts/assumptions.mjs > docs/ASSUMPTIONS.md"
   },
   "dependencies": {
-    "@fontsource-variable/fraunces": "^5.3.0",
-    "@fontsource-variable/inter-tight": "^5.3.0",
-    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/barlow-condensed": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
     "lucide-react": "^1.72.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",

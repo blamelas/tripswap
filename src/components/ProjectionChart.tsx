@@ -58,7 +58,7 @@ export function ProjectionChart({
             x2={W - PAD_X}
             y1={PAD_TOP + usableH * ratio}
             y2={PAD_TOP + usableH * ratio}
-            stroke="#DCD2C1"
+            stroke="#DAD8CF"
             strokeWidth="1"
             strokeDasharray="2 5"
             vectorEffect="non-scaling-stroke"
@@ -70,7 +70,7 @@ export function ProjectionChart({
           x2={W - PAD_X}
           y1={targetY}
           y2={targetY}
-          stroke="#AC4620"
+          stroke="#FF5936"
           strokeWidth="1.5"
           strokeDasharray="5 4"
           vectorEffect="non-scaling-stroke"
@@ -79,7 +79,7 @@ export function ProjectionChart({
           x={W - PAD_X}
           y={targetY - 6}
           textAnchor="end"
-          className="fill-clay text-[9px] uppercase"
+          className="fill-accent-dark text-[9px] uppercase"
           style={{ letterSpacing: '0.12em' }}
         >
           {copy.common.target}
@@ -88,7 +88,7 @@ export function ProjectionChart({
         <polyline
           points={points}
           fill="none"
-          stroke={unlocked ? '#AC4620' : '#151310'}
+          stroke={unlocked ? '#FF5936' : '#151A19'}
           strokeWidth="2.5"
           strokeLinejoin="round"
           strokeLinecap="round"
@@ -99,8 +99,8 @@ export function ProjectionChart({
           cx={x(0)}
           cy={y(oneTime)}
           r="3"
-          fill="#151310"
-          stroke="#F6F2E9"
+          fill="#151A19"
+          stroke="#F7F6F2"
           strokeWidth="1.5"
         />
 
@@ -110,8 +110,8 @@ export function ProjectionChart({
               cx={x(crossing)}
               cy={y(projectedSavings(monthly, oneTime, crossing))}
               r="5"
-              fill="#AC4620"
-              stroke="#F6F2E9"
+              fill="#FF5936"
+              stroke="#F7F6F2"
               strokeWidth="2"
             />
             <line
@@ -119,7 +119,7 @@ export function ProjectionChart({
               x2={x(crossing)}
               y1={y(projectedSavings(monthly, oneTime, crossing))}
               y2={H - PAD_BOTTOM}
-              stroke="#AC4620"
+              stroke="#FF5936"
               strokeWidth="1"
               strokeDasharray="2 3"
               vectorEffect="non-scaling-stroke"
@@ -132,7 +132,7 @@ export function ProjectionChart({
           x2={W - PAD_X}
           y1={H - PAD_BOTTOM}
           y2={H - PAD_BOTTOM}
-          stroke="#151310"
+          stroke="#151A19"
           strokeWidth="1"
           vectorEffect="non-scaling-stroke"
         />

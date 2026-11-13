@@ -31,6 +31,11 @@ commit. Os tempos são reais e incluem revisão manual.
 | 24 | 13 Nov 04:18 | i18n conteúdo | 24 trocas, 8 destinos, benefícios e todas as vistas traduzidas | Toggle completo | `feat(i18n): translate catalogue and calculation flow` | 40 min |
 | 25 | 13 Nov 04:22 | i18n testes | Paridade de chaves, conteúdo EN, formatação localizada | 35/35 verdes | `test(i18n): cover parity and localised formatting` | 15 min |
 | 26 | 13 Nov 04:25 | Release | Changelog, versão e deploy | `v1.1.0` | `chore(release): v1.1.0` | 10 min |
+| 27 | 13 Nov 04:30 | Design system | Barlow Condensed, IBM Plex, canvas/ink/signal, remover Fraunces | Tokens novos | `feat(design): establish the new art direction` | 30 min |
+| 28 | 13 Nov 04:36 | Homepage | Hero assimétrico, catálogo flagship, €0* sky band | Nova homepage | `feat(home): rebuild hero and editorial catalogue` | 45 min |
+| 29 | 13 Nov 04:44 | Detalhe | Reward window com maré/rail, price block, hábitos em linhas | Nova interação | `feat(detail): add the reward window interaction` | 45 min |
+| 30 | 13 Nov 04:50 | QA | Imagens novas, contraste, mobile, screenshots e docs | 35/35 verdes | `docs: update art direction evidence` | 30 min |
+| 31 | 13 Nov 04:55 | Release | Changelog, versão e deploy | `v1.2.0` | `chore(release): v1.2.0` | 10 min |
 
 ## O que aprendi
 

@@ -11,16 +11,18 @@ export function NotFound({ title, body }: NotFoundProps) {
   const { copy } = useI18n()
 
   return (
-    <div className="page flex min-h-[60vh] flex-col items-start justify-center py-20">
-      <p className="eyebrow">{copy.notFound.eyebrow}</p>
-      <h1 className="mt-4 max-w-xl font-display text-[clamp(2.2rem,5vw,3.6rem)] leading-tight text-ink">
+    <div className="page flex min-h-[70vh] flex-col justify-center py-20">
+      <p className="font-display text-[clamp(6rem,18vw,14rem)] font-semibold leading-[0.65] text-line">
+        404
+      </p>
+      <h1 className="mt-4 max-w-2xl text-[clamp(2.4rem,5vw,4rem)] leading-[0.86] text-ink">
         {title ?? copy.notFound.title}
       </h1>
-      <p className="mt-4 max-w-md text-[15px] leading-relaxed text-ink-soft">
+      <p className="mt-4 max-w-md text-[13px] leading-relaxed text-muted">
         {body ?? copy.notFound.body}
       </p>
-      <Link to="/" className="btn-primary mt-8">
-        <ArrowLeft className="h-4 w-4" />
+      <Link to="/" className="btn-primary mt-8 w-fit">
+        <ArrowLeft className="h-3.5 w-3.5" />
         {copy.notFound.cta}
       </Link>
     </div>

@@ -53,7 +53,7 @@ componentes: o risco do produto está na aritmética e nas sobreposições.
 - Singular/plural de meses.
 - Percentagens.
 
-## Checklist manual (13 casos)
+## Checklist manual (17 casos)
 
 Executar em http://localhost:5173 e repetir no URL público.
 
@@ -72,6 +72,10 @@ Executar em http://localhost:5173 e repetir no URL público.
 | 11 | Primeira visita (incógnito) | Interface em **inglês**; Paris **€122 / 6 months** |
 | 12 | Toggle **PT** | Toda a copy em português; **122 € / 6 meses**; `lang` = `pt-PT` |
 | 13 | Recarregar em PT | PT persiste; toggle **EN** volta a inglês |
+| 14 | Contraste | Texto pequeno em `accent-dark`; €0* e números grandes em `accent` |
+| 15 | 360 px | Header cabe; sem scroll horizontal; reward window legível |
+| 16 | Reduced motion | Sem animações de maré, contador ou hover |
+| 17 | €0* | Orçamento riscado + €0* + “financiado por trocas”; nunca “grátis” |
 
 Casos adicionais: `/destination/nao-existe` (404), `/unlocks` sem planos (empty state),
 imagem inexistente (fallback), `prefers-reduced-motion` (sem animações).

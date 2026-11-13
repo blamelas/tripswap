@@ -59,6 +59,8 @@ fluxo, um ecrã principal.
 - **Poupanças pontuais não são rendimento mensal.** Reparações e vendas entram uma vez.
 - **Transparência total.** Cada ecrã de resultado inclui o recibo do cálculo e a nota
   sobre o €0\*.
+- **Uma interação-assinatura.** Escolher trocas faz o destino subir: uma linha coral
+  sobe pela fotografia, a imagem aproxima-se e o contador de meses anima.
 - **Bilingue por desenho.** O inglês é o idioma por omissão e o português está a um
   clique. O toggle muda toda a copy — incluindo as 24 trocas e os 8 destinos — e os
   números mantêm-se iguais.
@@ -68,13 +70,33 @@ fluxo, um ecrã principal.
 
 ---
 
+## Direção de arte
+
+**The world is the reward.** O TripSwap é uma revista de viagens redesenhada como
+produto: fotografia full-bleed, tipografia condensada e uma única cor-sinal.
+
+| Token | Valor |
+|---|---|
+| Canvas | `#F7F6F2` |
+| Ink | `#151A19` |
+| Signal | `#FF5936` |
+| Azul pálido | `#D8E8EE` |
+| Display | Barlow Condensed |
+| Interface | IBM Plex Sans |
+| Números | IBM Plex Mono |
+
+O bloco €0* mostra sempre o orçamento ilustrativo riscado, a expressão €0* e a linha
+"financiado por trocas". No detalhe, a fotografia do destino é a superfície de
+progresso: uma maré crescente e uma linha coral ligam as trocas escolhidas, a poupança
+mensal e o tempo até ao objetivo.
+
 ## Stack
 
 | Área | Escolha |
 |---|---|
 | Framework | React 19 + TypeScript (strict) |
 | Build | Vite 8 |
-| Estilo | Tailwind CSS 3.4, tipografia Fraunces / Inter Tight / JetBrains Mono |
+| Estilo | Tailwind CSS 3.4, Barlow Condensed / IBM Plex Sans / IBM Plex Mono |
 | Router | React Router 7 |
 | Ícones | Lucide |
 | Gráfico | SVG próprio, sem biblioteca de charts |
@@ -170,8 +192,8 @@ incluindo uma falha real detetada por um teste.
 ## Créditos
 
 Fotografia: Wikimedia Commons / Unsplash, com autores e licenças em
-[`docs/CREDITS.md`](docs/CREDITS.md). Tipografia: Fraunces, Inter Tight e JetBrains
-Mono (SIL Open Font License), servidas localmente via Fontsource.
+[`docs/CREDITS.md`](docs/CREDITS.md). Tipografia: Barlow Condensed, IBM Plex Sans e IBM
+Plex Mono (SIL Open Font License), servidas localmente via Fontsource.
 
 Projeto final do curso **Building Digital Products with Generative AI** — EUNICE
 Network, 2026.

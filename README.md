@@ -59,6 +59,8 @@ one primary screen.
   once.
 - **Full transparency.** Every result screen includes the calculation receipt and the
   €0\* note.
+- **A signature interaction.** Choosing swaps makes the destination rise: a coral rail
+  climbs the photograph, the image moves closer and the months counter animates.
 - **Bilingual by design.** English is the default and Portuguese is one click away.
   The toggle changes every string — including the 24 swaps and 8 destinations — while
   the numbers stay identical.
@@ -68,13 +70,33 @@ one primary screen.
 
 ---
 
+## Design direction
+
+**The world is the reward.** TripSwap is a travel magazine redesigned as a product:
+full-bleed photography, condensed display type and one signal colour.
+
+| Token | Value |
+|---|---|
+| Canvas | `#F7F6F2` |
+| Ink | `#151A19` |
+| Signal | `#FF5936` |
+| Pale blue | `#D8E8EE` |
+| Display | Barlow Condensed |
+| Interface | IBM Plex Sans |
+| Numbers | IBM Plex Mono |
+
+The €0* block always shows the illustrative budget crossed out, the €0* expression and
+the "funded by everyday swaps" line. In the detail page, the destination photograph is
+the progress surface: a rising tide and a coral edge rail connect selected swaps, the
+monthly saving and the time to the target.
+
 ## Stack
 
 | Area | Choice |
 |---|---|
 | Framework | React 19 + TypeScript (strict) |
 | Build | Vite 8 |
-| Styling | Tailwind CSS 3.4, Fraunces / Inter Tight / JetBrains Mono |
+| Styling | Tailwind CSS 3.4, Barlow Condensed / IBM Plex Sans / IBM Plex Mono |
 | Router | React Router 7 |
 | Icons | Lucide |
 | Chart | Hand-rolled SVG, no chart library |
@@ -173,8 +195,8 @@ including a real failure caught by a test.
 ## Credits
 
 Photography: Wikimedia Commons / Unsplash, with authors and licences in
-[`docs/CREDITS.md`](docs/CREDITS.md). Type: Fraunces, Inter Tight and JetBrains Mono
-(SIL Open Font License), self-hosted via Fontsource.
+[`docs/CREDITS.md`](docs/CREDITS.md). Type: Barlow Condensed, IBM Plex Sans and IBM
+Plex Mono (SIL Open Font License), self-hosted via Fontsource.
 
 Final project for **Building Digital Products with Generative AI** — EUNICE Network,
 2026.
