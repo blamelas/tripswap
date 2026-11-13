@@ -39,6 +39,9 @@ commit. Os tempos são reais e incluem revisão manual.
 | 32 | 13 Nov 05:00 | Feedback | Estado de sucesso, ícones, favicon, €0* CTA nos cartões | Interação clara | `feat(ui): make the reward and the €0* explicit` | 40 min |
 | 33 | 13 Nov 05:05 | QA | Contraste, mobile, screenshots, docs | 35/35 verdes | `docs: update success state evidence` | 20 min |
 | 34 | 13 Nov 05:10 | Release | Changelog, versão e deploy | `v1.3.0` | `chore(release): v1.3.0` | 10 min |
+| 35 | 13 Nov 05:20 | Estabilidade | Cartão de recompensa com altura fixa; sucesso como transformação | 753/462 px constantes | `fix(reward): keep the card height stable on unlock` | 30 min |
+| 36 | 13 Nov 05:28 | Hierarquia | Categorias discretas; atividades com detalhes progressivos | Lista mais calma | `feat(habits): quiet categories and progressive details` | 30 min |
+| 37 | 13 Nov 05:32 | Release | QA, screenshots, changelog e tag | `v1.3.1` | `chore(release): v1.3.1` | 10 min |
 
 ## O que aprendi
 

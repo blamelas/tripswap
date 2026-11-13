@@ -91,8 +91,14 @@ O bloco €0* mostra sempre o orçamento ilustrativo riscado, a expressão €0*
 "Desbloquear esta experiência" logo abaixo. No detalhe, a fotografia do destino é a
 superfície de progresso: uma maré crescente e uma linha coral ligam as trocas
 escolhidas, a poupança mensal e o tempo até ao objetivo. Quando o plano atinge o
-alvo, um bloco signal declara **“Isto agora é possível.”** com os meses e as trocas
-escolhidas; no telemóvel, a barra de funding fica signal.
+alvo, é o próprio cartão de recompensa que fica signal: a mesma fotografia, a mesma
+altura, um check e **“Isto agora é possível.”** substituem o bloco neutro. Nada é
+acrescentado abaixo; só o cartão se transforma. No telemóvel, a barra de funding fica
+signal.
+
+As linhas de hábitos mostram apenas o nome, a poupança e o estado selecionado. As
+categorias são etiquetas discretas, não títulos; descrições, premissas e benefícios
+ficam atrás de um chevron.
 
 ![O estado de sucesso](docs/assets/success.jpg)
 

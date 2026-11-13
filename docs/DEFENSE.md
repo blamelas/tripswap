@@ -83,7 +83,7 @@ Preparação: janela limpa, zoom 110%, `/unlocks` vazio, `/` aberto.
 |---|---|---|
 | 0:00 | `/` | “Oito destinos. Cada um com um objetivo real de planeamento — e um €0* que é uma metáfora, não um preço.” |
 | 0:20 | Abrir **Paris City Break** | “650 € para planear. Dois viajantes, três noites, partida de Lisboa.” |
-| 0:35 | Clicar **Balanced** | “Três trocas comuns: café em casa, almoço de casa, metade dos Uber. **€122 por mês. Seis meses.** O bloco laranja confirma: *this is now possible*.” |
+| 0:35 | Clicar **Balanced** | “Três trocas comuns: café em casa, almoço de casa, metade dos Uber. **€122 por mês. Seis meses.** O próprio cartão fica laranja: *this is now possible*, sem mudar de altura.” |
 | 0:55 | Abrir **How we calculated** | “A conta está aqui: (€2.00 − €0.40) × 20. Nada disto é gerado por IA.” |
 | 1:10 | Clicar **Walk** | “Substitui o Uber — as duas assumem as mesmas viagens. O produto recusa somar.” |
 | 1:25 | Voltar a **Balanced**, mudar horizonte para **3m** | “Com três meses, ainda não está desbloqueado. O produto não mente.” |
