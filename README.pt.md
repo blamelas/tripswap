@@ -7,13 +7,14 @@
 [![CI](https://github.com/blamelas/tripswap/actions/workflows/ci.yml/badge.svg)](https://github.com/blamelas/tripswap/actions/workflows/ci.yml)
 [![Deploy](https://github.com/blamelas/tripswap/actions/workflows/pages.yml/badge.svg)](https://github.com/blamelas/tripswap/actions/workflows/pages.yml)
 
-TripSwap is a premium travel discovery experience that shows how small, realistic
-changes in everyday habits could finance a meaningful trip. Users browse a curated
-catalogue, choose swaps they would genuinely consider, and watch the projected savings
-and funding horizon update instantly.
+O TripSwap é uma experiência de descoberta de viagens que mostra como pequenas
+mudanças realistas nos hábitos do dia a dia podem financiar uma viagem com significado.
+O utilizador explora um catálogo curado, escolhe trocas que faria mesmo e vê a poupança
+projetada e o prazo de financiamento a atualizar-se de imediato.
 
-> The trip is not free. The **€0\*** is a metaphor for a cost covered by savings
-> accumulated through the selected swaps. The real planning target is always visible.
+> A viagem não é gratuita. O **€0\*** é uma metáfora para um custo coberto pela
+> poupança acumulada nas trocas escolhidas. O objetivo real de planeamento está sempre
+> visível.
 
 | | |
 |---|---|
