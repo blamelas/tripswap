@@ -6,7 +6,7 @@
 npm test
 ```
 
-29 testes em Vitest, todos sobre a lógica central e os dados. Não há snapshots de
+35 testes em Vitest, todos sobre a lógica central e os dados. Não há snapshots de
 componentes: o risco do produto está na aritmética e nas sobreposições.
 
 ### `tests/calc.test.ts` (21)
@@ -36,6 +36,15 @@ componentes: o risco do produto está na aritmética e nas sobreposições.
 - Cada destino tem uma imagem local em `public/images/` com mais de 20 kB.
 - Nenhum destino aponta para um domínio externo de imagens.
 
+### `tests/i18n.test.ts` (6)
+
+- Paridade de chaves, arrays e assinaturas entre PT e EN.
+- As 24 trocas têm título, descrição e premissas em inglês.
+- Os 8 destinos têm país, citação, descrição, alt e o mesmo número de inclusões.
+- Todas as etiquetas de benefício usadas têm tradução.
+- EUR formatado em pt-PT e en-IE.
+- Rótulos de meses em singular, plural e `null`, nos dois idiomas.
+
 ### `tests/format.test.ts` (6)
 
 - EUR sem decimais quando o valor é inteiro.
@@ -44,7 +53,7 @@ componentes: o risco do produto está na aritmética e nas sobreposições.
 - Singular/plural de meses.
 - Percentagens.
 
-## Checklist manual (10 casos)
+## Checklist manual (13 casos)
 
 Executar em http://localhost:5173 e repetir no URL público.
 
@@ -60,6 +69,9 @@ Executar em http://localhost:5173 e repetir no URL público.
 | 8 | Abrir `?h=coffee-at-home,lunch-from-home` | Mesmo plano, mesmo número, após refresh |
 | 9 | Guardar plano e abrir `/unlocks` | Plano presente; remover funciona; "limpar tudo" pede confirmação |
 | 10 | Telemóvel 390 px | Sem scroll horizontal; barra inferior visível; nav legível |
+| 11 | Primeira visita (incógnito) | Interface em **inglês**; Paris **€122 / 6 months** |
+| 12 | Toggle **PT** | Toda a copy em português; **122 € / 6 meses**; `lang` = `pt-PT` |
+| 13 | Recarregar em PT | PT persiste; toggle **EN** volta a inglês |
 
 Casos adicionais: `/destination/nao-existe` (404), `/unlocks` sem planos (empty state),
 imagem inexistente (fallback), `prefers-reduced-motion` (sem animações).

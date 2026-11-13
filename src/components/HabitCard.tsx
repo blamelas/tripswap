@@ -1,6 +1,6 @@
 import { Check, RotateCcw } from 'lucide-react'
 import type { Habit } from '../types'
-import { formatEUR } from '../lib/format'
+import { useI18n } from '../i18n/context'
 import { cn } from '../lib/cn'
 
 interface HabitCardProps {
@@ -11,6 +11,8 @@ interface HabitCardProps {
 }
 
 export function HabitCard({ habit, selected, replacedHabit, onToggle }: HabitCardProps) {
+  const { copy, habitText, benefitLabel, fmt } = useI18n()
+  const text = habitText(habit)
   const isRecurring = habit.kind === 'recurring'
 
   return (
@@ -36,15 +38,15 @@ export function HabitCard({ habit, selected, replacedHabit, onToggle }: HabitCar
       </span>
 
       <div className="pr-9">
-        <h4 className="text-[15px] font-semibold leading-snug text-ink">{habit.title}</h4>
-        <p className="mt-1.5 text-[13px] leading-relaxed text-muted">{habit.description}</p>
+        <h4 className="text-[15px] font-semibold leading-snug text-ink">{text.title}</h4>
+        <p className="mt-1.5 text-[13px] leading-relaxed text-muted">{text.description}</p>
       </div>
 
       <div className="mt-auto pt-4">
         <p className="nums text-lg text-clay">
-          {formatEUR(habit.saving)}{' '}
+          {fmt.eur(habit.saving)}{' '}
           <span className="font-sans text-[11px] font-medium text-muted">
-            {isRecurring ? '/mês' : 'uma vez'}
+            {isRecurring ? copy.common.perMonth : copy.common.oneTime}
           </span>
         </p>
 
@@ -55,7 +57,7 @@ export function HabitCard({ habit, selected, replacedHabit, onToggle }: HabitCar
                 key={benefit}
                 className="rounded-full bg-moss-soft px-2 py-0.5 text-[10px] font-medium text-moss"
               >
-                {benefit}
+                {benefitLabel(benefit)}
               </span>
             ))}
           </div>
@@ -64,7 +66,7 @@ export function HabitCard({ habit, selected, replacedHabit, onToggle }: HabitCar
         {replacedHabit && (
           <p className="mt-3 flex items-start gap-1.5 border-t border-clay-soft pt-2.5 text-[11px] leading-relaxed text-clay-dark">
             <RotateCcw className="mt-0.5 h-3 w-3 shrink-0" aria-hidden="true" />
-            Substitui “{replacedHabit.title}”: as duas assumem as mesmas despesas.
+            {copy.habitCard.replacement(habitText(replacedHabit).title)}
           </p>
         )}
       </div>

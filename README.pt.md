@@ -22,7 +22,7 @@ projetada e o prazo de financiamento a atualizar-se de imediato.
 | **Repositório** | https://github.com/blamelas/tripswap |
 | **Guião de defesa** | [`docs/DEFENSE.md`](docs/DEFENSE.md) |
 | **Pressupostos** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) |
-| **Estado** | MVP funcional, 4 user stories, dados fictícios, persistência local |
+| **Estado** | MVP funcional, 4 user stories, toggle PT/EN, dados fictícios, persistência local |
 
 ![Catálogo do TripSwap](docs/assets/home.jpg)
 
@@ -59,6 +59,9 @@ fluxo, um ecrã principal.
 - **Poupanças pontuais não são rendimento mensal.** Reparações e vendas entram uma vez.
 - **Transparência total.** Cada ecrã de resultado inclui o recibo do cálculo e a nota
   sobre o €0\*.
+- **Bilingue por desenho.** O inglês é o idioma por omissão e o português está a um
+  clique. O toggle muda toda a copy — incluindo as 24 trocas e os 8 destinos — e os
+  números mantêm-se iguais.
 - **Nenhuma promessa de saúde.** As vantagens são etiquetas qualitativas.
 
 ![Detalhe do destino com plano aplicado](docs/assets/detail.jpg)
@@ -76,7 +79,7 @@ fluxo, um ecrã principal.
 | Ícones | Lucide |
 | Gráfico | SVG próprio, sem biblioteca de charts |
 | Persistência | `localStorage` (`tripswap:unlocks:v1`) |
-| Testes | Vitest — 29 testes |
+| Testes | Vitest — 35 testes |
 | Ambiente | Docker multi-stage + DevContainer |
 | Deploy | Vercel (estático) |
 | AI no desenvolvimento | DeepSeek (`deepseek-flash`) como agente de código |
@@ -105,7 +108,7 @@ Abre http://localhost:5173. As alterações recarregam automaticamente.
 ```bash
 npm run lint        # oxlint
 npm run typecheck   # tsc
-npm test            # 29 testes (motor, dados, formatação)
+npm test            # 35 testes (motor, dados, assets, formatação, i18n)
 npm run build       # build de produção
 node scripts/assumptions.mjs > docs/ASSUMPTIONS.md   # regenera os pressupostos
 ```
@@ -128,6 +131,7 @@ elimina sobreposições de forma defensiva, mesmo que receba uma lista não sani
 src/
   data/      destinos, trocas, pressupostos
   lib/       motor, conflitos, formatação, presets, storage
+  i18n/      dicionários PT/EN tipados, conteúdo e contexto de idioma
   components/
   views/     Descobrir, Detalhe, Unlocks, Sobre
 tests/       motor, dados, formatação

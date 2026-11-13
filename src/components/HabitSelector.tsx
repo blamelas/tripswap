@@ -1,9 +1,6 @@
-import type { Habit, HabitCategory } from '../types'
-import {
-  HABITS,
-  HABIT_CATEGORY_LABELS,
-  HABIT_CATEGORY_ORDER,
-} from '../data/habits'
+import type { Habit } from '../types'
+import { HABITS, HABIT_CATEGORY_ORDER } from '../data/habits'
+import { useI18n } from '../i18n/context'
 import { conflictWith } from '../lib/conflicts'
 import { HabitCard } from './HabitCard'
 
@@ -13,6 +10,8 @@ interface HabitSelectorProps {
 }
 
 export function HabitSelector({ selectedIds, onToggle }: HabitSelectorProps) {
+  const { copy } = useI18n()
+
   const grouped = HABIT_CATEGORY_ORDER.map((category) => ({
     category,
     habits: HABITS.filter((habit) => habit.category === category),
@@ -23,14 +22,11 @@ export function HabitSelector({ selectedIds, onToggle }: HabitSelectorProps) {
       {grouped.map(({ category, habits }) => (
         <section key={category} aria-labelledby={`cat-${category}`}>
           <div className="flex items-baseline justify-between gap-4 border-b border-line pb-2.5">
-            <h3
-              id={`cat-${category}`}
-              className="font-display text-[1.35rem] text-ink"
-            >
-              {HABIT_CATEGORY_LABELS[category as HabitCategory]}
+            <h3 id={`cat-${category}`} className="font-display text-[1.35rem] text-ink">
+              {copy.habitCategories[category]}
             </h3>
             <span className="text-[11px] uppercase tracking-[0.14em] text-muted">
-              {habits.length} trocas
+              {copy.habitSelector.count(habits.length)}
             </span>
           </div>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
