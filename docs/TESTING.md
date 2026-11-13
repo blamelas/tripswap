@@ -6,12 +6,12 @@
 npm test
 ```
 
-42 testes em Vitest, todos sobre a lógica central e os dados. Não há snapshots de
+45 testes em Vitest, todos sobre a lógica central e os dados. Não há snapshots de
 componentes: o risco do produto está na aritmética e nas sobreposições.
 
-### `tests/calc.test.ts` (21)
+### `tests/calc.test.ts` (24)
 
-- Catálogo: 24 trocas, ids únicos, `saving` igual à fórmula documentada.
+- Catálogo: 25 trocas, ids únicos, `saving` igual à fórmula documentada.
 - Frequência mensal apenas em trocas recorrentes.
 - Uma reparação nunca entra no total mensal.
 - Valores publicados (café 32 €, almoço 60 €, tabaco 120 €, sapatos 65 €, etc.).
@@ -39,7 +39,7 @@ componentes: o risco do produto está na aritmética e nas sobreposições.
 ### `tests/i18n.test.ts` (6)
 
 - Paridade de chaves, arrays e assinaturas entre PT e EN.
-- As 24 trocas têm título, descrição e premissas em inglês.
+- As 25 trocas têm título, descrição e premissas em inglês.
 - Os 8 destinos têm país, citação, descrição, alt e o mesmo número de inclusões.
 - Todas as etiquetas de benefício usadas têm tradução.
 - EUR formatado em pt-PT e en-IE.
@@ -61,7 +61,7 @@ componentes: o risco do produto está na aritmética e nas sobreposições.
 - Singular/plural de meses.
 - Percentagens.
 
-## Checklist manual (24 casos)
+## Checklist manual (27 casos)
 
 Executar em http://localhost:5173 e repetir no URL público.
 
@@ -91,6 +91,9 @@ Executar em http://localhost:5173 e repetir no URL público.
 | 22 | Colapsar | Cabeçalho colapsa/expande com `aria-expanded`; seleções e contagem mantêm-se |
 | 23 | Lembrete | Plano guardado → Add reminder → diário/mensal, hora, dia → download `.ics`; resumo visível |
 | 24 | Lembrete persiste | Reload mantém o resumo; editar atualiza; remover limpa; remover o plano limpa o lembrete |
+| 25 | Swaps | `/swaps` mostra 6 categorias e 25 cartões; categorias colapsam |
+| 26 | Jogos | Sem valores não há poupança; 100/60 → €40/mês; adicionar atualiza o resumo |
+| 27 | Transporte | 2 trocas em `/swaps` → Douro com seleção pré-preenchida; guardar e ver o plano |
 
 Casos adicionais: `/destination/nao-existe` (404), `/unlocks` sem planos (empty state),
 imagem inexistente (fallback), `prefers-reduced-motion` (sem animações).

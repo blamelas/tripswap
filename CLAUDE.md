@@ -50,8 +50,10 @@ src/
     planState.ts            # discover / on the way / unlocked / unreachable
     storage.ts              # versioned localStorage read/write
     reminders.ts            # reminder storage, next occurrence and .ics export
-  components/               # presentational components
-  views/                    # Discover, DestinationDetail, MyUnlocks, About, NotFound
+    habitValues.ts          # applies user-entered games estimate to a habit
+    habitCategories.ts      # shared category icons and colours
+  components/               # presentational components, including SwapCard/GamesFields
+  views/                    # Discover, DestinationDetail, Swaps, MyUnlocks, About, NotFound
 tests/                      # Vitest suites for the engine and data
 docs/                       # MVP, assumptions, decisions, testing, defense, credits
 ```
@@ -81,6 +83,11 @@ is the only place where amounts are summed.
 - **PT and EN must stay in parity.** `tests/i18n.test.ts` compares keys, arrays and
   function shapes; a missing translation fails the build. Numbers never change with
   the locale.
+- **Games and betting has no universal average.** `games-betting` is a
+  `customExpense`; the saving is `current − reduced` supplied by the user, and no number
+  is shown until both values exist. Use `applyGamesEstimate`; do not duplicate the maths.
+- **The swaps catalogue uses the same data and engine.** `/swaps` must use `HABITS`,
+  `toggleHabit` and `summarizeSavings`; selected swaps persist and carry by deep link.
 - **The AI must not invent numbers.** Every swap has one stored `saving` value; a unit
   test asserts it equals `(originalCost - alternativeCost) * monthlyFrequency` for
   recurring swaps and `originalCost - alternativeCost` for one-time swaps.

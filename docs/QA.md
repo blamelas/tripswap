@@ -8,7 +8,7 @@ Respostas curtas, para ensaiar em voz alta. Cada linha tem o artefacto que a pro
 > o dinheiro. O TripSwap mostra o custo real de planeamento, propõe trocas pequenas e
 > calcula em quanto tempo a viagem fica ao alcance. Começa no desejo, não no orçamento.
 
-## 24 perguntas
+## 26 perguntas
 
 | # | Pergunta | Resposta curta | Artefacto |
 |---|---|---|---|
@@ -22,7 +22,7 @@ Respostas curtas, para ensaiar em voz alta. Cada linha tem o artefacto que a pro
 | 8 | Porque não pedes o salário? | O valor não depende de dados pessoais. Reduz fricção, risco e superfície de privacidade. | `types.ts` |
 | 9 | O que a AI fez mal? | O motor somava trocas sobrepostas. Um teste falhou com 2 linhas onde esperava 1. Corrigi o motor. | `docs/PROMPTS.md` |
 | 10 | Como reproduzo? | `docker compose up` ou `npm ci && npm run dev`. Node 20. | `README.md` |
-| 11 | Como sabes que funciona? | 42 testes na lógica, checklist manual de 24 casos, CI em cada PR. | `docs/TESTING.md` |
+| 11 | Como sabes que funciona? | 45 testes na lógica, checklist manual de 27 casos, CI em cada PR. | `docs/TESTING.md` |
 | 12 | Onde está deployed? | Vercel, deploy automático a cada push para `main`. | `vercel.json`, `docs/PUBLISH.md` |
 | 13 | Como escalarias? | Pré-renderização, contas e sync, recomendação calculada, testes e2e. | `docs/DECISIONS.md` |
 | 14 | Qual foi a decisão mais difícil? | Excluir trocas sobrepostas em vez de penalizar. Perdi combinações, ganhei um número defensável. | `docs/DECISIONS.md` |
@@ -36,6 +36,8 @@ Respostas curtas, para ensaiar em voz alta. Cada linha tem o artefacto que a pro
 | 22 | Posso colapsar? | Sim, pelo cabeçalho; seleções e contagens mantêm-se. | `HabitSelector` |
 | 23 | Como crio um lembrete? | Num plano guardado, “Add reminder”, escolho diário/mensal, hora e dia; descarrego o `.ics`. | `ReminderForm`, `lib/reminders` |
 | 24 | O evento entra no calendário? | O ficheiro `.ics` cria evento + alarme no calendário do utilizador; sem push notifications. | `buildReminderIcs` |
+| 25 | Onde está o catálogo de trocas? | Em `/swaps`, com 25 trocas, 6 categorias e seleção que segue para o destino. | `Swaps.tsx` |
+| 26 | Como funcionam os jogos? | O utilizador introduz gasto atual e reduzido; a poupança é a diferença. Sem valores, sem número. | `GamesFields`, `habitValues` |
 
 ## Frases a evitar
 

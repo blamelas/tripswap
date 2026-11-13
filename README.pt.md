@@ -21,6 +21,8 @@ projetada e o prazo de financiamento a atualizar-se de imediato.
 | **Demo pública (Vercel)** | https://tripswap-home.vercel.app/ |
 | **Repositório** | https://github.com/blamelas/tripswap |
 | **Guião de defesa** | [`docs/DEFENSE.md`](docs/DEFENSE.md) |
+| **Slides** | [`docs/TripSwap-Defense.pptx`](docs/TripSwap-Defense.pptx) |
+| **Pacote de submissão** | [`docs/SUBMISSION.md`](docs/SUBMISSION.md) |
 | **Pressupostos** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) |
 | **Estado** | MVP funcional, 4 user stories, toggle PT/EN, dados fictícios, persistência local |
 
@@ -61,10 +63,10 @@ fluxo, um ecrã principal.
   sobre o €0\*.
 - **Uma interação-assinatura.** Escolher trocas faz o destino subir: uma linha coral
   sobe pela fotografia, a imagem aproxima-se e o contador de meses anima.
-- **Planos tornam-se rotinas.** Os planos guardados podem criar um evento diário ou
-  mensal no calendário, com lembrete à hora escolhida; a preferência fica no dispositivo.
+- **Planos tornam-se rotinas.** Um plano guardado pode criar um evento diário ou mensal
+  no calendário, com lembrete a uma hora escolhida; a preferência fica no dispositivo.
 - **Bilingue por desenho.** O inglês é o idioma por omissão e o português está a um
-  clique. O toggle muda toda a copy — incluindo as 24 trocas e os 8 destinos — e os
+  clique. O toggle muda toda a copy — incluindo as 25 trocas e os 8 destinos — e os
   números mantêm-se iguais.
 - **Nenhuma promessa de saúde.** As vantagens são etiquetas qualitativas.
 
@@ -118,7 +120,7 @@ os planos sugeridos vivem numa faixa azul-pálida no início do passo de troca.
 | Ícones | Lucide |
 | Gráfico | SVG próprio, sem biblioteca de charts |
 | Persistência | `localStorage` (`tripswap:unlocks:v1`) |
-| Testes | Vitest — 42 testes |
+| Testes | Vitest — 45 testes |
 | Ambiente | Docker multi-stage + DevContainer |
 | Deploy | Vercel (estático) |
 | AI no desenvolvimento | DeepSeek (`deepseek-flash`) como agente de código |
@@ -147,7 +149,7 @@ Abre http://localhost:5173. As alterações recarregam automaticamente.
 ```bash
 npm run lint        # oxlint
 npm run typecheck   # tsc
-npm test            # 42 testes (motor, dados, assets, formatação, i18n, lembretes)
+npm test            # 45 testes (motor, dados, assets, formatação, i18n, lembretes)
 npm run build       # build de produção
 node scripts/assumptions.mjs > docs/ASSUMPTIONS.md   # regenera os pressupostos
 ```
@@ -160,15 +162,30 @@ node scripts/assumptions.mjs > docs/ASSUMPTIONS.md   # regenera os pressupostos
 - **Prazo:** o primeiro mês inteiro em que a projeção atinge o objetivo
 
 O motor vive em [`src/lib/calc.ts`](src/lib/calc.ts) e é a única fonte de verdade. Um
-teste garante que cada uma das 24 trocas mantém o valor documentado. O motor também
+teste garante que cada uma das 25 trocas mantém o valor documentado. O motor também
 elimina sobreposições de forma defensiva, mesmo que receba uma lista não sanitizada
 (link direto antigo ou `localStorage` editado).
 
-### Lembretes de planos
+### O catálogo de trocas
 
-Um plano guardado pode criar um evento diário ou mensal no calendário, com lembrete à
-hora escolhida. O `.ics` descarregado contém um evento de 15 minutos e um `VALARM`; a
-preferência (periodicidade, hora, dia) fica no navegador. Não há push notifications nem
+A página `/swaps` apresenta as 25 mudanças em seis categorias, independentemente de
+qualquer destino. Usa os mesmos dados, motor e regras de sobreposição do fluxo de
+destino. **Jogos e apostas** usa o gasto mensal atual e o valor reduzido introduzidos
+pelo utilizador — sem médias inventadas — e não mostra poupança numérica enquanto os
+dois valores não existirem. As trocas escolhidas ficam guardadas localmente e seguem
+para qualquer plano através dos links de destino e da seleção global. Dois cartões
+tracejados mostram o roadmap de “Criar a minha troca” e “Adicionar a minha viagem de
+sonho”.
+
+![O catálogo de trocas](docs/assets/swaps.jpg)
+
+![Jogos e apostas](docs/assets/swaps-games.jpg)
+
+### Lembretes de plano
+
+Um plano guardado pode criar um evento diário ou mensal no calendário, com lembrete a
+uma hora escolhida. O `.ics` transferido contém um evento de 15 minutos e um `VALARM`;
+a preferência (frequência, hora, dia) fica no browser. Não há push notifications nem
 servidor.
 
 ![Lembrete de plano](docs/assets/reminders.jpg)
@@ -205,6 +222,10 @@ docs/        MVP, pressupostos, decisões, iterações, testes, defesa
 - [`docs/TESTING.md`](docs/TESTING.md) — testes automáticos e checklist manual
 - [`docs/PROMPTS.md`](docs/PROMPTS.md) — prompts reais e uma falha do AI
 - [`docs/DEFENSE.md`](docs/DEFENSE.md) — slides, demo e Q&A
+- [`docs/QA.md`](docs/QA.md) — cartões de treino
+- [`docs/VIDEO.md`](docs/VIDEO.md) — guião do vídeo de backup
+- [`docs/SUBMISSION.md`](docs/SUBMISSION.md) — requisito do curso → evidência
+- [`docs/TripSwap-Defense.pptx`](docs/TripSwap-Defense.pptx) — deck de 10 slides
 - [`CLAUDE.md`](CLAUDE.md) — contexto e regras para o agente
 
 ## Como a IA ajudou

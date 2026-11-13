@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { Check, ChevronDown } from 'lucide-react'
-import type { Habit } from '../types'
+import type { GamesEstimate, Habit } from '../types'
 import { useI18n } from '../i18n/context'
+import { GamesFields } from './GamesFields'
+import { hasGamesSaving } from '../lib/habitValues'
 import { cn } from '../lib/cn'
 
 interface HabitCardProps {
@@ -9,13 +11,25 @@ interface HabitCardProps {
   selected: boolean
   replacedHabit?: Habit
   onToggle: (habit: Habit) => void
+  gamesEstimate: GamesEstimate | null
+  onGamesEstimateChange: (estimate: GamesEstimate) => void
 }
 
-export function HabitCard({ habit, selected, replacedHabit, onToggle }: HabitCardProps) {
+export function HabitCard({
+  habit,
+  selected,
+  replacedHabit,
+  onToggle,
+  gamesEstimate,
+  onGamesEstimateChange,
+}: HabitCardProps) {
   const { copy, habitText, benefitLabel, fmt } = useI18n()
   const text = habitText(habit)
   const isRecurring = habit.kind === 'recurring'
-  const [open, setOpen] = useState(false)
+  const isGames = Boolean(habit.customExpense)
+  const gamesReady = hasGamesSaving(gamesEstimate)
+  const canSelect = !isGames || gamesReady
+  const [open, setOpen] = useState(isGames)
   const detailsId = `habit-${habit.id}-details`
 
   return (
@@ -29,8 +43,9 @@ export function HabitCard({ habit, selected, replacedHabit, onToggle }: HabitCar
         <button
           type="button"
           aria-pressed={selected}
+          disabled={!canSelect}
           onClick={() => onToggle(habit)}
-          className="flex min-w-0 flex-1 items-center gap-3 text-left"
+          className="flex min-w-0 flex-1 items-center gap-3 text-left disabled:cursor-not-allowed"
         >
           <span
             className={cn(
@@ -49,12 +64,18 @@ export function HabitCard({ habit, selected, replacedHabit, onToggle }: HabitCar
               <span className="text-[14px] font-medium leading-snug text-ink">
                 {text.title}
               </span>
-              <span className="nums shrink-0 text-[13.5px] text-accent-dark">
-                {fmt.eur(habit.saving)}
-                <span className="ml-1 font-sans text-[9px] font-semibold uppercase tracking-[0.1em] text-muted">
-                  {isRecurring ? copy.common.perMonth : copy.common.oneTime}
+              {isGames && !gamesReady ? (
+                <span className="shrink-0 text-[9px] font-semibold uppercase tracking-[0.1em] text-accent-dark">
+                  {copy.games.setFirst}
                 </span>
-              </span>
+              ) : (
+                <span className="nums shrink-0 text-[13.5px] text-accent-dark">
+                  {fmt.eur(habit.saving)}
+                  <span className="ml-1 font-sans text-[9px] font-semibold uppercase tracking-[0.1em] text-muted">
+                    {isRecurring ? copy.common.perMonth : copy.common.oneTime}
+                  </span>
+                </span>
+              )}
             </span>
 
             {replacedHabit && (
@@ -83,6 +104,15 @@ export function HabitCard({ habit, selected, replacedHabit, onToggle }: HabitCar
       {open && (
         <div id={detailsId} className="pb-3 pl-[30px] pr-10">
           <p className="text-[11.5px] leading-relaxed text-muted">{text.description}</p>
+          {isGames ? (
+            <>
+              <GamesFields estimate={gamesEstimate} onSave={onGamesEstimateChange} />
+              <p className="mt-2 text-[10px] leading-relaxed text-muted">
+                {text.assumptions}
+              </p>
+            </>
+          ) : (
+            <>
           <p className="mt-1.5 text-[10px] leading-relaxed text-muted">
             <span className="font-semibold uppercase tracking-[0.1em]">
               {copy.habitCard.assumptionLabel}:
@@ -98,6 +128,8 @@ export function HabitCard({ habit, selected, replacedHabit, onToggle }: HabitCar
             <p className="mt-1.5 text-[10px] leading-relaxed text-accent-dark">
               {copy.habitCard.replacement(habitText(replacedHabit).title)}
             </p>
+          )}
+            </>
           )}
         </div>
       )}
