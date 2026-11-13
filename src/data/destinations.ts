@@ -40,8 +40,8 @@ export const DESTINATIONS: Destination[] = [
     category: 'weekend',
     duration: '2 noites',
     image: '/images/lisbon.webp',
-    imageAlt: 'Elétrico amarelo numa rua estreita de Alfama, em Lisboa',
-    imageCredit: 'Ingo Mehling · CC BY-SA 4.0 · Wikimedia Commons',
+    imageAlt: 'Telhados de Alfama e o rio Tejo vistos de um miradouro em Lisboa',
+    imageCredit: 'Dale Cruse · CC BY 4.0 · Wikimedia Commons',
     quote: 'A cidade que se vê a subir, devagar.',
     description:
       'Miradouros, pastelarias e ruas que não estão em nenhum mapa. Uma cidade pequena o suficiente para ser caminhada e grande o suficiente para surpreender.',
@@ -78,8 +78,8 @@ export const DESTINATIONS: Destination[] = [
     category: 'city',
     duration: '2 noites',
     image: '/images/barcelona.webp',
-    imageAlt: 'Fachada da Sagrada Família em Barcelona',
-    imageCredit: 'Alvesgaspar · CC BY-SA 4.0 · Wikimedia Commons',
+    imageAlt: 'Vista da cidade de Barcelona a partir do Park Güell',
+    imageCredit: 'Jcca76 · CC BY-SA 4.0 · Wikimedia Commons',
     quote: 'Arquitetura, mar e uma noite mais longa.',
     description:
       'Gaudí de manhã, praia à tarde e bairros estreitos à noite. Uma cidade que se adapta ao teu ritmo, mesmo quando só tens um fim de semana.',
@@ -135,8 +135,8 @@ export const DESTINATIONS: Destination[] = [
     category: 'nature',
     duration: '6 noites',
     image: '/images/iceland.webp',
-    imageAlt: 'Aurora boreal verde sobre uma paisagem gelada da Islândia',
-    imageCredit: 'Giles Laurent · CC BY-SA 4.0 · Wikimedia Commons',
+    imageAlt: 'Aurora boreal verde sobre cabanas de telhado vermelho na Islândia',
+    imageCredit: 'Preserved Light Photography · CC BY-SA 3.0 · Wikimedia Commons',
     quote: 'Seis noites à procura do céu certo.',
     description:
       'Uma road trip pelo sul da Islândia, com auroras como objetivo e o inverno como companhia. Um plano maior, para quem quer um motivo grande.',

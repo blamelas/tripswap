@@ -1,6 +1,6 @@
 # Decisões
 
-Sete decisões que explicam a forma do produto. Cada uma tem o custo assumido.
+Oito decisões que explicam a forma do produto. Cada uma tem o custo assumido.
 
 ## 1. SPA estática em vez de Next.js
 
@@ -95,3 +95,19 @@ controlo total do tom editorial. O motor de cálculo não sabe qual é o idioma.
 **Trade-off:** cada nova string tem de ser adicionada nos dois dicionários; o teste de
 paridade falha se faltar. As rotas não são localizadas (`/destination/...` é igual nos
 dois idiomas).
+
+## 8. Direção de arte “The world is the reward”
+
+**Contexto:** a primeira versão era competente mas previsível — bege, serif itálico e
+cartões iguais. O produto é sobre desejo e viagem, não sobre poupança.
+
+**Decisão:** fotografia full-bleed, Barlow Condensed, IBM Plex Sans, IBM Plex Mono,
+ink/canvas/signal e azul pálido. €0* com orçamento riscado. Reward window com maré,
+linha coral e meses animados. Listas em vez de cartões.
+
+**Porquê:** a fotografia passa a ser o interface; o mecanismo financeiro aparece como
+consequência. A tipografia condensada dá escala e confiança sem parecer um template.
+
+**Trade-off:** menos densidade por ecrã e mais dependência de boa fotografia. As imagens
+substituídas (Lisboa, Barcelona, Islândia) exigem créditos e peso de página; foram
+comprimidas para WebP local.

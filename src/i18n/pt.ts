@@ -5,14 +5,32 @@ export const pt = {
       'TripSwap — pequenas mudanças, viagens maiores. Descobre as experiências que podes desbloquear mudando os pequenos hábitos do dia a dia.',
   },
   nav: {
-    discover: 'Descobrir',
-    unlocks: 'Os meus unlocks',
-    unlocksShort: 'Unlocks',
+    discover: 'Destinos',
+    placesShort: 'Locais',
+    unlocks: 'Os meus planos',
+    unlocksShort: 'Planos',
     about: 'Sobre',
     skip: 'Saltar para o conteúdo',
     language: 'Idioma',
+    menu: 'Navegação',
     toEnglish: 'Mudar para inglês',
     toPortuguese: 'Mudar para português',
+  },
+  price: {
+    planningTarget: 'Objetivo de planeamento',
+    fundedBySwaps: 'Financiado por trocas do dia a dia',
+    metaphor:
+      '€0* é uma metáfora. A viagem é paga com dinheiro poupado nas trocas que escolheres — não é um desconto nem uma viagem gratuita.',
+    notAPrice: 'Não é um preço nem uma oferta.',
+  },
+  reward: {
+    timeToReach: 'Tempo até chegar',
+    months: 'meses',
+    month: 'mês',
+    selected: 'trocas escolhidas',
+    unlocked: 'Desbloqueado na simulação',
+    noPlan: 'Escolhe uma troca para começar.',
+    destination: 'Destino',
   },
   common: {
     perMonth: '/mês',
@@ -29,9 +47,9 @@ export const pt = {
   },
   footer: {
     explore: 'Explorar',
-    catalogue: 'Catálogo de destinos',
-    unlocks: 'Os meus unlocks',
-    how: 'Como funciona',
+    catalogue: 'Destinos',
+    unlocks: 'Os meus planos',
+    how: 'Sobre',
     honest: 'Nota honesta',
     honestBody:
       'Os orçamentos são objetivos ilustrativos de planeamento, não preços verificados nem ofertas. O €0* significa que a viagem seria paga com dinheiro poupado nas trocas escolhidas — não é grátis, nem um desconto.',
@@ -63,17 +81,18 @@ export const pt = {
     withSwaps: 'com trocas',
   },
   discover: {
-    eyebrow: 'Small changes. Bigger journeys.',
+    eyebrow: 'Viagens financiadas por hábitos.',
     headline: {
-      line1: 'O mundo cabe',
-      line2: 'em pequenas',
-      accent: 'mudanças.',
+      line1: 'O mundo',
+      line2: 'é a',
+      accent: 'recompensa.',
     },
     intro:
-      'O TripSwap começa no desejo e mostra o que uma troca pequena pode financiar. Escolhe um destino, vê que hábitos fariam sentido para ti e descobre em quanto tempo ele fica ao teu alcance.',
-    ctaDestinations: 'Ver destinos',
+      'Escolhe um lugar. Muda pequenos hábitos. Vê em quanto tempo ele fica ao teu alcance.',
+    ctaDestinations: 'Encontra o próximo lugar',
     ctaHow: 'Como funciona',
-    stats: ['8 destinos', '24 trocas', 'Um cálculo transparente'],
+    stats: ['8 destinos', '24 trocas', 'Sem folhas de cálculo'],
+    chapters: ['Sonhar', 'Trocar', 'Chegar'],
     featuredNote: (budget: string) =>
       `Objetivo ilustrativo de ${budget} · não é um preço`,
     steps: [
@@ -93,14 +112,14 @@ export const pt = {
         body: 'Vê a poupança e o prazo em tempo real. Um plano, não uma promessa.',
       },
     ],
-    catalogueEyebrow: 'O catálogo',
-    catalogueTitle: 'Por onde começar?',
+    catalogueEyebrow: 'Destinos',
+    catalogueTitle: 'Escolhe um lugar.',
     catalogueIntro:
-      'Do fim de semana perto de casa à viagem que exige um ano de pequenas decisões. Todos os orçamentos são objetivos de planeamento.',
+      'Do fim de semana perto de casa à viagem que exige um ano de pequenas decisões.',
     zeroEyebrow: 'A nota dos €0*',
     zeroTitle: 'Não é grátis. É pago com escolhas.',
     zeroBody:
-      'Cada destino tem um custo real de planeamento. O €0* mostra o que aconteceria se esse custo fosse coberto por dinheiro poupado nas trocas que escolheres. Não é um desconto, nem uma oferta, nem uma viagem gratuita.',
+      'Cada destino tem um custo real. O €0* mostra o que aconteceria se esse custo fosse coberto pelo dinheiro poupado nas tuas trocas. Não é um desconto nem uma viagem gratuita.',
     ruleLabel: 'A regra do projeto',
     ruleQuote: '“Menos isto. Mais mundo.”',
     ruleBody:
@@ -121,7 +140,7 @@ export const pt = {
       'Objetivo ilustrativo de planeamento. Não é um preço verificado, uma tarifa atual nem uma oferta de viagem. O TripSwap não reserva viagens.',
     presetsEyebrow: 'Começar com um plano',
     presetsHint: 'Podes ajustar tudo depois',
-    step2Eyebrow: 'Passo 2 — trocar',
+    step2Eyebrow: '02 — Trocar',
     step2Title: 'O que mudarias?',
     step2Intro:
       'Escolhe só o que farias mesmo. Nada aqui é obrigatório e nada é enviado para fora do teu dispositivo.',
@@ -133,7 +152,7 @@ export const pt = {
       'Ainda não poupaste nada — isto é o plano, não o saldo. Guarda-o para voltares quando quiseres rever as trocas.',
     unlockSave: 'Guardar este futuro',
     unlockSaved: 'Plano guardado',
-    step3: 'Passo 3 — desbloquear',
+    step3: '03 — Chegar',
     missingTitle: 'Este destino não existe.',
     missingBody:
       'O link pode estar incompleto. Volta ao catálogo e escolhe uma experiência.',
@@ -145,7 +164,7 @@ export const pt = {
   },
   habitCard: {
     replacement: (title: string) =>
-      `Substitui “${title}”: as duas assumem as mesmas despesas.`,
+      `Substitui “${title}” · mesmas despesas.`,
   },
   panel: {
     states: {
@@ -226,8 +245,8 @@ export const pt = {
     ],
   },
   unlocks: {
-    eyebrow: 'Passo 3 — desbloquear',
-    title: 'Os meus unlocks',
+    eyebrow: '03 — Chegar',
+    title: 'Os meus planos',
     intro:
       'Planos guardados apenas neste dispositivo. São simulações de poupança, não reservas nem dinheiro já poupado.',
     clear: 'Limpar tudo',

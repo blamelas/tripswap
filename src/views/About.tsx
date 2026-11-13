@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, Check, Minus } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { DESTINATIONS } from '../data/destinations'
 import { HABITS } from '../data/habits'
 import { useI18n } from '../i18n/context'
@@ -9,6 +9,7 @@ export function About() {
   const budgets = DESTINATIONS.map((destination) => destination.budget)
   const minBudget = Math.min(...budgets)
   const maxBudget = Math.max(...budgets)
+
   const formulas = [
     {
       label: copy.about.formulas.recurringLabel,
@@ -25,164 +26,155 @@ export function About() {
   ]
 
   return (
-    <div className="pb-16">
-      <section className="page pt-12 lg:pt-16">
-        <p className="eyebrow">{copy.about.eyebrow}</p>
-        <h1 className="mt-4 max-w-4xl font-display text-[clamp(2.4rem,5.5vw,4.4rem)] leading-[1.02] tracking-tightest text-ink">
+    <div>
+      <section className="page pt-10 lg:pt-16">
+        <p className="label-accent">{copy.about.eyebrow}</p>
+        <h1 className="mt-3 max-w-5xl text-[clamp(2.8rem,7vw,6rem)] leading-[0.82] tracking-tightest text-ink">
           {copy.about.titleA}
           <br />
           {copy.about.titleB}{' '}
-          <em className="italic text-clay">{copy.about.titleAccent}</em>
+          <span className="text-accent">{copy.about.titleAccent}</span>
         </h1>
-        <p className="mt-6 max-w-2xl text-[15.5px] leading-relaxed text-ink-soft">
+        <p className="mt-6 max-w-2xl text-[14px] leading-relaxed text-ink-soft">
           {copy.about.intro}
         </p>
       </section>
 
-      <section className="page mt-16" aria-labelledby="pilares">
-        <div className="border-b border-line pb-4">
-          <p className="eyebrow">{copy.about.pillarsEyebrow}</p>
-          <h2
-            id="pilares"
-            className="mt-2 font-display text-[clamp(1.8rem,3.4vw,2.6rem)] leading-none text-ink"
-          >
-            {copy.about.pillarsTitle}
-          </h2>
+      <section className="page mt-14 lg:mt-20">
+        <div className="flex flex-wrap items-end justify-between gap-3 border-t-2 border-ink pt-4">
+          <p className="label-accent">{copy.about.pillarsEyebrow}</p>
+          <p className="label">{copy.about.pillarsTitle}</p>
         </div>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
+
+        <div className="mt-7 grid gap-8 md:grid-cols-3 md:gap-10">
           {copy.about.pillars.map((pillar, index) => (
-            <div key={pillar.title} className="border border-line bg-white/50 p-6">
-              <span className="nums text-[11px] text-clay">0{index + 1}</span>
-              <h3 className="mt-3 font-display text-2xl text-ink">{pillar.title}</h3>
-              <p className="mt-2 text-[13.5px] leading-relaxed text-muted">
+            <div key={pillar.title}>
+              <span className="nums text-[10px] text-accent">
+                0{index + 1}
+              </span>
+              <h2 className="mt-2 text-[2rem] leading-[0.9] text-ink">
+                {pillar.title}
+              </h2>
+              <p className="mt-2 text-[12px] leading-relaxed text-muted">
                 {pillar.body}
               </p>
             </div>
           ))}
         </div>
-        <p className="mt-4 max-w-3xl text-[11px] leading-relaxed text-muted">
+
+        <p className="mt-7 max-w-3xl text-[10px] leading-relaxed text-muted">
           {copy.about.pillarsNote}
         </p>
       </section>
 
-      <section className="page mt-16" aria-labelledby="calculo">
-        <div className="grid gap-10 border border-line bg-white/50 p-6 sm:p-10 lg:grid-cols-[1.05fr_0.95fr]">
-          <div>
-            <p className="eyebrow">{copy.about.transparencyEyebrow}</p>
-            <h2
-              id="calculo"
-              className="mt-2 font-display text-[clamp(1.8rem,3.2vw,2.5rem)] leading-tight text-ink"
-            >
-              {copy.about.transparencyTitle}
-            </h2>
-            <p className="mt-4 text-[14px] leading-relaxed text-ink-soft">
-              {copy.about.transparencyBody}
-            </p>
+      <section className="page mt-16 grid gap-10 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <p className="label-accent">{copy.about.transparencyEyebrow}</p>
+          <h2 className="mt-2 text-[clamp(2rem,4vw,3.2rem)] leading-[0.9] text-ink">
+            {copy.about.transparencyTitle}
+          </h2>
+          <p className="mt-4 text-[13px] leading-relaxed text-ink-soft">
+            {copy.about.transparencyBody}
+          </p>
 
-            <div className="mt-6 space-y-3">
-              {formulas.map((formula) => (
-                <div key={formula.label} className="border-l-2 border-clay pl-4">
-                  <p className="text-[10px] uppercase tracking-[0.14em] text-muted">
-                    {formula.label}
-                  </p>
-                  <p className="nums mt-1 text-[13px] text-ink">{formula.value}</p>
-                </div>
-              ))}
-            </div>
+          <div className="mt-6">
+            {formulas.map((formula) => (
+              <div key={formula.label} className="border-t border-line py-3">
+                <p className="label">{formula.label}</p>
+                <p className="nums mt-1 text-[13px] text-ink">{formula.value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-sky p-6 lg:p-8">
+          <p className="label-accent">{copy.about.overlapEyebrow}</p>
+          <p className="mt-3 text-[13px] leading-relaxed text-ink/75">
+            {copy.about.overlapBody1}
+          </p>
+          <p className="mt-3 text-[13px] leading-relaxed text-ink/75">
+            {copy.about.overlapBody2}
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-x-3 gap-y-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-ink/45">
+            {copy.about.groups.map((group, index) => (
+              <span key={group}>
+                {index > 0 && <span aria-hidden="true">· </span>}
+                {group}
+              </span>
+            ))}
           </div>
 
-          <div className="border-t border-line pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-            <p className="eyebrow">{copy.about.overlapEyebrow}</p>
-            <p className="mt-3 text-[13.5px] leading-relaxed text-ink-soft">
-              {copy.about.overlapBody1}
-            </p>
-            <p className="mt-3 text-[13.5px] leading-relaxed text-ink-soft">
-              {copy.about.overlapBody2}
-            </p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {copy.about.groups.map((group) => (
-                <span
-                  key={group}
-                  className="border border-line px-2.5 py-1 text-[10px] uppercase tracking-[0.1em] text-muted"
-                >
-                  {group}
-                </span>
-              ))}
-            </div>
-            <p className="mt-5 text-[11px] leading-relaxed text-muted">
-              {copy.about.stats(
-                HABITS.length,
-                DESTINATIONS.length,
-                fmt.eur(minBudget),
-                fmt.eur(maxBudget),
-              )}
-            </p>
-          </div>
+          <p className="mt-6 border-t border-ink/15 pt-4 text-[10px] text-ink/50">
+            {copy.about.stats(
+              HABITS.length,
+              DESTINATIONS.length,
+              fmt.eur(minBudget),
+              fmt.eur(maxBudget),
+            )}
+          </p>
         </div>
       </section>
 
-      <section className="page mt-16" aria-labelledby="zero">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div className="border border-clay/30 bg-clay-soft/40 p-6 sm:p-8">
-            <p className="font-display text-[clamp(3rem,7vw,4.6rem)] leading-none text-clay">
-              €0<span className="align-top text-xl">*</span>
-            </p>
-            <p className="mt-3 text-[11px] uppercase tracking-[0.14em] text-clay-dark">
+      <section className="mt-16 bg-ink text-canvas">
+        <div className="page grid gap-8 py-14 lg:grid-cols-[0.7fr_1.3fr] lg:items-center lg:py-20">
+          <p className="font-display text-[clamp(5rem,14vw,12rem)] font-semibold leading-[0.62] text-accent">
+            €0<span className="align-top text-[0.2em]">*</span>
+          </p>
+          <div>
+            <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/45">
               {copy.about.zeroEyebrow}
             </p>
-          </div>
-          <div>
-            <h2
-              id="zero"
-              className="font-display text-[clamp(1.7rem,3vw,2.3rem)] leading-tight text-ink"
-            >
+            <h2 className="mt-2 text-[clamp(2rem,4vw,3.4rem)] leading-[0.88] text-canvas">
               {copy.about.zeroTitle}
             </h2>
-            <p className="mt-3 max-w-xl text-[14px] leading-relaxed text-ink-soft">
+            <p className="mt-4 max-w-xl text-[13px] leading-relaxed text-canvas/60">
               {copy.about.zeroBody1}
             </p>
-            <p className="mt-3 max-w-xl text-[14px] leading-relaxed text-ink-soft">
+            <p className="mt-3 max-w-xl text-[13px] leading-relaxed text-canvas/60">
               {copy.about.zeroBody2}
+            </p>
+            <p className="mt-4 max-w-xl text-[10px] font-semibold uppercase leading-relaxed tracking-[0.12em] text-accent">
+              {copy.price.metaphor}
             </p>
           </div>
         </div>
       </section>
 
-      <section className="page mt-16" aria-labelledby="limites">
-        <div className="border-b border-line pb-4">
-          <p className="eyebrow">{copy.about.limitsEyebrow}</p>
-          <h2
-            id="limites"
-            className="mt-2 font-display text-[clamp(1.8rem,3.2vw,2.4rem)] leading-none text-ink"
-          >
+      <section className="page mt-16">
+        <div className="border-t-2 border-ink pt-4">
+          <p className="label-accent">{copy.about.limitsEyebrow}</p>
+          <h2 className="mt-2 text-[clamp(1.7rem,3vw,2.4rem)] leading-none text-ink">
             {copy.about.limitsTitle}
           </h2>
         </div>
-        <ul className="mt-6 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+
+        <ul className="mt-7 grid gap-x-12 sm:grid-cols-2">
           {copy.about.limits.map((item) => (
             <li
               key={item}
-              className="flex items-start gap-2.5 text-[13.5px] leading-relaxed text-ink-soft"
+              className="flex gap-3 border-t border-line py-3 text-[12px] leading-relaxed text-ink-soft"
             >
-              <Minus className="mt-1 h-3.5 w-3.5 shrink-0 text-clay" aria-hidden="true" />
+              <span className="text-accent" aria-hidden="true">
+                —
+              </span>
               {item}
             </li>
           ))}
         </ul>
-        <div className="mt-6 flex items-start gap-2.5 border border-line bg-white/50 p-4 text-[12px] leading-relaxed text-muted">
-          <Check className="mt-0.5 h-4 w-4 shrink-0 text-moss" aria-hidden="true" />
-          <p>{copy.about.assumptionsNote}</p>
-        </div>
+
+        <p className="mt-6 max-w-3xl border-l-2 border-accent pl-4 text-[11px] leading-relaxed text-muted">
+          {copy.about.assumptionsNote}
+        </p>
       </section>
 
-      <section className="page mt-16" aria-labelledby="creditos">
-        <div className="border-b border-line pb-4">
-          <p className="eyebrow">{copy.about.creditsEyebrow}</p>
-          <h2 id="creditos" className="mt-2 font-display text-xl text-ink">
-            {copy.about.creditsTitle}
-          </h2>
+      <section className="page mt-16">
+        <div className="flex flex-wrap items-end justify-between gap-3 border-t border-line pt-4">
+          <p className="label-accent">{copy.about.creditsEyebrow}</p>
+          <p className="label">{copy.about.creditsTitle}</p>
         </div>
-        <ul className="mt-5 grid gap-2 text-[11.5px] leading-relaxed text-muted sm:grid-cols-2">
+
+        <ul className="mt-5 grid gap-x-10 gap-y-2 text-[10px] leading-relaxed text-muted sm:grid-cols-2">
           {DESTINATIONS.map((destination) => (
             <li key={destination.id}>
               <span className="text-ink">{destination.name}:</span>{' '}
@@ -190,23 +182,23 @@ export function About() {
             </li>
           ))}
         </ul>
-        <p className="mt-4 text-[11px] leading-relaxed text-muted">
+        <p className="mt-4 text-[10px] leading-relaxed text-muted">
           {copy.about.creditsNote}
         </p>
       </section>
 
-      <section className="page mt-16">
-        <div className="flex flex-wrap items-center justify-between gap-6 border-t border-line pt-8">
+      <section className="page mt-16 border-t-2 border-ink pb-16 pt-8">
+        <div className="flex flex-wrap items-end justify-between gap-8">
           <div>
-            <p className="eyebrow">{copy.about.closingEyebrow}</p>
-            <p className="mt-2 max-w-md font-display text-xl leading-snug text-ink">
+            <p className="label-accent">{copy.about.closingEyebrow}</p>
+            <p className="mt-2 max-w-2xl font-display text-[clamp(2rem,4.5vw,3.6rem)] normal-case leading-[0.95] text-ink">
               {copy.about.closingLine}
             </p>
-            <p className="mt-3 text-[11px] text-muted">{copy.about.languageNote}</p>
+            <p className="mt-3 text-[10px] text-muted">{copy.about.languageNote}</p>
           </div>
-          <Link to="/" className="btn-primary">
+          <Link to="/" className="btn-accent">
             {copy.about.closingCta}
-            <ArrowUpRight className="h-4 w-4" />
+            <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>
         </div>
       </section>

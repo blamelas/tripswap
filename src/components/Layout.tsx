@@ -1,26 +1,32 @@
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
-import { Languages } from 'lucide-react'
 import { useI18n } from '../i18n/context'
 import { cn } from '../lib/cn'
 
-function Brand() {
+function Mark({ tone = 'light' }: { tone?: 'light' | 'dark' }) {
+  const background = tone === 'light' ? '#151A19' : '#F7F6F2'
+  const foreground = tone === 'light' ? '#F7F6F2' : '#151A19'
+
   return (
-    <NavLink to="/" className="group inline-flex items-center gap-2.5" aria-label="TripSwap">
-      <svg viewBox="0 0 24 24" className="h-6 w-6 shrink-0" aria-hidden="true">
-        <rect width="24" height="24" rx="5" fill="currentColor" className="text-clay" />
-        <path
-          d="M7.4 16.6 16.6 7.4"
-          fill="none"
-          stroke="#F6F2E9"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-        />
-        <circle cx="6.6" cy="17.4" r="2" fill="#F6F2E9" />
-        <circle cx="17.4" cy="6.6" r="2" fill="#F6F2E9" />
-      </svg>
-      <span className="text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-[13px] sm:tracking-[0.26em]">
-        TripSwap
+    <svg viewBox="0 0 28 28" className="h-6 w-6 shrink-0 sm:h-7 sm:w-7" aria-hidden="true">
+      <rect width="28" height="28" fill={background} />
+      <circle cx="14" cy="11.5" r="7.5" fill={foreground} />
+      <rect y="17.5" width="28" height="2.5" fill="#FF5936" />
+    </svg>
+  )
+}
+
+function Brand({ tone = 'light' }: { tone?: 'light' | 'dark' }) {
+  return (
+    <NavLink to="/" className="inline-flex items-center gap-2 sm:gap-2.5" aria-label="TripSwap">
+      <Mark tone={tone} />
+      <span
+        className={cn(
+          'font-display text-[19px] font-bold uppercase leading-none tracking-[0.01em] sm:text-[25px]',
+          tone === 'dark' ? 'text-canvas' : 'text-ink',
+        )}
+      >
+        TRIP<span className="text-accent">SWAP</span>
       </span>
     </NavLink>
   )
@@ -28,20 +34,31 @@ function Brand() {
 
 function LanguageToggle() {
   const { locale, setLocale, copy } = useI18n()
-  const next = locale === 'pt' ? 'en' : 'pt'
-  const label = locale === 'pt' ? copy.nav.toEnglish : copy.nav.toPortuguese
 
   return (
-    <button
-      type="button"
-      onClick={() => setLocale(next)}
-      aria-label={label}
-      title={label}
-      className="ml-1 inline-flex h-8 shrink-0 items-center gap-1.5 border border-line px-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-ink transition-colors hover:border-ink sm:ml-3 sm:px-2.5"
-    >
-      <Languages className="h-3.5 w-3.5" aria-hidden="true" />
-      <span className="hidden sm:inline">{locale === 'pt' ? 'EN' : 'PT'}</span>
-    </button>
+    <div className="flex items-center gap-1" role="group" aria-label={copy.nav.language}>
+      {(['en', 'pt'] as const).map((value, index) => (
+        <span key={value} className="flex items-center gap-1.5">
+          {index > 0 && (
+            <span className="text-[9px] text-line" aria-hidden="true">
+              /
+            </span>
+          )}
+          <button
+            type="button"
+            onClick={() => setLocale(value)}
+            aria-pressed={locale === value}
+            aria-label={value === 'en' ? copy.nav.toEnglish : copy.nav.toPortuguese}
+            className={cn(
+              'border-b pb-0.5 text-[9.5px] font-semibold uppercase tracking-[0.1em] transition-colors',
+              locale === value ? 'border-accent text-ink' : 'border-transparent text-muted hover:text-ink',
+            )}
+          >
+            {value}
+          </button>
+        </span>
+      ))}
+    </div>
   )
 }
 
@@ -57,9 +74,9 @@ export function Layout() {
   const { copy } = useI18n()
 
   const links = [
-    { to: '/', label: copy.nav.discover, short: copy.nav.discover, end: true },
+    { to: '/', label: copy.nav.discover, short: copy.nav.placesShort, end: true },
     { to: '/unlocks', label: copy.nav.unlocks, short: copy.nav.unlocksShort, end: false },
-    { to: '/about', label: copy.nav.about, short: copy.nav.about, end: false },
+    { to: '/about', label: copy.nav.about, end: false },
   ]
 
   return (
@@ -67,16 +84,16 @@ export function Layout() {
       <ScrollToTop />
       <a
         href="#conteudo"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-canvas"
       >
         {copy.nav.skip}
       </a>
 
-      <header className="sticky top-0 z-40 border-b border-line bg-paper">
-        <div className="page flex h-16 items-center justify-between gap-2 sm:gap-6">
+      <header className="sticky top-0 z-40 border-b border-line bg-canvas">
+        <div className="page flex h-14 items-center justify-between gap-2 lg:h-16">
           <Brand />
-          <div className="flex items-center">
-            <nav aria-label="Navigation" className="flex items-center gap-0.5 sm:gap-6">
+          <div className="flex items-center gap-3 lg:gap-8">
+            <nav aria-label={copy.nav.menu} className="flex items-center gap-2 lg:gap-7">
               {links.map((link) => (
                 <NavLink
                   key={link.to}
@@ -85,14 +102,14 @@ export function Layout() {
                   aria-label={link.label}
                   className={({ isActive }) =>
                     cn(
-                      'relative px-1.5 py-2 text-[10.5px] uppercase tracking-[0.08em] transition-colors sm:px-1 sm:text-[11px] sm:tracking-[0.18em]',
-                      isActive ? 'text-ink' : 'text-muted hover:text-ink',
-                      isActive &&
-                        'after:absolute after:-bottom-[1px] after:left-0 after:h-[2px] after:w-full after:bg-clay',
+                      'border-b-2 pb-0.5 text-[9px] font-semibold uppercase tracking-[0.05em] transition-colors lg:text-[10.5px] lg:tracking-[0.14em]',
+                      isActive
+                        ? 'border-accent text-ink'
+                        : 'border-transparent text-muted hover:text-ink',
                     )
                   }
                 >
-                  <span className="sm:hidden">{link.short}</span>
+                  <span className="sm:hidden">{link.short ?? link.label}</span>
                   <span className="hidden sm:inline">{link.label}</span>
                 </NavLink>
               ))}
@@ -106,43 +123,62 @@ export function Layout() {
         <Outlet />
       </main>
 
-      <footer className="mt-24 border-t border-line">
-        <div className="page grid gap-10 py-14 lg:grid-cols-[1.2fr_1fr_1fr]">
+      <footer className="mt-24 bg-ink text-canvas">
+        <div className="page grid gap-10 py-14 lg:grid-cols-[1.35fr_0.85fr_0.85fr] lg:gap-14 lg:py-20">
           <div>
-            <Brand />
-            <p className="mt-5 max-w-xs font-display text-xl leading-snug text-ink-soft">
-              {copy.footer.tagline}
-            </p>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              {copy.footer.blurb}
+            <Brand tone="dark" />
+            <p className="mt-10 font-display text-[clamp(2.6rem,5.5vw,4.6rem)] font-semibold uppercase leading-[0.84] tracking-tightest">
+              {copy.discover.headline.line1}
+              <br />
+              {copy.discover.headline.line2}{' '}
+              <span className="text-accent">{copy.discover.headline.accent}</span>
             </p>
           </div>
 
           <div className="text-sm">
-            <p className="eyebrow">{copy.footer.explore}</p>
-            <ul className="mt-4 space-y-2">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/45">
+              {copy.footer.explore}
+            </p>
+            <ul className="mt-4 space-y-2.5">
               <li>
-                <NavLink to="/" className="link-underline">
+                <NavLink to="/" className="text-canvas/75 transition-colors hover:text-accent">
                   {copy.footer.catalogue}
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/unlocks" className="link-underline">
+                <NavLink
+                  to="/unlocks"
+                  className="text-canvas/75 transition-colors hover:text-accent"
+                >
                   {copy.footer.unlocks}
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/about" className="link-underline">
+                <NavLink
+                  to="/about"
+                  className="text-canvas/75 transition-colors hover:text-accent"
+                >
                   {copy.footer.how}
                 </NavLink>
               </li>
             </ul>
           </div>
 
-          <div className="text-sm text-muted">
-            <p className="eyebrow">{copy.footer.honest}</p>
-            <p className="mt-4 leading-relaxed">{copy.footer.honestBody}</p>
-            <p className="mt-4">{copy.footer.project}</p>
+          <div className="text-[12px] leading-relaxed text-canvas/55">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/45">
+              {copy.footer.honest}
+            </p>
+            <p className="mt-4">{copy.footer.honestBody}</p>
+            <p className="mt-4 text-canvas/40">{copy.footer.project}</p>
+          </div>
+        </div>
+
+        <div className="border-t border-canvas/15">
+          <div className="page flex flex-wrap items-center justify-between gap-3 py-4 text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/40">
+            <span>
+              {copy.discover.stats[0]} · {copy.discover.stats[1]}
+            </span>
+            <span>EST. 2026 · LISBON</span>
           </div>
         </div>
       </footer>

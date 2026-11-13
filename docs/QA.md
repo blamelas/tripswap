@@ -8,7 +8,7 @@ Respostas curtas, para ensaiar em voz alta. Cada linha tem o artefacto que a pro
 > o dinheiro. O TripSwap mostra o custo real de planeamento, propõe trocas pequenas e
 > calcula em quanto tempo a viagem fica ao alcance. Começa no desejo, não no orçamento.
 
-## 16 perguntas
+## 17 perguntas
 
 | # | Pergunta | Resposta curta | Artefacto |
 |---|---|---|---|
@@ -22,12 +22,13 @@ Respostas curtas, para ensaiar em voz alta. Cada linha tem o artefacto que a pro
 | 8 | Porque não pedes o salário? | O valor não depende de dados pessoais. Reduz fricção, risco e superfície de privacidade. | `types.ts` |
 | 9 | O que a AI fez mal? | O motor somava trocas sobrepostas. Um teste falhou com 2 linhas onde esperava 1. Corrigi o motor. | `docs/PROMPTS.md` |
 | 10 | Como reproduzo? | `docker compose up` ou `npm ci && npm run dev`. Node 20. | `README.md` |
-| 11 | Como sabes que funciona? | 35 testes na lógica, checklist manual de 13 casos, CI em cada PR. | `docs/TESTING.md` |
+| 11 | Como sabes que funciona? | 35 testes na lógica, checklist manual de 17 casos, CI em cada PR. | `docs/TESTING.md` |
 | 12 | Onde está deployed? | Vercel, deploy automático a cada push para `main`. | `vercel.json`, `docs/PUBLISH.md` |
 | 13 | Como escalarias? | Pré-renderização, contas e sync, recomendação calculada, testes e2e. | `docs/DECISIONS.md` |
 | 14 | Qual foi a decisão mais difícil? | Excluir trocas sobrepostas em vez de penalizar. Perdi combinações, ganhei um número defensável. | `docs/DECISIONS.md` |
 | 15 | O que ficou de fora? | Auth, booking, preços live, backend, mapas. Sem isso o valor central mantém-se. | `docs/MVP.md` |
 | 16 | A app é bilingue? | Sim: inglês por omissão, português a um clique. Números iguais; copy e dados traduzidos. | `src/i18n`, `tests/i18n.test.ts` |
+| 17 | Qual é a ideia visual? | “The world is the reward”: fotografia full-bleed, Barlow Condensed, ink/canvas/signal. A foto é a superfície de progresso. | `README.md`, `src/index.css`, `RewardPanel` |
 
 ## Frases a evitar
 

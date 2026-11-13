@@ -23,9 +23,10 @@ Supporting line: **Less of this. More of the world.**
 - Tailwind CSS 3.4 (design tokens in `tailwind.config.ts`)
 - React Router 7 (`/`, `/destination/:id`, `/unlocks`, `/about`)
 - Lucide icons
-- Self-hosted fonts via Fontsource: Fraunces (display), Inter Tight (UI),
-  JetBrains Mono (tabular numerals)
+- Self-hosted fonts via Fontsource: Barlow Condensed (display), IBM Plex Sans (UI),
+  IBM Plex Mono (tabular numerals)
 - Typed PT/EN dictionaries in `src/i18n` (no i18n dependency) and a persisted locale
+- Design tokens: canvas `#F7F6F2`, ink `#151A19`, signal `#FF5936`, pale blue `#D8E8EE`
 - Vitest for the calculation engine, data integrity and formatting
 - localStorage for saved plans, behind `src/lib/storage.ts`
 - Docker (multi-stage) + DevContainer, deployed on Vercel
@@ -67,6 +68,10 @@ is the only place where amounts are summed.
 - Keep all user-facing amounts formatted through `src/lib/format.ts`, passing the locale.
 - Every user-facing string lives in `src/i18n/pt.ts` and `src/i18n/en.ts`; no copy
   literals in components. Translated data lives in `src/i18n/content.ts`.
+- Design rules: photography first, Barlow Condensed for display, one signal colour,
+  no serif italics, no warm beige, no rounded pills, no decorative gradients or
+  glassmorphism. Use `PriceBlock` for every €0* surface and `RewardPanel` for the
+  destination progress interaction.
 - No `any`. No new dependency without a stated reason.
 - Run `npm run lint && npm test && npm run build` before committing.
 
@@ -103,6 +108,17 @@ npm test                # Vitest
 npm run build           # typecheck + production build
 docker compose up       # same dev server in a container
 ```
+
+## Design system
+
+- Canvas `#F7F6F2`; ink `#151A19`; signal `#FF5936`; pale blue `#D8E8EE`.
+- Display: Barlow Condensed, uppercase, tight leading (0.79–0.9).
+- Interface: IBM Plex Sans. Numbers: IBM Plex Mono, tabular.
+- No rounded corners. Borders are 1px lines; emphasis comes from scale and contrast.
+- The €0* block always includes the crossed-out planning target, the €0* expression and
+  the "funded by everyday swaps" line. It is never a discount or a free price.
+- The signature interaction is the reward window: destination photo, tide fill, coral
+  edge rail, animated months, then the monthly saving and target.
 
 ## Business context
 

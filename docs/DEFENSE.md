@@ -31,7 +31,7 @@ Nome, URL, repo. Visual: captura da homepage.
 - Visual: um cartão com €0\* e o orçamento real.
 
 ### 4. Demo — 2:00 (ver guião abaixo)
-**O momento de valor:** 3 trocas → 6 meses.
+**O momento de valor:** 3 trocas → 6 meses, com a maré a subir na fotografia e a linha coral a acompanhar.
 Visual: ecrã real, não mockup.
 
 ### 5. Scope — 5:00
@@ -41,7 +41,8 @@ Visual: ecrã real, não mockup.
 - Critério: “sem isto, o utilizador obtém o valor central?”
 - Visual: tabela in/out de `docs/MVP.md`.
 
-### 6. Arquitetura — 6:00
+### 6. Arquitetura e design — 6:00
+- Direção “The world is the reward”: Barlow Condensed, IBM Plex, ink/canvas/signal; fotografia como interface.
 - SPA estática: React 19 + TS + Vite + Tailwind.
 - Dados tipados → motor puro → UI. Sem servidor.
 - i18n local: dicionários PT/EN tipados, paridade testada, motor independente do idioma.
@@ -116,7 +117,7 @@ pedir desculpa mais de uma vez.
 
 ---
 
-## Q&A (13 perguntas)
+## Q&A (14 perguntas)
 
 **1. Isto não é só um CRUD?**
 > “O CRUD é o meio. O produto é o número: um motor que transforma escolhas em prazo,
@@ -170,6 +171,9 @@ pedir desculpa mais de uma vez.
 > “O produto é para Lisboa, mas o júri e o repo são internacionais. A interface tem
 > toggle, os dados estão traduzidos e um teste garante paridade. Os números não mudam
 > com o idioma.”
+
+**14. Porque mudaste o visual?**
+> “A primeira versão era competente mas previsível. O produto é sobre desejo; a fotografia tinha de ser o interface e o mecanismo financeiro a consequência. A reward window liga as trocas à imagem.”
 
 **Se não souberes:** “Não validei isso. A minha hipótese é X; o próximo teste seria Y.”
 
