@@ -1,8 +1,9 @@
+import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowDownRight, ArrowRight } from 'lucide-react'
 import { DESTINATIONS } from '../data/destinations'
+import { useI18n } from '../i18n/context'
 import { DestinationCard } from '../components/DestinationCard'
-import { formatEUR } from '../lib/format'
 import { cn } from '../lib/cn'
 
 const featured = DESTINATIONS.find((destination) => destination.id === 'paris-city-break')
@@ -18,59 +19,46 @@ const GRID = [
   { span: 'lg:col-span-6', variant: 'wide' as const },
 ]
 
-const STEPS = [
-  {
-    number: '01',
-    title: 'Descobre',
-    body: 'Um destino, uma imagem, um orçamento de planeamento claro. O desejo vem primeiro.',
-  },
-  {
-    number: '02',
-    title: 'Troca',
-    body: 'Escolhe mudanças que farias mesmo. Sem salários, sem extratos, sem formulários.',
-  },
-  {
-    number: '03',
-    title: 'Desbloqueia',
-    body: 'Vê a poupança e o prazo em tempo real. Um plano, não uma promessa.',
-  },
-]
-
 export function Discover() {
+  const { copy, fmt } = useI18n()
+
   return (
     <div className="pb-16">
       <section className="page grid items-end gap-12 pb-16 pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-20 lg:pt-16">
         <div className="animate-rise">
-          <p className="eyebrow">Small changes. Bigger journeys.</p>
+          <p className="eyebrow">{copy.discover.eyebrow}</p>
           <h1 className="mt-5 font-display text-[clamp(2.9rem,7.4vw,5.8rem)] font-normal leading-[0.92] tracking-tightest text-ink">
-            O mundo cabe
+            {copy.discover.headline.line1}
             <br />
-            em pequenas
+            {copy.discover.headline.line2}
             <br />
-            <em className="italic text-clay">mudanças.</em>
+            <em className="italic text-clay">{copy.discover.headline.accent}</em>
           </h1>
           <p className="mt-7 max-w-lg text-pretty text-[17px] leading-relaxed text-ink-soft">
-            O TripSwap começa no desejo e mostra o que uma troca pequena pode financiar.
-            Escolhe um destino, vê que hábitos fariam sentido para ti e descobre em quanto
-            tempo ele fica ao teu alcance.
+            {copy.discover.intro}
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a href="#destinos" className="btn-primary">
-              Ver destinos
+              {copy.discover.ctaDestinations}
               <ArrowDownRight className="h-4 w-4" />
             </a>
             <Link to="/about" className="btn-ghost">
-              Como funciona
+              {copy.discover.ctaHow}
             </Link>
           </div>
 
           <p className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] uppercase tracking-[0.14em] text-muted">
-            <span>8 destinos</span>
-            <span className="hidden sm:inline" aria-hidden="true">·</span>
-            <span>24 trocas</span>
-            <span className="hidden sm:inline" aria-hidden="true">·</span>
-            <span>Um cálculo transparente</span>
+            {copy.discover.stats.map((stat, index) => (
+              <Fragment key={stat}>
+                {index > 0 && (
+                  <span className="hidden sm:inline" aria-hidden="true">
+                    ·
+                  </span>
+                )}
+                <span>{stat}</span>
+              </Fragment>
+            ))}
           </p>
         </div>
 
@@ -78,7 +66,7 @@ export function Discover() {
           <div className="animate-fade lg:pb-2" style={{ animationDelay: '120ms' }}>
             <DestinationCard destination={featured} variant="tall" priority />
             <p className="mt-3 text-right text-[10px] uppercase tracking-[0.14em] text-muted">
-              Objetivo ilustrativo de {formatEUR(featured.budget)} · não é um preço
+              {copy.discover.featuredNote(fmt.eur(featured.budget))}
             </p>
           </div>
         )}
@@ -86,7 +74,7 @@ export function Discover() {
 
       <section className="border-y border-line bg-white/35">
         <div className="page grid gap-8 py-8 sm:grid-cols-3 sm:gap-6">
-          {STEPS.map((step) => (
+          {copy.discover.steps.map((step) => (
             <div key={step.number} className="flex gap-4">
               <span className="nums pt-0.5 text-[11px] text-clay">{step.number}</span>
               <div>
@@ -103,14 +91,13 @@ export function Discover() {
       <section id="destinos" className="page scroll-mt-20 pt-16">
         <div className="flex flex-wrap items-end justify-between gap-4 border-b border-line pb-5">
           <div>
-            <p className="eyebrow">O catálogo</p>
+            <p className="eyebrow">{copy.discover.catalogueEyebrow}</p>
             <h2 className="mt-2 font-display text-[clamp(2rem,4vw,3rem)] leading-none text-ink">
-              Por onde começar?
+              {copy.discover.catalogueTitle}
             </h2>
           </div>
           <p className="max-w-sm text-[13px] leading-relaxed text-muted">
-            Do fim de semana perto de casa à viagem que exige um ano de pequenas
-            decisões. Todos os orçamentos são objetivos de planeamento.
+            {copy.discover.catalogueIntro}
           </p>
         </div>
 
@@ -129,33 +116,29 @@ export function Discover() {
       <section className="page mt-20">
         <div className="grid gap-8 border border-line bg-white/50 p-6 sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
-            <p className="eyebrow">A nota dos €0*</p>
+            <p className="eyebrow">{copy.discover.zeroEyebrow}</p>
             <h2 className="mt-3 max-w-lg font-display text-[clamp(1.8rem,3.4vw,2.6rem)] leading-tight text-ink">
-              Não é grátis. É pago com escolhas.
+              {copy.discover.zeroTitle}
             </h2>
             <p className="mt-4 max-w-xl text-[14px] leading-relaxed text-ink-soft">
-              Cada destino tem um custo real de planeamento. O <strong>€0*</strong> mostra
-              o que aconteceria se esse custo fosse coberto por dinheiro poupado nas
-              trocas que escolheres. Não é um desconto, nem uma oferta, nem uma viagem
-              gratuita.
+              {copy.discover.zeroBody}
             </p>
           </div>
           <div className="border-l-0 border-t border-line pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
             <p className="text-[11px] uppercase tracking-[0.14em] text-muted">
-              A regra do projeto
+              {copy.discover.ruleLabel}
             </p>
             <p className="mt-3 font-display text-xl leading-snug text-ink">
-              “Menos isto. Mais mundo.”
+              {copy.discover.ruleQuote}
             </p>
             <p className="mt-3 text-[13px] leading-relaxed text-muted">
-              A viagem continua a ter um preço. O que muda é quem a financia: as
-              decisões pequenas, repetidas, que já fazem parte da tua semana.
+              {copy.discover.ruleBody}
             </p>
             <Link
               to="/about"
               className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-semibold text-clay"
             >
-              Ler as premissas
+              {copy.discover.ruleLink}
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>

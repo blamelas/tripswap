@@ -1,5 +1,5 @@
 import { projectedSavings } from '../lib/calc'
-import { formatEUR } from '../lib/format'
+import { useI18n } from '../i18n/context'
 
 interface ProjectionChartProps {
   monthly: number
@@ -24,6 +24,7 @@ export function ProjectionChart({
   monthsToTarget,
   unlocked,
 }: ProjectionChartProps) {
+  const { copy, fmt } = useI18n()
   const maxValue = Math.max(target, projectedSavings(monthly, oneTime, horizonMonths), 1)
   const yMax = maxValue * 1.08
   const usableW = W - PAD_X * 2
@@ -40,6 +41,7 @@ export function ProjectionChart({
   const targetY = y(target)
   const crossing =
     monthsToTarget !== null && monthsToTarget <= horizonMonths ? monthsToTarget : null
+  const horizonText = fmt.months(horizonMonths)
 
   return (
     <div>
@@ -47,9 +49,7 @@ export function ProjectionChart({
         viewBox={`0 0 ${W} ${H}`}
         className="h-auto w-full"
         role="img"
-        aria-label={`Projeção de poupança ao longo de ${horizonMonths} meses face a um objetivo de ${formatEUR(
-          target,
-        )}.`}
+        aria-label={copy.projection.aria(fmt.eur(target), horizonText)}
       >
         {[0.25, 0.5, 0.75].map((ratio) => (
           <line
@@ -82,7 +82,7 @@ export function ProjectionChart({
           className="fill-clay text-[9px] uppercase"
           style={{ letterSpacing: '0.12em' }}
         >
-          objetivo
+          {copy.common.target}
         </text>
 
         <polyline
@@ -138,17 +138,14 @@ export function ProjectionChart({
         />
 
         <text x={PAD_X} y={H - 6} className="fill-muted text-[9px]">
-          hoje
+          {copy.common.today}
         </text>
         <text x={W - PAD_X} y={H - 6} textAnchor="end" className="fill-muted text-[9px]">
-          {horizonMonths} meses
+          {horizonText}
         </text>
       </svg>
 
-      <p className="mt-2 text-[11px] leading-relaxed text-muted">
-        A linha soma a poupança recorrente mês a mês e as poupanças pontuais no
-        início. Não é uma conta bancária real.
-      </p>
+      <p className="mt-2 text-[11px] leading-relaxed text-muted">{copy.projection.note}</p>
     </div>
   )
 }
