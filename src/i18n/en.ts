@@ -32,6 +32,9 @@ export const en: Copy = {
     months: 'months',
     month: 'month',
     selected: 'swaps selected',
+    selectedCount: (count: number) =>
+      count === 1 ? '1 swap selected' : `${count} swaps selected`,
+
     unlocked: 'Unlocked in simulation',
     noPlan: 'Choose a swap to start.',
     destination: 'Destination',
@@ -311,6 +314,8 @@ export const en: Copy = {
         `Already funding your ${destination} plan.`,
       sameGroup: (destination: string) =>
         `Shares spending with a swap already funding your ${destination} plan.`,
+      emptySelection:
+        'Keep at least one swap for this plan, or move one here.',
       oneTimeUsed: 'This one-time swap is already credited to another plan.',
       transfer: 'Move to this plan',
       keepOther: 'Keep with the other plan',
@@ -321,6 +326,9 @@ export const en: Copy = {
     pause: 'Pause',
     resume: 'Resume',
     achieve: 'Mark as achieved',
+    achieveConfirm:
+      'Mark this plan as achieved? Future estimated savings stop accumulating.',
+    achievedOn: 'Achieved on',
     manage: 'Manage',
     addActivity: 'Add a swap',
     addActivityHint: 'Swaps you are not using yet, checked against your other plans.',

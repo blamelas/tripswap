@@ -30,6 +30,9 @@ export const pt = {
     months: 'meses',
     month: 'mês',
     selected: 'trocas escolhidas',
+    selectedCount: (count: number) =>
+      count === 1 ? '1 troca escolhida' : `${count} trocas escolhidas`,
+
     unlocked: 'Desbloqueado na simulação',
     noPlan: 'Escolhe uma troca para começar.',
     destination: 'Destino',
@@ -309,6 +312,8 @@ export const pt = {
         `Já está a financiar o teu plano de ${destination}.`,
       sameGroup: (destination: string) =>
         `Partilha despesas com uma troca que já financia o teu plano de ${destination}.`,
+      emptySelection:
+        'Mantém pelo menos uma troca neste plano, ou move uma para aqui.',
       oneTimeUsed: 'Esta troca pontual já está creditada noutro plano.',
       transfer: 'Mover para este plano',
       keepOther: 'Manter no outro plano',
@@ -319,6 +324,9 @@ export const pt = {
     pause: 'Pausar',
     resume: 'Retomar',
     achieve: 'Marcar como concluído',
+    achieveConfirm:
+      'Marcar este plano como concluído? A poupança estimada futura deixa de acumular.',
+    achievedOn: 'Concluído a',
     manage: 'Gerir',
     addActivity: 'Adicionar uma troca',
     addActivityHint:
