@@ -6,6 +6,7 @@ import { getDestination } from '../data/destinations'
 import { getHabit } from '../data/habits'
 import { calculatePlan } from '../lib/calc'
 import { formatDate, formatEUR, formatMonths } from '../lib/format'
+import { withBase } from '../lib/base'
 import { clearPlans, readPlans, removePlan } from '../lib/storage'
 import { ProgressRail } from '../components/ProgressRail'
 
@@ -118,7 +119,7 @@ export function MyUnlocks() {
                 aria-label={`Abrir ${view.name}`}
               >
                 <img
-                  src={view.image}
+                  src={withBase(view.image)}
                   alt=""
                   width={800}
                   height={600}
