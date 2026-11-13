@@ -3,6 +3,14 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.0.5] — 2026-11-13
+
+### Alterado
+
+- URL público passa a ser o deploy de produção na Vercel:
+  <https://tripswap-kappa.vercel.app/>. O GitHub Pages mantém-se como fallback.
+- README e guião de defesa alinhados com o URL final.
+
 ## [1.0.4] — 2026-11-13
 
 ### Corrigido

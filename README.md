@@ -18,8 +18,8 @@ and funding horizon update instantly.
 | | |
 |---|---|
 | **Local demo** | `npm run dev` → http://localhost:5173 |
-| **Public demo (GitHub Pages)** | https://blamelas.github.io/tripswap/ |
-| **Vercel production** | https://tripswap-filipes-projects-ba4328b8.vercel.app/ — auto-deploy active; disable Deployment Protection to make it public |
+| **Live demo** | https://tripswap-kappa.vercel.app/ |
+| **Fallback demo (GitHub Pages)** | https://blamelas.github.io/tripswap/ |
 | **Repository** | https://github.com/blamelas/tripswap |
 | **Defense script** | [`docs/DEFENSE.md`](docs/DEFENSE.md) (pt-PT) |
 | **Assumptions** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) (pt-PT) |
@@ -80,7 +80,7 @@ one primary screen.
 | Persistence | `localStorage` (`tripswap:unlocks:v1`) |
 | Tests | Vitest — 29 tests |
 | Environment | Multi-stage Docker + DevContainer |
-| Deploy | Vercel (auto-deploy) · GitHub Pages (public fallback) |
+| Deploy | Vercel (production) · GitHub Pages (fallback) |
 | AI in development | DeepSeek (`deepseek-flash`) as the coding agent |
 
 ## Run it
@@ -144,8 +144,7 @@ docs/        MVP, assumptions, decisions, iterations, testing, defense
 - Browser-only persistence; clearing site data removes saved plans.
 - The horizon is an arithmetic projection, not a savings guarantee.
 - Local photography with licences listed in [`docs/CREDITS.md`](docs/CREDITS.md).
-- The Vercel production alias sits behind Vercel Authentication until the project owner
-  disables Deployment Protection. GitHub Pages is the public fallback until then.
+- GitHub Pages is kept as a static fallback; the primary deployment is Vercel.
 
 ## Documentation
 

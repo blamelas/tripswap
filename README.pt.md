@@ -19,8 +19,8 @@ projetada e o prazo de financiamento a atualizar-se de imediato.
 | | |
 |---|---|
 | **Demo local** | `npm run dev` → http://localhost:5173 |
-| **Demo pública (Pages)** | https://blamelas.github.io/tripswap/ |
-| **Produção Vercel** | https://tripswap-filipes-projects-ba4328b8.vercel.app/ — deploy automático ativo; desativar a Deployment Protection para ficar público |
+| **Demo pública (Vercel)** | https://tripswap-kappa.vercel.app/ |
+| **Fallback (GitHub Pages)** | https://blamelas.github.io/tripswap/ |
 | **Repositório** | https://github.com/blamelas/tripswap |
 | **Guião de defesa** | [`docs/DEFENSE.md`](docs/DEFENSE.md) |
 | **Pressupostos** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) |
@@ -145,8 +145,7 @@ docs/        MVP, pressupostos, decisões, iterações, testes, defesa
 - Persistência apenas no navegador; limpar os dados do site remove os planos.
 - O prazo é uma projeção aritmética, não uma garantia de poupança.
 - Fotografias locais com licenças indicadas em [`docs/CREDITS.md`](docs/CREDITS.md).
-- O alias de produção da Vercel está atrás de Vercel Authentication até o proprietário
-  desativar a Deployment Protection. Até lá, o GitHub Pages é o fallback público.
+- O GitHub Pages fica como fallback estático; o deploy principal é na Vercel.
 
 ## Documentação
 
