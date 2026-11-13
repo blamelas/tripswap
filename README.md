@@ -20,6 +20,7 @@ and funding horizon update instantly.
 | **Live demo** | https://tripswap-home.vercel.app/ |
 | **Repository** | https://github.com/blamelas/tripswap |
 | **Defense script** | [`docs/DEFENSE.md`](docs/DEFENSE.md) (English) |
+| **5-minute script** | [`docs/DEFENSE-5MIN.md`](docs/DEFENSE-5MIN.md) (pt-PT) |
 | **10-minute deck script** | [`docs/DECK-SCRIPT.md`](docs/DECK-SCRIPT.md) (English) |
 | **Slides** | [`docs/TripSwap-Defense.pptx`](docs/TripSwap-Defense.pptx) · [PDF](docs/TripSwap-Defense.pdf) |
 | **Submission pack** | [`docs/SUBMISSION.md`](docs/SUBMISSION.md) |
@@ -51,6 +52,24 @@ one primary screen.
 2. **Select** realistic changes without entering income, expenses or bank details.
 3. **Understand** the potential savings and estimated horizon, with the maths visible.
 4. **Save** goals and plans locally to come back later.
+
+### Minimum moment of value
+
+Under 60 seconds, no account: open **Paris City Break**, choose **Balanced**, and watch
+**€122/month** become **6 months**. The card turns coral and the rail climbs the
+photograph — the trip stops being an idea and becomes a dated plan.
+
+## Features: MVP and backlog
+
+| In the MVP | In the backlog |
+|---|---|
+| 8 destinations and 25 swaps | Accounts and sync |
+| Deterministic engine with overlap groups | Live prices and flight APIs |
+| Unlocks, deep links and local persistence | Booking and payments |
+| PT/EN parity, `.ics` reminders, responsive UI | Maps, weather, e2e tests, observability |
+
+The scope rule was always the same: without this, does the user still get the central
+value — a cost and a horizon they can defend?
 
 ## What makes it different
 
@@ -153,6 +172,16 @@ npm run build       # production build
 node scripts/assumptions.mjs > docs/ASSUMPTIONS.md   # regenerate assumptions
 ```
 
+### Production and monitoring
+
+- **Deploy:** Vercel builds `main` automatically; HTTPS is automatic.
+- **Secrets:** there are no runtime secrets in the SPA; if any are added, they go in
+  the Vercel dashboard, never in the repo. `.env.local` is ignored.
+- **Logs:** build and runtime logs in the Vercel dashboard.
+- **Uptime:** a free UptimeRobot HTTP monitor on the public URL, alerting by email
+  after 5 minutes down.
+- **Dependencies:** `npm audit` before each release.
+
 ## How the calculation works
 
 - **Recurring:** `(original cost − alternative) × monthly frequency`
@@ -223,6 +252,7 @@ docs/        MVP, assumptions, decisions, iterations, testing, defense
 - [`docs/TESTING.md`](docs/TESTING.md) — automated tests and manual checklist
 - [`docs/PROMPTS.md`](docs/PROMPTS.md) — real prompts and one real AI failure
 - [`docs/DEFENSE.md`](docs/DEFENSE.md) — English demo runbook and full defence script
+- [`docs/DEFENSE-5MIN.md`](docs/DEFENSE-5MIN.md) — guião de 5 minutos (limite do Módulo 07)
 - [`docs/DECK-SCRIPT.md`](docs/DECK-SCRIPT.md) — English 10-minute slide script
 - [`docs/QA.md`](docs/QA.md) — English rehearsal flashcards (26 questions)
 - [`docs/VIDEO.md`](docs/VIDEO.md) — English 3-minute backup video script
@@ -240,6 +270,43 @@ components, tests and documentation. It was **not** used for runtime arithmetic,
 generation or health claims. The process is recorded in
 [`docs/ITERATIONS.md`](docs/ITERATIONS.md) and [`docs/PROMPTS.md`](docs/PROMPTS.md),
 including a real failure caught by a test.
+
+### What went well
+
+- The calculation contract was specified before the UI: inputs, outputs, `null` above
+  240 months. The agent could then be tested instead of trusted.
+- One story per cycle kept each diff small and the review honest.
+- The agent wrote the overlap groups and the defensive dedupe in the engine, which
+  made old deep links safe.
+
+### What was hard
+
+- The first `calculatePlan` added every swap, even two in the same `exclusiveGroup`.
+  The UI replaced correctly, but the engine accepted an unsanitised list. A test the
+  agent wrote caught it: two snack swaps produced two lines instead of one. I fixed
+  the engine, not the test.
+- Keeping PT/EN in true parity — every string, every swap, every number identical —
+  needed a dedicated test rather than trust.
+- The visual direction was rewritten once: the first version was competent but
+  generic; desire had to be the interface, not a decoration.
+
+### A real prompt
+
+> “Cria `src/lib/calc.ts` com: `monthlySaving`, `oneTimeSaving`, `projectedSavings`,
+> `monthsToTarget` e `calculatePlan`. Regras: recorrente = `(original − alternativa) ×
+> frequência`; pontual = diferença, contada uma vez; prazo = primeiro mês inteiro;
+> devolve `null` acima de 240 meses. Não formata nada; não toca em componentes. Depois
+> cria `tests/calc.test.ts` com os valores documentados e os casos-limite. Corre os
+> testes.”
+
+This is cycle 1 in [`docs/PROMPTS.md`](docs/PROMPTS.md). It produced the engine and 21
+tests — and the failure above.
+
+## Status and next steps
+
+The MVP is live and complete against the four stories. Next: a pre-rendered catalogue,
+accounts and sync, custom swaps, savings tracking, and end-to-end tests. The explicit
+non-goals remain auth, booking, live prices and a backend.
 
 ## Credits
 

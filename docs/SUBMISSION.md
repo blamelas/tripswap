@@ -21,7 +21,7 @@
 | GitHub description and homepage | ✅ |
 | 3+ merged PRs | ✅ 21+ |
 | CI on every PR | ✅ `lint → typecheck → test → build` |
-| 3+ branches | ✅ 29 remote branches |
+| 3+ branches | ✅ 30 remote branches |
 | 15+ conventional commits | ✅ 114+ |
 | Tag `v1.0.0` | ✅ and tags up to `v1.5.7` |
 | 3+ unit tests | ✅ 42 |
@@ -70,7 +70,7 @@
 | Versioned `.env.example` | `.env.example` | ✅ |
 | Zero secrets in history | see §6 | ✅ |
 | 15+ conventional commits | 114+ | ✅ |
-| 3+ branches and 3+ merged PRs | 29 branches, 21+ PRs | ✅ |
+| 3+ branches and 3+ merged PRs | 30 branches, 21+ PRs | ✅ |
 | Tag `v1.0.0` | tags up to `v1.5.7` | ✅ |
 | `.devcontainer/devcontainer.json` | `.devcontainer/` | ✅ |
 | `Dockerfile` + `docker-compose.yml` | root | ✅ |
@@ -103,7 +103,7 @@
 | 4:50 | Architecture and design | Data → pure engine → UI; “the world is the reward” |
 | 5:40 | The calculation | Formula, overlaps, one-time savings, games |
 | 6:30 | The swaps catalogue | 25/6, carry-over, games, roadmap |
-| 7:20 | Process with AI | 114+ commits, 21+ PRs, 3 agents, the engine failure |
+| 7:20 | Process with AI | 120+ commits, 21+ PRs, 3 agents, the engine failure |
 | 8:20 | Quality and deploy | CI, 42 tests, Vercel, rollback |
 | 9:20 | Limits and close | Illustrative budgets; next step |
 

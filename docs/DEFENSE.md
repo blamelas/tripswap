@@ -73,7 +73,7 @@ horizon buttons update. Visual: the real screen, not a mockup.
 
 ### 9. Process with AI — 6:40
 - `CLAUDE.md`, 3 agents, 3 skills, 49 cycles in `ITERATIONS.md`.
-- 42 tests; two of them caught real AI errors. 110+ commits, 20+ merged PRs, CI on every PR.
+- 42 tests; two of them caught real AI errors. 120+ commits, 20+ merged PRs, CI on every PR.
 - Failure 1: the engine summed overlapping swaps. A test failed with 2 lines instead of 1. I fixed the engine, not the test.
 - Failure 2: a literal i18n return type broke the English dictionary. `tsc` caught it; I widened the type and added a parity test.
 - Visual: `git log --oneline`, agent files, a failing test.
@@ -131,7 +131,7 @@ Use [`QA.md`](QA.md) (26 questions). If you do not know:
 - Paris, Essential: €90/month · 8 months.
 - Paris, Conscious: €146/month + €65 one-time · 5 months.
 - 42 tests · 27 manual cases · 26 Q&A · 49 iterations.
-- 110+ commits · 20+ merged PRs · 21 merged at the time of writing.
+- 120+ commits · 20+ merged PRs · 21 merged at the time of writing.
 
 ---
 
