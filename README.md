@@ -2,6 +2,9 @@
 
 **Small changes. Bigger journeys.**
 
+[![CI](https://github.com/blamelas/tripswap/actions/workflows/ci.yml/badge.svg)](https://github.com/blamelas/tripswap/actions/workflows/ci.yml)
+[![Deploy](https://github.com/blamelas/tripswap/actions/workflows/pages.yml/badge.svg)](https://github.com/blamelas/tripswap/actions/workflows/pages.yml)
+
 TripSwap is a premium travel discovery experience that shows how small, realistic
 changes in everyday habits could finance a meaningful trip. Users browse a curated
 catalogue, choose swaps they would genuinely consider, and watch the projected savings
