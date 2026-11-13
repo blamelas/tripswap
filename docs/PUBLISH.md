@@ -11,15 +11,10 @@ Vite, build `npm run build`, output `dist` e o rewrite de SPA (deep links com 20
 `filipes-projects-ba4328b8`). Cada push para `main` publica; cada PR cria um preview.
 A build de produção está verde.
 
-**Alias de produção:** <https://tripswap-filipes-projects-ba4328b8.vercel.app/>
+**URL público:** <https://tripswap-kappa.vercel.app/>
 
-> **Bloqueio atual:** o alias responde com *Vercel Authentication* (SSO). Para ficar
-> público: Vercel → projeto `tripswap` → **Settings** → **Deployment Protection** →
-> **Vercel Authentication** → desativar (ou aplicar apenas a *Preview Deployments*).
-> Depois, abrir o alias em incógnito e confirmar os deep links.
->
-> Enquanto a proteção estiver ativa, o GitHub Pages
-> (<https://blamelas.github.io/tripswap/>) é o URL público.
+> Deployment Protection desativada. O URL responde 200 em `/`, `/destination/...`,
+> `/unlocks` e `/about`; o GitHub Pages mantém-se como fallback estático.
 
 ### 1. Login (alternativa por CLI)
 
@@ -78,7 +73,7 @@ curl -I https://<projeto>.vercel.app/unlocks                          # 200
 Vercel → Deployments → versão anterior → **Promote to Production**. Sem base de dados,
 o rollback é imediato.
 
-## GitHub Pages (fallback atual, já no ar)
+## GitHub Pages (fallback)
 
 - **URL:** <https://blamelas.github.io/tripswap/>
 - **Workflow:** [`.github/workflows/pages.yml`](../.github/workflows/pages.yml) — corre
