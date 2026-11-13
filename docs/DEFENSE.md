@@ -56,7 +56,7 @@ Visual: ecrã real, não mockup.
 
 ### 8. Processo com AI — 7:45
 - `CLAUDE.md`, 3 agentes, 3 skills, 14 ciclos em `ITERATIONS.md`.
-- 26 testes; um deles apanhou um erro real do agente.
+- 27 testes; um deles apanhou um erro real do agente.
 - Visual: `git log --oneline`, ficheiros de agentes, teste a falhar.
 
 ### 9. Qualidade e deploy — 8:45

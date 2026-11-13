@@ -3,6 +3,19 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.0.1] — 2026-11-13
+
+### Alterado
+
+- As fórmulas do recibo mostram sempre dois decimais (`2,00 € − 0,40 €`), para que a
+  conta seja legível linha a linha.
+- O sufixo de valor passou a `/mês` (sem espaço) e ganhou um espaço textual antes,
+  para leitura por screen readers.
+
+### Testes
+
+- 27 testes (novo caso para formatação com dois decimais).
+
 ## [1.0.0] — 2026-11-13
 
 ### Adicionado
