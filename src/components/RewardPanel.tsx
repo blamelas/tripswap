@@ -252,8 +252,8 @@ export function RewardPanel({
           </button>
         )}
 
-        {/* Secondary save for saved and live plans. */}
-        {planStatus !== 'none' && (
+        {/* Secondary save only while the plan is still a bookmark. */}
+        {isSaved && (
           <button
             type="button"
             onClick={onSave}
@@ -388,7 +388,7 @@ export function MobileFundingBar({
             </button>
           )}
 
-          {(live || planStatus === 'saved') && (
+          {planStatus === 'saved' && (
             <button
               type="button"
               onClick={onSave}

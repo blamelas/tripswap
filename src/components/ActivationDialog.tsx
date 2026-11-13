@@ -40,16 +40,47 @@ export function ActivationDialog({
     Object.fromEntries(conflicts.map((conflict) => [conflict.habitId, false])),
   )
   const firstActionRef = useRef<HTMLButtonElement | null>(null)
+  const dialogRef = useRef<HTMLDivElement | null>(null)
   const allKept = conflicts.every((conflict) => !(choices[conflict.habitId] ?? false))
   const wouldStartEmpty = remainingCount === 0 && allKept
 
   useEffect(() => {
+    const previous = document.activeElement as HTMLElement | null
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
     firstActionRef.current?.focus()
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      previous?.focus?.()
+    }
   }, [])
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
-      if (event.key === 'Escape') onCancel()
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        onCancel()
+        return
+      }
+      if (event.key !== 'Tab') return
+
+      const root = dialogRef.current
+      if (!root) return
+      const focusable = root.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      )
+      if (focusable.length === 0) return
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
@@ -73,6 +104,7 @@ export function ActivationDialog({
       }}
     >
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}

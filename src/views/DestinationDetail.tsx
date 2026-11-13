@@ -132,8 +132,9 @@ function DetailView({ destination }: { destination: Destination }) {
   }
 
   function handleStart() {
-    // Starting always keeps the plan; the bookmark is created if needed.
-    if (!getPlan(destination.id)) handleSave()
+    // Starting always persists the current selection first, so the saved plan
+    // and its new allocations can never drift apart.
+    handleSave()
 
     const startingHabits = selectedHabits.filter(
       (habit) => monthlySaving(habit) > 0 || oneTimeSaving(habit) > 0,
