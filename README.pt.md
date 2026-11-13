@@ -175,9 +175,9 @@ destino. **Jogos de azar e apostas** usa uma estimativa fixa e conservadora — 
 20 € reduzidos, 20 €/mês — sem inputs e sem médias inventadas. As trocas escolhidas ficam guardadas localmente
 e seguem para qualquer plano através dos links de destino e da seleção global.
 
-Cada atividade tem um ícone próprio e uma faixa fotográfica estreita e mascarada do
-Wikimedia Commons na edge do cartão. A faixa é textura, não um tile de stock; a
-fotografia completa continua reservada aos destinos. Créditos:
+Cada atividade tem um ícone próprio e uma faixa fotográfica de largura total do
+Wikimedia Commons no topo do cartão. A faixa é cortada de forma limpa, sem blur nem
+fade; a fotografia completa continua reservada aos destinos. Créditos:
 [`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md). Ao selecionar uma troca, aparece um
 check monocromático no cartão. As categorias começam fechadas; abrir uma fecha as
 outras, mantendo o catálogo curto.

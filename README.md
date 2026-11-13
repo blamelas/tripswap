@@ -173,9 +173,9 @@ destination flow. **Games of chance & betting** uses a fixed, conservative estim
 €20 reduced, €20/month — with no user inputs and no invented average. Selected swaps are stored locally and carried into any destination
 plan through the destination links and the global selection.
 
-Each activity has a distinct icon and a narrow, masked photographic strip from Wikimedia
-Commons on the card edge. The strip is a texture, not a full stock-photo tile; full
-photography remains destination-led. Credits: [`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md).
+Each activity has a distinct icon and a full-width photographic strip from Wikimedia
+Commons across the top of the card. The strip is cropped cleanly, with no blur or fade;
+full photography remains destination-led. Credits: [`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md).
 Selecting a swap shows a standard monochrome check in the card. Categories start
 collapsed; opening one closes the others, keeping the catalogue short.
 

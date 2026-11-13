@@ -1,7 +1,8 @@
 # Image credits — swap strips
 
-The 25 swap cards use a narrow, masked strip from Wikimedia Commons. The strip is
-a texture, not a full stock-photo tile. Licenses and authors are listed below.
+The 25 swap cards use a full-width strip from Wikimedia Commons at the top of each
+card. The strip is cropped cleanly, with no blur or fade; it is a texture, not a full
+stock-photo tile. Licenses and authors are listed below.
 
 | Habit | File | Author | License | Source |
 |---|---|---|---|---|

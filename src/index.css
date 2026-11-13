@@ -99,20 +99,7 @@
     scrollbar-width: none;
   }
 
-  .swap-edge {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      #000 0%,
-      #000 55%,
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      #000 0%,
-      #000 55%,
-      transparent 100%
-    );
-  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {

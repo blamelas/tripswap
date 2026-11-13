@@ -45,9 +45,9 @@ export function SwapCard({ habit, selected, onToggle }: SwapCardProps) {
         selected ? 'border-ink bg-sky/35' : 'bg-white/25',
       )}
     >
-      <span
+      <div
         aria-hidden="true"
-        className="swap-edge pointer-events-none absolute inset-y-0 left-0 z-10 w-[12px] overflow-hidden"
+        className="-mx-4 -mt-4 mb-3 h-9 overflow-hidden bg-sky/30"
       >
         <img
           src={habitImage(habit.id)}
@@ -56,7 +56,7 @@ export function SwapCard({ habit, selected, onToggle }: SwapCardProps) {
           loading="lazy"
           decoding="async"
         />
-      </span>
+      </div>
       <div className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 items-start gap-3">
           <span

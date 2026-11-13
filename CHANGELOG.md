@@ -3,6 +3,15 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.5.4] — 2026-11-13
+
+### Alterado
+
+- A faixa fotográfica dos cartões passa de uma **edge vertical de 12 px com fade** para
+  uma **faixa horizontal de 36 px, de largura total, no topo**. Sem blur, sem máscara
+  desfocada; a imagem é apenas cortada de forma limpa.
+- 42 testes.
+
 ## [1.5.3] — 2026-11-13
 
 ### Alterado
