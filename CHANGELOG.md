@@ -3,6 +3,15 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.0.2] — 2026-11-13
+
+### Adicionado
+
+- Deploy automático no GitHub Pages, com build testado em cada push para `main`.
+- Suporte de subpath (`VITE_BASE`), `basename` no router e `withBase` para imagens.
+- Fallback `404.html` para deep links em hosting estático.
+- `aria-label` nos links de navegação para nomes acessíveis sem duplicação.
+
 ## [1.0.1] — 2026-11-13
 
 ### Alterado

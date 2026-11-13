@@ -21,6 +21,8 @@ commit. Os tempos são reais e incluem revisão manual.
 | 14 | 13 Nov 03:35 | Release | Lint, typecheck, test, build, tag | `v1.0.0` | `chore(release): v1.0.0` | 10 min |
 | 15 | 13 Nov 03:36 | Precisão | Recibo com dois decimais; sufixo `/mês` acessível | 27/27 verdes | `fix(receipt): show cents and fix value suffix spacing` | 10 min |
 | 16 | 13 Nov 03:37 | Patch | Bump 1.0.1, changelog, tag | `v1.0.1` | `chore(release): v1.0.1` | 5 min |
+| 17 | 13 Nov 03:38 | Deploy | GitHub Pages, subpath, SPA fallback | URL público | `feat(deploy): support subpath hosting and github pages` | 20 min |
+| 18 | 13 Nov 03:40 | Release | URL no README, bump 1.0.2, tag | `v1.0.2` | `chore(release): v1.0.2` | 5 min |
 
 ## O que aprendi
 
