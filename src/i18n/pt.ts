@@ -7,6 +7,8 @@ export const pt = {
   nav: {
     discover: 'Destinos',
     placesShort: 'Locais',
+    swaps: 'As trocas',
+    swapsShort: 'Trocas',
     unlocks: 'Os meus planos',
     unlocksShort: 'Planos',
     about: 'Sobre',
@@ -53,6 +55,7 @@ export const pt = {
   footer: {
     explore: 'Explorar',
     catalogue: 'Destinos',
+    swaps: 'As trocas',
     unlocks: 'Os meus planos',
     how: 'Sobre',
     honest: 'Nota honesta',
@@ -78,6 +81,7 @@ export const pt = {
     entertainment: 'Lazer e subscrições',
     shopping: 'Compras e reparações',
     wellbeing: 'Bem-estar',
+    games: 'Jogos e apostas',
   },
   card: {
     aria: (name: string, country: string, budget: string) =>
@@ -96,7 +100,7 @@ export const pt = {
       'Escolhe um lugar. Muda pequenos hábitos. Vê em quanto tempo ele fica ao teu alcance.',
     ctaDestinations: 'Encontra o próximo lugar',
     ctaHow: 'Como funciona',
-    stats: ['8 destinos', '24 trocas', 'Sem folhas de cálculo'],
+    stats: ['8 destinos', '25 trocas', 'Sem folhas de cálculo'],
     chapters: ['Sonhar', 'Trocar', 'Chegar'],
     featuredNote: (budget: string) =>
       `Objetivo ilustrativo de ${budget} · não é um preço`,
@@ -353,6 +357,15 @@ export const pt = {
     body: 'O endereço pode estar incompleto. O catálogo continua à espera.',
     cta: 'Voltar ao catálogo',
   },
+  games: {
+    current: 'Gasto mensal atual',
+    reduced: 'Gasto mensal que queres manter',
+    save: 'Guardar valores',
+    estimated: 'Poupança mensal estimada',
+    hint: 'Indica os dois valores para ver a poupança.',
+    invalid: 'O valor reduzido deve ser inferior ao atual.',
+    setFirst: 'Define os teus valores mensais',
+  },
   reminder: {
     add: 'Adicionar lembrete',
     edit: 'Editar lembrete',
@@ -373,6 +386,42 @@ export const pt = {
     eventTitle: (destination: string) => `TripSwap — rever ${destination}`,
     eventDescription: (swaps: number, monthly: string, horizon: string, target: string) =>
       `${swaps} trocas · ${monthly}/mês · ${horizon} · objetivo ${target}. Simulação, não uma reserva.`,
+  },
+  swaps: {
+    eyebrow: 'As trocas',
+    headline: {
+      line1: 'Menos do que não precisas.',
+      line2: 'Mais do que queres viver.',
+    },
+    intro:
+      'Escolhe as mudanças que te parecem valer a pena. Junta-as a um plano e vê onde te podem levar.',
+    swapCount: 'trocas',
+    categoryCount: 'categorias',
+    selected: 'selecionadas',
+    monthly: 'Por mês',
+    oneTime: 'Uma vez',
+    add: 'Adicionar ao meu plano',
+    added: 'Adicionada',
+    assumptions: 'Premissas e cálculo',
+    alone: (name: string, months: string) =>
+      `Sozinha, esta troca poderia cobrir ${name} em cerca de ${months}.`,
+    start: (name: string) => `Um começo pontual para ${name}.`,
+    leads: 'Adiciona a um plano para veres onde leva.',
+    cta: 'Vê onde estas trocas te podem levar',
+    ctaShort: 'Ver destinos',
+    destinationsTitle: 'Escolhe um lugar.',
+    destinationsIntro: 'Levamos as trocas escolhidas para o plano.',
+    choose: 'Escolher este lugar',
+    futureEyebrow: 'Roadmap',
+    futureTitle: 'Constrói o teu plano de liberdade.',
+    futureIntro:
+      'Duas ferramentas estão em desenvolvimento para tornares o plano verdadeiramente teu.',
+    createSwapTitle: 'Criar a minha troca',
+    createSwapBody: 'Define um hábito, uma alternativa e a poupança que esperas.',
+    dreamTripTitle: 'Adicionar a minha viagem de sonho',
+    dreamTripBody: 'Dá ao teu plano um destino e um orçamento pessoais.',
+    comingSoon: 'Em desenvolvimento',
+    futureNote: 'Estas ferramentas estão em desenvolvimento. Ainda não estão ativas.',
   },
   a11y: {
     progress: 'Progresso para o objetivo',

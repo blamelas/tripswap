@@ -6,6 +6,7 @@ export const HABIT_CATEGORY_LABELS: Record<HabitCategory, string> = {
   entertainment: 'Lazer e subscrições',
   shopping: 'Compras e reparações',
   wellbeing: 'Bem-estar',
+  games: 'Jogos e apostas',
 }
 
 export const HABIT_CATEGORY_ORDER: HabitCategory[] = [
@@ -14,6 +15,7 @@ export const HABIT_CATEGORY_ORDER: HabitCategory[] = [
   'entertainment',
   'shopping',
   'wellbeing',
+  'games',
 ]
 
 /**
@@ -356,6 +358,22 @@ export const HABITS: Habit[] = [
     saving: 120,
     assumptions: '20 maços por mês · 6 € por maço. Não inclui apoio à cessação.',
     benefits: ['Menos tabaco comprado'],
+  },
+  {
+    id: 'games-betting',
+    title: 'Reduzir gastos em jogos e apostas',
+    description:
+      'Pequenos valores somam-se ao longo do tempo. Vê quanto desse orçamento podes reservar para uma nova experiência.',
+    category: 'games',
+    kind: 'recurring',
+    originalCost: 0,
+    alternativeCost: 0,
+    monthlyFrequency: 1,
+    saving: 0,
+    assumptions:
+      'Indica o teu gasto mensal atual e o valor que preferes manter. Poupança = atual − reduzido.',
+    benefits: ['Consumo consciente'],
+    customExpense: true,
   },
   {
     id: 'exercise-at-home',

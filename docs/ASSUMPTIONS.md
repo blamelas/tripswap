@@ -39,7 +39,12 @@ Todos os valores são **ilustrativos e fictícios**, definidos para este projeto
 | `second-hand-instead-of-new` | Compras e reparações | mensal | 30 € | 10 € | 1/mês | 20 € | — |
 | `sell-unused-items` | Compras e reparações | pontual | 80 € | 0 € | — | 80 € | — |
 | `stop-tobacco` | Bem-estar | mensal | 6 € | 0 € | 20/mês | 120 € | — |
+| `games-betting` | undefined | mensal | 0 € | 0 € | 1/mês | 0 € | — |
 | `exercise-at-home` | Bem-estar | mensal | 30 € | 0 € | 1/mês | 30 € | — |
+
+> **Jogos e apostas:** `games-betting` não tem valor fixo. A poupança é
+> `gasto mensal atual − gasto mensal reduzido`, introduzida pelo utilizador; sem
+> valores não existe poupança numérica. Não é usada qualquer média universal.
 
 ## Destinos
 
@@ -65,4 +70,4 @@ Duas trocas do mesmo grupo assumem a mesma despesa. Só uma pode estar ativa; es
 - **subscriptions**: Emprestar livros e cancelar um serviço de streaming · Cancelar subscrições esquecidas
 - **repairs**: Reparar sapatos em vez de comprar novos · Reparar equipamento antes de substituir
 
-Total: 24 trocas, 8 destinos.
+Total: 25 trocas, 8 destinos.

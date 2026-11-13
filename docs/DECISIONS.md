@@ -1,6 +1,6 @@
 # Decisões
 
-Oito decisões que explicam a forma do produto. Cada uma tem o custo assumido.
+Nove decisões que explicam a forma do produto. Cada uma tem o custo assumido.
 
 ## 1. SPA estática em vez de Next.js
 
@@ -17,7 +17,7 @@ seria a próxima melhoria.
 
 ## 2. Dados locais tipados em vez de API
 
-**Contexto:** o MVP precisa de 8 destinos e 24 trocas, todos fictícios.
+**Contexto:** o MVP precisa de 8 destinos e 25 trocas, todos fictícios.
 
 **Decisão:** `src/data/*.ts` com tipos estritos e um teste que valida a integridade.
 
@@ -81,7 +81,7 @@ a viagem é possível.
 ## 7. Dicionários locais em vez de uma biblioteca de i18n
 
 **Contexto:** a app tem dois públicos — o viajante em Lisboa e o júri internacional do
-curso. A copy é extensa (24 trocas, 8 destinos, método) e os números não podem mudar
+curso. A copy é extensa (25 trocas, 8 destinos, método) e os números não podem mudar
 com o idioma.
 
 **Decisão:** dois dicionários tipados (`src/i18n/pt.ts`, `en.ts`) e mapas de conteúdo
@@ -111,3 +111,19 @@ consequência. A tipografia condensada dá escala e confiança sem parecer um te
 **Trade-off:** menos densidade por ecrã e mais dependência de boa fotografia. As imagens
 substituídas (Lisboa, Barcelona, Islândia) exigem créditos e peso de página; foram
 comprimidas para WebP local.
+
+## 9. Valores de jogos introduzidos pelo utilizador
+
+**Contexto:** não existe uma média universal de gasto em jogos e apostas, e inventá-la
+seria enganador e potencialmente prejudicial.
+
+**Decisão:** `games-betting` é uma troca `customExpense`; o utilizador introduz o gasto
+mensal atual e o valor que quer manter. A poupança é a diferença, calculada pelo mesmo
+motor e guardada como snapshot no plano. Sem valores, não há número e a troca não pode
+ser adicionada.
+
+**Porquê:** honestidade, segurança e integração com o cálculo existente sem duplicar
+lógica. Não há promessa de recuperar perdas nem sugestão de que apostar financia viagens.
+
+**Trade-off:** exige dois inputs; é mais lento do que um valor pré-definido, mas é o
+único caminho defensável.

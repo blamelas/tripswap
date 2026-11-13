@@ -20,6 +20,8 @@ and funding horizon update instantly.
 | **Live demo** | https://tripswap-home.vercel.app/ |
 | **Repository** | https://github.com/blamelas/tripswap |
 | **Defense script** | [`docs/DEFENSE.md`](docs/DEFENSE.md) (pt-PT) |
+| **Slides** | [`docs/TripSwap-Defense.pptx`](docs/TripSwap-Defense.pptx) |
+| **Submission pack** | [`docs/SUBMISSION.md`](docs/SUBMISSION.md) |
 | **Assumptions** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) (pt-PT) |
 | **Status** | working MVP, 4 user stories, PT/EN toggle, fictional data, local persistence |
 
@@ -64,7 +66,7 @@ one primary screen.
 - **Plans become routines.** Saved plans can create a daily or monthly calendar event
   with a reminder at a chosen time; the reminder preference stays on the device.
 - **Bilingual by design.** English is the default and Portuguese is one click away.
-  The toggle changes every string — including the 24 swaps and 8 destinations — while
+  The toggle changes every string — including the 25 swaps and 8 destinations — while
   the numbers stay identical.
 - **No health promises.** Benefits are qualitative tags.
 
@@ -117,7 +119,7 @@ step, clearly separate from the trip data.
 | Icons | Lucide |
 | Chart | Hand-rolled SVG, no chart library |
 | Persistence | `localStorage` (`tripswap:unlocks:v1`) |
-| Tests | Vitest — 42 tests |
+| Tests | Vitest — 45 tests |
 | Environment | Multi-stage Docker + DevContainer |
 | Deploy | Vercel (production, auto-deploy from `main`) |
 | AI in development | DeepSeek (`deepseek-flash`) as the coding agent |
@@ -145,7 +147,7 @@ Open http://localhost:5173. Changes reload automatically.
 ```bash
 npm run lint        # oxlint
 npm run typecheck   # tsc
-npm test            # 42 tests (engine, data, assets, formatting, i18n, reminders)
+npm test            # 45 tests (engine, data, assets, formatting, i18n, reminders)
 npm run build       # production build
 node scripts/assumptions.mjs > docs/ASSUMPTIONS.md   # regenerate assumptions
 ```
@@ -158,9 +160,23 @@ node scripts/assumptions.mjs > docs/ASSUMPTIONS.md   # regenerate assumptions
 - **Horizon:** the first whole month at which the projection reaches the target
 
 The engine lives in [`src/lib/calc.ts`](src/lib/calc.ts) and is the single source of
-truth. A test asserts that each of the 24 swaps keeps its documented value. The engine
+truth. A test asserts that each of the 25 swaps keeps its documented value. The engine
 also removes overlaps defensively, even if it receives an unsanitised list (old deep
 link or edited `localStorage`).
+
+### The swaps catalogue
+
+A dedicated `/swaps` page presents all 25 changes across six categories, independent of
+any destination. It uses the same habit data, calculator and overlap rules as the
+destination flow. **Games & Betting** uses user-entered current and reduced monthly
+spend — there is no invented average — and shows no numerical saving until both values
+exist. Selected swaps are stored locally and carried into any destination plan through
+the destination links and the global selection. Two dashed roadmap cards preview the
+future “Create my own swap” and “Add my dream trip” tools.
+
+![The swaps catalogue](docs/assets/swaps.jpg)
+
+![Games and betting](docs/assets/swaps-games.jpg)
 
 ### Plan reminders
 
@@ -204,6 +220,9 @@ docs/        MVP, assumptions, decisions, iterations, testing, defense
 - [`docs/PROMPTS.md`](docs/PROMPTS.md) — real prompts and one real AI failure
 - [`docs/DEFENSE.md`](docs/DEFENSE.md) — slides, demo script and Q&A
 - [`docs/QA.md`](docs/QA.md) — rehearsal flashcards
+- [`docs/VIDEO.md`](docs/VIDEO.md) — 3-minute backup video script
+- [`docs/SUBMISSION.md`](docs/SUBMISSION.md) — course requirement → evidence map
+- [`docs/TripSwap-Defense.pptx`](docs/TripSwap-Defense.pptx) — 10-slide defense deck
 - [`CLAUDE.md`](CLAUDE.md) — agent context and rules
 
 The interface is fully bilingual (PT-PT / EN) with a persistent toggle. Documentation

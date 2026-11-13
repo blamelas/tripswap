@@ -22,12 +22,15 @@ export interface PlanLine {
   oneTime: number
 }
 
-export interface PlanResult {
+export interface SavingsSummary {
   habits: Habit[]
   lines: PlanLine[]
-  target: number
   monthly: number
   oneTime: number
+}
+
+export interface PlanResult extends SavingsSummary {
+  target: number
   horizonMonths: number
   monthsToTarget: number | null
   projectedAtHorizon: number
@@ -69,11 +72,7 @@ export function monthsToTarget(
   return projectedSavings(monthly, oneTime, months) >= target ? months : null
 }
 
-export function calculatePlan(
-  target: number,
-  habits: Habit[],
-  horizonMonths: number,
-): PlanResult {
+export function summarizeSavings(habits: Habit[]): SavingsSummary {
   const unique = new Map(habits.map((habit) => [habit.id, habit]))
   const seenGroups = new Set<string>()
 
@@ -95,16 +94,24 @@ export function calculatePlan(
 
   const monthly = round2(lines.reduce((total, line) => total + line.monthly, 0))
   const oneTime = round2(lines.reduce((total, line) => total + line.oneTime, 0))
+
+  return { habits: selected, lines, monthly, oneTime }
+}
+
+export function calculatePlan(
+  target: number,
+  habits: Habit[],
+  horizonMonths: number,
+): PlanResult {
+  const summary = summarizeSavings(habits)
+  const { monthly, oneTime } = summary
   const months = monthsToTarget(target, monthly, oneTime)
   const projectedAtHorizon = projectedSavings(monthly, oneTime, horizonMonths)
   const safeTarget = target > 0 ? target : 1
 
   return {
-    habits: selected,
-    lines,
+    ...summary,
     target,
-    monthly,
-    oneTime,
     horizonMonths,
     monthsToTarget: months,
     projectedAtHorizon,

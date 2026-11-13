@@ -3,6 +3,26 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.5.0] — 2026-11-13
+
+### Adicionado
+
+- Página `/swaps` — “As trocas” / “The swaps” — com as 25 trocas em 6 categorias,
+  independente de destinos, grelha editorial, resumo fixo e seleção persistente.
+- **Jogos e apostas**: categoria própria; o utilizador introduz gasto mensal atual e
+  reduzido. A poupança é a diferença, sem médias universais e sem número até os valores
+  existirem.
+- Transporte das trocas escolhidas para qualquer plano de destino, via deep link e
+  seleção global; o plano guarda um snapshot dos valores de jogos.
+- Dois cartões de roadmap com bordas tracejadas: “Criar a minha troca” e “Adicionar a
+  minha viagem de sonho” — não interativos, marcados como em desenvolvimento.
+- 45 testes (novos casos para valores personalizados e resumo de poupança).
+
+### Alterado
+
+- Estatísticas do produto passam a 25 trocas / 6 categorias.
+- Navegação principal inclui “As trocas”; no mobile, About passa para o footer.
+
 ## [1.4.0] — 2026-11-13
 
 ### Adicionado
