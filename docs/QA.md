@@ -8,7 +8,7 @@ Respostas curtas, para ensaiar em voz alta. Cada linha tem o artefacto que a pro
 > o dinheiro. O TripSwap mostra o custo real de planeamento, propõe trocas pequenas e
 > calcula em quanto tempo a viagem fica ao alcance. Começa no desejo, não no orçamento.
 
-## 20 perguntas
+## 22 perguntas
 
 | # | Pergunta | Resposta curta | Artefacto |
 |---|---|---|---|
@@ -32,6 +32,8 @@ Respostas curtas, para ensaiar em voz alta. Cada linha tem o artefacto que a pro
 | 18 | Como sei que alcancei o objetivo? | O próprio cartão fica signal: check, “This is now possible.”, meses/trocas/objetivo; no mobile a barra fica signal. | `RewardPanel` |
 | 19 | O cartão muda de altura? | Não. A transformação é de cor, label e tipografia; não acrescenta secções. | caso 19, `RewardPanel` |
 | 20 | Como vejo os detalhes? | Chevron em cada atividade abre descrição, premissa e benefícios. | `HabitCard` |
+| 21 | As categorias têm identidade? | Cinco cores, ícone 44px, título 21px e resumo ao vivo. | `HabitSelector` |
+| 22 | Posso colapsar? | Sim, pelo cabeçalho; seleções e contagens mantêm-se. | `HabitSelector` |
 
 ## Frases a evitar
 

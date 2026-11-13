@@ -3,6 +3,16 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.3.4] — 2026-11-13
+
+### Adicionado
+
+- Cabeçalhos de categoria como capítulos editoriais: 21px, ícone de 44px, cinco cores
+  (azul/teal, damasco, violeta, sálvia, rosa), regra de 2px e resumo ao vivo
+  “N trocas disponíveis · N selecionadas”.
+- Secções colapsáveis, expandidas por omissão, com `aria-expanded` e contagem de
+  selecionadas visível no cabeçalho. As seleções mantêm-se ao colapsar.
+
 ## [1.3.3] — 2026-11-13
 
 ### Alterado

@@ -95,10 +95,12 @@ reaches the target, the reward card itself turns signal: the same photo, the sam
 height, a check and **“This is now possible.”** replace the neutral info block. Nothing
 is added below; only the card transforms. On mobile the funding bar turns signal.
 
-Habit rows keep only the activity name, the saving and the selected state. Category
-labels are quiet, not headings, with a small icon; descriptions, assumptions and
-benefits sit behind a chevron. Trip facts are icon-led, and suggested plans live in a
-pale-blue band at the start of the swap step, clearly separate from the trip data.
+Habit rows keep only the activity name, the saving and the selected state; descriptions,
+assumptions and benefits sit behind a chevron. Categories are chapter markers: a 44px
+tinted icon, a 21px title, a live “N changes available · N selected” summary and a 2px
+category-coloured rule. They collapse from the header and keep selections. Trip facts
+are icon-led, and suggested plans live in a pale-blue band at the start of the swap
+step, clearly separate from the trip data.
 
 ![The success state](docs/assets/success.jpg)
 
