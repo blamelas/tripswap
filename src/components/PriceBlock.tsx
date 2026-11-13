@@ -37,7 +37,7 @@ export function PriceBlock({
 }: PriceBlockProps) {
   const { copy, fmt } = useI18n()
   const s = SIZES[size]
-  const muted = tone === 'dark' ? 'text-canvas/55' : 'text-muted'
+  const muted = tone === 'dark' ? 'text-canvas/70' : 'text-muted'
   const decorated = tone === 'dark' ? 'decoration-canvas/40' : 'decoration-muted/60'
 
   return (

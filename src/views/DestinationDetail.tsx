@@ -144,7 +144,7 @@ function DetailView({ destination }: { destination: Destination }) {
         <div className="bg-ink text-canvas">
           <div className="page grid gap-6 py-6 lg:grid-cols-[1fr_auto] lg:items-end lg:py-8">
             <div className="min-w-0">
-              <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/45">
+              <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/60">
                 {text.country} · {copy.common.nights(destination.nights)}
               </p>
               <h1 className="mt-2 text-[clamp(2.8rem,7vw,6rem)] leading-[0.8] tracking-tightest text-canvas">
