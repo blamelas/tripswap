@@ -1,4 +1,4 @@
-import { Check, RotateCcw } from 'lucide-react'
+import { Check } from 'lucide-react'
 import type { Habit } from '../types'
 import { useI18n } from '../i18n/context'
 import { cn } from '../lib/cn'
@@ -21,55 +21,54 @@ export function HabitCard({ habit, selected, replacedHabit, onToggle }: HabitCar
       aria-pressed={selected}
       onClick={() => onToggle(habit)}
       className={cn(
-        'group relative flex h-full w-full flex-col border p-4 text-left transition-all duration-200 sm:p-5',
-        selected
-          ? 'border-ink bg-white shadow-lift'
-          : 'border-line bg-white/40 hover:border-ink/40 hover:bg-white/70',
+        'group flex w-full items-start gap-3 border-b border-line px-1 py-4 text-left transition-colors lg:gap-4 lg:px-2',
+        selected ? 'bg-sky/55' : 'hover:bg-sky/25',
       )}
     >
       <span
         className={cn(
-          'absolute right-4 top-4 flex h-6 w-6 items-center justify-center rounded-full border transition-colors sm:right-5 sm:top-5',
-          selected ? 'border-clay bg-clay text-paper' : 'border-line text-transparent',
+          'mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center border transition-colors',
+          selected
+            ? 'border-accent bg-accent text-ink'
+            : 'border-ink/30 text-transparent group-hover:border-ink',
         )}
         aria-hidden="true"
       >
-        <Check className="h-3.5 w-3.5" strokeWidth={3} />
+        <Check className="h-3 w-3" strokeWidth={3} />
       </span>
 
-      <div className="pr-9">
-        <h4 className="text-[15px] font-semibold leading-snug text-ink">{text.title}</h4>
-        <p className="mt-1.5 text-[13px] leading-relaxed text-muted">{text.description}</p>
-      </div>
-
-      <div className="mt-auto pt-4">
-        <p className="nums text-lg text-clay">
-          {fmt.eur(habit.saving)}{' '}
-          <span className="font-sans text-[11px] font-medium text-muted">
-            {isRecurring ? copy.common.perMonth : copy.common.oneTime}
+      <span className="min-w-0 flex-1">
+        <span className="flex items-baseline justify-between gap-4">
+          <span className="text-[14.5px] font-medium leading-snug text-ink">
+            {text.title}
           </span>
-        </p>
+          <span className="nums shrink-0 text-[14px] text-accent-dark">
+            {fmt.eur(habit.saving)}
+            <span className="ml-1 font-sans text-[9px] font-semibold uppercase tracking-[0.12em] text-muted">
+              {isRecurring ? copy.common.perMonth : copy.common.oneTime}
+            </span>
+          </span>
+        </span>
 
-        {habit.benefits.length > 0 && (
-          <div className="mt-3 flex flex-wrap gap-1.5">
+        <span className="mt-1 block max-w-xl text-[12px] leading-relaxed text-muted">
+          {text.description}
+        </span>
+
+        {(habit.benefits.length > 0 || replacedHabit) && (
+          <span className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[9px] font-semibold uppercase tracking-[0.12em]">
             {habit.benefits.map((benefit) => (
-              <span
-                key={benefit}
-                className="rounded-full bg-moss-soft px-2 py-0.5 text-[10px] font-medium text-moss"
-              >
+              <span key={benefit} className="text-muted">
                 {benefitLabel(benefit)}
               </span>
             ))}
-          </div>
+            {replacedHabit && (
+              <span className="normal-case tracking-normal text-accent-dark">
+                {copy.habitCard.replacement(habitText(replacedHabit).title)}
+              </span>
+            )}
+          </span>
         )}
-
-        {replacedHabit && (
-          <p className="mt-3 flex items-start gap-1.5 border-t border-clay-soft pt-2.5 text-[11px] leading-relaxed text-clay-dark">
-            <RotateCcw className="mt-0.5 h-3 w-3 shrink-0" aria-hidden="true" />
-            {copy.habitCard.replacement(habitText(replacedHabit).title)}
-          </p>
-        )}
-      </div>
+      </span>
     </button>
   )
 }

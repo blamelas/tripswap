@@ -13,59 +13,68 @@
   }
 
   body {
-    @apply overflow-x-hidden bg-paper font-sans text-ink antialiased;
+    @apply overflow-x-hidden bg-canvas font-sans text-ink antialiased;
     text-rendering: optimizeLegibility;
   }
 
   ::selection {
-    @apply bg-clay text-paper;
+    @apply bg-accent text-ink;
   }
 
   :focus-visible {
-    @apply outline-none ring-2 ring-clay ring-offset-2 ring-offset-paper;
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-canvas;
   }
 
   h1,
   h2,
   h3 {
-    @apply font-display font-normal;
-    font-variation-settings: 'SOFT' 0, 'WONK' 0;
+    @apply font-display font-semibold uppercase;
+    letter-spacing: -0.015em;
+    line-height: 0.86;
   }
 
   .nums {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -0.03em;
+    @apply font-mono tabular-nums;
+    letter-spacing: -0.04em;
   }
 }
 
 @layer components {
   .page {
-    @apply mx-auto w-full max-w-page px-5 sm:px-8 lg:px-12;
+    @apply mx-auto w-full max-w-page px-4 sm:px-6 lg:px-8;
   }
 
+  .label {
+    @apply text-[10px] font-semibold uppercase tracking-[0.18em] text-muted;
+  }
+
+  .label-accent {
+    @apply text-[10px] font-semibold uppercase tracking-[0.18em] text-accent-dark;
+  }
+
+  /* Legacy alias used by a few views while the redesign lands. */
   .eyebrow {
-    @apply text-[11px] font-semibold uppercase tracking-[0.22em] text-muted;
-  }
-
-  .card-surface {
-    @apply rounded-[4px] border border-line bg-white/60;
+    @apply label;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-[3px] px-5 py-3 text-sm font-semibold transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-40;
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-40;
   }
 
   .btn-primary {
-    @apply btn bg-ink text-paper hover:bg-clay;
+    @apply btn bg-ink text-canvas hover:bg-accent hover:text-ink;
+  }
+
+  .btn-accent {
+    @apply btn bg-accent text-ink hover:bg-ink hover:text-canvas;
   }
 
   .btn-ghost {
-    @apply btn border border-line bg-transparent text-ink hover:border-ink;
+    @apply btn border border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-canvas;
   }
 
   .link-underline {
-    @apply underline decoration-line decoration-1 underline-offset-4 transition-colors hover:decoration-clay;
+    @apply underline decoration-line decoration-1 underline-offset-4 transition-colors hover:decoration-accent;
   }
 }
 
@@ -78,18 +87,16 @@
     text-wrap: pretty;
   }
 
-  .grain {
-    position: relative;
+  .hairline {
+    @apply border-line;
   }
 
-  .grain::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.35;
-    background-image: radial-gradient(rgba(21, 19, 16, 0.14) 0.5px, transparent 0.5px);
-    background-size: 3px 3px;
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
   }
 }
 

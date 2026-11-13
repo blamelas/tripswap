@@ -7,14 +7,32 @@ export const en: Copy = {
       'TripSwap — small changes, bigger journeys. Discover the experiences you could unlock by changing the small habits of everyday life.',
   },
   nav: {
-    discover: 'Discover',
-    unlocks: 'My unlocks',
-    unlocksShort: 'Unlocks',
+    discover: 'Destinations',
+    placesShort: 'Places',
+    unlocks: 'My plans',
+    unlocksShort: 'Plans',
     about: 'About',
     skip: 'Skip to content',
     language: 'Language',
+    menu: 'Navigation',
     toEnglish: 'Switch to English',
     toPortuguese: 'Switch to Portuguese',
+  },
+  price: {
+    planningTarget: 'Planning target',
+    fundedBySwaps: 'Funded by everyday swaps',
+    metaphor:
+      '€0* is a metaphor. The trip is paid with money saved through the swaps you choose — not a discount or a free trip.',
+    notAPrice: 'Not a price or an offer.',
+  },
+  reward: {
+    timeToReach: 'Time to reach',
+    months: 'months',
+    month: 'month',
+    selected: 'swaps selected',
+    unlocked: 'Unlocked in simulation',
+    noPlan: 'Choose a swap to start.',
+    destination: 'Destination',
   },
   common: {
     perMonth: '/mo',
@@ -31,9 +49,9 @@ export const en: Copy = {
   },
   footer: {
     explore: 'Explore',
-    catalogue: 'Destination catalogue',
-    unlocks: 'My unlocks',
-    how: 'How it works',
+    catalogue: 'Destinations',
+    unlocks: 'My plans',
+    how: 'About',
     honest: 'Honest note',
     honestBody:
       'Budgets are illustrative planning targets, not verified prices or offers. €0* means the trip would be paid for with money saved through the chosen swaps — it is not free, and it is not a discount.',
@@ -65,17 +83,18 @@ export const en: Copy = {
     withSwaps: 'with swaps',
   },
   discover: {
-    eyebrow: 'Small changes. Bigger journeys.',
+    eyebrow: 'Travel, funded by habits.',
     headline: {
-      line1: 'The world fits',
-      line2: 'into small',
-      accent: 'changes.',
+      line1: 'The world',
+      line2: 'is the',
+      accent: 'reward.',
     },
     intro:
-      'TripSwap starts with desire and shows what one small swap can fund. Choose a destination, see which habits would make sense for you, and find out how soon it comes within reach.',
-    ctaDestinations: 'See destinations',
+      'Pick a place. Change a few everyday habits. See how soon it becomes possible.',
+    ctaDestinations: 'Find your next place',
     ctaHow: 'How it works',
-    stats: ['8 destinations', '24 swaps', 'One transparent calculation'],
+    stats: ['8 destinations', '24 swaps', 'No spreadsheets'],
+    chapters: ['Dream', 'Swap', 'Arrive'],
     featuredNote: (budget: string) =>
       `Illustrative target of ${budget} · not a price`,
     steps: [
@@ -95,14 +114,14 @@ export const en: Copy = {
         body: 'See the savings and the horizon in real time. A plan, not a promise.',
       },
     ],
-    catalogueEyebrow: 'The catalogue',
-    catalogueTitle: 'Where to start?',
+    catalogueEyebrow: 'Destinations',
+    catalogueTitle: 'Choose a place.',
     catalogueIntro:
-      'From a weekend close to home to the trip that takes a year of small decisions. Every budget is a planning target.',
+      'From a weekend close to home to the trip that takes a year of small decisions.',
     zeroEyebrow: 'The €0* note',
     zeroTitle: 'It is not free. It is paid with choices.',
     zeroBody:
-      'Every destination has a real planning cost. €0* shows what would happen if that cost were covered by money saved through the swaps you choose. It is not a discount, an offer or a free trip.',
+      'Every destination has a real cost. €0* shows what would happen if it were covered by the money you save through your swaps. Not a discount, not a free trip.',
     ruleLabel: 'The project rule',
     ruleQuote: '“Less of this. More of the world.”',
     ruleBody:
@@ -123,7 +142,7 @@ export const en: Copy = {
       'Illustrative planning target. Not a verified price, a current fare or a travel offer. TripSwap does not book trips.',
     presetsEyebrow: 'Start with a plan',
     presetsHint: 'You can adjust everything afterwards',
-    step2Eyebrow: 'Step 2 — swap',
+    step2Eyebrow: '02 — Swap',
     step2Title: 'What would you change?',
     step2Intro:
       'Pick only what you would actually do. Nothing here is mandatory and nothing leaves your device.',
@@ -135,7 +154,7 @@ export const en: Copy = {
       'You have not saved anything yet — this is the plan, not the balance. Keep it to return when you want to revisit the swaps.',
     unlockSave: 'Save this future',
     unlockSaved: 'Plan saved',
-    step3: 'Step 3 — unlock',
+    step3: '03 — Arrive',
     missingTitle: 'This destination does not exist.',
     missingBody:
       'The link may be incomplete. Go back to the catalogue and choose an experience.',
@@ -147,7 +166,7 @@ export const en: Copy = {
   },
   habitCard: {
     replacement: (title: string) =>
-      `Replaces “${title}”: both assume the same spending.`,
+      `Replaces “${title}” · same spending.`,
   },
   panel: {
     states: {
@@ -228,8 +247,8 @@ export const en: Copy = {
     ],
   },
   unlocks: {
-    eyebrow: 'Step 3 — unlock',
-    title: 'My unlocks',
+    eyebrow: '03 — Arrive',
+    title: 'My plans',
     intro:
       'Plans saved only on this device. They are savings simulations, not bookings or money already saved.',
     clear: 'Clear all',
