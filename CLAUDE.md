@@ -26,7 +26,7 @@ Supporting line: **Less of this. More of the world.**
 - Self-hosted fonts via Fontsource: Barlow Condensed (display), IBM Plex Sans (UI),
   IBM Plex Mono (tabular numerals)
 - Typed PT/EN dictionaries in `src/i18n` (no i18n dependency) and a persisted locale
-- Design tokens: canvas `#F7F6F2`, ink `#151A19`, signal `#FF5936`, pale blue `#D8E8EE`
+- Design tokens: canvas `#F7F6F2`, ink `#151A19`, signal `#F04A28` (deep `#B83417` for small text), pale blue `#D8E8EE`
 - Vitest for the calculation engine, data integrity and formatting
 - localStorage for saved plans, behind `src/lib/storage.ts`
 - Docker (multi-stage) + DevContainer, deployed on Vercel
@@ -111,7 +111,7 @@ docker compose up       # same dev server in a container
 
 ## Design system
 
-- Canvas `#F7F6F2`; ink `#151A19`; signal `#FF5936`; pale blue `#D8E8EE`.
+- Canvas `#F7F6F2`; ink `#151A19`; signal `#F04A28` (deep `#B83417` for small text); pale blue `#D8E8EE`.
 - Display: Barlow Condensed, uppercase, tight leading (0.79–0.9).
 - Interface: IBM Plex Sans. Numbers: IBM Plex Mono, tabular.
 - No rounded corners. Borders are 1px lines; emphasis comes from scale and contrast.

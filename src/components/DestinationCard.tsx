@@ -53,14 +53,14 @@ export function DestinationCard({
 
           <div className="absolute inset-x-0 bottom-0 flex flex-col gap-5 bg-ink p-5 lg:flex-row lg:items-end lg:justify-between lg:gap-10 lg:p-8">
             <div className="min-w-0">
-              <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/45">
+              <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/60">
                 {copy.destinationCategories[destination.category]} · {text.country} ·{' '}
                 {copy.common.nights(destination.nights)}
               </p>
               <h3 className="mt-2 text-[clamp(2.5rem,6vw,5rem)] leading-[0.84] text-canvas transition-colors group-hover:text-accent">
                 {destination.name}
               </h3>
-              <p className="mt-2 max-w-lg text-[13px] leading-relaxed text-canvas/55">
+              <p className="mt-2 max-w-lg text-[13px] leading-relaxed text-canvas/70">
                 {text.quote}
               </p>
             </div>

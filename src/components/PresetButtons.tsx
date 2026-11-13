@@ -60,7 +60,7 @@ export function PresetButtons({ presets, activeIds, onApply }: PresetButtonsProp
               <span
                 className={cn(
                   'mt-1 block text-[9px] font-semibold uppercase tracking-[0.12em]',
-                  isActive ? 'text-canvas/50' : 'text-muted',
+                  isActive ? 'text-canvas/65' : 'text-muted',
                 )}
               >
                 {presetCopy.description}

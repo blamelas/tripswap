@@ -136,7 +136,7 @@ export function Layout() {
           </div>
 
           <div className="text-sm">
-            <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/45">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/60">
               {copy.footer.explore}
             </p>
             <ul className="mt-4 space-y-2.5">
@@ -164,17 +164,17 @@ export function Layout() {
             </ul>
           </div>
 
-          <div className="text-[12px] leading-relaxed text-canvas/55">
-            <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/45">
+          <div className="text-[12px] leading-relaxed text-canvas/70">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/60">
               {copy.footer.honest}
             </p>
             <p className="mt-4">{copy.footer.honestBody}</p>
-            <p className="mt-4 text-canvas/40">{copy.footer.project}</p>
+            <p className="mt-4 text-canvas/60">{copy.footer.project}</p>
           </div>
         </div>
 
         <div className="border-t border-canvas/15">
-          <div className="page flex flex-wrap items-center justify-between gap-3 py-4 text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/40">
+          <div className="page flex flex-wrap items-center justify-between gap-3 py-4 text-[9px] font-semibold uppercase tracking-[0.16em] text-canvas/60">
             <span>
               {copy.discover.stats[0]} · {copy.discover.stats[1]}
             </span>

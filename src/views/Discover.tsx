@@ -29,7 +29,7 @@ export function Discover() {
       <section className="page pt-4 lg:pt-6">
         <div className="grid lg:grid-cols-12">
           <div className="relative flex min-h-[430px] flex-col justify-between bg-ink p-6 text-canvas lg:col-span-5 lg:min-h-[640px] lg:p-10">
-            <div className="flex items-center justify-between gap-4 text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/40">
+            <div className="flex items-center justify-between gap-4 text-[9px] font-semibold uppercase tracking-[0.18em] text-canvas/60">
               <span>01 / {copy.discover.eyebrow}</span>
               <span>LISBON · 2026</span>
             </div>
@@ -175,7 +175,7 @@ export function Discover() {
             <p className="mt-4 max-w-lg text-[13px] leading-relaxed text-ink/70">
               {copy.discover.zeroBody}
             </p>
-            <p className="mt-4 max-w-lg text-[10px] font-semibold uppercase leading-relaxed tracking-[0.12em] text-ink/45">
+            <p className="mt-4 max-w-lg text-[10px] font-semibold uppercase leading-relaxed tracking-[0.12em] text-ink/65">
               {copy.price.metaphor}
             </p>
             <Link
