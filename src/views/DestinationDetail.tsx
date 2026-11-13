@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, ListChecks, Moon, PlaneTakeoff, Users } from 'lucide-react'
 import type { Destination, Habit } from '../types'
 import { HABITS, getHabit } from '../data/habits'
 import { getDestination } from '../data/destinations'
@@ -88,10 +88,10 @@ function DetailView({ destination }: { destination: Destination }) {
   }
 
   const meta = [
-    { label: copy.detail.labels.departure, value: destination.departureCity },
-    { label: copy.detail.labels.travellers, value: String(destination.travelers) },
-    { label: copy.detail.labels.nights, value: String(destination.nights) },
-    { label: copy.detail.labels.includes, value: text.includes.join(' · ') },
+    { label: copy.detail.labels.departure, value: destination.departureCity, icon: PlaneTakeoff },
+    { label: copy.detail.labels.travellers, value: String(destination.travelers), icon: Users },
+    { label: copy.detail.labels.nights, value: String(destination.nights), icon: Moon },
+    { label: copy.detail.labels.includes, value: text.includes.join(' · '), icon: ListChecks },
   ]
 
   return (
@@ -141,22 +141,22 @@ function DetailView({ destination }: { destination: Destination }) {
           </p>
 
           <dl className="mt-7 grid grid-cols-2 border-t border-line sm:grid-cols-4">
-            {meta.map((item) => (
-              <div
-                key={item.label}
-                className="border-b border-line py-3 sm:border-b-0 sm:border-r sm:pr-4 sm:last:border-r-0"
-              >
-                <dt className="text-[9px] font-semibold uppercase tracking-[0.16em] text-muted">
-                  {item.label}
-                </dt>
-                <dd className="mt-1 text-[12px] text-ink">{item.value}</dd>
-              </div>
-            ))}
+            {meta.map((item) => {
+              const Icon = item.icon
+              return (
+                <div
+                  key={item.label}
+                  className="border-b border-line py-3 sm:border-b-0 sm:border-r sm:pr-4 sm:last:border-r-0"
+                >
+                  <dt className="flex items-center gap-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-muted">
+                    <Icon className="h-3 w-3 shrink-0 text-accent-dark" aria-hidden="true" />
+                    {item.label}
+                  </dt>
+                  <dd className="mt-1 text-[12px] text-ink">{item.value}</dd>
+                </div>
+              )
+            })}
           </dl>
-
-          <p className="mt-3 max-w-2xl text-[10px] leading-relaxed text-muted">
-            {copy.detail.illustrative}
-          </p>
 
           <div className="mt-8 lg:hidden">
             <RewardPanel
@@ -169,15 +169,7 @@ function DetailView({ destination }: { destination: Destination }) {
             />
           </div>
 
-          <div className="mt-10">
-            <PresetButtons
-              presets={presets}
-              activeIds={selected}
-              onApply={(habitIds) => setSelected(habitIds)}
-            />
-          </div>
-
-          <div className="mt-10">
+          <div className="mt-12">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <p className="label-accent">{copy.detail.step2Eyebrow}</p>
@@ -190,7 +182,15 @@ function DetailView({ destination }: { destination: Destination }) {
               </p>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-5 bg-sky p-4 lg:p-5">
+              <PresetButtons
+                presets={presets}
+                activeIds={selected}
+                onApply={(habitIds) => setSelected(habitIds)}
+              />
+            </div>
+
+            <div className="mt-8">
               <HabitSelector selectedIds={selected} onToggle={handleToggle} />
             </div>
           </div>

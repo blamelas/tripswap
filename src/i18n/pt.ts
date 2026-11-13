@@ -143,7 +143,7 @@ export const pt = {
     },
     illustrative:
       'Objetivo ilustrativo de planeamento. Não é um preço verificado, uma tarifa atual nem uma oferta de viagem. O TripSwap não reserva viagens.',
-    presetsEyebrow: 'Começar com um plano',
+    presetsEyebrow: 'Planos sugeridos',
     presetsHint: 'Podes ajustar tudo depois',
     step2Eyebrow: '02 — Trocar',
     step2Title: 'O que mudarias?',
