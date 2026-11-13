@@ -6,7 +6,7 @@
 npm test
 ```
 
-26 testes em Vitest, todos sobre a lógica central e os dados. Não há snapshots de
+27 testes em Vitest, todos sobre a lógica central e os dados. Não há snapshots de
 componentes: o risco do produto está na aritmética e nas sobreposições.
 
 ### `tests/calc.test.ts` (21)

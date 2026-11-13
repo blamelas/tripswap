@@ -42,9 +42,9 @@ export function HabitCard({ habit, selected, replacedHabit, onToggle }: HabitCar
 
       <div className="mt-auto pt-4">
         <p className="nums text-lg text-clay">
-          {formatEUR(habit.saving)}
-          <span className="ml-1 font-sans text-[11px] font-medium text-muted">
-            {isRecurring ? '/ mês' : 'uma vez'}
+          {formatEUR(habit.saving)}{' '}
+          <span className="font-sans text-[11px] font-medium text-muted">
+            {isRecurring ? '/mês' : 'uma vez'}
           </span>
         </p>
 
