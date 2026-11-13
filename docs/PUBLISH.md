@@ -11,7 +11,7 @@ Vite, build `npm run build`, output `dist` e o rewrite de SPA (deep links com 20
 `filipes-projects-ba4328b8`). Cada push para `main` publica; cada PR cria um preview.
 A build de produção está verde.
 
-**URL público:** <https://tripswap-kappa.vercel.app/>
+**URL público:** <https://tripswap-home.vercel.app/>
 
 > Deployment Protection desativada. O URL responde 200 em `/`, `/destination/...`,
 > `/unlocks` e `/about`.

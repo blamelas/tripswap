@@ -1,6 +1,6 @@
 # Defesa — guião completo
 
-**Produto:** TripSwap · **URL pública:** https://tripswap-kappa.vercel.app/ · **Repo:** https://github.com/blamelas/tripswap
+**Produto:** TripSwap · **URL pública:** https://tripswap-home.vercel.app/ · **Repo:** https://github.com/blamelas/tripswap
 **Duração:** 10 min de apresentação + Q&A · **Ensaios:** 2 cronometrados
 
 ---

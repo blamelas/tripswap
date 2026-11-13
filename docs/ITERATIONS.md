@@ -26,6 +26,7 @@ commit. Os tempos são reais e incluem revisão manual.
 | 19 | 13 Nov 03:41 | Imagens | Testes de integridade dos assets locais | 29/29 verdes | `test(assets): verify destination images are local and present` | 10 min |
 | 20 | 13 Nov 03:42 | Evidência | QA flashcards + PR template + release | `v1.0.3` | `chore(release): v1.0.3` | 15 min |
 | 21 | 13 Nov 04:35 | Deploy | Remover GitHub Pages; Vercel como único alvo | `v1.0.6` | `chore(deploy): remove github pages` | 15 min |
+| 22 | 13 Nov 04:50 | Domínio | `tripswap-home.vercel.app` como URL público | `v1.0.7` | `chore(deploy): set public domain` | 10 min |
 
 ## O que aprendi
 

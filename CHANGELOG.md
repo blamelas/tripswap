@@ -3,6 +3,13 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.0.7] — 2026-11-13
+
+### Alterado
+
+- O domínio público passa a ser <https://tripswap-home.vercel.app>, adicionado ao
+  projeto na Vercel e a seguir produção. O alias anterior continua a redirecionar.
+
 ## [1.0.6] — 2026-11-13
 
 ### Removido
