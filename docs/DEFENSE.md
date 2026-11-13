@@ -185,7 +185,7 @@ pedir desculpa mais de uma vez.
 > “A primeira versão era competente mas previsível. O produto é sobre desejo; a fotografia tinha de ser o interface e o mecanismo financeiro a consequência. A reward window liga as trocas à imagem.”
 
 **16. O que é a página The swaps?**
-> “Um catálogo independente das 25 trocas, com seis categorias. Jogos e apostas usa valores introduzidos pelo utilizador, sem médias inventadas. A seleção segue para qualquer destino e há dois cartões de roadmap claramente não interativos.”
+> “Um catálogo independente das 25 trocas, com seis categorias. Jogos de azar e apostas usa valores introduzidos pelo utilizador, sem médias inventadas. A seleção segue para qualquer destino e há dois cartões de roadmap claramente não interativos.”
 
 **Se não souberes:** “Não validei isso. A minha hipótese é X; o próximo teste seria Y.”
 

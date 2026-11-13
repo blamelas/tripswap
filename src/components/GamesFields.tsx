@@ -57,6 +57,21 @@ export function GamesFields({ estimate, onSave }: GamesFieldsProps) {
         </label>
       </div>
 
+      <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+        <button
+          type="button"
+          onClick={() => {
+            setCurrent('20')
+            setReduced('15')
+            onSave({ current: 20, reduced: 15 })
+          }}
+          className="text-[9px] font-semibold uppercase tracking-[0.12em] text-accent-dark underline decoration-line underline-offset-4 transition-colors hover:decoration-accent"
+        >
+          {copy.games.example}
+        </button>
+        <p className="text-[9px] leading-relaxed text-muted">{copy.games.exampleNote}</p>
+      </div>
+
       <div className="mt-3 flex flex-wrap items-start gap-x-5 gap-y-3">
         <button
           type="button"

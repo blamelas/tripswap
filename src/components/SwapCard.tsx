@@ -1,9 +1,12 @@
+import { createElement } from 'react'
 import { Check, Plus } from 'lucide-react'
 import type { GamesEstimate, Habit } from '../types'
 import { DESTINATIONS } from '../data/destinations'
 import { useI18n } from '../i18n/context'
 import { monthsToTarget } from '../lib/calc'
 import { applyGamesEstimate, hasGamesSaving } from '../lib/habitValues'
+import { HABIT_CATEGORY_META } from '../lib/habitCategories'
+import { habitIcon } from '../lib/habitIcons'
 import { cn } from '../lib/cn'
 import { GamesFields } from './GamesFields'
 
@@ -32,6 +35,7 @@ export function SwapCard({
   const isGames = Boolean(habit.customExpense)
   const gamesReady = hasGamesSaving(gamesEstimate)
   const canSelect = !isGames || gamesReady
+  const meta = HABIT_CATEGORY_META[habit.category]
 
   const monthly = habit.kind === 'recurring' ? effective.saving : 0
   const oneTime = habit.kind === 'one-time' ? effective.saving : 0
@@ -55,7 +59,23 @@ export function SwapCard({
       )}
     >
       <div className="flex items-start justify-between gap-3">
-        <h3 className="text-[20px] leading-[0.98] text-ink">{text.title}</h3>
+        <div className="flex min-w-0 items-start gap-3">
+          <span
+            className={cn(
+              'flex h-9 w-9 shrink-0 items-center justify-center',
+              meta.soft,
+              meta.color,
+            )}
+            aria-hidden="true"
+          >
+            {createElement(habitIcon(habit.id), {
+              className: 'h-4 w-4',
+              strokeWidth: 2.1,
+              'aria-hidden': true,
+            })}
+          </span>
+          <h3 className="text-[20px] leading-[0.98] text-ink">{text.title}</h3>
+        </div>
         {selected && (
           <span className="flex h-5 w-5 shrink-0 items-center justify-center bg-accent text-ink">
             <Check className="h-3 w-3" strokeWidth={3} aria-hidden="true" />
@@ -104,13 +124,15 @@ export function SwapCard({
         {selected ? copy.swaps.added : copy.swaps.add}
       </button>
 
-      <details className="mt-3 border-t border-line pt-2 text-[10px] text-muted">
-        <summary className="cursor-pointer text-[9px] font-semibold uppercase tracking-[0.12em]">
-          {copy.swaps.assumptions}
-        </summary>
-        <p className="mt-2 leading-relaxed">{text.assumptions}</p>
-        <p className="nums mt-1 text-[10px] text-ink">{formula}</p>
-      </details>
+      {!isGames && (
+        <details className="mt-3 border-t border-line pt-2 text-[10px] text-muted">
+          <summary className="cursor-pointer text-[9px] font-semibold uppercase tracking-[0.12em]">
+            {copy.swaps.assumptions}
+          </summary>
+          <p className="mt-2 leading-relaxed">{text.assumptions}</p>
+          <p className="nums mt-1 text-[10px] text-ink">{formula}</p>
+        </details>
+      )}
     </article>
   )
 }

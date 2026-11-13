@@ -149,11 +149,11 @@ export const habitEn: Record<string, HabitText> = {
       '20 packs per month · €6 per pack. Does not include cessation support.',
   },
   'games-betting': {
-    title: 'Reduce spending on games and betting',
+    title: 'Spend less on games of chance and betting',
     description:
-      'Small amounts add up over time. See how much of that budget you could put toward a new experience.',
+      'Scratch cards, online betting and casino visits add up quietly. Swap part of that spend for board games or free plans, and put some of the budget toward a new experience.',
     assumptions:
-      'Enter your current monthly spend and the amount you would rather keep. Saving = current − reduced.',
+      'Enter your current monthly spend on scratch cards, betting or casino, and the amount you would rather keep. Saving = current − reduced.',
   },
   'exercise-at-home': {
     title: 'Train at home instead of paying for a gym',

@@ -3,6 +3,19 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.5.1] — 2026-11-13
+
+### Alterado
+
+- Cartões de swap com um ícone próprio por atividade, na cor da categoria. A fotografia
+  continua reservada aos destinos, evitando 25 tiles de stock repetidos.
+- Categoria renomeada para **Jogos de azar e apostas** / **Games of chance & betting**.
+  O copy nomeia raspadinhas, apostas online e casino e sugere jogos de tabuleiro ou
+  planos gratuitos como alternativa.
+- Botão “Usar um exemplo conservador” preenche 20 € → 15 € e guarda a estimativa de
+  5 €/mês, sem obrigar a escrever valores.
+- As premissas de cálculo ficam ocultas no cartão de jogos.
+
 ## [1.5.0] — 2026-11-13
 
 ### Adicionado

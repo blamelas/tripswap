@@ -81,7 +81,7 @@ export const pt = {
     entertainment: 'Lazer e subscrições',
     shopping: 'Compras e reparações',
     wellbeing: 'Bem-estar',
-    games: 'Jogos e apostas',
+    games: 'Jogos de azar e apostas',
   },
   card: {
     aria: (name: string, country: string, budget: string) =>
@@ -365,6 +365,8 @@ export const pt = {
     hint: 'Indica os dois valores para ver a poupança.',
     invalid: 'O valor reduzido deve ser inferior ao atual.',
     setFirst: 'Define os teus valores mensais',
+    example: 'Usar um exemplo conservador',
+    exampleNote: 'Exemplo ilustrativo: 20 € atuais, 15 € reduzidos. Ajusta ao teu gasto.',
   },
   reminder: {
     add: 'Adicionar lembrete',

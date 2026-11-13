@@ -52,6 +52,7 @@ commit. Os tempos são reais e incluem revisão manual.
 | 45 | 13 Nov 09:30 | Catálogo | Página `/swaps`, cartões editoriais, resumo e seleção | 25/6 | `feat(swaps): add the swaps catalogue` | 60 min |
 | 46 | 13 Nov 09:45 | Jogos | Valores atuais/reduzidos, cálculo efetivo e transporte para o plano | Sem média inventada | `feat(games): user-defined games estimate` | 40 min |
 | 47 | 13 Nov 09:55 | Release | Testes, docs, screenshots e deploy | `v1.5.0` | `chore(release): v1.5.0` | 20 min |
+| 48 | 13 Nov 10:05 | Refinamento | Ícones por atividade, jogos de azar, exemplo conservador e premissas ocultas | `v1.5.1` | `feat(swaps): refine activity cards and games copy` | 25 min |
 
 ## O que aprendi
 

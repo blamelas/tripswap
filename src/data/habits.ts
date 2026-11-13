@@ -6,7 +6,7 @@ export const HABIT_CATEGORY_LABELS: Record<HabitCategory, string> = {
   entertainment: 'Lazer e subscrições',
   shopping: 'Compras e reparações',
   wellbeing: 'Bem-estar',
-  games: 'Jogos e apostas',
+  games: 'Jogos de azar e apostas',
 }
 
 export const HABIT_CATEGORY_ORDER: HabitCategory[] = [
@@ -361,9 +361,9 @@ export const HABITS: Habit[] = [
   },
   {
     id: 'games-betting',
-    title: 'Reduzir gastos em jogos e apostas',
+    title: 'Reduzir gastos em jogos de azar e apostas',
     description:
-      'Pequenos valores somam-se ao longo do tempo. Vê quanto desse orçamento podes reservar para uma nova experiência.',
+      'Raspadinhas, apostas online e idas ao casino somam-se sem se notar. Troca parte desse gasto por jogos de tabuleiro ou planos gratuitos e reserva algum desse orçamento para uma nova experiência.',
     category: 'games',
     kind: 'recurring',
     originalCost: 0,
@@ -371,7 +371,7 @@ export const HABITS: Habit[] = [
     monthlyFrequency: 1,
     saving: 0,
     assumptions:
-      'Indica o teu gasto mensal atual e o valor que preferes manter. Poupança = atual − reduzido.',
+      'Indica o teu gasto mensal atual em raspadinhas, apostas ou casino e o valor que preferes manter. Poupança = atual − reduzido.',
     benefits: ['Consumo consciente'],
     customExpense: true,
   },

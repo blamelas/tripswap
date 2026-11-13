@@ -168,11 +168,14 @@ link or edited `localStorage`).
 
 A dedicated `/swaps` page presents all 25 changes across six categories, independent of
 any destination. It uses the same habit data, calculator and overlap rules as the
-destination flow. **Games & Betting** uses user-entered current and reduced monthly
-spend — there is no invented average — and shows no numerical saving until both values
-exist. Selected swaps are stored locally and carried into any destination plan through
-the destination links and the global selection. Two dashed roadmap cards preview the
-future “Create my own swap” and “Add my dream trip” tools.
+destination flow. **Games of chance & betting** uses user-entered current and reduced
+monthly spend — there is no invented average — and shows no numerical saving until
+both values exist. Selected swaps are stored locally and carried into any destination
+plan through the destination links and the global selection.
+
+Each activity has a distinct icon in its category colour; photography stays
+destination-led, so the cards do not become repeated stock-photo tiles. Two dashed
+roadmap cards preview the future “Create my own swap” and “Add my dream trip” tools.
 
 ![The swaps catalogue](docs/assets/swaps.jpg)
 
@@ -195,7 +198,7 @@ src/
   lib/       engine, conflicts, formatting, presets, storage
   i18n/      typed PT/EN dictionaries, content and locale context
   components/
-  views/     Discover, Destination detail, Unlocks, About
+  views/     Discover, Destination detail, Swaps, Unlocks, About
 tests/       engine, data, assets, formatting
 docs/        MVP, assumptions, decisions, iterations, testing, defense
 ```

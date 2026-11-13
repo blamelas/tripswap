@@ -170,16 +170,19 @@ elimina sobreposições de forma defensiva, mesmo que receba uma lista não sani
 
 A página `/swaps` apresenta as 25 mudanças em seis categorias, independentemente de
 qualquer destino. Usa os mesmos dados, motor e regras de sobreposição do fluxo de
-destino. **Jogos e apostas** usa o gasto mensal atual e o valor reduzido introduzidos
-pelo utilizador — sem médias inventadas — e não mostra poupança numérica enquanto os
-dois valores não existirem. As trocas escolhidas ficam guardadas localmente e seguem
-para qualquer plano através dos links de destino e da seleção global. Dois cartões
-tracejados mostram o roadmap de “Criar a minha troca” e “Adicionar a minha viagem de
-sonho”.
+destino. **Jogos de azar e apostas** usa o gasto mensal atual e o valor reduzido
+introduzidos pelo utilizador — sem médias inventadas — e não mostra poupança numérica
+enquanto os dois valores não existirem. As trocas escolhidas ficam guardadas localmente
+e seguem para qualquer plano através dos links de destino e da seleção global.
+
+Cada atividade tem um ícone próprio na cor da categoria; a fotografia continua
+reservada aos destinos, para que os cartões não se tornem tiles repetidos de stock.
+Dois cartões tracejados mostram o roadmap de “Criar a minha troca” e “Adicionar a minha
+viagem de sonho”.
 
 ![O catálogo de trocas](docs/assets/swaps.jpg)
 
-![Jogos e apostas](docs/assets/swaps-games.jpg)
+![Jogos de azar e apostas](docs/assets/swaps-games.jpg)
 
 ### Lembretes de plano
 
@@ -198,7 +201,7 @@ src/
   lib/       motor, conflitos, formatação, presets, storage
   i18n/      dicionários PT/EN tipados, conteúdo e contexto de idioma
   components/
-  views/     Descobrir, Detalhe, Unlocks, Sobre
+  views/     Descobrir, Detalhe, Swaps, Unlocks, Sobre
 tests/       motor, dados, formatação
 docs/        MVP, pressupostos, decisões, iterações, testes, defesa
 ```

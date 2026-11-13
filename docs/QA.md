@@ -1,64 +1,65 @@
-# Q&A — cartões de treino
+# Q&A — training cards (English)
 
-Respostas curtas, para ensaiar em voz alta. Cada linha tem o artefacto que a prova.
+Short answers, to rehearse out loud. Each row names the artefact that proves it.
 
-## Pitch de 30 segundos
+## 30-second pitch
 
-> Quem quer viajar já sabe para onde quer ir. O que falta é uma ponte entre o desejo e
-> o dinheiro. O TripSwap mostra o custo real de planeamento, propõe trocas pequenas e
-> calcula em quanto tempo a viagem fica ao alcance. Começa no desejo, não no orçamento.
+> Anyone who wants to travel already knows where they want to go. What is missing is a
+> bridge between desire and money. TripSwap shows the real planning cost, proposes small
+> swaps and calculates how soon the trip becomes reachable. It starts with desire, not
+> with a budget.
 
-## 26 perguntas
+## 26 questions
 
-| # | Pergunta | Resposta curta | Artefacto |
+| # | Question | Short answer | Artefact |
 |---|---|---|---|
-| 1 | O que é o produto? | Um catálogo de viagens cujo resultado é um plano de poupança determinístico. | `/`, `src/lib/calc.ts` |
-| 2 | Para quem? | Viajante em Lisboa, 25–40, com um destino em mente e sem paciência para folhas de cálculo. | `docs/MVP.md` |
-| 3 | Isto não é só CRUD? | O CRUD é o meio; o valor é o número calculado e o prazo que muda em tempo real. | `docs/TESTING.md` |
-| 4 | Os preços são reais? | Não. São objetivos ilustrativos com partida, viajantes, noites e âmbito declarados. | `docs/ASSUMPTIONS.md` |
-| 5 | E o €0*? | É uma metáfora: custo coberto por poupança. Nunca um desconto, preço anterior ou oferta. | `Discover`, detalhe, `About` |
-| 6 | Como evitas dupla contagem? | Seis grupos exclusivos; escolher uma troca substitui a anterior; o motor deduplica. | `conflicts.ts`, testes |
-| 7 | Como tratas poupanças pontuais? | Entram uma vez, no início da projeção. Nunca como rendimento mensal. | `calc.test.ts` |
-| 8 | Porque não pedes o salário? | O valor não depende de dados pessoais. Reduz fricção, risco e superfície de privacidade. | `types.ts` |
-| 9 | O que a AI fez mal? | O motor somava trocas sobrepostas. Um teste falhou com 2 linhas onde esperava 1. Corrigi o motor. | `docs/PROMPTS.md` |
-| 10 | Como reproduzo? | `docker compose up` ou `npm ci && npm run dev`. Node 20. | `README.md` |
-| 11 | Como sabes que funciona? | 45 testes na lógica, checklist manual de 27 casos, CI em cada PR. | `docs/TESTING.md` |
-| 12 | Onde está deployed? | Vercel, deploy automático a cada push para `main`. | `vercel.json`, `docs/PUBLISH.md` |
-| 13 | Como escalarias? | Pré-renderização, contas e sync, recomendação calculada, testes e2e. | `docs/DECISIONS.md` |
-| 14 | Qual foi a decisão mais difícil? | Excluir trocas sobrepostas em vez de penalizar. Perdi combinações, ganhei um número defensável. | `docs/DECISIONS.md` |
-| 15 | O que ficou de fora? | Auth, booking, preços live, backend, mapas. Sem isso o valor central mantém-se. | `docs/MVP.md` |
-| 16 | A app é bilingue? | Sim: inglês por omissão, português a um clique. Números iguais; copy e dados traduzidos. | `src/i18n`, `tests/i18n.test.ts` |
-| 17 | Qual é a ideia visual? | “The world is the reward”: fotografia full-bleed, Barlow Condensed, ink/canvas/signal. A foto é a superfície de progresso. | `README.md`, `src/index.css`, `RewardPanel` |
-| 18 | Como sei que alcancei o objetivo? | O próprio cartão fica signal: check, “This is now possible.”, meses/trocas/objetivo; no mobile a barra fica signal. | `RewardPanel` |
-| 19 | O cartão muda de altura? | Não. A transformação é de cor, label e tipografia; não acrescenta secções. | caso 19, `RewardPanel` |
-| 20 | Como vejo os detalhes? | Chevron em cada atividade abre descrição, premissa e benefícios. | `HabitCard` |
-| 21 | As categorias têm identidade? | Cinco cores, ícone 44px, título 21px e resumo ao vivo. | `HabitSelector` |
-| 22 | Posso colapsar? | Sim, pelo cabeçalho; seleções e contagens mantêm-se. | `HabitSelector` |
-| 23 | Como crio um lembrete? | Num plano guardado, “Add reminder”, escolho diário/mensal, hora e dia; descarrego o `.ics`. | `ReminderForm`, `lib/reminders` |
-| 24 | O evento entra no calendário? | O ficheiro `.ics` cria evento + alarme no calendário do utilizador; sem push notifications. | `buildReminderIcs` |
-| 25 | Onde está o catálogo de trocas? | Em `/swaps`, com 25 trocas, 6 categorias e seleção que segue para o destino. | `Swaps.tsx` |
-| 26 | Como funcionam os jogos? | O utilizador introduz gasto atual e reduzido; a poupança é a diferença. Sem valores, sem número. | `GamesFields`, `habitValues` |
+| 1 | What is the product? | A travel catalogue whose output is a deterministic savings plan. | `/`, `src/lib/calc.ts` |
+| 2 | Who is it for? | A traveller in Lisbon, 25–40, with a destination in mind and no patience for spreadsheets. | `docs/MVP.md` |
+| 3 | Is this just CRUD? | CRUD is the means; the value is the calculated number and the horizon that changes live. | `docs/TESTING.md` |
+| 4 | Are the prices real? | No. They are illustrative targets with departure, travellers, nights and scope declared. | `docs/ASSUMPTIONS.md` |
+| 5 | What about €0*? | A metaphor: a cost covered by savings. Never a discount, an old price or a free trip. | `Discover`, detail, `About` |
+| 6 | How do you prevent double counting? | Six exclusive groups; choosing a swap replaces the previous one; the engine deduplicates. | `conflicts.ts`, tests |
+| 7 | How are one-time savings handled? | They enter once, at the start of the projection. Never as monthly income. | `calc.test.ts` |
+| 8 | Why not ask for salary? | The value does not depend on personal data. It reduces friction, risk and privacy surface. | `types.ts` |
+| 9 | What did the AI get wrong? | The engine summed overlapping swaps. A test failed with 2 lines where 1 was expected. I fixed the engine. | `docs/PROMPTS.md` |
+| 10 | How do I reproduce it? | `docker compose up` or `npm ci && npm run dev`. Node 20. | `README.md` |
+| 11 | How do you know it works? | 45 tests on the logic, a 27-case manual checklist, CI on every PR. | `docs/TESTING.md` |
+| 12 | Where is it deployed? | Vercel, automatic deploy on every push to `main`. | `vercel.json`, `docs/PUBLISH.md` |
+| 13 | How would you scale it? | Pre-rendering, accounts and sync, calculated recommendations, end-to-end tests. | `docs/DECISIONS.md` |
+| 14 | What was the hardest decision? | Excluding overlapping swaps instead of penalising them. I lost combinations, gained a defensible number. | `docs/DECISIONS.md` |
+| 15 | What is out of scope? | Auth, booking, live prices, backend, maps. Without them the core value remains. | `docs/MVP.md` |
+| 16 | Is the app bilingual? | Yes: English by default, Portuguese in one click. Same numbers; copy and data translated. | `src/i18n`, `tests/i18n.test.ts` |
+| 17 | What is the visual idea? | “The world is the reward”: full-bleed photography, Barlow Condensed, ink/canvas/signal. The photo is the progress surface. | `README.md`, `src/index.css`, `RewardPanel` |
+| 18 | How do I know the goal was reached? | The card itself turns signal: check, “This is now possible.”, months/swaps/target; on mobile the bar turns signal. | `RewardPanel` |
+| 19 | Does the card change height? | No. The transformation is colour, label and typography; it adds no sections. | case 19, `RewardPanel` |
+| 20 | How do I see the details? | A chevron on each activity opens the description, assumption and benefits. | `HabitCard` |
+| 21 | Do categories have identity? | Six colours, a 44px icon, a 21px title and a live summary. | `HabitSelector` |
+| 22 | Can I collapse them? | Yes, from the header; selections and counts remain. | `HabitSelector` |
+| 23 | How do I create a reminder? | In a saved plan, “Add reminder”, choose daily/monthly, time and day; download the `.ics`. | `ReminderForm`, `lib/reminders` |
+| 24 | Does the event enter my calendar? | The `.ics` creates an event + alarm in the user’s calendar; no push notifications. | `buildReminderIcs` |
+| 25 | Where is the swaps catalogue? | At `/swaps`, with 25 swaps, 6 categories and a selection that carries into a destination. | `Swaps.tsx` |
+| 26 | How do games of chance work? | The user enters current and reduced spend; the saving is the difference. The conservative example 20/15 gives €5/month. | `GamesFields`, `habitValues` |
 
-## Frases a evitar
+## Phrases to avoid
 
-- “É grátis.” → “O custo é coberto pelas trocas.”
-- “Vais poupar X.” → “A projeção é X, se as trocas se mantiverem.”
-- “É saudável.” → “Reduz bebidas açucaradas” (facto, não promessa).
-- “A IA calculou.” → “O motor calcula; a IA escreveu o código.”
-- “Preço.” → “Objetivo ilustrativo de planeamento.”
+- “It’s free.” → “The cost is covered by the swaps.”
+- “You will save X.” → “The projection is X, if the swaps hold.”
+- “It’s healthy.” → “It reduces sugary drinks” (a fact, not a promise).
+- “The AI calculated it.” → “The engine calculates; the AI wrote the code.”
+- “Price.” → “Illustrative planning target.”
 
-## Se não souberes
+## If you do not know
 
-> “Não validei isso. A minha hipótese é X. O próximo teste seria Y.”
+> “I have not validated that. My hypothesis is X. The next test would be Y.”
 
-## Números para saber de cor
+## Numbers to know by heart
 
-| Cenário | Resultado |
+| Scenario | Result |
 |---|---|
-| Paris, Essencial (Uber + almoço) | 90 €/mês · 8 meses |
-| Paris, Equilibrado (Uber + almoço + café) | 122 €/mês · 6 meses |
-| Paris, Consciente (+ água + sapatos) | 146 €/mês + 65 € pontuais · 5 meses |
-| Café em casa | 32 €/mês |
-| Almoço de casa | 60 €/mês |
-| Reparar sapatos | 65 € uma vez |
-| Deixar de comprar tabaco | 120 €/mês |
+| Paris, Essential (Uber + lunch) | €90/month · 8 months |
+| Paris, Balanced (Uber + lunch + coffee) | €122/month · 6 months |
+| Paris, Conscious (+ water + shoes) | €146/month + €65 one-time · 5 months |
+| Coffee at home | €32/month |
+| Lunch at home | €60/month |
+| Repair shoes | €65 once |
+| Stop buying tobacco | €120/month |

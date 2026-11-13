@@ -105,12 +105,7 @@ export function HabitCard({
         <div id={detailsId} className="pb-3 pl-[30px] pr-10">
           <p className="text-[11.5px] leading-relaxed text-muted">{text.description}</p>
           {isGames ? (
-            <>
-              <GamesFields estimate={gamesEstimate} onSave={onGamesEstimateChange} />
-              <p className="mt-2 text-[10px] leading-relaxed text-muted">
-                {text.assumptions}
-              </p>
-            </>
+            <GamesFields estimate={gamesEstimate} onSave={onGamesEstimateChange} />
           ) : (
             <>
           <p className="mt-1.5 text-[10px] leading-relaxed text-muted">

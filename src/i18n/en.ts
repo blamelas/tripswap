@@ -83,7 +83,7 @@ export const en: Copy = {
     entertainment: 'Leisure & subscriptions',
     shopping: 'Shopping & repairs',
     wellbeing: 'Wellbeing',
-    games: 'Games & Betting',
+    games: 'Games of chance & betting',
   },
   card: {
     aria: (name: string, country: string, budget: string) =>
@@ -368,6 +368,8 @@ export const en: Copy = {
     hint: 'Enter both amounts to see your saving.',
     invalid: 'The reduced amount should be lower than the current amount.',
     setFirst: 'Set your monthly amounts',
+    example: 'Use a conservative example',
+    exampleNote: 'Illustrative: €20 current, €15 reduced. Adjust to your spending.',
   },
   reminder: {
     add: 'Add reminder',

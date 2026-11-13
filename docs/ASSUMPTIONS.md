@@ -42,7 +42,7 @@ Todos os valores são **ilustrativos e fictícios**, definidos para este projeto
 | `games-betting` | undefined | mensal | 0 € | 0 € | 1/mês | 0 € | — |
 | `exercise-at-home` | Bem-estar | mensal | 30 € | 0 € | 1/mês | 30 € | — |
 
-> **Jogos e apostas:** `games-betting` não tem valor fixo. A poupança é
+> **Jogos de azar e apostas:** `games-betting` não tem valor fixo. A poupança é
 > `gasto mensal atual − gasto mensal reduzido`, introduzida pelo utilizador; sem
 > valores não existe poupança numérica. Não é usada qualquer média universal.
 
