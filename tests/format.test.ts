@@ -19,6 +19,11 @@ describe('currency formatting', () => {
   it('can force whole euros for compact display', () => {
     expect(normalise(formatEUR(32.4, { whole: true }))).toBe('32 €')
   })
+
+  it('can force two decimals for receipts', () => {
+    expect(normalise(formatEUR(0.4, { cents: true }))).toBe('0,40 €')
+    expect(normalise(formatEUR(2, { cents: true }))).toBe('2,00 €')
+  })
 })
 
 describe('label formatting', () => {

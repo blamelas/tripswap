@@ -19,6 +19,8 @@ commit. Os tempos são reais e incluem revisão manual.
 | 12 | 13 Nov 03:31 | Ambiente | DevContainer, Docker multi-stage, compose, CI | `docker compose up` documentado | `chore(env): add devcontainer docker and ci` | 20 min |
 | 13 | 13 Nov 03:33 | Evidência | README, MVP, pressupostos, decisões, testes, prompts, defesa | Repo defensável | `docs: add mvp decisions testing and defense pack` | 35 min |
 | 14 | 13 Nov 03:35 | Release | Lint, typecheck, test, build, tag | `v1.0.0` | `chore(release): v1.0.0` | 10 min |
+| 15 | 13 Nov 03:36 | Precisão | Recibo com dois decimais; sufixo `/mês` acessível | 27/27 verdes | `fix(receipt): show cents and fix value suffix spacing` | 10 min |
+| 16 | 13 Nov 03:37 | Patch | Bump 1.0.1, changelog, tag | `v1.0.1` | `chore(release): v1.0.1` | 5 min |
 
 ## O que aprendi
 

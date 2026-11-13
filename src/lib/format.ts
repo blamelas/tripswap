@@ -12,7 +12,18 @@ const eurWhole = new Intl.NumberFormat('pt-PT', {
   maximumFractionDigits: 0,
 })
 
-export function formatEUR(value: number, options?: { whole?: boolean }): string {
+const eurCents = new Intl.NumberFormat('pt-PT', {
+  style: 'currency',
+  currency: 'EUR',
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+})
+
+export function formatEUR(
+  value: number,
+  options?: { whole?: boolean; cents?: boolean },
+): string {
+  if (options?.cents) return eurCents.format(value)
   if (options?.whole || Number.isInteger(value)) return eurWhole.format(value)
   return eur.format(value)
 }

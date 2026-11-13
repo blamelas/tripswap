@@ -53,8 +53,9 @@ export function UnlockReceipt({ plan }: UnlockReceiptProps) {
                 </td>
                 <td className="nums p-4 text-right align-top text-[11px] text-muted">
                   {line.habit.kind === 'recurring'
-                    ? `(${formatEUR(line.habit.originalCost)} − ${formatEUR(
+                    ? `(${formatEUR(line.habit.originalCost, { cents: true })} − ${formatEUR(
                         line.habit.alternativeCost,
+                        { cents: true },
                       )}) × ${line.habit.monthlyFrequency}`
                     : `${formatEUR(line.habit.originalCost)} − ${formatEUR(
                         line.habit.alternativeCost,
