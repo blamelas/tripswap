@@ -119,6 +119,11 @@ docker compose up       # same dev server in a container
   the "funded by everyday swaps" line. It is never a discount or a free price.
 - The signature interaction is the reward window: destination photo, tide fill, coral
   edge rail, animated months, then the monthly saving and target.
+- Success is explicit: a signal block “This is now possible.” with check, months, swaps
+  and target; the mobile funding bar turns signal. Saving always uses a bookmark icon;
+  habit categories have icons.
+- The €0* is the card CTA: struck planning target above, large €0*, “Unlock this
+  experience” underneath.
 
 ## Business context
 
