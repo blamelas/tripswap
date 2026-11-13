@@ -3,6 +3,31 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.2.0] — 2026-11-13
+
+### Alterado
+
+- Nova direção de arte **“The world is the reward”**: Barlow Condensed, IBM Plex Sans e
+  IBM Plex Mono; canvas `#F7F6F2`, ink `#151A19`, signal `#FF5936` e azul pálido
+  `#D8E8EE`. Removidos Fraunces, bege e terracota.
+- Homepage reconstruída: hero assimétrico, fotografia full-bleed, grelha editorial com
+  destino flagship e capítulos Dream / Swap / Arrive.
+- Detalhe reconstruído: bloco €0* com orçamento riscado, reward window com maré e linha
+  de progresso sobre a fotografia, meses animados e lista de trocas em linhas.
+- My plans, About, 404, header, footer e favicon redesenhados.
+- Nova fotografia para Lisboa, Barcelona e Islândia, com créditos atualizados.
+- Testes manuais de design e contraste em `docs/TESTING.md`.
+
+### Adicionado
+
+- `PriceBlock` e `RewardPanel` como componentes-assinatura.
+- Sistema tipográfico e tokens documentados no README.
+
+### Removido
+
+- `FundingPanel` e `ProgressRail` (substituídos pela reward window).
+- Dependências de Fraunces, Inter Tight e JetBrains Mono.
+
 ## [1.1.0] — 2026-11-13
 
 ### Adicionado

@@ -7,12 +7,12 @@ Nenhuma imagem é servida a partir de um domínio de terceiros em runtime.
 | Ficheiro | Destino | Obra | Autor | Licença | Origem |
 |---|---|---|---|---|---|
 | `douro.webp` | Douro Escape | The Douro Valley vineyards | mat's eye | CC BY 2.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:The_Douro_Valley_vineyards.jpg) |
-| `lisbon.webp` | Lisbon Weekend | Lissabon – Alfama – Largo Santa Luzia – Streetcar – 1 | Ingo Mehling | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Lissabon_-_Alfama_-_Largo_Santa_Luzia_-_Streetcar_-_1.jpg) |
+| `lisbon.webp` | Lisbon Weekend | Alfama Rooftops and Tagus River View | Dale Cruse | CC BY 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Alfama_Rooftops_and_Tagus_River_View,_Lisbon_(54733828355).jpg) |
 | `paris.webp` | Paris City Break | Paris Night | Benh LIEU SONG | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Paris_Night.jpg) |
-| `barcelona.webp` | Barcelona Weekend | Sagrada Familia March 2015-10a | Alvesgaspar | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sagrada_Familia_March_2015-10a.jpg) |
+| `barcelona.webp` | Barcelona Weekend | Barcelona desde el Parque Güell | Jcca76 | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Barcelona_desde_el_Parque_G%C3%BCell.JPG) |
 | `rome.webp` | Rome Discovery | Colosseum in Rome – April 2007 | Diliff | CC BY-SA 2.5 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Colosseum_in_Rome-April_2007-1-_copie_2B.jpg) |
 | `alps.webp` | French Alps Winter Escape | French Alps (233127345) | Loic Faucon | CC BY 3.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:French_Alps_(233127345).jpeg) |
-| `iceland.webp` | Northern Lights Adventure | 039 Northern lights over Mývatn | Giles Laurent | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:039_Northern_lights_over_M%C3%BDvatn_(Iceland)_Photo_by_Giles_Laurent.jpg) |
+| `iceland.webp` | Northern Lights Adventure | Northern Lights Over Red Roofed Cabins | Preserved Light Photography | CC BY-SA 3.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Northern_Lights_Over_Red_Roofed_Cabins_(63879565).jpeg) |
 | `india.webp` | India Discovery | Taj Mahal, Agra, India edit2 | Yann; edited by King of Hearts | CC BY-SA 4.0 | [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Taj_Mahal,_Agra,_India_edit2.jpg) |
 
 ## Notas de licença
@@ -21,6 +21,6 @@ Nenhuma imagem é servida a partir de um domínio de terceiros em runtime.
   mesma licença. As imagens são usadas sem alteração de conteúdo, apenas redimensionadas
   e recodificadas, e a atribuição está visível em `/about` e neste ficheiro.
 - O projeto não reivindica propriedade sobre as fotografias.
-- Tipografia: Fraunces, Inter Tight e JetBrains Mono, distribuídas via
+- Tipografia: Barlow Condensed, IBM Plex Sans e IBM Plex Mono, distribuídas via
   [Fontsource](https://fontsource.org) sob SIL Open Font License 1.1.
 - Ícones: [Lucide](https://lucide.dev), licença ISC.
