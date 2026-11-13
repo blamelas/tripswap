@@ -1,5 +1,7 @@
 # TripSwap
 
+[Português](README.pt.md) · **English**
+
 **Small changes. Bigger journeys.**
 
 [![CI](https://github.com/blamelas/tripswap/actions/workflows/ci.yml/badge.svg)](https://github.com/blamelas/tripswap/actions/workflows/ci.yml)
@@ -15,157 +17,162 @@ and funding horizon update instantly.
 
 | | |
 |---|---|
-| **Demo local** | `npm run dev` → http://localhost:5173 |
-| **Demo pública** | https://blamelas.github.io/tripswap/ |
-| **Repositório** | https://github.com/blamelas/tripswap |
-| **Guião de defesa** | [`docs/DEFENSE.md`](docs/DEFENSE.md) |
-| **Pressupostos** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) |
-| **Estado** | MVP funcional, 4 user stories, dados fictícios, persistência local |
+| **Local demo** | `npm run dev` → http://localhost:5173 |
+| **Public demo (GitHub Pages)** | https://blamelas.github.io/tripswap/ |
+| **Vercel deploy** | pending login — see [`docs/PUBLISH.md`](docs/PUBLISH.md#vercel) |
+| **Repository** | https://github.com/blamelas/tripswap |
+| **Defense script** | [`docs/DEFENSE.md`](docs/DEFENSE.md) (pt-PT) |
+| **Assumptions** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) (pt-PT) |
+| **Status** | working MVP, 4 user stories, fictional data, local persistence |
 
-![Catálogo do TripSwap](docs/assets/home.jpg)
+![TripSwap catalogue](docs/assets/home.jpg)
 
 ---
 
-## O problema
+## The problem
 
-Quem quer viajar já sabe para onde quer ir. O que falta não é inspiração: é uma ponte
-entre o desejo e o dinheiro. As ferramentas existentes começam em orçamentos, extratos
-e folhas de cálculo — e perdem a pessoa no primeiro ecrã.
+People who want to travel already know where they want to go. What is missing is not
+inspiration: it is a bridge between desire and money. Existing tools start with
+budgets, bank statements and spreadsheets — and lose the person on the first screen.
 
-O TripSwap começa no desejo. Mostra o custo real de planeamento, propõe trocas pequenas
-e responde a uma única pergunta: **em quanto tempo isto fica ao meu alcance?**
+TripSwap starts with desire. It shows the real planning cost, proposes small swaps and
+answers a single question: **how long until this is within my reach?**
 
-## Para quem
+## Who it is for
 
-Um viajante em Lisboa, entre os 25 e os 40 anos, que já tem um destino em mente e quer
-um plano concreto sem entregar dados financeiros a mais uma aplicação. Uma pessoa, um
-fluxo, um ecrã principal.
+A traveller in Lisbon, 25–40, who already has a destination in mind and wants a
+concrete plan without handing financial data to yet another app. One person, one flow,
+one primary screen.
 
-## As 4 user stories
+## The 4 user stories
 
-1. **Descobrir** destinos com orçamentos de planeamento transparentes.
-2. **Selecionar** mudanças realistas sem introduzir rendimentos, despesas ou dados bancários.
-3. **Entender** a poupança potencial e o prazo estimado, com o cálculo visível.
-4. **Guardar** objetivos e planos localmente para voltar mais tarde.
+1. **Discover** destinations with transparent planning targets.
+2. **Select** realistic changes without entering income, expenses or bank details.
+3. **Understand** the potential savings and estimated horizon, with the maths visible.
+4. **Save** goals and plans locally to come back later.
 
-## O que distingue o produto
+## What makes it different
 
-- **O insight é o produto.** O valor não está no CRUD; está no número calculado e no
-  prazo que muda enquanto escolhes.
-- **Sobreposições são explícitas.** Duas trocas que assumem a mesma despesa nunca são
-  somadas: pertencem ao mesmo grupo e só uma pode estar ativa.
-- **Poupanças pontuais não são rendimento mensal.** Reparações e vendas entram uma vez.
-- **Transparência total.** Cada ecrã de resultado inclui o recibo do cálculo e a nota
-  sobre o €0\*.
-- **Nenhuma promessa de saúde.** As vantagens são etiquetas qualitativas.
+- **The insight is the product.** The value is not the CRUD; it is the computed number
+  and the horizon that moves as you choose.
+- **Overlaps are explicit.** Two swaps that assume the same spending are never added
+  together: they belong to the same group and only one can be active.
+- **One-time savings are not monthly income.** Repairs and resales enter the projection
+  once.
+- **Full transparency.** Every result screen includes the calculation receipt and the
+  €0\* note.
+- **No health promises.** Benefits are qualitative tags.
 
-![Detalhe do destino com plano aplicado](docs/assets/detail.jpg)
+![Destination detail with a plan applied](docs/assets/detail.jpg)
 
 ---
 
 ## Stack
 
-| Área | Escolha |
+| Area | Choice |
 |---|---|
 | Framework | React 19 + TypeScript (strict) |
 | Build | Vite 8 |
-| Estilo | Tailwind CSS 3.4, tipografia Fraunces / Inter Tight / JetBrains Mono |
+| Styling | Tailwind CSS 3.4, Fraunces / Inter Tight / JetBrains Mono |
 | Router | React Router 7 |
-| Ícones | Lucide |
-| Gráfico | SVG próprio, sem biblioteca de charts |
-| Persistência | `localStorage` (`tripswap:unlocks:v1`) |
-| Testes | Vitest — 29 testes |
-| Ambiente | Docker multi-stage + DevContainer |
-| Deploy | Vercel (estático) |
-| AI no desenvolvimento | DeepSeek (`deepseek-flash`) como agente de código |
+| Icons | Lucide |
+| Chart | Hand-rolled SVG, no chart library |
+| Persistence | `localStorage` (`tripswap:unlocks:v1`) |
+| Tests | Vitest — 29 tests |
+| Environment | Multi-stage Docker + DevContainer |
+| Deploy | Vercel (pending) · GitHub Pages (live) |
+| AI in development | DeepSeek (`deepseek-flash`) as the coding agent |
 
-## Correr localmente
+## Run it
 
-Requisitos: Node.js 20+ e npm.
+Requirements: Node.js 20+ and npm.
 
 ```bash
 npm ci && npm run dev
 ```
 
-Abre http://localhost:5173. Os dados de demonstração estão no código: não há setup,
-seed nem API.
+Open http://localhost:5173. Demo data is in the code: no setup, seed or API.
 
-### Com Docker
+### With Docker
 
 ```bash
 docker compose up
 ```
 
-Abre http://localhost:5173. As alterações recarregam automaticamente.
+Open http://localhost:5173. Changes reload automatically.
 
-### Qualidade
+### Quality
 
 ```bash
 npm run lint        # oxlint
 npm run typecheck   # tsc
-npm test            # 29 testes (motor, dados, formatação)
-npm run build       # build de produção
-node scripts/assumptions.mjs > docs/ASSUMPTIONS.md   # regenera os pressupostos
+npm test            # 29 tests (engine, data, assets, formatting)
+npm run build       # production build
+node scripts/assumptions.mjs > docs/ASSUMPTIONS.md   # regenerate assumptions
 ```
 
-## Como o cálculo funciona
+## How the calculation works
 
-- **Recorrente:** `(custo original − alternativa) × frequência mensal`
-- **Pontual:** `custo original − alternativa`, uma única vez
-- **Projeção:** `poupança mensal × meses + poupanças pontuais`
-- **Prazo:** o primeiro mês inteiro em que a projeção atinge o objetivo
+- **Recurring:** `(original cost − alternative) × monthly frequency`
+- **One-time:** `original cost − alternative`, once
+- **Projection:** `monthly savings × months + one-time savings`
+- **Horizon:** the first whole month at which the projection reaches the target
 
-O motor vive em [`src/lib/calc.ts`](src/lib/calc.ts) e é a única fonte de verdade. Um
-teste garante que cada uma das 24 trocas mantém o valor documentado. O motor também
-elimina sobreposições de forma defensiva, mesmo que receba uma lista não sanitizada
-(link direto antigo ou `localStorage` editado).
+The engine lives in [`src/lib/calc.ts`](src/lib/calc.ts) and is the single source of
+truth. A test asserts that each of the 24 swaps keeps its documented value. The engine
+also removes overlaps defensively, even if it receives an unsanitised list (old deep
+link or edited `localStorage`).
 
-## Estrutura
+## Structure
 
 ```text
 src/
-  data/      destinos, trocas, pressupostos
-  lib/       motor, conflitos, formatação, presets, storage
+  data/      destinations, swaps, assumptions
+  lib/       engine, conflicts, formatting, presets, storage
   components/
-  views/     Descobrir, Detalhe, Unlocks, Sobre
-tests/       motor, dados, formatação
-docs/        MVP, pressupostos, decisões, iterações, testes, defesa
+  views/     Discover, Destination detail, Unlocks, About
+tests/       engine, data, assets, formatting
+docs/        MVP, assumptions, decisions, iterations, testing, defense
 ```
 
-## Limitações explícitas
+## Explicit limitations
 
-- Orçamentos **ilustrativos** de planeamento (Lisboa, 2 viajantes, âmbito indicado).
-  Não são preços verificados, tarifas atuais nem ofertas.
-- Sem reservas, pagamentos, contas de utilizador ou sincronização.
-- Sem preços em tempo real, mapas, clima ou APIs externas.
-- Persistência apenas no navegador; limpar os dados do site remove os planos.
-- O prazo é uma projeção aritmética, não uma garantia de poupança.
-- Fotografias locais com licenças indicadas em [`docs/CREDITS.md`](docs/CREDITS.md).
+- **Illustrative** planning targets (Lisbon, 2 travellers, stated scope). They are not
+  verified prices, current fares or offers.
+- No booking, payments, user accounts or sync.
+- No live pricing, maps, weather or external APIs.
+- Browser-only persistence; clearing site data removes saved plans.
+- The horizon is an arithmetic projection, not a savings guarantee.
+- Local photography with licences listed in [`docs/CREDITS.md`](docs/CREDITS.md).
 
-## Documentação
+## Documentation
 
-- [`docs/MVP.md`](docs/MVP.md) — scope, user stories e critérios de aceitação
-- [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) — todas as premissas, geradas do código
-- [`docs/DECISIONS.md`](docs/DECISIONS.md) — decisões e trade-offs
-- [`docs/ITERATIONS.md`](docs/ITERATIONS.md) — ciclos de construção
-- [`docs/TESTING.md`](docs/TESTING.md) — testes automáticos e checklist manual
-- [`docs/PROMPTS.md`](docs/PROMPTS.md) — prompts reais e uma falha do AI
-- [`docs/DEFENSE.md`](docs/DEFENSE.md) — slides, demo e Q&A
-- [`CLAUDE.md`](CLAUDE.md) — contexto e regras para o agente
+- [`docs/MVP.md`](docs/MVP.md) — scope, user stories, acceptance criteria
+- [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) — every assumption, generated from code
+- [`docs/DECISIONS.md`](docs/DECISIONS.md) — decisions and trade-offs
+- [`docs/ITERATIONS.md`](docs/ITERATIONS.md) — build cycles
+- [`docs/TESTING.md`](docs/TESTING.md) — automated tests and manual checklist
+- [`docs/PROMPTS.md`](docs/PROMPTS.md) — real prompts and one real AI failure
+- [`docs/DEFENSE.md`](docs/DEFENSE.md) — slides, demo script and Q&A
+- [`docs/QA.md`](docs/QA.md) — rehearsal flashcards
+- [`CLAUDE.md`](CLAUDE.md) — agent context and rules
 
-## Como a IA ajudou
+The documentation and UI copy are written in Portuguese (pt-PT); this README is the
+English counterpart.
 
-A IA foi usada como agente de código dentro do repositório: scaffold, dados, motor,
-componentes, testes e documentação. **Não** foi usada para aritmética em runtime, nem
-para gerar preços, nem para validar afirmações de saúde. O processo está em
-[`docs/ITERATIONS.md`](docs/ITERATIONS.md) e [`docs/PROMPTS.md`](docs/PROMPTS.md),
-incluindo uma falha real detetada por um teste.
+## How AI helped
 
-## Créditos
+AI was used as a coding agent inside the repository: scaffold, data, engine,
+components, tests and documentation. It was **not** used for runtime arithmetic, price
+generation or health claims. The process is recorded in
+[`docs/ITERATIONS.md`](docs/ITERATIONS.md) and [`docs/PROMPTS.md`](docs/PROMPTS.md),
+including a real failure caught by a test.
 
-Fotografia: Wikimedia Commons / Unsplash, com autores e licenças em
-[`docs/CREDITS.md`](docs/CREDITS.md). Tipografia: Fraunces, Inter Tight e JetBrains
-Mono (SIL Open Font License), servidas localmente via Fontsource.
+## Credits
 
-Projeto final do curso **Building Digital Products with Generative AI** — EUNICE
-Network, 2026.
+Photography: Wikimedia Commons / Unsplash, with authors and licences in
+[`docs/CREDITS.md`](docs/CREDITS.md). Type: Fraunces, Inter Tight and JetBrains Mono
+(SIL Open Font License), self-hosted via Fontsource.
+
+Final project for **Building Digital Products with Generative AI** — EUNICE Network,
+2026.
