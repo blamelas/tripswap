@@ -75,9 +75,17 @@ export function calculatePlan(
   horizonMonths: number,
 ): PlanResult {
   const unique = new Map(habits.map((habit) => [habit.id, habit]))
-  const selected = [...unique.values()].filter(
-    (habit) => monthlySaving(habit) > 0 || oneTimeSaving(habit) > 0,
-  )
+  const seenGroups = new Set<string>()
+
+  // Defensive: never add two habits from the same overlap group, even if a
+  // caller passes an unsanitised list (deep link, old localStorage entry).
+  const selected = [...unique.values()].filter((habit) => {
+    if (habit.exclusiveGroup) {
+      if (seenGroups.has(habit.exclusiveGroup)) return false
+      seenGroups.add(habit.exclusiveGroup)
+    }
+    return monthlySaving(habit) > 0 || oneTimeSaving(habit) > 0
+  })
 
   const lines: PlanLine[] = selected.map((habit) => ({
     habit,
