@@ -1,6 +1,25 @@
 # Publicar
 
-Dois passos: GitHub e Vercel. Nenhum segredo é necessário — a app é estática.
+Dois passos: GitHub e um host estático. Nenhum segredo é necessário — a app é estática.
+
+## Deploy atual: GitHub Pages
+
+O workflow [`.github/workflows/pages.yml`](../.github/workflows/pages.yml) constrói,
+testa e publica a app em cada push para `main`, com `VITE_BASE=/tripswap/`.
+
+- URL: <https://blamelas.github.io/tripswap/>
+- Deep links funcionam através de `dist/404.html` (cópia de `index.html`), a convenção
+  de SPA do GitHub Pages.
+- O subpath é suportado por `src/lib/base.ts` e pelo `basename` do router.
+
+Para reativar Pages num clone novo:
+
+```bash
+gh api -X POST repos/<owner>/<repo>/pages -f build_type=workflow
+gh workflow run pages.yml
+```
+
+## Alternativa: Vercel
 
 ## 1. GitHub
 

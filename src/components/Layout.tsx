@@ -56,6 +56,7 @@ export function Layout() {
                 key={link.to}
                 to={link.to}
                 end={link.end}
+                aria-label={link.label}
                 className={({ isActive }) =>
                   cn(
                     'relative px-1.5 py-2 text-[10.5px] uppercase tracking-[0.08em] transition-colors sm:px-1 sm:text-[11px] sm:tracking-[0.18em]',

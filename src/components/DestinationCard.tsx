@@ -3,6 +3,7 @@ import { ArrowUpRight } from 'lucide-react'
 import type { Destination } from '../types'
 import { DESTINATION_CATEGORY_LABELS } from '../data/destinations'
 import { formatEUR } from '../lib/format'
+import { withBase } from '../lib/base'
 import { cn } from '../lib/cn'
 
 interface DestinationCardProps {
@@ -30,7 +31,7 @@ export function DestinationCard({
       >
         <div className={cn('relative overflow-hidden bg-paper-2', aspect)}>
           <img
-            src={destination.image}
+            src={withBase(destination.image)}
             alt={destination.imageAlt}
             width={1600}
             height={1067}
