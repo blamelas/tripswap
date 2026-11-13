@@ -55,3 +55,13 @@ export interface SavedPlan {
   horizonMonths: number
   savedAt: string
 }
+
+export type ReminderFrequency = 'daily' | 'monthly'
+
+export interface PlanReminder {
+  destinationId: string
+  frequency: ReminderFrequency
+  time: string
+  dayOfMonth?: number
+  createdAt: string
+}

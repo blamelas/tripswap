@@ -3,6 +3,23 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.4.0] — 2026-11-13
+
+### Adicionado
+
+- Lembretes por plano guardado: botão “Add reminder”, periodicidade diária ou mensal,
+  hora escolhida e dia do mês (1–28).
+- Exportação `.ics` com evento de 15 minutos, `VALARM` à hora escolhida, `RRULE`
+  diária/mensal e link profundo para o plano.
+- Preferência de lembrete guardada em `localStorage`, com resumo, edição e remoção;
+  remover o plano ou limpar tudo remove também o lembrete.
+- 7 testes novos para datas, RRULE, alarme e escape de texto.
+
+### Notas
+
+- Não há push notifications nem backend. O calendário do utilizador é o mecanismo de
+  lembrete; o ficheiro `.ics` é descarregado e aberto pelo utilizador.
+
 ## [1.3.4] — 2026-11-13
 
 ### Adicionado
