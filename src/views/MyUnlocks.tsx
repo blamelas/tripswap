@@ -6,7 +6,7 @@ import { getDestination } from '../data/destinations'
 import { getHabit } from '../data/habits'
 import { calculatePlan } from '../lib/calc'
 import { formatDate, formatEUR, formatMonths } from '../lib/format'
-import { withBase } from '../lib/base'
+import { DestinationImage } from '../components/DestinationImage'
 import { clearPlans, readPlans, removePlan } from '../lib/storage'
 import { ProgressRail } from '../components/ProgressRail'
 
@@ -118,13 +118,10 @@ export function MyUnlocks() {
                 className="relative block aspect-[4/3] overflow-hidden bg-paper-2 sm:aspect-auto sm:h-full"
                 aria-label={`Abrir ${view.name}`}
               >
-                <img
-                  src={withBase(view.image)}
-                  alt=""
-                  width={800}
-                  height={600}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+                <DestinationImage
+                  src={view.image}
+                  alt={`${view.name}, ${view.country}`}
+                  className="transition-transform duration-700 hover:scale-[1.03]"
                 />
               </Link>
 
