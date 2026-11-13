@@ -7,7 +7,21 @@ A app é estática: não há segredos, base de dados nem variáveis obrigatória
 Destino principal do projeto. O [`vercel.json`](../vercel.json) já define framework
 Vite, build `npm run build`, output `dist` e o rewrite de SPA (deep links com 200).
 
-### 1. Login (uma vez)
+**Estado:** já ligado ao repositório `blamelas/tripswap` (team
+`filipes-projects-ba4328b8`). Cada push para `main` publica; cada PR cria um preview.
+A build de produção está verde.
+
+**Alias de produção:** <https://tripswap-filipes-projects-ba4328b8.vercel.app/>
+
+> **Bloqueio atual:** o alias responde com *Vercel Authentication* (SSO). Para ficar
+> público: Vercel → projeto `tripswap` → **Settings** → **Deployment Protection** →
+> **Vercel Authentication** → desativar (ou aplicar apenas a *Preview Deployments*).
+> Depois, abrir o alias em incógnito e confirmar os deep links.
+>
+> Enquanto a proteção estiver ativa, o GitHub Pages
+> (<https://blamelas.github.io/tripswap/>) é o URL público.
+
+### 1. Login (alternativa por CLI)
 
 O CLI não tem sessão iniciada nesta máquina.
 
