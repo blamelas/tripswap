@@ -68,6 +68,10 @@ function RewardWindow({ destination, plan }: RewardWindowProps) {
           reached ? 'bg-accent text-ink' : 'bg-ink text-canvas',
         )}
       >
+        <p className="sr-only" role="status" aria-live="polite">
+          {reached ? `${copy.reward.reachedTitle} ${fmt.months(months)}` : ''}
+        </p>
+
         <div className="flex items-center justify-between gap-3">
           <span
             className={cn(

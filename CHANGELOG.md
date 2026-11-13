@@ -3,6 +3,13 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.3.2] — 2026-11-13
+
+### Corrigido
+
+- Região `aria-live` anuncia o estado de sucesso (“This is now possible. 6 months”)
+  sem alterar o layout do cartão.
+
 ## [1.3.1] — 2026-11-13
 
 ### Corrigido
