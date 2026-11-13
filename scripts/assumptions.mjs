@@ -50,6 +50,12 @@ lines.push('- **Recorrente:** `(custo original − alternativa) × frequência m
 lines.push('- **Pontual:** `custo original − alternativa`, aplicado uma única vez')
 lines.push('- **Projeção:** `poupança mensal × meses + poupanças pontuais`')
 lines.push('- **Prazo:** o primeiro mês inteiro em que a projeção atinge o objetivo')
+lines.push(
+  '- **Progresso estimado:** `poupança mensal × dias decorridos ÷ (365,25 ÷ 12)`, arredondado aos cêntimos. O tempo em pausa não acumula; é uma estimativa de tempo decorrido, não poupança observada.',
+)
+lines.push(
+  '- **Poupanças pontuais no progresso:** creditadas uma única vez; nunca são movidas nem creditadas de novo.',
+)
 lines.push('')
 lines.push('## Trocas')
 lines.push('')

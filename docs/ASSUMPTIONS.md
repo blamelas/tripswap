@@ -11,6 +11,8 @@ Todos os valores são **ilustrativos e fictícios**, definidos para este projeto
 - **Pontual:** `custo original − alternativa`, aplicado uma única vez
 - **Projeção:** `poupança mensal × meses + poupanças pontuais`
 - **Prazo:** o primeiro mês inteiro em que a projeção atinge o objetivo
+- **Progresso estimado:** `poupança mensal × dias decorridos ÷ (365,25 ÷ 12)`, arredondado aos cêntimos. O tempo em pausa não acumula; é uma estimativa de tempo decorrido, não poupança observada.
+- **Poupanças pontuais no progresso:** creditadas uma única vez; nunca são movidas nem creditadas de novo.
 
 ## Trocas
 
