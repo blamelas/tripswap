@@ -167,7 +167,8 @@ export const en: Copy = {
       `for a target of ${budget}. A projection, not money already saved.`,
   },
   habitSelector: {
-    count: (n: number) => `${n} swaps`,
+    summary: (available: number, selected: number) =>
+      `${available} ${available === 1 ? 'change available' : 'changes available'} · ${selected} selected`,
   },
   habitCard: {
     replacement: (title: string) =>

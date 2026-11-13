@@ -165,7 +165,8 @@ export const pt = {
       `para um objetivo de ${budget}. Projeção, não dinheiro já poupado.`,
   },
   habitSelector: {
-    count: (n: number) => `${n} trocas`,
+    summary: (available: number, selected: number) =>
+      `${available} ${available === 1 ? 'troca disponível' : 'trocas disponíveis'} · ${selected} ${selected === 1 ? 'selecionada' : 'selecionadas'}`,
   },
   habitCard: {
     replacement: (title: string) =>

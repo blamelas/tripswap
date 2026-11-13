@@ -44,6 +44,8 @@ commit. Os tempos são reais e incluem revisão manual.
 | 37 | 13 Nov 05:32 | Release | QA, screenshots, changelog e tag | `v1.3.1` | `chore(release): v1.3.1` | 10 min |
 | 38 | 13 Nov 05:38 | Clareza | Planos sugeridos em faixa sky; ícones na meta e categorias | Zona clara | `feat(detail): separate suggested plans from trip data` | 25 min |
 | 39 | 13 Nov 05:42 | Release | Changelog, versão e deploy | `v1.3.3` | `chore(release): v1.3.3` | 10 min |
+| 40 | 13 Nov 05:55 | Categorias | Capítulos 21/44px, cinco cores, resumo live e colapso | Navegação clara | `feat(habits): editorial category chapters` | 35 min |
+| 41 | 13 Nov 06:00 | Release | QA, screenshots, changelog e deploy | `v1.3.4` | `chore(release): v1.3.4` | 10 min |
 
 ## O que aprendi
 
