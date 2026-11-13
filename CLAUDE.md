@@ -25,6 +25,7 @@ Supporting line: **Less of this. More of the world.**
 - Lucide icons
 - Self-hosted fonts via Fontsource: Fraunces (display), Inter Tight (UI),
   JetBrains Mono (tabular numerals)
+- Typed PT/EN dictionaries in `src/i18n` (no i18n dependency) and a persisted locale
 - Vitest for the calculation engine, data integrity and formatting
 - localStorage for saved plans, behind `src/lib/storage.ts`
 - Docker (multi-stage) + DevContainer, deployed on Vercel
@@ -39,6 +40,7 @@ src/
   data/
     destinations.ts         # 8 curated destinations + documented budgets
     habits.ts               # 24 swaps with costs, frequency, assumptions, groups
+  i18n/                     # pt/en dictionaries, translated content, locale context
   lib/
     calc.ts                 # deterministic engine (single source of truth)
     conflicts.ts            # exclusive overlap groups + selection sanitising
@@ -62,12 +64,17 @@ is the only place where amounts are summed.
 - Conventional Commits: `feat(scope): ...`, `fix(scope): ...`, `docs: ...`, `test: ...`.
 - Never edit `main` or `develop` directly. Branch per task, PR into `develop`.
 - Keep money arithmetic in `src/lib/calc.ts`. Never duplicate a formula in a component.
-- Keep all user-facing amounts formatted through `src/lib/format.ts`.
+- Keep all user-facing amounts formatted through `src/lib/format.ts`, passing the locale.
+- Every user-facing string lives in `src/i18n/pt.ts` and `src/i18n/en.ts`; no copy
+  literals in components. Translated data lives in `src/i18n/content.ts`.
 - No `any`. No new dependency without a stated reason.
 - Run `npm run lint && npm test && npm run build` before committing.
 
 ## Rules
 
+- **PT and EN must stay in parity.** `tests/i18n.test.ts` compares keys, arrays and
+  function shapes; a missing translation fails the build. Numbers never change with
+  the locale.
 - **The AI must not invent numbers.** Every swap has one stored `saving` value; a unit
   test asserts it equals `(originalCost - alternativeCost) * monthlyFrequency` for
   recurring swaps and `originalCost - alternativeCost` for one-time swaps.
@@ -99,10 +106,12 @@ docker compose up       # same dev server in a container
 
 ## Business context
 
-The audience is a Lisbon-based traveller who already wants to go somewhere and is
-tired of generic budgeting tools. The product's job is to turn desire into a concrete,
+The UI defaults to English; Portuguese is one toggle away. The audience is a
+Lisbon-based traveller who already wants to go somewhere and is tired of generic
+budgeting tools. The product's job is to turn desire into a concrete,
 believable plan in under a minute. Success is a user who understands the real cost,
 sees a plausible timeline and leaves with one small change they are willing to try.
 
-Priority right now: a trustworthy, visually memorable Discover -> Swap -> Unlock flow.
+Priority right now: a trustworthy, visually memorable, bilingual Discover -> Swap ->
+Unlock flow.
 Everything that does not serve that flow is out of scope for v1.0.0.

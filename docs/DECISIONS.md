@@ -1,6 +1,6 @@
 # Decisões
 
-Seis decisões que explicam a forma do produto. Cada uma tem o custo assumido.
+Sete decisões que explicam a forma do produto. Cada uma tem o custo assumido.
 
 ## 1. SPA estática em vez de Next.js
 
@@ -77,3 +77,21 @@ mantém o produto honesto perante o júri e o utilizador.
 
 **Trade-off:** o produto não serve para decidir uma compra hoje. Serve para decidir se
 a viagem é possível.
+
+## 7. Dicionários locais em vez de uma biblioteca de i18n
+
+**Contexto:** a app tem dois públicos — o viajante em Lisboa e o júri internacional do
+curso. A copy é extensa (24 trocas, 8 destinos, método) e os números não podem mudar
+com o idioma.
+
+**Decisão:** dois dicionários tipados (`src/i18n/pt.ts`, `en.ts`) e mapas de conteúdo
+por id (`content.ts`). O inglês é o padrão; o português está a um clique. O idioma vive
+num contexto React, persiste em `localStorage` (chave `v2`) e é aplicado por `useI18n`.
+Sem `react-i18next`.
+
+**Porquê:** zero dependências, paridade garantida pelo TypeScript e por um teste, e
+controlo total do tom editorial. O motor de cálculo não sabe qual é o idioma.
+
+**Trade-off:** cada nova string tem de ser adicionada nos dois dicionários; o teste de
+paridade falha se faltar. As rotas não são localizadas (`/destination/...` é igual nos
+dois idiomas).

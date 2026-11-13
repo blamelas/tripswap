@@ -1,25 +1,19 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, BookmarkX, Compass } from 'lucide-react'
-import type { SavedPlan } from '../types'
+import type { Destination, SavedPlan } from '../types'
 import { getDestination } from '../data/destinations'
 import { getHabit } from '../data/habits'
-import { calculatePlan } from '../lib/calc'
-import { formatDate, formatEUR, formatMonths } from '../lib/format'
-import { DestinationImage } from '../components/DestinationImage'
+import { useI18n } from '../i18n/context'
+import { calculatePlan, type PlanResult } from '../lib/calc'
 import { clearPlans, readPlans, removePlan } from '../lib/storage'
 import { ProgressRail } from '../components/ProgressRail'
+import { DestinationImage } from '../components/DestinationImage'
 
 interface PlanView {
   saved: SavedPlan
-  name: string
-  country: string
-  image: string
-  target: number
-  monthly: number
-  months: number | null
-  progress: number
-  unlocked: boolean
+  destination: Destination
+  plan: PlanResult
 }
 
 function buildViews(plans: SavedPlan[]): PlanView[] {
@@ -29,24 +23,18 @@ function buildViews(plans: SavedPlan[]): PlanView[] {
     const habits = saved.habitIds
       .map((id) => getHabit(id))
       .filter((habit) => habit !== undefined)
-    const plan = calculatePlan(destination.budget, habits, saved.horizonMonths)
     return [
       {
         saved,
-        name: destination.name,
-        country: destination.country,
-        image: destination.image,
-        target: destination.budget,
-        monthly: plan.monthly,
-        months: plan.monthsToTarget,
-        progress: plan.progress,
-        unlocked: plan.unlocked,
+        destination,
+        plan: calculatePlan(destination.budget, habits, saved.horizonMonths),
       },
     ]
   })
 }
 
 export function MyUnlocks() {
+  const { copy, fmt, destinationText } = useI18n()
   const [plans, setPlans] = useState<SavedPlan[]>(() => readPlans())
   const views = buildViews(plans)
 
@@ -55,9 +43,7 @@ export function MyUnlocks() {
   }
 
   function handleClear() {
-    const confirmed = window.confirm(
-      'Remover todos os planos guardados neste dispositivo? Esta ação não pode ser anulada.',
-    )
+    const confirmed = window.confirm(copy.unlocks.confirm)
     if (!confirmed) return
     clearPlans()
     setPlans([])
@@ -67,13 +53,12 @@ export function MyUnlocks() {
     <div className="page py-12 lg:py-16">
       <div className="flex flex-wrap items-end justify-between gap-6 border-b border-line pb-6">
         <div>
-          <p className="eyebrow">Passo 3 — desbloquear</p>
+          <p className="eyebrow">{copy.unlocks.eyebrow}</p>
           <h1 className="mt-3 font-display text-[clamp(2.4rem,5.5vw,4rem)] leading-none tracking-tightest text-ink">
-            Os meus unlocks
+            {copy.unlocks.title}
           </h1>
           <p className="mt-4 max-w-lg text-[14px] leading-relaxed text-ink-soft">
-            Planos guardados apenas neste dispositivo. São simulações de poupança, não
-            reservas nem dinheiro já poupado.
+            {copy.unlocks.intro}
           </p>
         </div>
         {views.length > 0 && (
@@ -82,7 +67,7 @@ export function MyUnlocks() {
             onClick={handleClear}
             className="text-[11px] uppercase tracking-[0.14em] text-muted underline decoration-line underline-offset-4 hover:text-clay"
           >
-            Limpar tudo
+            {copy.unlocks.clear}
           </button>
         )}
       </div>
@@ -91,118 +76,116 @@ export function MyUnlocks() {
         <div className="mt-16 flex flex-col items-start border border-dashed border-line p-8 sm:p-14">
           <Compass className="h-8 w-8 text-clay" aria-hidden="true" />
           <h2 className="mt-5 max-w-md font-display text-[clamp(1.8rem,3.4vw,2.6rem)] leading-tight text-ink">
-            Ainda não guardaste nenhum futuro.
+            {copy.unlocks.emptyTitle}
           </h2>
           <p className="mt-3 max-w-md text-[14px] leading-relaxed text-muted">
-            Abre um destino, escolhe as trocas que farias e guarda o plano. Fica aqui, à
-            espera de ser revisto.
+            {copy.unlocks.emptyBody}
           </p>
           <Link to="/" className="btn-primary mt-7">
-            Explorar destinos
+            {copy.unlocks.emptyCta}
             <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>
       ) : (
         <div className="mt-10 grid gap-5">
-          {views.map((view) => (
-            <article
-              key={view.saved.destinationId}
-              className="grid gap-5 border border-line bg-white/50 p-4 sm:grid-cols-[180px_minmax(0,1fr)] sm:p-5"
-            >
-              <Link
-                to={`/destination/${view.saved.destinationId}${
-                  view.saved.habitIds.length
-                    ? `?h=${view.saved.habitIds.join(',')}`
-                    : ''
-                }`}
-                className="relative block aspect-[4/3] overflow-hidden bg-paper-2 sm:aspect-auto sm:h-full"
-                aria-label={`Abrir ${view.name}`}
+          {views.map((view) => {
+            const text = destinationText(view.destination)
+            const href = `/destination/${view.saved.destinationId}${
+              view.saved.habitIds.length ? `?h=${view.saved.habitIds.join(',')}` : ''
+            }`
+
+            return (
+              <article
+                key={view.saved.destinationId}
+                className="grid gap-5 border border-line bg-white/50 p-4 sm:grid-cols-[180px_minmax(0,1fr)] sm:p-5"
               >
-                <DestinationImage
-                  src={view.image}
-                  alt={`${view.name}, ${view.country}`}
-                  className="transition-transform duration-700 hover:scale-[1.03]"
-                />
-              </Link>
+                <Link
+                  to={href}
+                  className="relative block aspect-[4/3] overflow-hidden bg-paper-2 sm:aspect-auto sm:h-full"
+                  aria-label={view.destination.name}
+                >
+                  <DestinationImage
+                    src={view.destination.image}
+                    alt={text.imageAlt}
+                    className="transition-transform duration-700 hover:scale-[1.03]"
+                  />
+                </Link>
 
-              <div className="flex min-w-0 flex-col">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.16em] text-muted">
-                      {view.country} · guardado a {formatDate(view.saved.savedAt)}
-                    </p>
-                    <h2 className="mt-1 font-display text-2xl leading-tight text-ink">
-                      {view.name}
-                    </h2>
+                <div className="flex min-w-0 flex-col">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.16em] text-muted">
+                        {text.country} · {copy.unlocks.savedOn(fmt.date(view.saved.savedAt))}
+                      </p>
+                      <h2 className="mt-1 font-display text-2xl leading-tight text-ink">
+                        {view.destination.name}
+                      </h2>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-[10px] uppercase tracking-[0.14em] text-muted">
+                        {copy.unlocks.estimatedHorizon}
+                      </p>
+                      <p className="nums mt-1 text-lg text-ink">
+                        {fmt.months(view.plan.monthsToTarget)}
+                      </p>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="text-[10px] uppercase tracking-[0.14em] text-muted">
-                      Prazo estimado
-                    </p>
-                    <p className="nums mt-1 text-lg text-ink">
-                      {formatMonths(view.months)}
-                    </p>
+
+                  <dl className="mt-4 grid grid-cols-3 gap-3 border-y border-line py-3">
+                    <div>
+                      <dt className="text-[10px] uppercase tracking-[0.12em] text-muted">
+                        {copy.unlocks.target}
+                      </dt>
+                      <dd className="nums mt-0.5 text-[13px] text-ink">
+                        {fmt.eur(view.destination.budget)}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-[10px] uppercase tracking-[0.12em] text-muted">
+                        {copy.unlocks.perMonth}
+                      </dt>
+                      <dd className="nums mt-0.5 text-[13px] text-ink">
+                        {fmt.eur(view.plan.monthly)}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-[10px] uppercase tracking-[0.12em] text-muted">
+                        {copy.unlocks.swaps}
+                      </dt>
+                      <dd className="nums mt-0.5 text-[13px] text-ink">
+                        {view.saved.habitIds.length}
+                      </dd>
+                    </div>
+                  </dl>
+
+                  <ProgressRail
+                    className="mt-4"
+                    progress={view.plan.progress}
+                    unlocked={view.plan.unlocked}
+                    label={copy.a11y.progressPlan(view.destination.name)}
+                  />
+
+                  <div className="mt-auto flex flex-wrap items-center gap-4 pt-5">
+                    <Link
+                      to={href}
+                      className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-clay"
+                    >
+                      {copy.unlocks.openPlan}
+                      <ArrowUpRight className="h-3.5 w-3.5" />
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => handleRemove(view.saved.destinationId)}
+                      className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.12em] text-muted hover:text-ink"
+                    >
+                      <BookmarkX className="h-3.5 w-3.5" />
+                      {copy.unlocks.remove}
+                    </button>
                   </div>
                 </div>
-
-                <dl className="mt-4 grid grid-cols-3 gap-3 border-y border-line py-3">
-                  <div>
-                    <dt className="text-[10px] uppercase tracking-[0.12em] text-muted">
-                      Objetivo
-                    </dt>
-                    <dd className="nums mt-0.5 text-[13px] text-ink">
-                      {formatEUR(view.target)}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-[10px] uppercase tracking-[0.12em] text-muted">
-                      Por mês
-                    </dt>
-                    <dd className="nums mt-0.5 text-[13px] text-ink">
-                      {formatEUR(view.monthly)}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-[10px] uppercase tracking-[0.12em] text-muted">
-                      Trocas
-                    </dt>
-                    <dd className="nums mt-0.5 text-[13px] text-ink">
-                      {view.saved.habitIds.length}
-                    </dd>
-                  </div>
-                </dl>
-
-                <ProgressRail
-                  className="mt-4"
-                  progress={view.progress}
-                  unlocked={view.unlocked}
-                  label={`Progresso de ${view.name}`}
-                />
-
-                <div className="mt-auto flex flex-wrap items-center gap-4 pt-5">
-                  <Link
-                    to={`/destination/${view.saved.destinationId}${
-                      view.saved.habitIds.length
-                        ? `?h=${view.saved.habitIds.join(',')}`
-                        : ''
-                    }`}
-                    className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-clay"
-                  >
-                    Abrir plano
-                    <ArrowUpRight className="h-3.5 w-3.5" />
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={() => handleRemove(view.saved.destinationId)}
-                    className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.12em] text-muted hover:text-ink"
-                  >
-                    <BookmarkX className="h-3.5 w-3.5" />
-                    Remover
-                  </button>
-                </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            )
+          })}
         </div>
       )}
     </div>

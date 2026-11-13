@@ -1,11 +1,9 @@
 import { ArrowRight } from 'lucide-react'
+import { useI18n } from '../i18n/context'
 import { cn } from '../lib/cn'
-import { formatMonths } from '../lib/format'
 
 export interface PresetView {
-  id: string
-  label: string
-  description: string
+  id: 'essential' | 'balanced' | 'conscious'
   habitIds: string[]
   months: number | null
 }
@@ -17,17 +15,19 @@ interface PresetButtonsProps {
 }
 
 export function PresetButtons({ presets, activeIds, onApply }: PresetButtonsProps) {
+  const { copy, fmt } = useI18n()
   const activeKey = [...activeIds].sort().join('|')
 
   return (
     <div>
       <div className="flex items-baseline justify-between gap-4">
-        <p className="eyebrow">Começar com um plano</p>
-        <p className="text-[11px] text-muted">Podes ajustar tudo depois</p>
+        <p className="eyebrow">{copy.detail.presetsEyebrow}</p>
+        <p className="text-[11px] text-muted">{copy.detail.presetsHint}</p>
       </div>
       <div className="mt-3 grid gap-2 sm:grid-cols-3">
         {presets.map((preset) => {
           const isActive = [...preset.habitIds].sort().join('|') === activeKey
+          const presetCopy = copy.presets[preset.id]
           return (
             <button
               key={preset.id}
@@ -42,13 +42,15 @@ export function PresetButtons({ presets, activeIds, onApply }: PresetButtonsProp
             >
               <span className="flex items-center gap-1.5 text-[13px] font-semibold text-ink">
                 <ArrowRight className="h-3.5 w-3.5 text-clay" aria-hidden="true" />
-                {preset.label}
+                {presetCopy.label}
               </span>
               <span className="mt-1 text-[11px] leading-relaxed text-muted">
-                {preset.description}
+                {presetCopy.description}
               </span>
               <span className="nums mt-2 text-[13px] text-ink">
-                {preset.months !== null ? `≈ ${formatMonths(preset.months)}` : 'fora de alcance'}
+                {preset.months !== null
+                  ? `≈ ${fmt.months(preset.months)}`
+                  : copy.preset.outOfReach}
               </span>
             </button>
           )

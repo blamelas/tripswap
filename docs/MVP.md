@@ -54,6 +54,17 @@ quanto tempo podem levar a financiar a viagem.
 - [ ] Uma poupança pontual nunca é somada como valor mensal.
 - [ ] Alvos inalcançáveis em 240 meses mostram "sem prazo estimado".
 
+### Transversal — Idioma
+
+Como visitante, quero ler a experiência no meu idioma.
+
+- [ ] O inglês é o idioma por omissão; o português está a um clique.
+- [ ] Um toggle PT/EN no cabeçalho muda toda a interface, incluindo as 24 trocas e os
+      8 destinos.
+- [ ] Os números, prazos e fórmulas mantêm-se idênticos nos dois idiomas.
+- [ ] A escolha persiste após refresh e atualiza `<html lang>` e o título do documento.
+- [ ] Um teste garante paridade de chaves e conteúdo traduzido.
+
 ### US4 — Guardar planos
 
 Como visitante, quero guardar objetivos e planos para voltar mais tarde.
@@ -74,6 +85,7 @@ Como visitante, quero guardar objetivos e planos para voltar mais tarde.
 - `/unlocks` com persistência local.
 - `/about` com método, limites e créditos.
 - Empty state, erro 404 e fallback de imagem.
+- Interface bilingue PT/EN com toggle persistente.
 - Responsivo até 360 px, com barra de financiamento fixa no telemóvel.
 - Testes, lint, typecheck e build verdes.
 
@@ -119,5 +131,6 @@ SavedPlan {
 - As 4 user stories funcionam de ponta a ponta, sem tocar no código.
 - Os 26 testes passam; lint, typecheck e build verdes.
 - O URL público abre em incógnito e no telemóvel.
+- O toggle PT/EN funciona e persiste.
 - Zero erros na consola.
 - O guião de demo em [`DEFENSE.md`](DEFENSE.md) foi ensaiado duas vezes.
