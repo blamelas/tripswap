@@ -87,9 +87,14 @@ produto: fotografia full-bleed, tipografia condensada e uma única cor-sinal.
 | Números | IBM Plex Mono |
 
 O bloco €0* mostra sempre o orçamento ilustrativo riscado, a expressão €0* e a linha
-"financiado por trocas". No detalhe, a fotografia do destino é a superfície de
-progresso: uma maré crescente e uma linha coral ligam as trocas escolhidas, a poupança
-mensal e o tempo até ao objetivo.
+"financiado por trocas". Em cada cartão de destino, o €0* é o call to action, com
+"Desbloquear esta experiência" logo abaixo. No detalhe, a fotografia do destino é a
+superfície de progresso: uma maré crescente e uma linha coral ligam as trocas
+escolhidas, a poupança mensal e o tempo até ao objetivo. Quando o plano atinge o
+alvo, um bloco signal declara **“Isto agora é possível.”** com os meses e as trocas
+escolhidas; no telemóvel, a barra de funding fica signal.
+
+![O estado de sucesso](docs/assets/success.jpg)
 
 ## Stack
 

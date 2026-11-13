@@ -87,9 +87,14 @@ full-bleed photography, condensed display type and one signal colour.
 | Numbers | IBM Plex Mono |
 
 The €0* block always shows the illustrative budget crossed out, the €0* expression and
-the "funded by everyday swaps" line. In the detail page, the destination photograph is
-the progress surface: a rising tide and a coral edge rail connect selected swaps, the
-monthly saving and the time to the target.
+the "funded by everyday swaps" line. Every destination card turns the €0* into the
+call to action, with "Unlock this experience" directly underneath. In the detail page,
+the destination photograph is the progress surface: a rising tide and a coral edge rail
+connect selected swaps, the monthly saving and the time to the target. When the plan
+reaches the target, a signal block states **“This is now possible.”** with the months
+and selected swaps; on mobile the funding bar turns signal.
+
+![The success state](docs/assets/success.jpg)
 
 ## Stack
 

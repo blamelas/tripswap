@@ -1,3 +1,4 @@
+import { BookmarkCheck, BookmarkPlus, Check } from 'lucide-react'
 import type { Destination } from '../types'
 import type { PlanResult } from '../lib/calc'
 import { HORIZONS, planState } from '../lib/planState'
@@ -53,7 +54,8 @@ function RewardWindow({ destination, plan }: RewardWindowProps) {
           {destination.name}
         </div>
         {plan.unlocked && (
-          <div className="absolute right-0 top-0 bg-accent px-2.5 py-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-ink">
+          <div className="absolute right-0 top-0 flex items-center gap-1 bg-accent px-2.5 py-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-ink">
+            <Check className="h-3 w-3" strokeWidth={3} aria-hidden="true" />
             {copy.reward.unlocked}
           </div>
         )}
@@ -127,10 +129,39 @@ export function RewardPanel({
   onSave,
   className,
 }: RewardPanelProps) {
-  const { copy } = useI18n()
+  const { copy, fmt } = useI18n()
+
+  const reached = plan.unlocked && plan.monthsToTarget !== null
 
   return (
     <div className={cn(className)}>
+      {reached && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="animate-rise bg-accent p-4 text-ink"
+        >
+          <div className="flex items-center gap-2">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-ink">
+              <Check className="h-3.5 w-3.5" strokeWidth={3} aria-hidden="true" />
+            </span>
+            <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-ink/70">
+              {copy.reward.reachedEyebrow}
+            </span>
+          </div>
+          <p className="mt-2 font-display text-[2.05rem] leading-[0.84]">
+            {copy.reward.reachedTitle}
+          </p>
+          <p className="mt-1 text-[11px] font-medium">
+            {fmt.months(plan.monthsToTarget)} · {plan.habits.length}{' '}
+            {copy.reward.selected}
+          </p>
+          <p className="mt-1 text-[10px] leading-relaxed text-ink/70">
+            {copy.reward.covered}
+          </p>
+        </div>
+      )}
+
       <RewardWindow destination={destination} plan={plan} />
 
       <div className="border-x border-b border-line p-4">
@@ -161,6 +192,11 @@ export function RewardPanel({
         </div>
 
         <button type="button" onClick={onSave} className="btn-accent mt-4 w-full">
+          {saved ? (
+            <BookmarkCheck className="h-4 w-4" aria-hidden="true" />
+          ) : (
+            <BookmarkPlus className="h-4 w-4" aria-hidden="true" />
+          )}
           {saved ? copy.panel.saved : copy.panel.save}
         </button>
 
@@ -183,27 +219,48 @@ export function MobileFundingBar({ plan, saved, onSave }: MobileFundingBarProps)
   const state = planState(plan)
   const months = plan.monthsToTarget
 
+  const reached = plan.unlocked && months !== null
+
   return (
-    <div className="fixed inset-x-0 bottom-0 z-30 bg-ink px-4 pb-[max(0.65rem,env(safe-area-inset-bottom))] pt-2.5 text-canvas lg:hidden">
-      <div className="absolute inset-x-0 top-0 h-[2px] bg-canvas/15">
+    <div
+      className={cn(
+        'fixed inset-x-0 bottom-0 z-30 px-4 pb-[max(0.65rem,env(safe-area-inset-bottom))] pt-2.5 lg:hidden',
+        reached ? 'bg-accent text-ink' : 'bg-ink text-canvas',
+      )}
+    >
+      <div className={cn('absolute inset-x-0 top-0 h-[2px]', reached ? 'bg-ink/15' : 'bg-canvas/15')}>
         <div
-          className="h-full bg-accent transition-[width] duration-700"
+          className={cn(
+            'h-full transition-[width] duration-700',
+            reached ? 'bg-ink' : 'bg-accent',
+          )}
           style={{ width: `${Math.round(plan.progress * 100)}%` }}
         />
       </div>
       <div className="flex items-center justify-between gap-4">
         <div className="min-w-0">
-          <p className="text-[8px] font-semibold uppercase tracking-[0.16em] text-canvas/60">
+          <p
+            className={cn(
+              'flex items-center gap-1 text-[8px] font-semibold uppercase tracking-[0.16em]',
+              reached ? 'text-ink/70' : 'text-canvas/60',
+            )}
+          >
+            {reached && <Check className="h-3 w-3" strokeWidth={3} aria-hidden="true" />}
             {copy.panel.states[state].label}
           </p>
           <p className="mt-0.5 flex items-baseline gap-1.5">
-            <span className="nums text-lg text-canvas">
+            <span className={cn('nums text-lg', reached ? 'text-ink' : 'text-canvas')}>
               {months !== null ? `${months}` : '—'}
             </span>
-            <span className="text-[10px] uppercase tracking-[0.12em] text-canvas/70">
+            <span
+              className={cn(
+                'text-[10px] uppercase tracking-[0.12em]',
+                reached ? 'text-ink/70' : 'text-canvas/70',
+              )}
+            >
               {months === 1 ? copy.reward.month : copy.reward.months}
             </span>
-            <span className="nums text-[10px] text-canvas/70">
+            <span className={cn('nums text-[10px]', reached ? 'text-ink/70' : 'text-canvas/70')}>
               · {fmt.eur(plan.monthly)}
             </span>
           </p>
@@ -211,8 +268,16 @@ export function MobileFundingBar({ plan, saved, onSave }: MobileFundingBarProps)
         <button
           type="button"
           onClick={onSave}
-          className="shrink-0 bg-accent px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-ink"
+          className={cn(
+            'flex shrink-0 items-center gap-1.5 px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.12em]',
+            reached ? 'bg-ink text-canvas' : 'bg-accent text-ink',
+          )}
         >
+          {saved ? (
+            <BookmarkCheck className="h-3.5 w-3.5" aria-hidden="true" />
+          ) : (
+            <BookmarkPlus className="h-3.5 w-3.5" aria-hidden="true" />
+          )}
           {saved ? copy.common.saved : copy.common.save}
         </button>
       </div>

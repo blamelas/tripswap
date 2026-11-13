@@ -3,6 +3,22 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.3.0] — 2026-11-13
+
+### Adicionado
+
+- Estado de sucesso explícito: bloco signal **“This is now possible.”** no painel e no
+  fluxo, com check, meses, trocas escolhidas e objetivo. A barra mobile fica signal e
+  mostra check.
+- Ícones nas categorias de hábitos (rota, talheres, bilhete, ferramenta, pulso) e nos
+  botões de guardar (bookmark / bookmark check).
+- Favicon novo (signal com horizonte ink/canvas) e `apple-touch-icon`.
+
+### Alterado
+
+- Cartões de destino: €0* muito maior, orçamento riscado acima e CTA explícito
+  “Unlock this experience” por baixo.
+
 ## [1.2.1] — 2026-11-13
 
 ### Corrigido
