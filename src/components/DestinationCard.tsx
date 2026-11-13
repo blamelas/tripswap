@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react'
 import type { Destination } from '../types'
 import { DESTINATION_CATEGORY_LABELS } from '../data/destinations'
 import { formatEUR } from '../lib/format'
-import { withBase } from '../lib/base'
+import { DestinationImage } from './DestinationImage'
 import { cn } from '../lib/cn'
 
 interface DestinationCardProps {
@@ -30,14 +30,11 @@ export function DestinationCard({
         )}. Ver como desbloquear.`}
       >
         <div className={cn('relative overflow-hidden bg-paper-2', aspect)}>
-          <img
-            src={withBase(destination.image)}
+          <DestinationImage
+            src={destination.image}
             alt={destination.imageAlt}
-            width={1600}
-            height={1067}
-            loading={priority ? 'eager' : 'lazy'}
-            decoding="async"
-            className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.035]"
+            priority={priority}
+            className="transition-transform duration-[900ms] ease-out group-hover:scale-[1.035]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/5 to-transparent" />
 
