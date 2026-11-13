@@ -86,6 +86,7 @@ Como visitante, quero guardar objetivos e planos para voltar mais tarde.
 - `/about` com método, limites e créditos.
 - Empty state, erro 404 e fallback de imagem.
 - Interface bilingue PT/EN com toggle persistente.
+- Lembretes locais por plano com exportação `.ics` (evento + alarme).
 - Responsivo até 360 px, com barra de financiamento fixa no telemóvel.
 - Testes, lint, typecheck e build verdes.
 
@@ -95,6 +96,7 @@ Como visitante, quero guardar objetivos e planos para voltar mais tarde.
 - Reservas, pagamentos, preços em tempo real, integrações de companhias.
 - Mapas, clima, uploads, notificações, email.
 - Chatbot ou geração de texto em runtime.
+- Push notifications, email ou sincronização de calendário via API.
 - Gamificação com pontos, moedas ou recompensas.
 - Filtros, pesquisa, favoritos sociais, i18n, dark mode.
 

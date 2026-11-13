@@ -61,6 +61,8 @@ one primary screen.
   €0\* note.
 - **A signature interaction.** Choosing swaps makes the destination rise: a coral rail
   climbs the photograph, the image moves closer and the months counter animates.
+- **Plans become routines.** Saved plans can create a daily or monthly calendar event
+  with a reminder at a chosen time; the reminder preference stays on the device.
 - **Bilingual by design.** English is the default and Portuguese is one click away.
   The toggle changes every string — including the 24 swaps and 8 destinations — while
   the numbers stay identical.
@@ -115,7 +117,7 @@ step, clearly separate from the trip data.
 | Icons | Lucide |
 | Chart | Hand-rolled SVG, no chart library |
 | Persistence | `localStorage` (`tripswap:unlocks:v1`) |
-| Tests | Vitest — 35 tests |
+| Tests | Vitest — 42 tests |
 | Environment | Multi-stage Docker + DevContainer |
 | Deploy | Vercel (production, auto-deploy from `main`) |
 | AI in development | DeepSeek (`deepseek-flash`) as the coding agent |
@@ -143,7 +145,7 @@ Open http://localhost:5173. Changes reload automatically.
 ```bash
 npm run lint        # oxlint
 npm run typecheck   # tsc
-npm test            # 35 tests (engine, data, assets, formatting, i18n)
+npm test            # 42 tests (engine, data, assets, formatting, i18n, reminders)
 npm run build       # production build
 node scripts/assumptions.mjs > docs/ASSUMPTIONS.md   # regenerate assumptions
 ```
@@ -159,6 +161,15 @@ The engine lives in [`src/lib/calc.ts`](src/lib/calc.ts) and is the single sourc
 truth. A test asserts that each of the 24 swaps keeps its documented value. The engine
 also removes overlaps defensively, even if it receives an unsanitised list (old deep
 link or edited `localStorage`).
+
+### Plan reminders
+
+A saved plan can create a daily or monthly calendar event with a reminder at a chosen
+time. The downloadable `.ics` contains a 15-minute event and a `VALARM`; the preference
+(frequency, time, day) stays in the browser. There are no push notifications and no
+server.
+
+![Plan reminder](docs/assets/reminders.jpg)
 
 ## Structure
 
