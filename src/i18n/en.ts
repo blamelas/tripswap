@@ -9,6 +9,8 @@ export const en: Copy = {
   nav: {
     discover: 'Destinations',
     placesShort: 'Places',
+    swaps: 'The swaps',
+    swapsShort: 'Swaps',
     unlocks: 'My plans',
     unlocksShort: 'Plans',
     about: 'About',
@@ -55,6 +57,7 @@ export const en: Copy = {
   footer: {
     explore: 'Explore',
     catalogue: 'Destinations',
+    swaps: 'The swaps',
     unlocks: 'My plans',
     how: 'About',
     honest: 'Honest note',
@@ -80,6 +83,7 @@ export const en: Copy = {
     entertainment: 'Leisure & subscriptions',
     shopping: 'Shopping & repairs',
     wellbeing: 'Wellbeing',
+    games: 'Games & Betting',
   },
   card: {
     aria: (name: string, country: string, budget: string) =>
@@ -98,7 +102,7 @@ export const en: Copy = {
       'Pick a place. Change a few everyday habits. See how soon it becomes possible.',
     ctaDestinations: 'Find your next place',
     ctaHow: 'How it works',
-    stats: ['8 destinations', '24 swaps', 'No spreadsheets'],
+    stats: ['8 destinations', '25 swaps', 'No spreadsheets'],
     chapters: ['Dream', 'Swap', 'Arrive'],
     featuredNote: (budget: string) =>
       `Illustrative target of ${budget} · not a price`,
@@ -356,6 +360,15 @@ export const en: Copy = {
     body: 'The address may be incomplete. The catalogue is still here.',
     cta: 'Back to the catalogue',
   },
+  games: {
+    current: 'Current monthly spend',
+    reduced: 'Reduced monthly spend',
+    save: 'Save amounts',
+    estimated: 'Estimated monthly saving',
+    hint: 'Enter both amounts to see your saving.',
+    invalid: 'The reduced amount should be lower than the current amount.',
+    setFirst: 'Set your monthly amounts',
+  },
   reminder: {
     add: 'Add reminder',
     edit: 'Edit reminder',
@@ -376,6 +389,42 @@ export const en: Copy = {
     eventTitle: (destination: string) => `TripSwap — review ${destination}`,
     eventDescription: (swaps: number, monthly: string, horizon: string, target: string) =>
       `${swaps} swaps · ${monthly}/month · ${horizon} · ${target} target. Simulation, not a booking.`,
+  },
+  swaps: {
+    eyebrow: 'The swaps',
+    headline: {
+      line1: "Less of what you don't need.",
+      line2: 'More of what you want to live.',
+    },
+    intro:
+      'Choose the changes that feel worthwhile. Add them to a plan and see where they could take you.',
+    swapCount: 'swaps',
+    categoryCount: 'categories',
+    selected: 'selected',
+    monthly: 'Monthly',
+    oneTime: 'One-time',
+    add: 'Add to my plan',
+    added: 'Added',
+    assumptions: 'Assumptions & calculation',
+    alone: (name: string, months: string) =>
+      `On its own, this could cover ${name} in about ${months}.`,
+    start: (name: string) => `A one-time start toward ${name}.`,
+    leads: 'Add it to a plan to see where it leads.',
+    cta: 'See where these changes could take you',
+    ctaShort: 'See places',
+    destinationsTitle: 'Choose a place.',
+    destinationsIntro: 'We will carry your selected swaps into the plan.',
+    choose: 'Choose this place',
+    futureEyebrow: 'Roadmap',
+    futureTitle: 'Build your own freedom plan.',
+    futureIntro:
+      'Two tools are in development to make the plan truly yours.',
+    createSwapTitle: 'Create my own swap',
+    createSwapBody: 'Define a habit, an alternative and the saving you expect.',
+    dreamTripTitle: 'Add my dream trip',
+    dreamTripBody: 'Give your plan a personal destination and target budget.',
+    comingSoon: 'Coming soon',
+    futureNote: 'These tools are in development. Nothing is active yet.',
   },
   a11y: {
     progress: 'Progress towards the target',

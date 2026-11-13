@@ -75,8 +75,14 @@ export function Layout() {
 
   const links = [
     { to: '/', label: copy.nav.discover, short: copy.nav.placesShort, end: true },
+    {
+      to: '/swaps',
+      label: copy.nav.swaps,
+      short: copy.nav.swapsShort,
+      end: false,
+    },
     { to: '/unlocks', label: copy.nav.unlocks, short: copy.nav.unlocksShort, end: false },
-    { to: '/about', label: copy.nav.about, end: false },
+    { to: '/about', label: copy.nav.about, end: false, hideOnMobile: true },
   ]
 
   return (
@@ -106,6 +112,7 @@ export function Layout() {
                       isActive
                         ? 'border-accent text-ink'
                         : 'border-transparent text-muted hover:text-ink',
+                      link.hideOnMobile && 'hidden sm:inline-flex',
                     )
                   }
                 >
@@ -143,6 +150,14 @@ export function Layout() {
               <li>
                 <NavLink to="/" className="text-canvas/75 transition-colors hover:text-accent">
                   {copy.footer.catalogue}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/swaps"
+                  className="text-canvas/75 transition-colors hover:text-accent"
+                >
+                  {copy.footer.swaps}
                 </NavLink>
               </li>
               <li>

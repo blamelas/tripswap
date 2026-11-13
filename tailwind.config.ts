@@ -33,6 +33,8 @@ export default {
         'cat-shopping-soft': '#E8EFE6',
         'cat-wellbeing': '#A5616F',
         'cat-wellbeing-soft': '#F4E3E7',
+        'cat-games': '#8A6A32',
+        'cat-games-soft': '#F2E8D5',
       },
       fontFamily: {
         display: ['"Barlow Condensed"', '"Arial Narrow"', 'sans-serif'],

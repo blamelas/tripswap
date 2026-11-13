@@ -148,6 +148,13 @@ export const habitEn: Record<string, HabitText> = {
     assumptions:
       '20 packs per month · €6 per pack. Does not include cessation support.',
   },
+  'games-betting': {
+    title: 'Reduce spending on games and betting',
+    description:
+      'Small amounts add up over time. See how much of that budget you could put toward a new experience.',
+    assumptions:
+      'Enter your current monthly spend and the amount you would rather keep. Saving = current − reduced.',
+  },
   'exercise-at-home': {
     title: 'Train at home instead of paying for a gym',
     description: 'Training moves home, with equipment you already own.',
