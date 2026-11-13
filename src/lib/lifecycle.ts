@@ -123,9 +123,10 @@ export function allocate(
 }
 
 /**
- * Removes an allocation: closes its open period (if any) and drops the
- * allocation, keeping closed periods as history. A matching one-time credit is
- * also released so the habit becomes available again.
+ * Removes a recurring allocation: closes its open period and drops the
+ * allocation, keeping closed periods as history. A one-time credit is history,
+ * not an allocation, so it is never removed — the saving happened once and
+ * cannot be credited again.
  */
 export function releaseAllocation(
   lifecycle: PlanLifecycle,
@@ -140,7 +141,6 @@ export function releaseAllocation(
         ? { ...period, end: nowIso }
         : period,
     ),
-    oneTimeCredits: lifecycle.oneTimeCredits.filter((credit) => credit.habitId !== habitId),
   }
 }
 

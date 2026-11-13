@@ -96,10 +96,10 @@ describe('releaseAllocation', () => {
     ])
   })
 
-  it('also releases a matching one-time credit', () => {
+  it('keeps a one-time credit as permanent history', () => {
     const started = activate(plan(['repair-shoes']), [getHabit('repair-shoes')!], NOW)
     const released = releaseAllocation(started, 'repair-shoes', T2)
-    expect(released.oneTimeCredits).toEqual([])
+    expect(released.oneTimeCredits).toEqual(started.oneTimeCredits)
   })
 })
 

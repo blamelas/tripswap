@@ -10,6 +10,7 @@ import type {
   SavedPlan,
 } from '../types'
 import type { ReservedAllocation } from './allocations'
+import { getHabit } from '../data/habits'
 import {
   achieve,
   activate,
@@ -260,11 +261,26 @@ export function addAllocation(
   habit: Habit,
   nowIso: string,
 ): SavedPlan[] {
-  return mutatePlan(destinationId, (plan) =>
-    plan.lifecycle
-      ? { ...plan, lifecycle: allocate(plan.lifecycle, habit, destinationId, nowIso) }
-      : plan,
-  )
+  return mutatePlan(destinationId, (plan) => {
+    if (!plan.lifecycle) return plan
+
+    // Defensive: one habit per overlap group, even if a caller bypasses the UI.
+    const alreadyAllocated = plan.lifecycle.allocations.some(
+      (allocation) => allocation.habitId === habit.id,
+    )
+    const clashesGroup =
+      habit.exclusiveGroup !== undefined &&
+      plan.lifecycle.allocations.some(
+        (allocation) =>
+          getHabit(allocation.habitId)?.exclusiveGroup === habit.exclusiveGroup,
+      )
+    if (alreadyAllocated || clashesGroup) return plan
+
+    return {
+      ...plan,
+      lifecycle: allocate(plan.lifecycle, habit, destinationId, nowIso),
+    }
+  })
 }
 
 export function removeAllocation(
