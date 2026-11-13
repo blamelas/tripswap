@@ -168,7 +168,7 @@ export const destinationEn: Record<string, DestinationText> = {
     quote: 'The city you see by climbing, slowly.',
     description:
       'Viewpoints, pastry shops and streets that are on no map. A city small enough to walk and large enough to surprise.',
-    imageAlt: 'Yellow tram on a narrow Alfama street in Lisbon',
+    imageAlt: 'Rooftops of Alfama and the Tagus river seen from a viewpoint in Lisbon',
     includes: ['Accommodation', 'Meals', 'Local transport'],
     country: 'Portugal',
   },
@@ -184,7 +184,7 @@ export const destinationEn: Record<string, DestinationText> = {
     quote: 'Architecture, sea and a longer night.',
     description:
       'Gaudí in the morning, the beach in the afternoon and narrow neighbourhoods at night. A city that adapts to your pace, even on a weekend.',
-    imageAlt: 'Sagrada Família façade in Barcelona',
+    imageAlt: 'Barcelona skyline seen from Park Güell',
     includes: ['Transport', 'Accommodation', 'Local transport'],
     country: 'Spain',
   },
@@ -208,7 +208,7 @@ export const destinationEn: Record<string, DestinationText> = {
     quote: 'Six nights looking for the right sky.',
     description:
       'A road trip through southern Iceland, with auroras as the goal and winter as company. A bigger plan, for anyone who wants a bigger reason.',
-    imageAlt: 'Green aurora borealis over an Icelandic landscape',
+    imageAlt: 'Green aurora borealis above red-roofed cabins in Iceland',
     includes: ['Transport', 'Accommodation', 'Car rental'],
     country: 'Iceland',
   },
