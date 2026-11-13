@@ -1,0 +1,177 @@
+import type { Destination, DestinationCategory } from '../types'
+
+export const DESTINATION_CATEGORY_LABELS: Record<DestinationCategory, string> = {
+  weekend: 'Escapadinha',
+  city: 'Cidade',
+  nature: 'Natureza e aventura',
+  winter: 'Inverno',
+  culture: 'Cultura',
+  journey: 'Grande viagem',
+}
+
+/**
+ * Illustrative planning targets, not verified travel prices.
+ * Each one states its assumed departure city, travellers, nights and scope.
+ */
+export const DESTINATIONS: Destination[] = [
+  {
+    id: 'douro-escape',
+    name: 'Douro Escape',
+    country: 'Portugal',
+    category: 'weekend',
+    duration: '2 noites',
+    image: '/images/douro.webp',
+    imageAlt: 'Vinhas em socalcos sobre o rio Douro ao entardecer',
+    imageCredit: "mat's eye · CC BY 2.0 · Wikimedia Commons",
+    quote: 'Dois dias entre socalcos, água e silêncio.',
+    description:
+      'Uma escapadinha lenta pelo vale do Douro: uma quinta, uma prova de vinho e tempo para não fazer nada. O tipo de viagem que se paga com pequenas decisões de semanas comuns.',
+    budget: 420,
+    departureCity: 'Lisboa',
+    travelers: 2,
+    nights: 2,
+    includes: ['Transporte', 'Alojamento', 'Pequeno-almoço'],
+    recommendedHabitIds: ['coffee-at-home', 'reduce-takeaway', 'reduce-food-waste'],
+  },
+  {
+    id: 'lisbon-weekend',
+    name: 'Lisbon Weekend',
+    country: 'Portugal',
+    category: 'weekend',
+    duration: '2 noites',
+    image: '/images/lisbon.webp',
+    imageAlt: 'Elétrico amarelo numa rua estreita de Alfama, em Lisboa',
+    imageCredit: 'Ingo Mehling · CC BY-SA 4.0 · Wikimedia Commons',
+    quote: 'A cidade que se vê a subir, devagar.',
+    description:
+      'Miradouros, pastelarias e ruas que não estão em nenhum mapa. Uma cidade pequena o suficiente para ser caminhada e grande o suficiente para surpreender.',
+    budget: 480,
+    departureCity: 'Lisboa',
+    travelers: 2,
+    nights: 2,
+    includes: ['Alojamento', 'Refeições', 'Transporte local'],
+    recommendedHabitIds: ['coffee-at-home', 'lunch-from-home', 'walk-short-distances'],
+  },
+  {
+    id: 'paris-city-break',
+    name: 'Paris City Break',
+    country: 'França',
+    category: 'city',
+    duration: '3 noites',
+    image: '/images/paris.webp',
+    imageAlt: 'Torre Eiffel iluminada ao anoitecer sobre a cidade de Paris',
+    imageCredit: 'Benh LIEU SONG · CC BY-SA 4.0 · Wikimedia Commons',
+    quote: 'Três noites para voltar a acreditar em cidades.',
+    description:
+      'Um fim de semana longo entre museus, margens do Sena e cafés onde o tempo passa mais devagar. O destino que abre o catálogo e a conversa.',
+    budget: 650,
+    departureCity: 'Lisboa',
+    travelers: 2,
+    nights: 3,
+    includes: ['Transporte', 'Alojamento', 'Pequeno-almoço'],
+    recommendedHabitIds: ['uber-public-transport', 'lunch-from-home', 'coffee-at-home'],
+  },
+  {
+    id: 'barcelona-weekend',
+    name: 'Barcelona Weekend',
+    country: 'Espanha',
+    category: 'city',
+    duration: '2 noites',
+    image: '/images/barcelona.webp',
+    imageAlt: 'Fachada da Sagrada Família em Barcelona',
+    imageCredit: 'Alvesgaspar · CC BY-SA 4.0 · Wikimedia Commons',
+    quote: 'Arquitetura, mar e uma noite mais longa.',
+    description:
+      'Gaudí de manhã, praia à tarde e bairros estreitos à noite. Uma cidade que se adapta ao teu ritmo, mesmo quando só tens um fim de semana.',
+    budget: 560,
+    departureCity: 'Lisboa',
+    travelers: 2,
+    nights: 2,
+    includes: ['Transporte', 'Alojamento', 'Transporte local'],
+    recommendedHabitIds: ['coffee-at-home', 'half-nights-out', 'reduce-takeaway'],
+  },
+  {
+    id: 'rome-discovery',
+    name: 'Rome Discovery',
+    country: 'Itália',
+    category: 'culture',
+    duration: '4 noites',
+    image: '/images/rome.webp',
+    imageAlt: 'Coliseu de Roma visto de fora, sob luz de dia',
+    imageCredit: 'Diliff · CC BY-SA 2.5 · Wikimedia Commons',
+    quote: 'Quatro dias a andar dentro da história.',
+    description:
+      'Roma não se visita à pressa. Praças, ruínas e trattorias de bairro — um plano de quatro noites para quem quer voltar com os pés cansados e a cabeça cheia.',
+    budget: 700,
+    departureCity: 'Lisboa',
+    travelers: 2,
+    nights: 4,
+    includes: ['Transporte', 'Alojamento', 'Refeições básicas'],
+    recommendedHabitIds: ['cook-instead-of-ready-meals', 'lunch-from-home', 'water-instead-of-soft-drinks'],
+  },
+  {
+    id: 'alps-winter-escape',
+    name: 'French Alps Winter Escape',
+    country: 'França',
+    category: 'winter',
+    duration: '4 noites',
+    image: '/images/alps.webp',
+    imageAlt: 'Cordilheira dos Alpes franceses coberta de neve',
+    imageCredit: 'Loic Faucon · CC BY 3.0 · Wikimedia Commons',
+    quote: 'Quatro dias rodeado de neve.',
+    description:
+      'Uma vila de montanha, ar frio e dias que começam com neve à janela. A viagem mais ambiciosa do catálogo de inverno — e a que mais cresce com pequenas trocas.',
+    budget: 1200,
+    departureCity: 'Lisboa',
+    travelers: 2,
+    nights: 4,
+    includes: ['Transporte', 'Alojamento', 'Forfait de esqui'],
+    recommendedHabitIds: ['reduce-takeaway', 'cancel-forgotten-subscriptions', 'exercise-at-home'],
+  },
+  {
+    id: 'northern-lights',
+    name: 'Northern Lights Adventure',
+    country: 'Islândia',
+    category: 'nature',
+    duration: '6 noites',
+    image: '/images/iceland.webp',
+    imageAlt: 'Aurora boreal verde sobre uma paisagem gelada da Islândia',
+    imageCredit: 'Giles Laurent · CC BY-SA 4.0 · Wikimedia Commons',
+    quote: 'Seis noites à procura do céu certo.',
+    description:
+      'Uma road trip pelo sul da Islândia, com auroras como objetivo e o inverno como companhia. Um plano maior, para quem quer um motivo grande.',
+    budget: 1900,
+    departureCity: 'Lisboa',
+    travelers: 2,
+    nights: 6,
+    includes: ['Transporte', 'Alojamento', 'Aluguer de carro'],
+    recommendedHabitIds: ['cancel-streaming', 'cook-instead-of-ready-meals', 'walk-short-distances'],
+  },
+  {
+    id: 'india-discovery',
+    name: 'India Discovery',
+    country: 'Índia',
+    category: 'journey',
+    duration: '12 noites',
+    image: '/images/india.webp',
+    imageAlt: 'Taj Mahal em Agra, Índia, refletido no jardim',
+    imageCredit: 'Yann; edited by King of Hearts · CC BY-SA 4.0 · Wikimedia Commons',
+    quote: 'Doze noites para mudar a escala.',
+    description:
+      'O grande salto do catálogo: várias cidades, um país inteiro e um plano de doze noites. Não é para amanhã — é para o dia em que decidires que vale a pena.',
+    budget: 2400,
+    departureCity: 'Lisboa',
+    travelers: 2,
+    nights: 12,
+    includes: ['Voos', 'Alojamento', 'Transporte interno'],
+    recommendedHabitIds: ['lunch-from-home', 'coffee-at-home', 'reduce-impulse-clothing'],
+  },
+]
+
+export const DESTINATIONS_BY_ID = new Map(
+  DESTINATIONS.map((destination) => [destination.id, destination]),
+)
+
+export function getDestination(id: string): Destination | undefined {
+  return DESTINATIONS_BY_ID.get(id)
+}
