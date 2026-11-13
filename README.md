@@ -17,7 +17,7 @@ and funding horizon update instantly.
 | | |
 |---|---|
 | **Local demo** | `npm run dev` → http://localhost:5173 |
-| **Live demo** | https://tripswap-kappa.vercel.app/ |
+| **Live demo** | https://tripswap-home.vercel.app/ |
 | **Repository** | https://github.com/blamelas/tripswap |
 | **Defense script** | [`docs/DEFENSE.md`](docs/DEFENSE.md) (pt-PT) |
 | **Assumptions** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) (pt-PT) |

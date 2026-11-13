@@ -18,7 +18,7 @@ projetada e o prazo de financiamento a atualizar-se de imediato.
 | | |
 |---|---|
 | **Demo local** | `npm run dev` → http://localhost:5173 |
-| **Demo pública (Vercel)** | https://tripswap-kappa.vercel.app/ |
+| **Demo pública (Vercel)** | https://tripswap-home.vercel.app/ |
 | **Repositório** | https://github.com/blamelas/tripswap |
 | **Guião de defesa** | [`docs/DEFENSE.md`](docs/DEFENSE.md) |
 | **Pressupostos** | [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) |
