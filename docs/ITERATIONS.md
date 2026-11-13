@@ -23,6 +23,8 @@ commit. Os tempos são reais e incluem revisão manual.
 | 16 | 13 Nov 03:37 | Patch | Bump 1.0.1, changelog, tag | `v1.0.1` | `chore(release): v1.0.1` | 5 min |
 | 17 | 13 Nov 03:38 | Deploy | GitHub Pages, subpath, SPA fallback | URL público | `feat(deploy): support subpath hosting and github pages` | 20 min |
 | 18 | 13 Nov 03:40 | Release | URL no README, bump 1.0.2, tag | `v1.0.2` | `chore(release): v1.0.2` | 5 min |
+| 19 | 13 Nov 03:41 | Imagens | Testes de integridade dos assets locais | 29/29 verdes | `test(assets): verify destination images are local and present` | 10 min |
+| 20 | 13 Nov 03:42 | Evidência | QA flashcards + PR template + release | `v1.0.3` | `chore(release): v1.0.3` | 15 min |
 
 ## O que aprendi
 
