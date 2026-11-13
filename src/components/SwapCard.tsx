@@ -6,7 +6,6 @@ import { useI18n } from '../i18n/context'
 import { monthsToTarget } from '../lib/calc'
 import { HABIT_CATEGORY_META } from '../lib/habitCategories'
 import { habitIcon } from '../lib/habitIcons'
-import { habitImage } from '../lib/habitImages'
 import { cn } from '../lib/cn'
 
 const cheapest = DESTINATIONS.reduce((first, next) =>
@@ -47,16 +46,8 @@ export function SwapCard({ habit, selected, onToggle }: SwapCardProps) {
     >
       <div
         aria-hidden="true"
-        className="-mx-4 -mt-4 mb-3 h-9 overflow-hidden bg-sky/30"
-      >
-        <img
-          src={habitImage(habit.id)}
-          alt=""
-          className="h-full w-full object-cover"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
+        className={cn('-mx-4 -mt-4 mb-3 h-9', meta.bar)}
+      />
       <div className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 items-start gap-3">
           <span

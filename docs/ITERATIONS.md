@@ -56,6 +56,7 @@ commit. Os tempos são reais e incluem revisão manual.
 | 49 | 13 Nov 11:05 | Simplificação | Jogos com estimativa fixa; inputs removidos; sorriso ao selecionar | `v1.5.2` | `feat(swaps): simplify games estimate and add selection feedback` | 25 min |
 | 50 | 13 Nov 11:30 | Refinamento | Jogos a 20 €/mês; faixa Wikimedia mascarada; check monocromático; categorias em acordeão | `v1.5.3` | `feat(swaps): raise games estimate and add masked image edge` | 30 min |
 | 51 | 13 Nov 11:50 | Refinamento | Faixa Wikimedia full-width no topo, sem blur/fade | `v1.5.4` | `feat(swaps): use full-width photo strips` | 15 min |
+| 52 | 13 Nov 12:00 | Refinamento | Barra sólida com a cor da categoria; imagens removidas | `v1.5.5` | `feat(swaps): replace photo strips with category colours` | 10 min |
 
 ## O que aprendi
 

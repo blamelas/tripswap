@@ -173,9 +173,8 @@ destination flow. **Games of chance & betting** uses a fixed, conservative estim
 €20 reduced, €20/month — with no user inputs and no invented average. Selected swaps are stored locally and carried into any destination
 plan through the destination links and the global selection.
 
-Each activity has a distinct icon and a full-width photographic strip from Wikimedia
-Commons across the top of the card. The strip is cropped cleanly, with no blur or fade;
-full photography remains destination-led. Credits: [`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md).
+Each activity has a distinct icon and a full-width **category-colour bar** across the top
+of the card. Photography remains destination-led; the bar is the only card texture.
 Selecting a swap shows a standard monochrome check in the card. Categories start
 collapsed; opening one closes the others, keeping the catalogue short.
 
@@ -214,13 +213,11 @@ docs/        MVP, assumptions, decisions, iterations, testing, defense
 - Browser-only persistence; clearing site data removes saved plans.
 - The horizon is an arithmetic projection, not a savings guarantee.
 - Local photography with licences listed in [`docs/CREDITS.md`](docs/CREDITS.md).
-- Swap-card strips from Wikimedia Commons, listed in [`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md).
 
 ## Documentation
 
 - [`docs/MVP.md`](docs/MVP.md) — scope, user stories, acceptance criteria
 - [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) — every assumption, generated from code
-- [`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md) — Wikimedia swap-strip credits
 - [`docs/DECISIONS.md`](docs/DECISIONS.md) — decisions and trade-offs
 - [`docs/ITERATIONS.md`](docs/ITERATIONS.md) — build cycles
 - [`docs/TESTING.md`](docs/TESTING.md) — automated tests and manual checklist

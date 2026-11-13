@@ -175,10 +175,9 @@ destino. **Jogos de azar e apostas** usa uma estimativa fixa e conservadora — 
 20 € reduzidos, 20 €/mês — sem inputs e sem médias inventadas. As trocas escolhidas ficam guardadas localmente
 e seguem para qualquer plano através dos links de destino e da seleção global.
 
-Cada atividade tem um ícone próprio e uma faixa fotográfica de largura total do
-Wikimedia Commons no topo do cartão. A faixa é cortada de forma limpa, sem blur nem
-fade; a fotografia completa continua reservada aos destinos. Créditos:
-[`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md). Ao selecionar uma troca, aparece um
+Cada atividade tem um ícone próprio e uma **barra sólida com a cor da categoria** no
+topo do cartão. A fotografia continua reservada aos destinos; a barra é a única textura
+dos cartões. Ao selecionar uma troca, aparece um
 check monocromático no cartão. As categorias começam fechadas; abrir uma fecha as
 outras, mantendo o catálogo curto.
 
@@ -217,13 +216,11 @@ docs/        MVP, pressupostos, decisões, iterações, testes, defesa
 - Persistência apenas no navegador; limpar os dados do site remove os planos.
 - O prazo é uma projeção aritmética, não uma garantia de poupança.
 - Fotografias locais com licenças indicadas em [`docs/CREDITS.md`](docs/CREDITS.md).
-- Faixas dos cartões de troca do Wikimedia Commons, em [`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md).
 
 ## Documentação
 
 - [`docs/MVP.md`](docs/MVP.md) — scope, user stories e critérios de aceitação
 - [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md) — todas as premissas, geradas do código
-- [`docs/IMAGE-CREDITS.md`](docs/IMAGE-CREDITS.md) — créditos das faixas Wikimedia
 - [`docs/DECISIONS.md`](docs/DECISIONS.md) — decisões e trade-offs
 - [`docs/ITERATIONS.md`](docs/ITERATIONS.md) — ciclos de construção
 - [`docs/TESTING.md`](docs/TESTING.md) — testes automáticos e checklist manual

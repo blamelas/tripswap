@@ -3,6 +3,15 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.5.5] — 2026-11-13
+
+### Alterado
+
+- Substituí as faixas fotográficas por uma **barra sólida com a cor da categoria** no
+  topo de cada cartão. Sem imagens de stock, sem blur, sem máscara.
+- Removi as 25 imagens do Wikimedia, o `IMAGE-CREDITS.md` e o script de fetching.
+- 42 testes.
+
 ## [1.5.4] — 2026-11-13
 
 ### Alterado
