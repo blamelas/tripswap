@@ -3,6 +3,14 @@
 Formato: [Keep a Changelog](https://keepachangelog.com/pt-PT/1.1.0/) ·
 Versionamento semântico.
 
+## [1.5.6] — 2026-11-13
+
+### Alterado
+
+- A barra de cor da categoria passa de 36 px para **20 px** de altura. Continua
+  full-width, sólida e sem imagens.
+- 42 testes.
+
 ## [1.5.5] — 2026-11-13
 
 ### Alterado
