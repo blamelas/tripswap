@@ -1,13 +1,15 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useParams, useSearchParams } from 'react-router-dom'
-import { ArrowLeft, ListChecks, Moon, PlaneTakeoff, Users } from 'lucide-react'
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { ArrowLeft, ArrowUpRight, Check, ListChecks, Moon, PlaneTakeoff, Users } from 'lucide-react'
 import type { Destination, GamesEstimate, Habit } from '../types'
 import { HABITS, getHabit } from '../data/habits'
 import { getDestination } from '../data/destinations'
 import { useI18n } from '../i18n/context'
-import { calculatePlan } from '../lib/calc'
+import { calculatePlan, monthlySaving, oneTimeSaving } from '../lib/calc'
 import { sanitizeSelection, toggleHabit } from '../lib/conflicts'
 import { getPresets } from '../lib/presets'
+import type { AllocationConflict } from '../lib/allocations'
+import { executeActivation, pendingActivationConflicts } from '../lib/activation'
 import {
   getPlan,
   readGamesEstimate,
@@ -18,6 +20,10 @@ import {
 import { applyGamesEstimate } from '../lib/habitValues'
 import { HabitSelector } from '../components/HabitSelector'
 import { MobileFundingBar, RewardPanel } from '../components/RewardPanel'
+import {
+  ActivationDialog,
+  type ActivationConflictChoice,
+} from '../components/ActivationDialog'
 import { PresetButtons, type PresetView } from '../components/PresetButtons'
 import { ProjectionChart } from '../components/ProjectionChart'
 import { UnlockReceipt } from '../components/UnlockReceipt'
@@ -26,9 +32,10 @@ import { PriceBlock } from '../components/PriceBlock'
 import { NotFound } from './NotFound'
 
 function DetailView({ destination }: { destination: Destination }) {
-  const { copy, fmt, destinationText } = useI18n()
+  const { copy, fmt, destinationText, habitText } = useI18n()
   const text = destinationText(destination)
   const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   const initialIds = useMemo(() => {
     const raw = searchParams.get('h')
@@ -43,7 +50,13 @@ function DetailView({ destination }: { destination: Destination }) {
     readGamesEstimate(),
   )
   const [horizon, setHorizon] = useState(12)
-  const [saved, setSaved] = useState(() => Boolean(getPlan(destination.id)))
+  const [savedPlan, setSavedPlan] = useState(() => getPlan(destination.id))
+  const [justStarted, setJustStarted] = useState(false)
+  const [activation, setActivation] = useState<{
+    raw: AllocationConflict[]
+    choices: ActivationConflictChoice[]
+    remaining: number
+  } | null>(null)
 
   useEffect(() => {
     const next = new URLSearchParams(searchParams)
@@ -101,7 +114,67 @@ function DetailView({ destination }: { destination: Destination }) {
       savedAt: new Date().toISOString(),
       gamesEstimate: gamesEstimate ?? undefined,
     })
-    setSaved(true)
+    setSavedPlan(getPlan(destination.id))
+  }
+
+  const planStatus = savedPlan ? (savedPlan.lifecycle?.status ?? 'saved') : 'none'
+  const canStart = plan.habits.length > 0
+
+  function toChoice(conflict: AllocationConflict): ActivationConflictChoice {
+    const habit = getHabit(conflict.habitId)
+    const other = getDestination(conflict.otherDestinationId)
+    return {
+      habitId: conflict.habitId,
+      habitTitle: habit ? habitText(habit).title : conflict.habitId,
+      kind: conflict.kind,
+      otherDestinationName: other ? other.name : '',
+    }
+  }
+
+  function handleStart() {
+    // Starting always keeps the plan; the bookmark is created if needed.
+    if (!getPlan(destination.id)) handleSave()
+
+    const startingHabits = selectedHabits.filter(
+      (habit) => monthlySaving(habit) > 0 || oneTimeSaving(habit) > 0,
+    )
+    const conflicts = pendingActivationConflicts(startingHabits, destination.id)
+    if (conflicts.length === 0) {
+      executeActivation(
+        destination.id,
+        startingHabits,
+        [],
+        [],
+        new Date().toISOString(),
+      )
+      setSavedPlan(getPlan(destination.id))
+      setJustStarted(true)
+      return
+    }
+
+    setActivation({
+      raw: conflicts,
+      choices: conflicts.map(toChoice),
+      remaining: startingHabits.length - conflicts.length,
+    })
+  }
+
+  function handleConfirmActivation(decisions: Parameters<typeof executeActivation>[3]) {
+    if (!activation) return
+    executeActivation(
+      destination.id,
+      selectedHabits,
+      activation.raw,
+      decisions,
+      new Date().toISOString(),
+    )
+    setActivation(null)
+    setSavedPlan(getPlan(destination.id))
+    setJustStarted(true)
+  }
+
+  function handleViewProgress() {
+    navigate('/unlocks#active')
   }
 
   const meta = [
@@ -151,6 +224,29 @@ function DetailView({ destination }: { destination: Destination }) {
         </div>
       </section>
 
+      {justStarted && (
+        <div className="page pt-6" role="status" aria-live="polite">
+          <div className="flex flex-wrap items-center justify-between gap-4 border border-accent bg-accent/10 px-4 py-3">
+            <div className="flex items-start gap-2.5">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent-dark" strokeWidth={3} aria-hidden="true" />
+              <div>
+                <p className="text-[12px] font-semibold text-ink">{copy.plan.startSuccess}</p>
+                <p className="mt-0.5 text-[11px] leading-relaxed text-muted">
+                  {copy.plan.startSuccessBody}
+                </p>
+              </div>
+            </div>
+            <Link
+              to="/unlocks#active"
+              className="inline-flex items-center gap-1.5 border-b border-ink pb-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink transition-colors hover:border-accent hover:text-accent"
+            >
+              {copy.plan.startSuccessLink}
+              <ArrowUpRight className="h-3 w-3" aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      )}
+
       <div className="page grid gap-10 pt-8 lg:grid-cols-12 lg:gap-12 lg:pt-12">
         <div className="min-w-0 lg:col-span-7">
           <p className="max-w-2xl text-[14.5px] leading-relaxed text-ink-soft">
@@ -181,8 +277,11 @@ function DetailView({ destination }: { destination: Destination }) {
               plan={plan}
               horizon={horizon}
               onHorizon={setHorizon}
-              saved={saved}
+              planStatus={planStatus}
+              canStart={canStart}
               onSave={handleSave}
+              onStart={handleStart}
+              onViewProgress={handleViewProgress}
             />
           </div>
 
@@ -248,8 +347,11 @@ function DetailView({ destination }: { destination: Destination }) {
               plan={plan}
               horizon={horizon}
               onHorizon={setHorizon}
-              saved={saved}
+              planStatus={planStatus}
+              canStart={canStart}
               onSave={handleSave}
+              onStart={handleStart}
+              onViewProgress={handleViewProgress}
             />
             <p className="mt-2 text-[9px] font-semibold uppercase tracking-[0.16em] text-muted">
               {copy.detail.step3}
@@ -258,7 +360,24 @@ function DetailView({ destination }: { destination: Destination }) {
         </aside>
       </div>
 
-      <MobileFundingBar plan={plan} saved={saved} onSave={handleSave} />
+      <MobileFundingBar
+        plan={plan}
+        planStatus={planStatus}
+        canStart={canStart}
+        onSave={handleSave}
+        onStart={handleStart}
+        onViewProgress={handleViewProgress}
+      />
+
+      {activation && (
+        <ActivationDialog
+          destinationName={destination.name}
+          conflicts={activation.choices}
+          remainingCount={activation.remaining}
+          onConfirm={handleConfirmActivation}
+          onCancel={() => setActivation(null)}
+        />
+      )}
     </article>
   )
 }

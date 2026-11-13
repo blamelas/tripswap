@@ -1,17 +1,41 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { ArrowUpRight, Bell, CalendarPlus } from 'lucide-react'
-import type { Destination, PlanReminder, SavedPlan } from '../types'
+import type {
+  Destination,
+  Habit,
+  LifecycleStatus,
+  PlanReminder,
+  SavedPlan,
+} from '../types'
 import { getDestination } from '../data/destinations'
-import { getHabit } from '../data/habits'
+import { HABITS, getHabit } from '../data/habits'
 import { useI18n } from '../i18n/context'
-import { calculatePlan, type PlanResult } from '../lib/calc'
 import {
+  calculatePlan,
+  combinedTotals,
+  monthlySaving,
+  oneTimeSaving,
+  planProgress,
+  type LifecycleProgress,
+  type PlanResult,
+} from '../lib/calc'
+import {
+  achievePlan,
+  addAllocation,
   clearPlans,
+  confirmAmount,
+  getCreditedHabitIds,
+  getReservedAllocations,
+  pausePlan,
   readGamesEstimate,
   readPlans,
+  removeAllocation,
   removePlan,
+  resumePlan,
 } from '../lib/storage'
+import { findActivationConflicts, type AllocationConflict } from '../lib/allocations'
+import { executeActivation } from '../lib/activation'
 import { applyGamesEstimate } from '../lib/habitValues'
 import {
   buildReminderIcs,
@@ -24,15 +48,25 @@ import {
   type ReminderValues,
 } from '../lib/reminders'
 import { ReminderForm } from '../components/ReminderForm'
-import { DestinationImage } from '../components/DestinationImage'
+import { ActivationDialog, type ActivationConflictChoice } from '../components/ActivationDialog'
+import { ActivePlanCard, type AllocatedHabitLine, type CreditedHabitLine } from '../components/ActivePlanCard'
+import { SavedPlanCard } from '../components/SavedPlanCard'
+import { AchievedPlanCard } from '../components/AchievedPlanCard'
+import { ProgressBar } from '../components/ProgressBar'
+
+function isoNow(): string {
+  return new Date().toISOString()
+}
 
 interface PlanView {
   saved: SavedPlan
   destination: Destination
   plan: PlanResult
+  status: LifecycleStatus
+  progress: LifecycleProgress | null
 }
 
-function buildViews(plans: SavedPlan[]): PlanView[] {
+function buildViews(plans: SavedPlan[], nowIso: string): PlanView[] {
   const globalGamesEstimate = readGamesEstimate()
 
   return plans.flatMap((saved) => {
@@ -43,25 +77,76 @@ function buildViews(plans: SavedPlan[]): PlanView[] {
       .map((id) => getHabit(id))
       .filter((habit) => habit !== undefined)
       .map((habit) => applyGamesEstimate(habit, gamesEstimate))
+    const status: LifecycleStatus = saved.lifecycle?.status ?? 'saved'
+    const lifecycle = saved.lifecycle
+    const progress =
+      lifecycle && status !== 'saved'
+        ? planProgress(
+            destination.budget,
+            lifecycle.allocations,
+            lifecycle.periods,
+            lifecycle.oneTimeCredits,
+            lifecycle.confirmed,
+            nowIso,
+          )
+        : null
+
     return [
       {
         saved,
         destination,
         plan: calculatePlan(destination.budget, habits, saved.horizonMonths),
+        status,
+        progress,
       },
     ]
   })
 }
 
 export function MyUnlocks() {
-  const { copy, fmt, destinationText } = useI18n()
+  const { copy, fmt, habitText } = useI18n()
+  const location = useLocation()
   const [plans, setPlans] = useState<SavedPlan[]>(() => readPlans())
   const [reminders, setReminders] = useState<PlanReminder[]>(() => readReminders())
   const [openReminder, setOpenReminder] = useState<string | null>(null)
   const [notice, setNotice] = useState<{ destinationId: string; text: string } | null>(
     null,
   )
-  const views = buildViews(plans)
+  const [pending, setPending] = useState<{
+    destinationId: string
+    habits: Habit[]
+    raw: AllocationConflict[]
+    choices: ActivationConflictChoice[]
+    remaining: number
+  } | null>(null)
+
+  const [nowIso] = useState(() => new Date().toISOString())
+  const views = buildViews(plans, nowIso)
+  const activeViews = views.filter(
+    (view) => view.status === 'active' || view.status === 'paused',
+  )
+  const savedViews = views.filter((view) => view.status === 'saved')
+  const achievedViews = views.filter((view) => view.status === 'achieved')
+  const activeOnly = activeViews.filter((view) => view.status === 'active')
+  const aggregate = combinedTotals(
+    activeOnly.map((view) => ({
+      target: view.destination.budget,
+      accumulated: view.progress?.accumulated ?? 0,
+    })),
+  )
+
+  const reserved = getReservedAllocations()
+  const creditedIds = getCreditedHabitIds()
+
+  useEffect(() => {
+    if (location.hash !== '#active') return
+    const target = document.getElementById('active')
+    if (!target) return
+    const frame = window.requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+    return () => window.cancelAnimationFrame(frame)
+  }, [location.hash])
 
   function notify(destinationId: string, text: string) {
     setNotice({ destinationId, text })
@@ -125,6 +210,194 @@ export function MyUnlocks() {
     notify(destinationId, copy.reminder.removed)
   }
 
+  function habitsFor(view: PlanView) {
+    const gamesEstimate = view.saved.gamesEstimate ?? readGamesEstimate()
+    return view.saved.habitIds
+      .map((id) => getHabit(id))
+      .filter((habit) => habit !== undefined)
+      .map((habit) => applyGamesEstimate(habit, gamesEstimate))
+  }
+
+  function toChoice(conflict: AllocationConflict): ActivationConflictChoice {
+    const habit = getHabit(conflict.habitId)
+    const other = getDestination(conflict.otherDestinationId)
+    return {
+      habitId: conflict.habitId,
+      habitTitle: habit ? habitText(habit).title : conflict.habitId,
+      kind: conflict.kind,
+      otherDestinationName: other ? other.name : '',
+    }
+  }
+
+  function handleStartFromCard(view: PlanView) {
+    const habits = habitsFor(view)
+    const conflicts = findActivationConflicts(
+      habits.filter(
+        (habit) => monthlySaving(habit) > 0 || oneTimeSaving(habit) > 0,
+      ).map((habit) => habit.id),
+      view.destination.id,
+      reserved,
+      creditedIds,
+      HABITS,
+    )
+
+    if (conflicts.length === 0) {
+      executeActivation(view.destination.id, habits, [], [], isoNow())
+      setPlans(readPlans())
+      return
+    }
+
+    setPending({
+      destinationId: view.destination.id,
+      habits,
+      raw: conflicts,
+      choices: conflicts.map(toChoice),
+      remaining:
+        habits.filter(
+          (habit) => monthlySaving(habit) > 0 || oneTimeSaving(habit) > 0,
+        ).length - conflicts.length,
+    })
+  }
+
+  function handleConfirmActivation(
+    decisions: Parameters<typeof executeActivation>[3],
+  ) {
+    if (!pending) return
+    executeActivation(
+      pending.destinationId,
+      pending.habits,
+      pending.raw,
+      decisions,
+      isoNow(),
+    )
+    setPending(null)
+    setPlans(readPlans())
+  }
+
+  function allocatedLines(view: PlanView): AllocatedHabitLine[] {
+    return (view.saved.lifecycle?.allocations ?? []).map((allocation) => {
+      const habit = getHabit(allocation.habitId)
+      return {
+        habitId: allocation.habitId,
+        title: habit ? habitText(habit).title : allocation.habitId,
+        monthly: allocation.monthly,
+      }
+    })
+  }
+
+  function creditedLines(view: PlanView): CreditedHabitLine[] {
+    return (view.saved.lifecycle?.oneTimeCredits ?? []).map((credit) => {
+      const habit = getHabit(credit.habitId)
+      return {
+        habitId: credit.habitId,
+        title: habit ? habitText(habit).title : credit.habitId,
+        amount: credit.amount,
+      }
+    })
+  }
+
+  function availableFor(view: PlanView) {
+    const allocated = new Set(
+      (view.saved.lifecycle?.allocations ?? []).map((item) => item.habitId),
+    )
+    const credited = new Set(
+      (view.saved.lifecycle?.oneTimeCredits ?? []).map((item) => item.habitId),
+    )
+    const groupsInPlan = new Set(
+      (view.saved.lifecycle?.allocations ?? [])
+        .map((allocation) => getHabit(allocation.habitId)?.exclusiveGroup)
+        .filter((group): group is string => group !== undefined),
+    )
+    const gamesEstimate = view.saved.gamesEstimate ?? readGamesEstimate()
+
+    return HABITS.flatMap((habit) => {
+      if (allocated.has(habit.id) || credited.has(habit.id)) return []
+      if (habit.exclusiveGroup && groupsInPlan.has(habit.exclusiveGroup)) return []
+      const effective = applyGamesEstimate(habit, gamesEstimate)
+      const saving = monthlySaving(effective) || oneTimeSaving(effective)
+      if (saving <= 0) return []
+      const conflicts = findActivationConflicts(
+        [habit.id],
+        view.destination.id,
+        reserved,
+        creditedIds,
+        HABITS,
+      )
+      if (conflicts.length > 0) return []
+      return [
+        {
+          habitId: habit.id,
+          title: habitText(habit).title,
+          saving,
+          kind: habit.kind,
+        },
+      ]
+    })
+  }
+
+  function renderReminder(view: PlanView) {
+    const destinationId = view.saved.destinationId
+    const reminder = reminders.find((item) => item.destinationId === destinationId)
+
+    return (
+      <div className="pb-6">
+        <div className="flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            aria-expanded={openReminder === destinationId}
+            aria-controls={`reminder-${destinationId}`}
+            onClick={() =>
+              setOpenReminder((current) =>
+                current === destinationId ? null : destinationId,
+              )
+            }
+            className="inline-flex items-center gap-1.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-ink transition-colors hover:text-accent"
+          >
+            {reminder ? (
+              <Bell className="h-3.5 w-3.5" aria-hidden="true" />
+            ) : (
+              <CalendarPlus className="h-3.5 w-3.5" aria-hidden="true" />
+            )}
+            {reminder ? copy.reminder.edit : copy.reminder.add}
+          </button>
+
+          {reminder && (
+            <span className="text-[10px] text-muted">
+              {reminder.frequency === 'daily'
+                ? copy.reminder.summaryDaily(reminder.time)
+                : copy.reminder.summaryMonthly(
+                    reminder.dayOfMonth ?? 1,
+                    reminder.time,
+                  )}
+            </span>
+          )}
+        </div>
+
+        {notice?.destinationId === destinationId && (
+          <p className="mt-1.5 text-[10px] leading-relaxed text-moss">{notice.text}</p>
+        )}
+
+        <div id={`reminder-${destinationId}`}>
+          {openReminder === destinationId && (
+            <ReminderForm
+              destinationId={destinationId}
+              initial={reminder}
+              defaultDay={Math.min(
+                28,
+                Math.max(1, new Date(view.saved.savedAt).getDate() || 1),
+              )}
+              onSubmit={(values) => handleReminderSubmit(view, values)}
+              onCancel={() => setOpenReminder(null)}
+              onRemove={
+                reminder ? () => handleReminderRemove(destinationId) : undefined
+              }
+            />
+          )}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="page py-10 lg:py-16">
       <div className="flex flex-wrap items-end justify-between gap-6 border-b-2 border-ink pb-5">
@@ -161,7 +434,7 @@ export function MyUnlocks() {
             </p>
             <Link to="/" className="btn-primary mt-6">
               {copy.unlocks.emptyCta}
-              <ArrowUpRight className="h-3.5 w-3.5" />
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </div>
           <div className="hidden lg:block">
@@ -172,168 +445,170 @@ export function MyUnlocks() {
         </div>
       ) : (
         <div className="mt-8">
-          {views.map((view, index) => {
-            const text = destinationText(view.destination)
-            const reminder = reminders.find(
-              (item) => item.destinationId === view.saved.destinationId,
-            )
-            const href = `/destination/${view.saved.destinationId}${
-              view.saved.habitIds.length ? `?h=${view.saved.habitIds.join(',')}` : ''
-            }`
+          {activeViews.length > 0 && (
+            <section id="active" className="scroll-mt-24 pt-6">
+              <div className="flex flex-wrap items-end justify-between gap-4 border-b border-line pb-3">
+                <h2 className="text-[clamp(1.8rem,4vw,2.8rem)] leading-none text-ink">
+                  {copy.unlocks.sections.active}
+                </h2>
+                <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-muted">
+                  {copy.plan.estimated}
+                </span>
+              </div>
 
-            return (
-              <article
-                key={view.saved.destinationId}
-                className="grid gap-6 border-b border-line py-8 lg:grid-cols-12 lg:gap-10"
-              >
-                <Link
-                  to={href}
-                  className="relative block aspect-[16/10] overflow-hidden bg-ink lg:col-span-5"
-                  aria-label={view.destination.name}
-                >
-                  <DestinationImage
-                    src={view.destination.image}
-                    alt={text.imageAlt}
-                    className="transition-transform duration-[1100ms] ease-out hover:scale-[1.03]"
-                  />
-                  <span className="absolute left-0 top-0 bg-canvas px-2.5 py-1.5 font-display text-sm font-semibold leading-none text-ink">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                </Link>
-
-                <div className="flex min-w-0 flex-col lg:col-span-7">
-                  <div className="flex flex-wrap items-start justify-between gap-4">
-                    <div>
-                      <p className="text-[9px] font-semibold uppercase tracking-[0.16em] text-muted">
-                        {text.country} · {copy.unlocks.savedOn(fmt.date(view.saved.savedAt))}
-                      </p>
-                      <h2 className="mt-1.5 text-[clamp(2rem,4vw,3.2rem)] leading-[0.86] text-ink">
-                        {view.destination.name}
-                      </h2>
-                    </div>
-                    <div className="text-right">
-                      <p className="label">{copy.unlocks.estimatedHorizon}</p>
-                      <p className="nums mt-1 text-[2.2rem] leading-none text-accent">
-                        {fmt.months(view.plan.monthsToTarget)}
-                      </p>
-                    </div>
-                  </div>
-
-                  <p className="mt-2 max-w-lg text-[12px] leading-relaxed text-muted">
-                    {text.quote}
+              {activeOnly.length > 0 && (
+              <div className="mt-5 border border-line bg-sky/40 p-4 sm:p-5">
+                <div className="flex flex-wrap items-baseline justify-between gap-3">
+                  <p className="label">{copy.unlocks.aggregate.activePlans(aggregate.activeCount)}</p>
+                  <p className="nums text-[1.6rem] leading-none text-accent">
+                    {fmt.percent(aggregate.progress)}
                   </p>
-
-                  <dl className="mt-5 grid grid-cols-3 gap-4 border-t border-line pt-4">
-                    <div>
-                      <dt className="label">{copy.unlocks.target}</dt>
-                      <dd className="nums mt-1 text-[14px] text-ink">
-                        {fmt.eur(view.destination.budget)}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="label">{copy.unlocks.perMonth}</dt>
-                      <dd className="nums mt-1 text-[14px] text-ink">
-                        {fmt.eur(view.plan.monthly)}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="label">{copy.unlocks.swaps}</dt>
-                      <dd className="nums mt-1 text-[14px] text-ink">
-                        {view.saved.habitIds.length}
-                      </dd>
-                    </div>
-                  </dl>
-
-                  <div className="mt-4 h-[2px] w-full bg-line">
-                    <div
-                      className="h-full bg-accent transition-[width] duration-700"
-                      style={{ width: `${Math.round(view.plan.progress * 100)}%` }}
-                    />
-                  </div>
-
-                  <div className="mt-auto flex flex-wrap items-center gap-5 pt-5">
-                    <Link
-                      to={href}
-                      className="inline-flex items-center gap-1.5 border-b border-ink pb-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink transition-colors hover:border-accent hover:text-accent"
-                    >
-                      {copy.unlocks.openPlan}
-                      <ArrowUpRight className="h-3 w-3" />
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => handleRemove(view.saved.destinationId)}
-                      className="text-[9px] font-semibold uppercase tracking-[0.14em] text-muted transition-colors hover:text-accent"
-                    >
-                      {copy.unlocks.remove}
-                    </button>
-                  </div>
-
-                  <div className="mt-4 border-t border-line pt-3">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <button
-                        type="button"
-                        aria-expanded={openReminder === view.saved.destinationId}
-                        aria-controls={`reminder-${view.saved.destinationId}`}
-                        onClick={() =>
-                          setOpenReminder((current) =>
-                            current === view.saved.destinationId
-                              ? null
-                              : view.saved.destinationId,
-                          )
-                        }
-                        className="inline-flex items-center gap-1.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-ink transition-colors hover:text-accent"
-                      >
-                        {reminder ? (
-                          <Bell className="h-3.5 w-3.5" />
-                        ) : (
-                          <CalendarPlus className="h-3.5 w-3.5" />
-                        )}
-                        {reminder ? copy.reminder.edit : copy.reminder.add}
-                      </button>
-
-                      {reminder && (
-                        <span className="text-[10px] text-muted">
-                          {reminder.frequency === 'daily'
-                            ? copy.reminder.summaryDaily(reminder.time)
-                            : copy.reminder.summaryMonthly(
-                                reminder.dayOfMonth ?? 1,
-                                reminder.time,
-                              )}
-                        </span>
-                      )}
-                    </div>
-
-                    {notice?.destinationId === view.saved.destinationId && (
-                      <p className="mt-1.5 text-[10px] leading-relaxed text-moss">
-                        {notice.text}
-                      </p>
-                    )}
-
-                    <div id={`reminder-${view.saved.destinationId}`}>
-                      {openReminder === view.saved.destinationId && (
-                        <ReminderForm
-                          destinationId={view.saved.destinationId}
-                          initial={reminder}
-                          defaultDay={Math.min(
-                            28,
-                            Math.max(1, new Date(view.saved.savedAt).getDate() || 1),
-                          )}
-                          onSubmit={(values) => handleReminderSubmit(view, values)}
-                          onCancel={() => setOpenReminder(null)}
-                          onRemove={
-                            reminder
-                              ? () => handleReminderRemove(view.saved.destinationId)
-                              : undefined
-                          }
-                        />
-                      )}
-                    </div>
-                  </div>
                 </div>
-              </article>
-            )
-          })}
+                <div className="mt-3">
+                  <ProgressBar
+                    value={aggregate.progress}
+                    label={copy.a11y.progress}
+                  />
+                </div>
+                <dl className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
+                  <div>
+                    <dt className="label">{copy.unlocks.aggregate.estimatedAccumulated}</dt>
+                    <dd className="nums mt-1 text-[14px] text-ink">
+                      {fmt.eur(aggregate.accumulated)}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="label">{copy.unlocks.aggregate.combinedTarget}</dt>
+                    <dd className="nums mt-1 text-[14px] text-ink">
+                      {fmt.eur(aggregate.target)}
+                    </dd>
+                  </div>
+                  <div className="col-span-2 sm:col-span-1">
+                    <dt className="label">{copy.unlocks.aggregate.combinedProgress}</dt>
+                    <dd className="nums mt-1 text-[14px] text-ink">
+                      {fmt.percent(aggregate.progress)}
+                    </dd>
+                  </div>
+                </dl>
+                <p className="mt-3 text-[10px] leading-relaxed text-muted">
+                  {copy.unlocks.aggregate.note}
+                </p>
+              </div>
+              )}
+
+              <div className="mt-2">
+                {activeViews.map((view, index) => (
+                  <div key={view.saved.destinationId}>
+                    <ActivePlanCard
+                      destination={view.destination}
+                      plan={view.saved}
+                      progress={view.progress as LifecycleProgress}
+                      index={index}
+                      allocated={allocatedLines(view)}
+                      credited={creditedLines(view)}
+                      available={availableFor(view)}
+                      onPause={() => setPlans(pausePlan(view.saved.destinationId, new Date().toISOString()))}
+                      onResume={() => setPlans(resumePlan(view.saved.destinationId, new Date().toISOString()))}
+                      onAchieve={() => {
+                        if (!window.confirm(copy.plan.achieveConfirm)) return
+                        setPlans(achievePlan(view.saved.destinationId, new Date().toISOString()))
+                      }}
+                      onRemove={() => handleRemove(view.saved.destinationId)}
+                      onAddActivity={(habitId) => {
+                        const habit = getHabit(habitId)
+                        if (!habit) return
+                        const gamesEstimate =
+                          view.saved.gamesEstimate ?? readGamesEstimate()
+                        setPlans(
+                          addAllocation(
+                            view.saved.destinationId,
+                            applyGamesEstimate(habit, gamesEstimate),
+                            new Date().toISOString(),
+                          ),
+                        )
+                      }}
+                      onRemoveAllocation={(habitId) =>
+                        setPlans(
+                          removeAllocation(
+                            view.saved.destinationId,
+                            habitId,
+                            new Date().toISOString(),
+                          ),
+                        )
+                      }
+                      onRecordSavings={(amount) =>
+                        setPlans(confirmAmount(view.saved.destinationId, amount))
+                      }
+                    />
+                    {renderReminder(view)}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {savedViews.length > 0 && (
+            <section id="saved" className="scroll-mt-24 pt-10">
+              <div className="flex flex-wrap items-end justify-between gap-4 border-b border-line pb-3">
+                <h2 className="text-[clamp(1.8rem,4vw,2.8rem)] leading-none text-ink">
+                  {copy.unlocks.sections.saved}
+                </h2>
+                <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-muted">
+                  {copy.unlocks.estimatedHorizon}
+                </span>
+              </div>
+              <div className="mt-2">
+                {savedViews.map((view, index) => (
+                  <div key={view.saved.destinationId}>
+                    <SavedPlanCard
+                      saved={view.saved}
+                      destination={view.destination}
+                      plan={view.plan}
+                      index={index}
+                      canStart={view.plan.habits.length > 0}
+                      onStartNow={() => handleStartFromCard(view)}
+                      onRemove={() => handleRemove(view.saved.destinationId)}
+                    />
+                    {renderReminder(view)}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {achievedViews.length > 0 && (
+            <section id="achieved" className="scroll-mt-24 pt-10">
+              <div className="flex flex-wrap items-end justify-between gap-4 border-b border-line pb-3">
+                <h2 className="text-[clamp(1.8rem,4vw,2.8rem)] leading-none text-ink">
+                  {copy.unlocks.sections.achieved}
+                </h2>
+              </div>
+              <div className="mt-2">
+                {achievedViews.map((view, index) => (
+                  <AchievedPlanCard
+                    key={view.saved.destinationId}
+                    saved={view.saved}
+                    destination={view.destination}
+                    index={index}
+                    onRemove={() => handleRemove(view.saved.destinationId)}
+                  />
+                ))}
+              </div>
+            </section>
+          )}
         </div>
+      )}
+
+      {pending && (
+        <ActivationDialog
+          destinationName={
+            getDestination(pending.destinationId)?.name ?? pending.destinationId
+          }
+          conflicts={pending.choices}
+          remainingCount={pending.remaining}
+          onConfirm={handleConfirmActivation}
+          onCancel={() => setPending(null)}
+        />
       )}
     </div>
   )
