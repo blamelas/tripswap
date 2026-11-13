@@ -61,6 +61,8 @@ fluxo, um ecrã principal.
   sobre o €0\*.
 - **Uma interação-assinatura.** Escolher trocas faz o destino subir: uma linha coral
   sobe pela fotografia, a imagem aproxima-se e o contador de meses anima.
+- **Planos tornam-se rotinas.** Os planos guardados podem criar um evento diário ou
+  mensal no calendário, com lembrete à hora escolhida; a preferência fica no dispositivo.
 - **Bilingue por desenho.** O inglês é o idioma por omissão e o português está a um
   clique. O toggle muda toda a copy — incluindo as 24 trocas e os 8 destinos — e os
   números mantêm-se iguais.
@@ -116,7 +118,7 @@ os planos sugeridos vivem numa faixa azul-pálida no início do passo de troca.
 | Ícones | Lucide |
 | Gráfico | SVG próprio, sem biblioteca de charts |
 | Persistência | `localStorage` (`tripswap:unlocks:v1`) |
-| Testes | Vitest — 35 testes |
+| Testes | Vitest — 42 testes |
 | Ambiente | Docker multi-stage + DevContainer |
 | Deploy | Vercel (estático) |
 | AI no desenvolvimento | DeepSeek (`deepseek-flash`) como agente de código |
@@ -145,7 +147,7 @@ Abre http://localhost:5173. As alterações recarregam automaticamente.
 ```bash
 npm run lint        # oxlint
 npm run typecheck   # tsc
-npm test            # 35 testes (motor, dados, assets, formatação, i18n)
+npm test            # 42 testes (motor, dados, assets, formatação, i18n, lembretes)
 npm run build       # build de produção
 node scripts/assumptions.mjs > docs/ASSUMPTIONS.md   # regenera os pressupostos
 ```
@@ -161,6 +163,15 @@ O motor vive em [`src/lib/calc.ts`](src/lib/calc.ts) e é a única fonte de verd
 teste garante que cada uma das 24 trocas mantém o valor documentado. O motor também
 elimina sobreposições de forma defensiva, mesmo que receba uma lista não sanitizada
 (link direto antigo ou `localStorage` editado).
+
+### Lembretes de planos
+
+Um plano guardado pode criar um evento diário ou mensal no calendário, com lembrete à
+hora escolhida. O `.ics` descarregado contém um evento de 15 minutos e um `VALARM`; a
+preferência (periodicidade, hora, dia) fica no navegador. Não há push notifications nem
+servidor.
+
+![Lembrete de plano](docs/assets/reminders.jpg)
 
 ## Estrutura
 

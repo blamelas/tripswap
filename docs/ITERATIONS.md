@@ -46,6 +46,9 @@ commit. Os tempos são reais e incluem revisão manual.
 | 39 | 13 Nov 05:42 | Release | Changelog, versão e deploy | `v1.3.3` | `chore(release): v1.3.3` | 10 min |
 | 40 | 13 Nov 05:55 | Categorias | Capítulos 21/44px, cinco cores, resumo live e colapso | Navegação clara | `feat(habits): editorial category chapters` | 35 min |
 | 41 | 13 Nov 06:00 | Release | QA, screenshots, changelog e deploy | `v1.3.4` | `chore(release): v1.3.4` | 10 min |
+| 42 | 13 Nov 08:50 | Lembretes | Form diário/mensal, hora, dia, `.ics` e storage | Evento + alarme | `feat(plans): add calendar reminders` | 45 min |
+| 43 | 13 Nov 09:00 | QA | Testes de ICS, fluxo de edição/remoção e docs | 42/42 verdes | `test(reminders): cover ics generation` | 20 min |
+| 44 | 13 Nov 09:05 | Release | Changelog, versão e deploy | `v1.4.0` | `chore(release): v1.4.0` | 10 min |
 
 ## O que aprendi
 

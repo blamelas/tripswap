@@ -49,6 +49,7 @@ src/
     format.ts               # EUR, months, percentages (pt-PT)
     planState.ts            # discover / on the way / unlocked / unreachable
     storage.ts              # versioned localStorage read/write
+    reminders.ts            # reminder storage, next occurrence and .ics export
   components/               # presentational components
   views/                    # Discover, DestinationDetail, MyUnlocks, About, NotFound
 tests/                      # Vitest suites for the engine and data
@@ -128,6 +129,8 @@ docker compose up       # same dev server in a container
   selected state; descriptions, assumptions and benefits live behind a chevron.
 - The €0* is the card CTA: struck planning target above, large €0*, “Unlock this
   experience” underneath.
+- Reminders are local preferences plus an `.ics` download (event + VALARM). No backend,
+  no push notifications; the user adds the file to their own calendar.
 
 ## Business context
 

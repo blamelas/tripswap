@@ -1,12 +1,23 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight } from 'lucide-react'
-import type { Destination, SavedPlan } from '../types'
+import { ArrowUpRight, Bell, CalendarPlus } from 'lucide-react'
+import type { Destination, PlanReminder, SavedPlan } from '../types'
 import { getDestination } from '../data/destinations'
 import { getHabit } from '../data/habits'
 import { useI18n } from '../i18n/context'
 import { calculatePlan, type PlanResult } from '../lib/calc'
 import { clearPlans, readPlans, removePlan } from '../lib/storage'
+import {
+  buildReminderIcs,
+  clearReminders,
+  createReminderUid,
+  downloadIcs,
+  readReminders,
+  removeReminder,
+  saveReminder,
+  type ReminderValues,
+} from '../lib/reminders'
+import { ReminderForm } from '../components/ReminderForm'
 import { DestinationImage } from '../components/DestinationImage'
 
 interface PlanView {
@@ -35,16 +46,73 @@ function buildViews(plans: SavedPlan[]): PlanView[] {
 export function MyUnlocks() {
   const { copy, fmt, destinationText } = useI18n()
   const [plans, setPlans] = useState<SavedPlan[]>(() => readPlans())
+  const [reminders, setReminders] = useState<PlanReminder[]>(() => readReminders())
+  const [openReminder, setOpenReminder] = useState<string | null>(null)
+  const [notice, setNotice] = useState<{ destinationId: string; text: string } | null>(
+    null,
+  )
   const views = buildViews(plans)
+
+  function notify(destinationId: string, text: string) {
+    setNotice({ destinationId, text })
+    window.setTimeout(() => {
+      setNotice((current) =>
+        current?.destinationId === destinationId ? null : current,
+      )
+    }, 7000)
+  }
 
   function handleRemove(destinationId: string) {
     setPlans(removePlan(destinationId))
+    setReminders(removeReminder(destinationId))
+    if (openReminder === destinationId) setOpenReminder(null)
   }
 
   function handleClear() {
     if (!window.confirm(copy.unlocks.confirm)) return
     clearPlans()
+    clearReminders()
     setPlans([])
+    setReminders([])
+    setOpenReminder(null)
+  }
+
+  function handleReminderSubmit(view: PlanView, values: ReminderValues) {
+    const destinationId = view.saved.destinationId
+    const reminder: PlanReminder = {
+      destinationId,
+      ...values,
+      createdAt: new Date().toISOString(),
+    }
+    setReminders(saveReminder(reminder))
+
+    const query = view.saved.habitIds.length
+      ? `?h=${view.saved.habitIds.join(',')}`
+      : ''
+    const url = `${window.location.origin}/destination/${destinationId}${query}`
+    const ics = buildReminderIcs({
+      uid: createReminderUid(destinationId),
+      summary: copy.reminder.eventTitle(view.destination.name),
+      description: copy.reminder.eventDescription(
+        view.plan.habits.length,
+        fmt.eur(view.plan.monthly),
+        fmt.months(view.plan.monthsToTarget),
+        fmt.eur(view.destination.budget),
+      ),
+      url,
+      reminder,
+      now: new Date(),
+    })
+
+    downloadIcs(`tripswap-${destinationId}.ics`, ics)
+    setOpenReminder(null)
+    notify(destinationId, copy.reminder.saved)
+  }
+
+  function handleReminderRemove(destinationId: string) {
+    setReminders(removeReminder(destinationId))
+    setOpenReminder(null)
+    notify(destinationId, copy.reminder.removed)
   }
 
   return (
@@ -96,6 +164,9 @@ export function MyUnlocks() {
         <div className="mt-8">
           {views.map((view, index) => {
             const text = destinationText(view.destination)
+            const reminder = reminders.find(
+              (item) => item.destinationId === view.saved.destinationId,
+            )
             const href = `/destination/${view.saved.destinationId}${
               view.saved.habitIds.length ? `?h=${view.saved.habitIds.join(',')}` : ''
             }`
@@ -185,6 +256,68 @@ export function MyUnlocks() {
                     >
                       {copy.unlocks.remove}
                     </button>
+                  </div>
+
+                  <div className="mt-4 border-t border-line pt-3">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <button
+                        type="button"
+                        aria-expanded={openReminder === view.saved.destinationId}
+                        aria-controls={`reminder-${view.saved.destinationId}`}
+                        onClick={() =>
+                          setOpenReminder((current) =>
+                            current === view.saved.destinationId
+                              ? null
+                              : view.saved.destinationId,
+                          )
+                        }
+                        className="inline-flex items-center gap-1.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-ink transition-colors hover:text-accent"
+                      >
+                        {reminder ? (
+                          <Bell className="h-3.5 w-3.5" />
+                        ) : (
+                          <CalendarPlus className="h-3.5 w-3.5" />
+                        )}
+                        {reminder ? copy.reminder.edit : copy.reminder.add}
+                      </button>
+
+                      {reminder && (
+                        <span className="text-[10px] text-muted">
+                          {reminder.frequency === 'daily'
+                            ? copy.reminder.summaryDaily(reminder.time)
+                            : copy.reminder.summaryMonthly(
+                                reminder.dayOfMonth ?? 1,
+                                reminder.time,
+                              )}
+                        </span>
+                      )}
+                    </div>
+
+                    {notice?.destinationId === view.saved.destinationId && (
+                      <p className="mt-1.5 text-[10px] leading-relaxed text-moss">
+                        {notice.text}
+                      </p>
+                    )}
+
+                    <div id={`reminder-${view.saved.destinationId}`}>
+                      {openReminder === view.saved.destinationId && (
+                        <ReminderForm
+                          destinationId={view.saved.destinationId}
+                          initial={reminder}
+                          defaultDay={Math.min(
+                            28,
+                            Math.max(1, new Date(view.saved.savedAt).getDate() || 1),
+                          )}
+                          onSubmit={(values) => handleReminderSubmit(view, values)}
+                          onCancel={() => setOpenReminder(null)}
+                          onRemove={
+                            reminder
+                              ? () => handleReminderRemove(view.saved.destinationId)
+                              : undefined
+                          }
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
               </article>

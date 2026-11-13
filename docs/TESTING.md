@@ -6,7 +6,7 @@
 npm test
 ```
 
-35 testes em Vitest, todos sobre a lógica central e os dados. Não há snapshots de
+42 testes em Vitest, todos sobre a lógica central e os dados. Não há snapshots de
 componentes: o risco do produto está na aritmética e nas sobreposições.
 
 ### `tests/calc.test.ts` (21)
@@ -45,6 +45,14 @@ componentes: o risco do produto está na aritmética e nas sobreposições.
 - EUR formatado em pt-PT e en-IE.
 - Rótulos de meses em singular, plural e `null`, nos dois idiomas.
 
+### `tests/reminders.test.ts` (7)
+
+- Próxima ocorrência diária e mensal.
+- Regra `FREQ=DAILY` e `FREQ=MONTHLY;BYMONTHDAY`.
+- `DTSTART`/`DTEND` de 15 minutos.
+- `VALARM` com trigger `-PT0M`.
+- Escape de vírgulas, pontos e vírgulas, barras e newlines.
+
 ### `tests/format.test.ts` (6)
 
 - EUR sem decimais quando o valor é inteiro.
@@ -53,7 +61,7 @@ componentes: o risco do produto está na aritmética e nas sobreposições.
 - Singular/plural de meses.
 - Percentagens.
 
-## Checklist manual (22 casos)
+## Checklist manual (24 casos)
 
 Executar em http://localhost:5173 e repetir no URL público.
 
@@ -81,6 +89,8 @@ Executar em http://localhost:5173 e repetir no URL público.
 | 20 | Detalhes | Chevron abre descrição, premissa e benefícios sem alterar a seleção |
 | 21 | Categorias | Título 21px, ícone 44px, resumo “N disponíveis · N selecionadas”, regra na cor |
 | 22 | Colapsar | Cabeçalho colapsa/expande com `aria-expanded`; seleções e contagem mantêm-se |
+| 23 | Lembrete | Plano guardado → Add reminder → diário/mensal, hora, dia → download `.ics`; resumo visível |
+| 24 | Lembrete persiste | Reload mantém o resumo; editar atualiza; remover limpa; remover o plano limpa o lembrete |
 
 Casos adicionais: `/destination/nao-existe` (404), `/unlocks` sem planos (empty state),
 imagem inexistente (fallback), `prefers-reduced-motion` (sem animações).
